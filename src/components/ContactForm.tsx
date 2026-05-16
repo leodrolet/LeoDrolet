@@ -5,10 +5,12 @@ import { Send, Upload, CheckCircle2 } from 'lucide-react';
 const ContactForm = () => {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
+    setError(null);
 
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
@@ -26,10 +28,10 @@ const ContactForm = () => {
       if (response.ok) {
         setSubmitted(true);
       } else {
-        alert('Une erreur est survenue lors de l\'envoi. Veuillez réessayer.');
+        setError('Une erreur est survenue lors de l\'envoi. Veuillez réessayer.');
       }
-    } catch (error) {
-      alert('Erreur de connexion. Veuillez vérifier votre internet.');
+    } catch (err) {
+      setError('Erreur de connexion. Veuillez vérifier votre internet.');
     } finally {
       setLoading(false);
     }
@@ -91,6 +93,18 @@ const ContactForm = () => {
                 name="email"
                 type="email"
                 placeholder="jean@entreprise.com"
+                className="w-full px-4 py-3 rounded-xl bg-primary border border-white/10 text-white focus:border-accent outline-none transition-all"
+              />
+            </div>
+
+            {/* Téléphone */}
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-gray-400 ml-1">Numéro de Téléphone</label>
+              <input
+                required
+                name="phone"
+                type="tel"
+                placeholder="06 12 34 56 78"
                 className="w-full px-4 py-3 rounded-xl bg-primary border border-white/10 text-white focus:border-accent outline-none transition-all"
               />
             </div>
@@ -176,12 +190,26 @@ const ContactForm = () => {
             </div>
 
             <div className="md:col-span-2 mt-6">
+              {error && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="mb-4 p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm text-center"
+                >
+                  {error}
+                </motion.div>
+              )}
               <motion.button
+                disabled={loading}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="w-full py-4 bg-accent text-white rounded-xl font-bold flex items-center justify-center gap-3 hover:shadow-[0_0_30px_rgba(59,130,246,0.4)] transition-all"
+                className={`w-full py-4 rounded-xl font-bold flex items-center justify-center gap-3 transition-all ${
+                  loading
+                    ? 'bg-gray-600 cursor-not-allowed'
+                    : 'bg-accent text-white hover:shadow-[0_0_30px_rgba(59,130,246,0.4)]'
+                }`}
               >
-                Envoyer la demande <Send size={18} />
+                {loading ? 'Envoi en cours...' : 'Envoyer la demande'} <Send size={18} />
               </motion.button>
             </div>
           </form>
