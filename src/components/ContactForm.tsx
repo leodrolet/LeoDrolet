@@ -194,7 +194,7 @@ const ContactForm = () => {
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="mb-4 p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm text-center"
+                  className="mb-4 p-4 rounded-xl bg-red-500/20 border border-red-500 text-red-200 text-sm text-center font-medium"
                 >
                   {error}
                 </motion.div>
