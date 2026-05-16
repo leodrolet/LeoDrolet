@@ -4,10 +4,35 @@ import { Send, Upload, CheckCircle2 } from 'lucide-react';
 
 const ContactForm = () => {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitted(true);
+    setLoading(true);
+
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData.entries());
+
+    try {
+      const response = await fetch('https://formspree.io/f/xykvgwnz', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+      } else {
+        alert('Une erreur est survenue lors de l\'envoi. Veuillez réessayer.');
+      }
+    } catch (error) {
+      alert('Erreur de connexion. Veuillez vérifier votre internet.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (submitted) {
@@ -51,6 +76,7 @@ const ContactForm = () => {
               <label className="text-sm font-medium text-gray-400 ml-1">Nom Complet</label>
               <input
                 required
+                name="full_name"
                 type="text"
                 placeholder="Jean Dupont"
                 className="w-full px-4 py-3 rounded-xl bg-primary border border-white/10 text-white focus:border-accent outline-none transition-all"
@@ -62,6 +88,7 @@ const ContactForm = () => {
               <label className="text-sm font-medium text-gray-400 ml-1">Email Professionnel</label>
               <input
                 required
+                name="email"
                 type="email"
                 placeholder="jean@entreprise.com"
                 className="w-full px-4 py-3 rounded-xl bg-primary border border-white/10 text-white focus:border-accent outline-none transition-all"
@@ -73,6 +100,7 @@ const ContactForm = () => {
               <label className="text-sm font-medium text-gray-400 ml-1">Nom de l'entreprise</label>
               <input
                 required
+                name="company"
                 type="text"
                 placeholder="Ma Super Boutique"
                 className="w-full px-4 py-3 rounded-xl bg-primary border border-white/10 text-white focus:border-accent outline-none transition-all"
@@ -82,7 +110,10 @@ const ContactForm = () => {
             {/* Type de site */}
             <div className="space-y-2">
               <label className="text-sm font-medium text-gray-400 ml-1">Type de site souhaité</label>
-              <select className="w-full px-4 py-3 rounded-xl bg-primary border border-white/10 text-white focus:border-accent outline-none transition-all appearance-none">
+              <select
+                name="site_type"
+                className="w-full px-4 py-3 rounded-xl bg-primary border border-white/10 text-white focus:border-accent outline-none transition-all appearance-none"
+              >
                 <option>Site Vitrine</option>
                 <option>E-commerce</option>
                 <option>Refonte Complète</option>
@@ -94,7 +125,10 @@ const ContactForm = () => {
             {/* Budget */}
             <div className="space-y-2">
               <label className="text-sm font-medium text-gray-400 ml-1">Budget Approximatif</label>
-              <select className="w-full px-4 py-3 rounded-xl bg-primary border border-white/10 text-white focus:border-accent outline-none transition-all appearance-none">
+              <select
+                name="budget"
+                className="w-full px-4 py-3 rounded-xl bg-primary border border-white/10 text-white focus:border-accent outline-none transition-all appearance-none"
+              >
                 <option>500€ - 1000€</option>
                 <option>1000€ - 3000€</option>
                 <option>3000€ - 5000€</option>
@@ -105,7 +139,10 @@ const ContactForm = () => {
             {/* Délai */}
             <div className="space-y-2">
               <label className="text-sm font-medium text-gray-400 ml-1">Délai souhaité</label>
-              <select className="w-full px-4 py-3 rounded-xl bg-primary border border-white/10 text-white focus:border-accent outline-none transition-all appearance-none">
+              <select
+                name="deadline"
+                className="w-full px-4 py-3 rounded-xl bg-primary border border-white/10 text-white focus:border-accent outline-none transition-all appearance-none"
+              >
                 <option>Urgent (&lt; 2 semaines)</option>
                 <option>Standard (1 mois)</option>
                 <option>Flexible (2 mois +)</option>
@@ -117,6 +154,7 @@ const ContactForm = () => {
               <label className="text-sm font-medium text-gray-400 ml-1">Description du projet</label>
               <textarea
                 required
+                name="description"
                 rows={4}
                 placeholder="Décrivez vos objectifs, vos fonctionnalités souhaitées et vos inspirations..."
                 className="w-full px-4 py-3 rounded-xl bg-primary border border-white/10 text-white focus:border-accent outline-none transition-all resize-none"
