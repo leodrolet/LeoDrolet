@@ -68,44 +68,51 @@ export const About = () => {
 export const Services = () => {
   const services = [
     {
-      title: "Création de site web",
-      desc: "Développement de sites vitrines modernes et performants sur mesure.",
+      title: "Landing Pages Modernes",
+      desc: "Des pages haute-conversion conçues pour transformer vos visiteurs en clients fidèles.",
       icon: <Code size={32} />,
     },
     {
-      title: "Refonte de site web",
-      desc: "Modernisation de votre image numérique pour augmenter vos conversions.",
-      icon: <RefreshCw size={32} />,
-    },
-    {
-      title: "Site Entreprise Locale",
-      desc: "Solutions optimisées pour le SEO local et l'acquisition de clients.",
-      icon: <Laptop size={32} />,
-    },
-    {
       title: "Optimisation Mobile",
-      desc: "Une expérience utilisateur parfaite sur tous les types d'écrans.",
+      desc: "Un design 'Mobile-First' pour une expérience fluide sur smartphones et tablettes.",
       icon: <Smartphone size={32} />,
     },
     {
-      title: "Design Moderne",
-      desc: "UI/UX haut de gamme inspirée des standards Apple et Vercel.",
+      title: "Design Professionnel",
+      desc: "Une esthétique premium et minimaliste qui renforce instantanément votre crédibilité.",
       icon: <Paintbrush size={32} />,
     },
     {
-      title: "Maintenance",
-      desc: "Mises à jour régulières et support technique pour une tranquillité totale.",
+      title: "Intégration Formulaires",
+      desc: "Collecte de leads optimisée avec notifications instantanées et gestion automatisée.",
       icon: <Settings size={32} />,
+    },
+    {
+      title: "SEO de Base",
+      desc: "Structure optimisée pour les moteurs de recherche afin de maximiser votre visibilité.",
+      icon: <TrendingUp size={32} />,
+    },
+    {
+      title: "Performance Rapide",
+      desc: "Temps de chargement ultra-rapide pour réduire le taux de rebond et booster le SEO.",
+      icon: <Zap size={32} />,
     },
   ];
 
   return (
-    <section id="services" className="py-24 bg-secondary/50">
+    <section id="services" className="py-24 relative bg-black">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold mb-4 tracking-tight">Mes Services</h2>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-3xl md:text-5xl font-bold mb-4 tracking-tight"
+          >
+            Ce que <span className="text-gradient">je fais</span>
+          </motion.h2>
           <p className="text-gray-400 max-w-xl mx-auto">
-            Des solutions digitales haut de gamme pour propulser votre activité.
+            Une approche complète pour transformer votre présence en ligne en machine à leads.
           </p>
         </div>
 
@@ -115,14 +122,15 @@ export const Services = () => {
               key={index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
               whileHover={{ y: -10 }}
-              className="p-8 rounded-2xl glass group cursor-pointer transition-all duration-300 hover:border-accent/50"
+              className="p-8 rounded-3xl glass group cursor-pointer transition-all duration-300 hover:border-indigo-500/50"
             >
-              <div className="w-14 h-14 bg-accent/10 rounded-lg flex items-center justify-center text-accent mb-6 group-hover:bg-accent group-hover:text-white transition-colors duration-300">
+              <div className="w-14 h-14 bg-indigo-500/10 rounded-lg flex items-center justify-center text-indigo-400 mb-6 group-hover:bg-indigo-500 group-hover:text-white transition-colors duration-300">
                 {service.icon}
               </div>
-              <h3 className="text-xl font-bold mb-3">{service.title}</h3>
+              <h3 className="text-xl font-bold mb-3 text-white">{service.title}</h3>
               <p className="text-gray-400 leading-relaxed">
                 {service.desc}
               </p>

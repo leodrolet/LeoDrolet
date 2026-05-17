@@ -8,13 +8,13 @@
 
 body {
   @apply bg-primary text-white antialiased;
-  background-color: #0a0a0a;
+  background-color: #000000;
 }
 
 .glass {
-  @apply bg-white/5 backdrop-blur-md border border-white/10;
+  @apply bg-white/5 backdrop-blur-xl border border-white/5;
 }
 
 .text-gradient {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-red-600;
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-blue-500 to-cyan-400;
 }
