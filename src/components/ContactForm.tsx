@@ -1,6 +1,63 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Send, Upload, CheckCircle2 } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Send, Upload, CheckCircle2, X } from 'lucide-react';
+
+const TOAST_DURATION = 6000;
+
+const SuccessToast = ({ onClose }: { onClose: () => void }) => {
+  const [progress, setProgress] = useState(100);
+
+  useEffect(() => {
+    const start = Date.now();
+    const interval = setInterval(() => {
+      const elapsed = Date.now() - start;
+      const remaining = Math.max(0, 100 - (elapsed / TOAST_DURATION) * 100);
+      setProgress(remaining);
+      if (remaining === 0) clearInterval(interval);
+    }, 30);
+
+    const timer = setTimeout(onClose, TOAST_DURATION);
+    return () => {
+      clearInterval(interval);
+      clearTimeout(timer);
+    };
+  }, [onClose]);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: -80, scale: 0.95 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, y: -80, scale: 0.95 }}
+      transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+      className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-full max-w-sm overflow-hidden rounded-2xl shadow-2xl"
+      style={{ background: 'rgba(15,23,42,0.95)', border: '1px solid rgba(255,255,255,0.1)', backdropFilter: 'blur(16px)' }}
+    >
+      <div className="flex items-start gap-4 p-5">
+        <div className="flex-shrink-0 w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center">
+          <CheckCircle2 size={22} className="text-green-400" />
+        </div>
+        <div className="flex-1 min-w-0">
+          <p className="font-bold text-white text-sm">Demande envoyée !</p>
+          <p className="text-gray-400 text-xs mt-1 leading-relaxed">
+            Je l'analyse et vous recontacte sous 24h avec une proposition personnalisée.
+          </p>
+        </div>
+        <button
+          onClick={onClose}
+          className="flex-shrink-0 text-gray-500 hover:text-white transition-colors"
+        >
+          <X size={16} />
+        </button>
+      </div>
+      <div className="h-1 bg-white/10">
+        <div
+          className="h-full bg-green-400 transition-all ease-linear"
+          style={{ width: `${progress}%`, transitionDuration: '30ms' }}
+        />
+      </div>
+    </motion.div>
+  );
+};
 
 const ContactForm = () => {
   const [submitted, setSubmitted] = useState(false);
@@ -27,6 +84,7 @@ const ContactForm = () => {
 
       if (response.ok) {
         setSubmitted(true);
+        (e.target as HTMLFormElement).reset();
       } else {
         setError('Une erreur est survenue lors de l\'envoi. Veuillez réessayer.');
       }
@@ -37,31 +95,11 @@ const ContactForm = () => {
     }
   };
 
-  if (submitted) {
-    return (
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="max-w-2xl mx-auto glass p-12 rounded-3xl text-center"
-      >
-        <div className="w-20 h-20 bg-accent/20 rounded-full flex items-center justify-center text-accent mx-auto mb-6">
-          <CheckCircle2 size={40} />
-        </div>
-        <h3 className="text-3xl font-bold mb-4">Demande Envoyée !</h3>
-        <p className="text-gray-400 mb-8">
-          Votre fiche projet a été créée automatiquement. Je l'analyse et je vous recontacte sous 24h avec une proposition personnalisée.
-        </p>
-        <button
-          onClick={() => setSubmitted(false)}
-          className="px-8 py-3 bg-accent text-white rounded-full font-bold hover:bg-orange-600 transition-colors"
-        >
-          Envoyer une autre demande
-        </button>
-      </motion.div>
-    );
-  }
-
   return (
+    <>
+      <AnimatePresence>
+        {submitted && <SuccessToast onClose={() => setSubmitted(false)} />}
+      </AnimatePresence>
     <section id="contact" className="py-24 bg-secondary/50">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
@@ -202,6 +240,7 @@ const ContactForm = () => {
         </div>
       </div>
     </section>
+    </>
   );
 };
 
