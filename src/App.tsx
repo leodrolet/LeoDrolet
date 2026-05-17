@@ -13,7 +13,7 @@ import './index.css';
 
 function App() {
   return (
-    <div className="min-h-screen selection:bg-indigo-500 selection:text-white bg-black">
+    <div className="min-h-screen selection:bg-orange-500 selection:text-white bg-black">
       <Navbar />
       <main>
         <Hero />

@@ -53,7 +53,7 @@ const ContactForm = () => {
         </p>
         <button
           onClick={() => setSubmitted(false)}
-          className="px-8 py-3 bg-accent text-white rounded-full font-bold hover:bg-blue-600 transition-colors"
+          className="px-8 py-3 bg-accent text-white rounded-full font-bold hover:bg-orange-600 transition-colors"
         >
           Envoyer une autre demande
         </button>

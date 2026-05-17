@@ -7,8 +7,8 @@ const Hero = () => {
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 bg-black">
       {/* Dynamic Background Elements */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute top-1/4 -left-10 w-72 h-72 bg-indigo-500/20 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 -right-10 w-72 h-72 bg-blue-500/20 rounded-full blur-3xl animate-pulse delay-700" />
+        <div className="absolute top-1/4 -left-10 w-72 h-72 bg-orange-500/20 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-1/4 -right-10 w-72 h-72 bg-red-500/20 rounded-full blur-3xl animate-pulse delay-700" />
       </div>
 
       <div className="container mx-auto px-6 relative z-10 text-center">
@@ -17,7 +17,7 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <span className="px-4 py-2 rounded-full glass text-xs font-medium text-indigo-400 mb-6 inline-block">
+          <span className="px-4 py-2 rounded-full glass text-xs font-medium text-orange-400 mb-6 inline-block">
             L'art de la conversion
           </span>
           <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-6 leading-tight">
@@ -33,7 +33,7 @@ const Hero = () => {
               href="#contact"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 bg-white text-black rounded-full font-bold flex items-center justify-center gap-2 hover:bg-gray-200 transition-all shadow-xl shadow-white/10"
+              className="px-8 py-4 bg-accent text-white rounded-full font-bold flex items-center justify-center gap-2 hover:bg-orange-600 transition-all shadow-xl shadow-orange-500/20"
             >
               Obtenir ma landing page <ArrowRight size={18} />
             </motion.a>
@@ -68,16 +68,16 @@ const Hero = () => {
                 [ Aperçu de votre future Landing Page Haute-Conversion ]
               </div>
               {/* Visual Decoration */}
-              <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-indigo-500/10 to-transparent" />
+              <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-orange-500/10 to-transparent" />
             </div>
           </div>
 
           {/* Floating Stats Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
             {[
-              { icon: <TrendingUp className="text-indigo-400" />, label: 'Conversions', value: '+150%', detail: 'Taux de conversion moyen' },
-              { icon: <ShieldCheck className="text-blue-400" />, label: 'Crédibilité', value: 'Haut de Gamme', detail: 'Image de marque premium' },
-              { icon: <Users className="text-cyan-400" />, label: 'Clients', value: 'Flux Continu', detail: 'Génération de leads 24/7' },
+              { icon: <TrendingUp className="text-orange-400" />, label: 'Conversions', value: '+150%', detail: 'Taux de conversion moyen' },
+              { icon: <ShieldCheck className="text-orange-400" />, label: 'Crédibilité', value: 'Haut de Gamme', detail: 'Image de marque premium' },
+              { icon: <Users className="text-red-400" />, label: 'Clients', value: 'Flux Continu', detail: 'Génération de leads 24/7' },
             ].map((stat, idx) => (
               <motion.div
                 key={idx}

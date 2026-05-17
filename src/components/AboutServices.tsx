@@ -125,9 +125,9 @@ export const Services = () => {
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
               whileHover={{ y: -10 }}
-              className="p-8 rounded-3xl glass group cursor-pointer transition-all duration-300 hover:border-indigo-500/50"
+              className="p-8 rounded-3xl glass group cursor-pointer transition-all duration-300 hover:border-orange-500/50"
             >
-              <div className="w-14 h-14 bg-indigo-500/10 rounded-lg flex items-center justify-center text-indigo-400 mb-6 group-hover:bg-indigo-500 group-hover:text-white transition-colors duration-300">
+              <div className="w-14 h-14 bg-accent/10 rounded-lg flex items-center justify-center text-accent mb-6 group-hover:bg-accent group-hover:text-white transition-colors duration-300">
                 {service.icon}
               </div>
               <h3 className="text-xl font-bold mb-3 text-white">{service.title}</h3>

@@ -69,22 +69,22 @@ const BeforeAfter = () => {
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="p-8 rounded-3xl glass relative overflow-hidden group border-indigo-500/20"
+            className="p-8 rounded-3xl glass relative overflow-hidden group border-orange-500/20"
           >
             <div className="absolute top-0 right-0 p-4">
-              <CheckCircle2 className="text-indigo-400" size={32} />
+              <CheckCircle2 className="text-orange-400" size={32} />
             </div>
             <h3 className="text-2xl font-bold mb-8 text-white uppercase tracking-widest text-center">AVEC OPTIMISATION</h3>
             <div className="space-y-4">
               {comparisons[0].pointsAfter.map((point, i) => (
-                <div key={i} className="flex items-center gap-3 text-gray-300 p-3 rounded-xl bg-white/5 group-hover:bg-indigo-500/10 transition-colors">
-                  <CheckCircle2 size={16} className="text-indigo-400" />
+                <div key={i} className="flex items-center gap-3 text-gray-300 p-3 rounded-xl bg-white/5 group-hover:bg-orange-500/10 transition-colors">
+                  <CheckCircle2 size={16} className="text-orange-400" />
                   <span className="text-sm">{point}</span>
                 </div>
               ))}
             </div>
-            <div className="mt-12 p-6 rounded-2xl bg-indigo-500/10 text-center border border-indigo-500/20">
-              <p className="text-sm text-indigo-300 italic">"C'est exactement ce qu'il me faut, je commande maintenant !"</p>
+            <div className="mt-12 p-6 rounded-2xl bg-orange-500/10 text-center border border-orange-500/20">
+              <p className="text-sm text-orange-300 italic">"C'est exactement ce qu'il me faut, je commande maintenant !"</p>
             </div>
           </motion.div>
         </div>

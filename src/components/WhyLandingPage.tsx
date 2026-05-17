@@ -5,22 +5,22 @@ import { Target, Zap, TrendingUp, Rocket } from 'lucide-react';
 const WhyLandingPage = () => {
   const reasons = [
     {
-      icon: <Target className="text-indigo-400" />,
+      icon: <Target className="text-orange-400" />,
       title: 'Plus de clients',
       description: 'Une structure optimisée pour capturer l\'attention et transformer chaque visiteur en prospect qualifié.'
     },
     {
-      icon: <Zap className="text-blue-400" />,
+      icon: <Zap className="text-orange-400" />,
       title: 'Image de marque premium',
       description: 'Un design haut de gamme qui inspire confiance instantanément et positionne votre entreprise comme leader.'
     },
     {
-      icon: <TrendingUp className="text-cyan-400" />,
+      icon: <TrendingUp className="text-red-400" />,
       title: 'Plus de rendez-vous',
       description: 'Réduisez la friction : un chemin clair et direct vers la prise de contact ou la réservation.'
     },
     {
-      icon: <Rocket className="text-purple-400" />,
+      icon: <Rocket className="text-orange-400" />,
       title: 'Marketing efficace',
       description: 'Maximisez vos campagnes pubs (Facebook, Google Ads) avec une page dédiée dont le seul but est la conversion.'
     },
@@ -29,8 +29,8 @@ const WhyLandingPage = () => {
   return (
     <section id="why" className="py-24 relative bg-black overflow-hidden">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl" />
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-orange-500/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-orange-500/10 rounded-full blur-3xl" />
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
@@ -66,7 +66,7 @@ const WhyLandingPage = () => {
               whileHover={{ y: -10 }}
               className="glass p-8 rounded-3xl text-left transition-all group"
             >
-              <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center mb-6 group-hover:bg-indigo-500/20 transition-colors">
+              <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center mb-6 group-hover:bg-orange-500/20 transition-colors">
                 {reason.icon}
               </div>
               <h3 className="text-xl font-bold text-white mb-3">{reason.title}</h3>
@@ -93,7 +93,7 @@ const WhyLandingPage = () => {
             </p>
           </div>
           <div className="flex-shrink-0">
-            <div className="w-16 h-16 rounded-full bg-indigo-500 flex items-center justify-center text-white font-bold shadow-lg shadow-indigo-500/50">
+            <div className="w-16 h-16 rounded-full bg-accent flex items-center justify-center text-white font-bold shadow-lg shadow-orange-500/50">
               KPI
             </div>
           </div>

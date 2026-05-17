@@ -51,17 +51,17 @@ const SocialProof = () => {
               transition={{ delay: i * 0.1 }}
               className="glass p-8 rounded-3xl relative"
             >
-              <Quote className="absolute top-6 right-6 text-indigo-500/20" size={40} />
+              <Quote className="absolute top-6 right-6 text-orange-500/20" size={40} />
               <div className="flex gap-1 mb-4">
                 {[...Array(t.rating)].map((_, starIdx) => (
-                  <Star key={starIdx} size={16} className="fill-indigo-400 text-indigo-400" />
+                  <Star key={starIdx} size={16} className="fill-orange-400 text-orange-400" />
                 ))}
               </div>
               <p className="text-gray-300 mb-8 italic leading-relaxed relative z-10">
                 "{t.content}"
               </p>
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-500 to-blue-500" />
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-orange-500 to-red-500" />
                 <div>
                   <div className="font-bold text-white">{t.name}</div>
                   <div className="text-xs text-gray-500">{t.role}</div>
