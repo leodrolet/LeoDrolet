@@ -55,23 +55,6 @@ const Hero = () => {
           transition={{ delay: 0.4, duration: 0.8 }}
           className="relative max-w-5xl mx-auto"
         >
-          {/* Landing Page Mockup Placeholder */}
-          <div className="relative glass p-2 rounded-2xl border-white/10 shadow-2xl overflow-hidden">
-            <div className="bg-black/50 rounded-xl overflow-hidden aspect-video relative">
-              {/* Simulating a Landing Page Layout */}
-              <div className="absolute top-0 left-0 w-full h-12 bg-white/5 border-b border-white/10 flex items-center px-4 gap-2">
-                <div className="w-3 h-3 rounded-full bg-red-500/50" />
-                <div className="w-3 h-3 rounded-full bg-yellow-500/50" />
-                <div className="w-3 h-3 rounded-full bg-green-500/50" />
-              </div>
-              <div className="flex items-center justify-center h-full text-gray-600 font-medium italic">
-                {/* Placeholder removed */}
-              </div>
-              {/* Visual Decoration */}
-              <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-orange-500/10 to-transparent" />
-            </div>
-          </div>
-
           {/* Floating Stats Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
             {[
