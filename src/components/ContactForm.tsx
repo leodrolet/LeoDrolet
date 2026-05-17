@@ -136,15 +136,6 @@ const ContactForm = () => {
               </select>
             </div>
 
-            {/* Prix de départ */}
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-400 ml-1">Investissement</label>
-              <div className="w-full px-4 py-3 rounded-xl bg-primary border border-white/10 flex items-center justify-between">
-                <span className="text-gray-400 text-sm">À partir de</span>
-                <span className="text-accent font-bold text-lg">1 200 $</span>
-              </div>
-            </div>
-
             {/* Délai */}
             <div className="space-y-2">
               <label className="text-sm font-medium text-gray-400 ml-1">Délai souhaité</label>

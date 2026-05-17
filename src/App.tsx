@@ -5,6 +5,7 @@ import { About, Services } from './components/AboutServices';
 import WhyLandingPage from './components/WhyLandingPage';
 import BeforeAfter from './components/BeforeAfter';
 import Process from './components/Process';
+import Pricing from './components/Pricing';
 import ContactForm from './components/ContactForm';
 import FinalCTA from './components/FinalCTA';
 import Footer from './components/Footer';
@@ -21,6 +22,7 @@ function App() {
         <About />
         <Services />
 <Process />
+        <Pricing />
         <ContactForm />
         <FinalCTA />
       </main>
