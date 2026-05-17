@@ -27,5 +27,13 @@ export function smoothScrollTo(targetId: string) {
     if (progress < 1) requestAnimationFrame(step);
   }
 
+  document.body.classList.add('is-scrolling');
+
+  function done() {
+    document.body.classList.remove('is-scrolling');
+  }
+
   requestAnimationFrame(step);
+
+  setTimeout(done, duration + 300);
 }
