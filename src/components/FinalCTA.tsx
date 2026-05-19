@@ -24,14 +24,16 @@ const FinalCTA = () => {
               Ne laissez plus vos clients potentiels s'échapper chez la concurrence.
               Passons ensemble à l'étape supérieure pour votre business.
             </p>
-            <motion.a
-              href="#contact"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-10 py-5 bg-accent text-white rounded-full font-bold inline-flex items-center justify-center gap-3 hover:bg-orange-600 transition-all shadow-2xl shadow-orange-500/30 text-lg"
-            >
-              Commencer maintenant <ArrowRight size={20} />
-            </motion.a>
+            <div className="btn-magnetic inline-block">
+              <motion.a
+                href="#contact"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-10 py-5 bg-accent text-white rounded-full font-bold inline-flex items-center justify-center gap-3 hover:bg-orange-600 transition-colors shadow-2xl shadow-orange-500/30 text-lg"
+              >
+                Commencer maintenant <ArrowRight size={20} />
+              </motion.a>
+            </div>
           </div>
         </motion.div>
       </div>

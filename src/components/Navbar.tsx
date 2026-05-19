@@ -36,15 +36,17 @@ const Navbar = () => {
               {link.name}
             </motion.a>
           ))}
-          <motion.a
-            href="#contact"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: navLinks.length * 0.1 }}
-            className="px-5 py-2 bg-accent text-white rounded-full text-sm font-bold hover:bg-orange-600 transition-all"
-          >
-            Démarrer
-          </motion.a>
+          <div className="btn-magnetic inline-block">
+            <motion.a
+              href="#contact"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: navLinks.length * 0.1 }}
+              className="px-5 py-2 bg-accent text-white rounded-full text-sm font-bold hover:bg-orange-600 transition-colors block"
+            >
+              Démarrer
+            </motion.a>
+          </div>
         </div>
 
         <div className="md:hidden flex items-center gap-4">
