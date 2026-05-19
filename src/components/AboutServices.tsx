@@ -78,11 +78,6 @@ export const Services = () => {
       icon: <Code size={32} />,
     },
     {
-      title: "Optimisation Mobile",
-      desc: "Un design 'Mobile-First' pour une expérience fluide sur smartphones et tablettes.",
-      icon: <Smartphone size={32} />,
-    },
-    {
       title: "Design Professionnel",
       desc: "Une esthétique premium et minimaliste qui renforce instantanément votre crédibilité.",
       icon: <Paintbrush size={32} />,
