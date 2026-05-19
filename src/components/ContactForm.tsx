@@ -202,45 +202,114 @@ const ContactForm = () => {
           {/* Two-column layout */}
           <div className="max-w-5xl mx-auto grid md:grid-cols-[1fr_2fr] gap-8 items-start">
 
-            {/* Left — trust panel */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="glass rounded-3xl p-8 space-y-8"
-            >
-              <div>
-                <h3 className="text-xl font-bold mb-1">Parlons de votre projet</h3>
-                <p className="text-gray-400 text-sm leading-relaxed">
-                  Chaque projet commence par une conversation. Dites-moi ce que vous voulez accomplir.
-                </p>
-              </div>
+            {/* Left — dynamic panel */}
+            {(() => {
+              const firstName = fields.full_name.trim().split(' ')[0];
+              const hasName    = fields.full_name.trim().length >= 2;
+              const hasCompany = fields.company.trim().length >= 2;
+              const hasDesc    = fields.description.trim().length >= 5;
+              const priceMap: Record<string, string> = {
+                'Landing Page': '899 $',
+                'Site Web Complet': '1 199 $',
+              };
+              const price = priceMap[fields.site_type] ?? 'Sur devis';
 
-              <ul className="space-y-4">
-                {trustItems.map((item, i) => (
-                  <li key={i} className="flex items-center gap-3 text-sm text-gray-300">
-                    <span className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
-                      {item.icon}
-                    </span>
-                    {item.text}
-                  </li>
-                ))}
-              </ul>
+              return (
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  className="glass rounded-3xl p-8 space-y-6 sticky top-24"
+                >
+                  {/* Greeting / header */}
+                  <div className="min-h-[56px]">
+                    <AnimatePresence mode="wait">
+                      {hasName ? (
+                        <motion.h3
+                          key="greeting"
+                          initial={{ opacity: 0, y: 6 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -6 }}
+                          className="text-xl font-bold mb-1"
+                        >
+                          Bonjour, {firstName} !
+                        </motion.h3>
+                      ) : (
+                        <motion.h3
+                          key="default"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          className="text-xl font-bold mb-1"
+                        >
+                          Parlons de votre projet
+                        </motion.h3>
+                      )}
+                    </AnimatePresence>
 
-              <div className="pt-4 border-t border-white/5">
-                <p className="text-xs text-gray-600 uppercase tracking-widest mb-2">Tarifs de départ</p>
-                <div className="space-y-1">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-400">Landing page</span>
-                    <span className="text-white font-semibold">899 $</span>
+                    <AnimatePresence>
+                      {hasCompany ? (
+                        <motion.p
+                          key="company"
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          exit={{ opacity: 0, height: 0 }}
+                          className="text-gray-400 text-sm"
+                        >
+                          {fields.company}
+                        </motion.p>
+                      ) : (
+                        <p className="text-gray-500 text-sm">
+                          Chaque projet commence par une conversation.
+                        </p>
+                      )}
+                    </AnimatePresence>
                   </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-400">Site web complet</span>
-                    <span className="text-white font-semibold">1 199 $</span>
+
+                  {/* Project card — updates live */}
+                  <div className="rounded-xl border border-white/10 bg-white/5 p-4 space-y-3">
+                    <div className="flex justify-between items-center">
+                      <div>
+                        <p className="text-xs text-gray-500 uppercase tracking-widest mb-1">Projet</p>
+                        <p className="text-white font-semibold text-sm">{fields.site_type}</p>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-xs text-gray-500 uppercase tracking-widest mb-1">À partir de</p>
+                        <p className="text-accent font-bold">{price}</p>
+                      </div>
+                    </div>
+
+                    <AnimatePresence>
+                      {hasDesc && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          exit={{ opacity: 0, height: 0 }}
+                          className="pt-3 border-t border-white/5"
+                        >
+                          <p className="text-xs text-gray-500 uppercase tracking-widest mb-1">Description</p>
+                          <p className="text-gray-400 text-xs leading-relaxed line-clamp-3">
+                            {fields.description}
+                          </p>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </div>
-                </div>
-              </div>
-            </motion.div>
+
+                  {/* Trust items */}
+                  <ul className="space-y-3">
+                    {trustItems.map((item, i) => (
+                      <li key={i} className="flex items-center gap-3 text-sm text-gray-300">
+                        <span className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
+                          {item.icon}
+                        </span>
+                        {item.text}
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
+              );
+            })()}
 
             {/* Right — form */}
             <motion.div
