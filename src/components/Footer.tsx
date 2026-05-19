@@ -11,7 +11,7 @@ const Footer = () => {
               NOVIO<span className="text-gradient">STUDIO</span>
             </div>
             <p className="text-gray-500 text-xs">
-              © 2026 Léo Drolet. Tous droits réservés.
+              © 2026 Novio Studio. Tous droits réservés.
             </p>
           </div>
 

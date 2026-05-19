@@ -68,6 +68,11 @@ export const About = () => {
 export const Services = () => {
   const services = [
     {
+      title: "Sites Web Complets",
+      desc: "Des sites multi-pages sur mesure pour une présence en ligne professionnelle et complète.",
+      icon: <Laptop size={32} />,
+    },
+    {
       title: "Landing Pages Modernes",
       desc: "Des pages haute-conversion conçues pour transformer vos visiteurs en clients fidèles.",
       icon: <Code size={32} />,
