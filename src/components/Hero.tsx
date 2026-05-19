@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Clock, Star, Briefcase } from 'lucide-react';
+import { ArrowRight, Clock } from 'lucide-react';
 
 const Hero = () => {
   return (
@@ -71,47 +71,6 @@ const Hero = () => {
           </div>
         </motion.div>
 
-        {/* Stats Cards */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.8 }}
-          className="relative max-w-5xl mx-auto"
-        >
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-            {[
-              {
-                icon: <Briefcase className="text-orange-400" size={22} />,
-                value: '10+',
-                label: 'Projets livrés',
-                detail: 'Sites web et landing pages',
-              },
-              {
-                icon: <Star className="text-yellow-400" size={22} fill="currentColor" />,
-                value: '5 / 5',
-                label: 'Satisfaction client',
-                detail: 'Note moyenne sur tous les projets',
-              },
-              {
-                icon: <Clock className="text-orange-400" size={22} />,
-                value: '14 jours',
-                label: 'Délai de livraison',
-                detail: 'De la validation au site en ligne',
-              },
-            ].map((stat, idx) => (
-              <motion.div
-                key={idx}
-                whileHover={{ y: -5 }}
-                className="glass p-6 rounded-2xl text-left transition-all"
-              >
-                <div className="mb-4">{stat.icon}</div>
-                <div className="text-2xl font-bold text-white mb-1">{stat.value}</div>
-                <div className="text-sm font-semibold text-gray-300 mb-1">{stat.label}</div>
-                <div className="text-xs text-gray-500">{stat.detail}</div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
       </div>
     </section>
   );
