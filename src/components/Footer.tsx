@@ -8,7 +8,7 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="text-center md:text-left">
             <div className="text-lg font-bold tracking-tighter mb-2">
-              LÉO<span className="text-gradient">DROLET</span>
+              NOVIO<span className="text-gradient">STUDIO</span>
             </div>
             <p className="text-gray-500 text-xs">
               © 2026 Léo Drolet. Tous droits réservés.

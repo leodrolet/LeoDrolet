@@ -20,7 +20,7 @@ const Navbar = () => {
           animate={{ opacity: 1, x: 0 }}
           className="text-2xl font-bold tracking-tighter"
         >
-          LÉO<span className="text-gradient">DROLET</span>
+          NOVIO<span className="text-gradient">STUDIO</span>
         </motion.div>
 
         <div className="hidden md:flex items-center gap-8">
