@@ -22,10 +22,10 @@ const Hero = () => {
           </span>
           <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-6 leading-tight">
             Votre entreprise mérite <br className="hidden md:block" />
-            <span className="text-gradient">mieux qu'un simple site web.</span>
+            <span className="text-gradient">une présence digitale d'élite.</span>
           </h1>
           <p className="max-w-2xl mx-auto text-gray-400 text-lg md:text-xl mb-10 leading-relaxed">
-            Une landing page optimisée n'est pas juste un design : c'est un moteur de croissance qui transforme vos visiteurs en clients fidèles.
+            Que ce soit une landing page haute conversion ou un site web complet, je crée des expériences digitales qui transforment vos visiteurs en clients fidèles.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-20">
@@ -35,7 +35,7 @@ const Hero = () => {
               whileTap={{ scale: 0.95 }}
               className="px-8 py-4 bg-accent text-white rounded-full font-bold flex items-center justify-center gap-2 hover:bg-orange-600 transition-all shadow-xl shadow-orange-500/20"
             >
-              Obtenir ma landing page <ArrowRight size={18} />
+              Lancer mon projet <ArrowRight size={18} />
             </motion.a>
             <motion.a
               href="#why"
