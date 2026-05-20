@@ -211,8 +211,8 @@ const ContactForm = () => {
               const priceMap: Record<string, string> = {
                 'Landing Page': '899 $',
                 'Site Vitrine': '1 499 $',
-                'Site Web Complet': '2 499 $',
-                'Refonte Complète': '2 299 $',
+                'Site Web Complet': '3 499 $',
+                'Refonte Complète': '2 999 $',
               };
               const price = priceMap[fields.site_type] ?? 'Sur devis';
 
