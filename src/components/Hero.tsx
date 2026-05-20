@@ -115,8 +115,8 @@ const Hero = () => {
               ref={h1Ref}
               className="text-5xl md:text-7xl font-bold tracking-tighter mb-6 leading-tight"
             >
-              Votre prochain client vous cherche en ligne — <br className="hidden md:block" />
-              <span className="text-gradient">assurez-vous qu'il vous trouve.</span>
+              Votre prochain client vous cherche <br className="hidden md:block" />
+              en ligne — <span className="text-gradient">assurez-vous qu'il vous trouve.</span>
             </h1>
 
             {/* Subtitle — slowest text layer */}
