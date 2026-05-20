@@ -6,7 +6,6 @@ const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
 
 const Hero = () => {
   const blobsRef  = useRef<HTMLDivElement>(null);
-  const brandRef  = useRef<HTMLDivElement>(null);
   const h1Ref     = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const ctasRef   = useRef<HTMLDivElement>(null);
@@ -22,7 +21,6 @@ const Hero = () => {
 
     const layers = [
       { ref: blobsRef,    xF:  0.030, yF:  0.025 },
-      { ref: brandRef,    xF: -0.020, yF: -0.015 },
       { ref: h1Ref,       xF: -0.015, yF: -0.010 },
       { ref: subtitleRef, xF: -0.010, yF: -0.007 },
       { ref: ctasRef,     xF: -0.008, yF: -0.005 },
@@ -112,11 +110,6 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            {/* Brand name */}
-            <div ref={brandRef} className="text-4xl md:text-6xl font-bold tracking-tighter mb-4">
-              NOVIO<span className="text-gradient">STUDIO</span>
-            </div>
-
             {/* H1 — mid-speed, opposite */}
             <h1
               ref={h1Ref}
