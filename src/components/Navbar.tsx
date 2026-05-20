@@ -54,7 +54,11 @@ const Navbar = () => {
           >
             Démarrer
           </a>
-          <button onClick={() => setIsOpen(!isOpen)}>
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label={isOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
+            aria-expanded={isOpen}
+          >
             {isOpen ? <X /> : <Menu />}
           </button>
         </div>

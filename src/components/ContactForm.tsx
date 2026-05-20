@@ -49,7 +49,7 @@ const SuccessToast = ({ onClose }: { onClose: () => void }) => {
             Je vous recontacte sous 24h avec une proposition personnalisée.
           </p>
         </div>
-        <button onClick={onClose} className="flex-shrink-0 text-gray-500 hover:text-white transition-colors">
+        <button onClick={onClose} aria-label="Fermer la notification" className="flex-shrink-0 text-gray-500 hover:text-white transition-colors">
           <X size={16} />
         </button>
       </div>
@@ -325,9 +325,9 @@ const ContactForm = () => {
                 {/* Row 1: Name + Email */}
                 <div className="grid sm:grid-cols-2 gap-5">
                   <div>
-                    <label className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2 block">Nom complet *</label>
+                    <label htmlFor="full_name" className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2 block">Nom complet *</label>
                     <input
-                      name="full_name" type="text" value={fields.full_name}
+                      id="full_name" name="full_name" type="text" value={fields.full_name}
                       onChange={onChange}
                       placeholder="Jean Tremblay"
                       className={fieldBase(!!(errors.full_name && touched.full_name))}
@@ -335,9 +335,9 @@ const ContactForm = () => {
                     <AnimatePresence>{errors.full_name && touched.full_name && <FieldError msg={errors.full_name} />}</AnimatePresence>
                   </div>
                   <div>
-                    <label className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2 block">Email *</label>
+                    <label htmlFor="email" className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2 block">Email *</label>
                     <input
-                      name="email" type="email" value={fields.email}
+                      id="email" name="email" type="email" value={fields.email}
                       onChange={onChange}
                       placeholder="jean@entreprise.com"
                       className={fieldBase(!!(errors.email && touched.email))}
@@ -349,9 +349,9 @@ const ContactForm = () => {
                 {/* Row 2: Phone + Company */}
                 <div className="grid sm:grid-cols-2 gap-5">
                   <div>
-                    <label className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2 block">Téléphone *</label>
+                    <label htmlFor="phone" className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2 block">Téléphone *</label>
                     <input
-                      name="phone" type="tel" value={fields.phone}
+                      id="phone" name="phone" type="tel" value={fields.phone}
                       onChange={onChange}
                       placeholder="514 000-0000"
                       className={fieldBase(!!(errors.phone && touched.phone))}
@@ -359,9 +359,9 @@ const ContactForm = () => {
                     <AnimatePresence>{errors.phone && touched.phone && <FieldError msg={errors.phone} />}</AnimatePresence>
                   </div>
                   <div>
-                    <label className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2 block">Entreprise *</label>
+                    <label htmlFor="company" className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2 block">Entreprise *</label>
                     <input
-                      name="company" type="text" value={fields.company}
+                      id="company" name="company" type="text" value={fields.company}
                       onChange={onChange}
                       placeholder="Ma Compagnie Inc."
                       className={fieldBase(!!(errors.company && touched.company))}
@@ -372,10 +372,10 @@ const ContactForm = () => {
 
                 {/* Row 3: Type de projet */}
                 <div>
-                  <label className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2 block">Type de projet</label>
+                  <label htmlFor="site_type" className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2 block">Type de projet</label>
                   <div className="relative">
                     <select
-                      name="site_type" value={fields.site_type}
+                      id="site_type" name="site_type" value={fields.site_type}
                       onChange={onChange}
                       className={`${fieldBase(false)} appearance-none pr-10 cursor-pointer`}
                     >
@@ -392,13 +392,13 @@ const ContactForm = () => {
                 {/* Description */}
                 <div>
                   <div className="flex justify-between items-center mb-2">
-                    <label className="text-xs font-semibold text-gray-400 uppercase tracking-widest">Description du projet *</label>
+                    <label htmlFor="description" className="text-xs font-semibold text-gray-400 uppercase tracking-widest">Description du projet *</label>
                     <span className={`text-xs ${fields.description.length > 400 ? 'text-orange-400' : 'text-gray-600'}`}>
                       {fields.description.length} / 500
                     </span>
                   </div>
                   <textarea
-                    name="description" value={fields.description}
+                    id="description" name="description" value={fields.description}
                     onChange={onChange}
                     maxLength={500} rows={4}
                     placeholder="Décrivez vos objectifs, vos fonctionnalités souhaitées et vos inspirations..."

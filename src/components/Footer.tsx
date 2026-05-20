@@ -11,14 +11,14 @@ const Footer = () => {
               NOVIO<span className="text-gradient">STUDIO</span>
             </div>
             <p className="text-gray-500 text-xs">
-              © 2026 Novio Studio. Tous droits réservés.
+              © 2026 Novio Studio. Tous droits réservés. · Gatineau, Québec
             </p>
           </div>
 
           <div className="flex gap-6">
-            <a href="#" className="text-gray-500 hover:text-white transition-colors"><Github size={18} /></a>
-            <a href="#" className="text-gray-500 hover:text-white transition-colors"><Linkedin size={18} /></a>
-            <a href="#" className="text-gray-500 hover:text-white transition-colors"><Mail size={18} /></a>
+            <a href="#" aria-label="GitHub" className="text-gray-500 hover:text-white transition-colors"><Github size={18} /></a>
+            <a href="#" aria-label="LinkedIn" className="text-gray-500 hover:text-white transition-colors"><Linkedin size={18} /></a>
+            <a href="#contact" aria-label="Envoyer un email" className="text-gray-500 hover:text-white transition-colors"><Mail size={18} /></a>
           </div>
 
           <div className="flex gap-6 text-[10px] font-medium text-gray-600 uppercase tracking-widest">

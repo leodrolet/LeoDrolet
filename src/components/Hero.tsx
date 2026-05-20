@@ -115,8 +115,8 @@ const Hero = () => {
               ref={h1Ref}
               className="text-5xl md:text-7xl font-bold tracking-tighter mb-6 leading-tight"
             >
-              Votre entreprise mérite <br className="hidden md:block" />
-              <span className="text-gradient">une présence digitale d'élite.</span>
+              Votre prochain client vous cherche en ligne — <br className="hidden md:block" />
+              <span className="text-gradient">assurez-vous qu'il vous trouve.</span>
             </h1>
 
             {/* Subtitle — slowest text layer */}
@@ -124,7 +124,7 @@ const Hero = () => {
               ref={subtitleRef}
               className="max-w-2xl mx-auto text-gray-400 text-lg md:text-xl mb-10 leading-relaxed"
             >
-              Que ce soit une landing page haute conversion ou un site web complet, je crée des expériences digitales qui transforment vos visiteurs en clients fidèles.
+              Je crée des sites web rapides, modernes et optimisés pour attirer des clients locaux et transformer vos visiteurs en appels, réservations et ventes.
             </p>
 
             {/* CTAs — very slight opposite movement */}
@@ -157,21 +157,21 @@ const Hero = () => {
             {[
               {
                 icon: <TrendingUp className="text-orange-400" />,
-                label: 'Conversions',
-                value: <span>+{count}%</span>,
-                detail: 'Taux de conversion moyen',
+                label: 'Délai de livraison',
+                value: '14 jours',
+                detail: 'Garanti par contrat',
               },
               {
                 icon: <ShieldCheck className="text-orange-400" />,
-                label: 'Crédibilité',
-                value: 'Haut de Gamme',
-                detail: 'Image de marque premium',
+                label: 'Révisions incluses',
+                value: 'Satisfaction garantie',
+                detail: "Jusqu'à la version finale",
               },
               {
                 icon: <Users className="text-red-400" />,
-                label: 'Clients',
-                value: 'Flux Continu',
-                detail: 'Génération de leads 24/7',
+                label: 'Après livraison',
+                value: 'Support inclus',
+                detail: "30 jours d'accompagnement",
               },
             ].map((stat, idx) => (
               <motion.div

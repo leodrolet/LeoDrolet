@@ -17,12 +17,11 @@ const FinalCTA = () => {
 
           <div className="relative z-10">
             <h2 className="text-4xl md:text-6xl font-bold mb-8 tracking-tighter leading-tight">
-              Chaque jour sans landing page <br className="hidden md:block" />
-              est une <span className="text-gradient">opportunité perdue.</span>
+              Chaque jour sans site web <br className="hidden md:block" />
+              est un client <span className="text-gradient">chez la concurrence.</span>
             </h2>
             <p className="text-gray-400 text-lg mb-12 max-w-2xl mx-auto">
-              Ne laissez plus vos clients potentiels s'échapper chez la concurrence.
-              Passons ensemble à l'étape supérieure pour votre business.
+              Que vous ayez besoin d'une landing page, d'un site vitrine ou d'une refonte complète — passons ensemble à l'étape supérieure.
             </p>
             <motion.a
               href="#contact"
