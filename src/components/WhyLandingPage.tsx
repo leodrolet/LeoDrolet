@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Target, Zap, TrendingUp, Rocket } from 'lucide-react';
+import { GlowCard } from './GlowCard';
 
 const WhyLandingPage = () => {
   const reasons = [
@@ -27,7 +28,7 @@ const WhyLandingPage = () => {
   ];
 
   return (
-    <section id="why" className="py-24 relative bg-black overflow-hidden">
+    <section id="why" className="py-24 relative overflow-hidden">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-orange-500/10 rounded-full blur-3xl" />
         <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-orange-500/10 rounded-full blur-3xl" />
@@ -63,16 +64,16 @@ const WhyLandingPage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1 }}
-              whileHover={{ y: -10 }}
-              className="glass p-8 rounded-3xl text-left transition-all group"
             >
-              <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center mb-6 group-hover:bg-orange-500/20 transition-colors">
-                {reason.icon}
-              </div>
-              <h3 className="text-xl font-bold text-white mb-3">{reason.title}</h3>
-              <p className="text-gray-400 text-sm leading-relaxed">
-                {reason.description}
-              </p>
+              <GlowCard customSize glowColor="orange" className="w-full p-8 text-left group">
+                <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center mb-6 group-hover:bg-orange-500/20 transition-colors">
+                  {reason.icon}
+                </div>
+                <h3 className="text-xl font-bold text-white mb-3">{reason.title}</h3>
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  {reason.description}
+                </p>
+              </GlowCard>
             </motion.div>
           ))}
         </div>
@@ -82,8 +83,9 @@ const WhyLandingPage = () => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.5 }}
-          className="mt-20 glass p-8 md:p-12 rounded-3xl max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-8"
+          className="mt-20 max-w-4xl mx-auto"
         >
+          <GlowCard customSize glowColor="orange" className="w-full p-8 md:p-12 flex flex-col md:flex-row items-center gap-8">
           <div className="flex-1">
             <h3 className="text-2xl font-bold mb-4">Le secret de la conversion</h3>
             <p className="text-gray-400 leading-relaxed">
@@ -97,6 +99,7 @@ const WhyLandingPage = () => {
               KPI
             </div>
           </div>
+          </GlowCard>
         </motion.div>
       </div>
     </section>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle2, ArrowRight, Star } from 'lucide-react';
+import { GlowCard } from './GlowCard';
 
 const hero = {
   name: "Landing Page",
@@ -59,7 +60,7 @@ const others = [
 
 const Pricing = () => {
   return (
-    <section id="pricing" className="py-24 relative bg-black overflow-hidden">
+    <section id="pricing" className="py-24 relative overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl" />
       </div>
@@ -86,7 +87,7 @@ const Pricing = () => {
           viewport={{ once: true }}
           className="max-w-3xl mx-auto mb-8"
         >
-          <div className="glass rounded-3xl p-10 md:p-14 relative overflow-hidden border-orange-500/30">
+          <GlowCard customSize glowColor="orange" className="w-full p-10 md:p-14 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-72 h-72 bg-orange-500/10 rounded-full blur-3xl pointer-events-none" />
             <div className="absolute top-5 right-5 bg-accent text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5">
               <Star size={11} fill="currentColor" /> Produit phare
@@ -133,7 +134,7 @@ const Pricing = () => {
                 ))}
               </ul>
             </div>
-          </div>
+          </GlowCard>
         </motion.div>
 
         {/* ── Other plans ── */}
@@ -148,8 +149,8 @@ const Pricing = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="glass rounded-3xl p-8 relative overflow-hidden flex flex-col"
             >
+              <GlowCard customSize glowColor="orange" className="w-full p-8 relative overflow-hidden flex flex-col">
               <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/5 rounded-full blur-2xl pointer-events-none" />
               <div className="relative z-10 flex flex-col h-full">
                 <p className="text-gray-400 text-xs uppercase tracking-widest mb-3">{plan.name}</p>
@@ -176,6 +177,7 @@ const Pricing = () => {
                   En savoir plus <ArrowRight size={15} />
                 </motion.a>
               </div>
+              </GlowCard>
             </motion.div>
           ))}
         </div>

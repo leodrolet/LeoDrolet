@@ -10,6 +10,9 @@ import ContactForm from './components/ContactForm';
 import FinalCTA from './components/FinalCTA';
 import Footer from './components/Footer';
 import { smoothScrollTo } from './components/utils';
+import { FluidParticlesBackground } from './components/FluidParticlesBackground';
+import { GlowStyles } from './components/GlowCard';
+import { ScrollProgress } from './components/ScrollProgress';
 import './index.css';
 
 function App() {
@@ -26,20 +29,24 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen selection:bg-orange-500 selection:text-white bg-black">
-<Navbar />
-      <main>
-        <Hero />
-        <WhyLandingPage />
-        <BeforeAfter />
-        <About />
-        <Services />
-<Process />
-        <Pricing />
-        <ContactForm />
-        <FinalCTA />
-      </main>
-      <Footer />
+    <div className="min-h-screen selection:bg-orange-500 selection:text-white">
+      <GlowStyles />
+      <ScrollProgress />
+      <Navbar />
+      <FluidParticlesBackground>
+        <main>
+          <Hero />
+          <WhyLandingPage />
+          <BeforeAfter />
+          <About />
+          <Services />
+          <Process />
+          <Pricing />
+          <ContactForm />
+          <FinalCTA />
+        </main>
+        <Footer />
+      </FluidParticlesBackground>
     </div>
   );
 }

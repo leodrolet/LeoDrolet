@@ -1,17 +1,19 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import { GlowCard } from './GlowCard';
 
 const FinalCTA = () => {
   return (
-    <section className="py-24 relative bg-black overflow-hidden">
+    <section className="py-24 relative overflow-hidden">
       <div className="container mx-auto px-6 relative z-10">
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
+          initial={{ opacity: 0, scale: 0.97 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          className="max-w-4xl mx-auto glass p-12 md:p-20 rounded-[3rem] text-center relative overflow-hidden border-orange-500/20"
+          className="max-w-4xl mx-auto"
         >
+          <GlowCard customSize glowColor="orange" className="w-full p-12 md:p-20 text-center relative overflow-hidden">
           {/* Decorative Background */}
           <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-orange-500/10 via-transparent to-red-500/10 pointer-events-none" />
 
@@ -32,6 +34,7 @@ const FinalCTA = () => {
               Commencer maintenant <ArrowRight size={20} />
             </motion.a>
           </div>
+          </GlowCard>
         </motion.div>
       </div>
     </section>
