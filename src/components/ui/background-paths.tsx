@@ -11,7 +11,7 @@ function FloatingPaths({ position }: { position: number }) {
     });
 
     // On déplace les lignes vers le bas au fur et à mesure du scroll
-    const y = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+    const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
 
     const paths = Array.from({ length: 36 }, (_, i) => ({
         id: i,
@@ -22,7 +22,6 @@ function FloatingPaths({ position }: { position: number }) {
         } ${343 - i * 6}C${616 - i * 5 * position} ${470 - i * 6} ${
             684 - i * 5 * position
         } ${875 - i * 6} ${684 - i * 5 * position} ${875 - i * 6}`,
-        color: `rgba(249, 115, 22, ${0.1 + i * 0.03})`, // Orange-500
         width: 0.5 + i * 0.03,
     }));
 
@@ -30,20 +29,26 @@ function FloatingPaths({ position }: { position: number }) {
         <div ref={ref} className="absolute inset-0 pointer-events-none overflow-hidden h-full w-full">
             <motion.div style={{ y }} className="w-full h-full">
                 <svg
-                    className="w-full h-full text-orange-500"
-                    // ViewBox élargi pour s'assurer que les coordonnées négatives et positives sont visibles
+                    className="w-full h-full"
                     viewBox="-500 -200 1200 1200"
                     fill="none"
-                    style={{ width: '100%', height: '100%', position: 'absolute', top: 0, left: 0 }}
+                    style={{
+                        width: '100%',
+                        height: '100%',
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        display: 'block'
+                    }}
                 >
                     <title>Background Paths</title>
                     {paths.map((path) => (
                         <motion.path
                             key={path.id}
                             d={path.d}
-                            stroke="currentColor"
+                            stroke="#f97316" // Orange-500 explicit
                             strokeWidth={path.width}
-                            strokeOpacity={0.1 + path.id * 0.03}
+                            strokeOpacity={0.2 + path.id * 0.02} // Légèrement plus opaque pour le debug
                             initial={{ pathLength: 0.3, opacity: 0.6 }}
                             animate={{
                                 pathLength: 1,
@@ -65,7 +70,7 @@ function FloatingPaths({ position }: { position: number }) {
 
 export function BackgroundPaths() {
     return (
-        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 z-10 overflow-hidden pointer-events-none">
             <FloatingPaths position={1} />
             <FloatingPaths position={-1} />
         </div>
