@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, TrendingUp, ShieldCheck, Users } from 'lucide-react';
+import { BackgroundPaths } from '@/components/ui/background-paths';
 
 const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
 
@@ -103,6 +104,7 @@ const Hero = () => {
           <div className="absolute top-1/4 -left-10 w-72 h-72 bg-orange-500/20 rounded-full blur-3xl animate-pulse" />
           <div className="absolute bottom-1/4 -right-10 w-72 h-72 bg-red-500/20 rounded-full blur-3xl animate-pulse delay-700" />
         </div>
+        <BackgroundPaths />
 
         <div className="container mx-auto px-6 relative z-10 text-center">
           <motion.div
