@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle2, ArrowRight, Star } from 'lucide-react';
+import { CheckCircle2, ArrowRight, Star, Clock, Heart, Headphones } from 'lucide-react';
 import { GlowCard } from './GlowCard';
 
 const hero = {
@@ -181,6 +181,48 @@ const Pricing = () => {
             </motion.div>
           ))}
         </div>
+
+        {/* ── Guarantees ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
+          className="max-w-5xl mx-auto mt-10 grid grid-cols-1 md:grid-cols-3 gap-4"
+        >
+          {[
+            {
+              icon: <Clock size={18} className="text-accent" />,
+              value: "14 jours",
+              label: "Délai de livraison",
+              sub: "Garanti par contrat",
+            },
+            {
+              icon: <Heart size={18} className="text-accent" />,
+              value: "Satisfaction garantie",
+              label: "Révisions incluses",
+              sub: "Jusqu'à la version finale",
+            },
+            {
+              icon: <Headphones size={18} className="text-accent" />,
+              value: "Support inclus",
+              label: "Après livraison",
+              sub: "30 jours d'accompagnement",
+            },
+          ].map((item, i) => (
+            <GlowCard key={i} customSize glowColor="orange" className="w-full px-6 py-5 flex items-center gap-4">
+              <div className="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center flex-shrink-0">
+                {item.icon}
+              </div>
+              <div>
+                <p className="text-white font-bold text-sm">{item.value}</p>
+                <p className="text-gray-400 text-xs">{item.label}</p>
+                <p className="text-gray-600 text-xs">{item.sub}</p>
+              </div>
+            </GlowCard>
+          ))}
+        </motion.div>
+
       </div>
     </section>
   );
