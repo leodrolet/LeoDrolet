@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, TrendingUp, ShieldCheck, Users } from 'lucide-react';
+import { GlowCard } from './GlowCard';
 const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
 
 const Hero = () => {
@@ -150,7 +151,7 @@ const Hero = () => {
       </section>
 
       {/* ── Stats — below the fold, animates on scroll ── */}
-      <section className="py-20 bg-black">
+      <section className="py-20">
         <div className="container mx-auto px-6">
           <div ref={statsRef} className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {[
@@ -167,7 +168,7 @@ const Hero = () => {
                 detail: "Jusqu'à la version finale",
               },
               {
-                icon: <Users className="text-red-400" />,
+                icon: <Users className="text-orange-400" />,
                 label: 'Après livraison',
                 value: 'Support inclus',
                 detail: "30 jours d'accompagnement",
@@ -179,13 +180,13 @@ const Hero = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ delay: idx * 0.1, duration: 0.5 }}
-                whileHover={{ y: -5 }}
-                className="glass p-6 rounded-2xl text-left"
               >
-                <div className="mb-4">{stat.icon}</div>
-                <div className="text-2xl font-bold text-white mb-1">{stat.value}</div>
-                <div className="text-sm font-semibold text-gray-300 mb-1">{stat.label}</div>
-                <div className="text-xs text-gray-500">{stat.detail}</div>
+                <GlowCard customSize glowColor="orange" className="w-full p-6 text-left">
+                  <div className="mb-4">{stat.icon}</div>
+                  <div className="text-2xl font-bold text-white mb-1">{stat.value}</div>
+                  <div className="text-sm font-semibold text-gray-300 mb-1">{stat.label}</div>
+                  <div className="text-xs text-gray-500">{stat.detail}</div>
+                </GlowCard>
               </motion.div>
             ))}
           </div>
