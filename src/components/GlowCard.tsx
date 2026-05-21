@@ -11,14 +11,13 @@ function globalSyncPointer(e: PointerEvent) {
   pendingY = e.clientY;
   if (!rafId) {
     rafId = requestAnimationFrame(() => {
-      const x = pendingX.toFixed(2);
-      const y = pendingY.toFixed(2);
       const xp = (pendingX / window.innerWidth).toFixed(2);
       const yp = (pendingY / window.innerHeight).toFixed(2);
       for (const el of registeredCards) {
-        el.style.setProperty('--x', x);
+        const rect = el.getBoundingClientRect();
+        el.style.setProperty('--x', (pendingX - rect.left).toFixed(2));
+        el.style.setProperty('--y', (pendingY - rect.top).toFixed(2));
         el.style.setProperty('--xp', xp);
-        el.style.setProperty('--y', y);
         el.style.setProperty('--yp', yp);
       }
       rafId = null;
@@ -35,7 +34,6 @@ const glowStyles = `
     inset: calc(var(--border-size) * -1);
     border: var(--border-size) solid transparent;
     border-radius: calc(var(--radius) * 1px);
-    background-attachment: fixed;
     background-size: calc(100% + (2 * var(--border-size))) calc(100% + (2 * var(--border-size)));
     background-repeat: no-repeat;
     background-position: 50% 50%;
@@ -142,7 +140,6 @@ export const GlowCard = ({
     backgroundColor: 'var(--backdrop, transparent)',
     backgroundSize: 'calc(100% + (2 * var(--border-size))) calc(100% + (2 * var(--border-size)))',
     backgroundPosition: '50% 50%',
-    backgroundAttachment: 'fixed',
     border: 'var(--border-size) solid var(--backup-border)',
     position: 'relative',
     touchAction: 'none',
