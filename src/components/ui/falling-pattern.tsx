@@ -5,17 +5,12 @@ import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
 type FallingPatternProps = React.ComponentProps<'div'> & {
-    /** Primary color of the falling elements (default: 'var(--primary)') */
     color?: string;
-    /** Background color (default: 'var(--background)') */
     backgroundColor?: string;
-    /** Animation duration in seconds (default: 150) */
     duration?: number;
-    /** Blur intensity for the overlay effect (default: '1em') */
     blurIntensity?: string;
-    /** Pattern density - affects spacing (default: 1) */
     density?: number;
-    /** Show the dot-grid overlay (default: true) */
+    /** Disable the dot-grid blur overlay (default: true) */
     showOverlay?: boolean;
 };
 
@@ -110,7 +105,7 @@ export function FallingPattern({
                         animate: {
                             backgroundPosition: [startPositions, endPositions],
                             transition: {
-                                duration: duration,
+                                duration,
                                 ease: 'linear',
                                 repeat: Number.POSITIVE_INFINITY,
                             },
@@ -122,7 +117,7 @@ export function FallingPattern({
             </motion.div>
             {showOverlay && (
                 <div
-                    className="absolute inset-0 z-1"
+                    className="absolute inset-0 z-[1]"
                     style={{
                         backdropFilter: `blur(${blurIntensity})`,
                         backgroundImage: `radial-gradient(circle at 50% 50%, transparent 0, transparent 2px, ${backgroundColor} 2px)`,

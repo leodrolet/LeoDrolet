@@ -98,71 +98,67 @@ const Hero = () => {
   return (
     <div id="home">
       {/* ── Main hero — full viewport ── */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-        {/* Falling pattern background */}
-        <div className="absolute inset-0 z-0 pointer-events-none">
-          <FallingPattern
-            color="rgba(249, 115, 22, 0.8)"
-            backgroundColor="#000000"
-            duration={120}
-            blurIntensity="0px"
-            density={1}
-            showOverlay={false}
-            className="[mask-image:linear-gradient(to_bottom,black_0%,black_70%,transparent_100%)]"
-          />
-        </div>
+      <div className="w-full relative min-h-screen overflow-hidden">
+        {/* FallingPattern — exact demo structure, color matches site theme */}
+        <FallingPattern
+          color="rgba(249, 115, 22, 0.9)"
+          backgroundColor="#000000"
+          duration={90}
+          showOverlay={false}
+          className="h-screen [mask-image:radial-gradient(ellipse_at_center,transparent_20%,var(--background)_65%)]"
+        />
 
-        {/* Background blobs — fastest layer, follows cursor */}
-        <div ref={blobsRef} className="absolute inset-0 z-0 pointer-events-none">
-          <div className="absolute top-1/4 -left-10 w-72 h-72 bg-orange-500/20 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute bottom-1/4 -right-10 w-72 h-72 bg-red-500/20 rounded-full blur-3xl animate-pulse delay-700" />
-        </div>
+        {/* All hero content sits above the pattern */}
+        <section className="absolute inset-0 z-10 flex items-center justify-center pt-20 pointer-events-none">
+          {/* Blobs — follow cursor via parallax ref, pointer-events re-enabled below */}
+          <div ref={blobsRef} className="absolute inset-0 pointer-events-none">
+            <div className="absolute top-1/4 -left-10 w-96 h-96 bg-orange-500/15 rounded-full blur-3xl animate-pulse" />
+            <div className="absolute bottom-1/4 -right-10 w-96 h-96 bg-red-500/10 rounded-full blur-3xl animate-pulse delay-700" />
+          </div>
 
-        <div className="container mx-auto px-6 relative z-10 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            {/* H1 — mid-speed, opposite */}
-            <h1
-              ref={h1Ref}
-              className="text-5xl md:text-7xl font-bold tracking-tighter mb-6 leading-tight"
+          <div className="container mx-auto px-6 relative text-center pointer-events-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
             >
-              Votre prochain client vous cherche <br className="hidden md:block" />
-              en ligne — <span className="text-gradient">assurez-vous qu'il vous trouve.</span>
-            </h1>
-
-            {/* Subtitle — slowest text layer */}
-            <p
-              ref={subtitleRef}
-              className="max-w-2xl mx-auto text-gray-400 text-lg md:text-xl mb-10 leading-relaxed"
-            >
-              Je crée des sites web rapides, modernes et optimisés pour attirer des clients locaux et transformer vos visiteurs en appels, réservations et ventes.
-            </p>
-
-            {/* CTAs — very slight opposite movement */}
-            <div ref={ctasRef} className="flex flex-col sm:flex-row gap-4 justify-center">
-              <motion.a
-                href="#contact"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 bg-accent text-white rounded-full font-bold flex items-center justify-center gap-2 hover:bg-orange-600 transition-all shadow-xl shadow-orange-500/20"
+              <h1
+                ref={h1Ref}
+                className="text-5xl md:text-7xl font-bold tracking-tighter mb-6 leading-tight"
               >
-                Lancer mon projet <ArrowRight size={18} />
-              </motion.a>
-              <motion.a
-                href="#why"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 glass text-white rounded-full font-bold flex items-center justify-center gap-2 hover:bg-white/10 transition-all"
+                Votre prochain client vous cherche <br className="hidden md:block" />
+                en ligne — <span className="text-gradient">assurez-vous qu'il vous trouve.</span>
+              </h1>
+
+              <p
+                ref={subtitleRef}
+                className="max-w-2xl mx-auto text-gray-400 text-lg md:text-xl mb-10 leading-relaxed"
               >
-                En savoir plus
-              </motion.a>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+                Je crée des sites web rapides, modernes et optimisés pour attirer des clients locaux et transformer vos visiteurs en appels, réservations et ventes.
+              </p>
+
+              <div ref={ctasRef} className="flex flex-col sm:flex-row gap-4 justify-center">
+                <motion.a
+                  href="#contact"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="px-8 py-4 bg-accent text-white rounded-full font-bold flex items-center justify-center gap-2 hover:bg-orange-600 transition-all shadow-xl shadow-orange-500/20"
+                >
+                  Lancer mon projet <ArrowRight size={18} />
+                </motion.a>
+                <motion.a
+                  href="#why"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="px-8 py-4 glass text-white rounded-full font-bold flex items-center justify-center gap-2 hover:bg-white/10 transition-all"
+                >
+                  En savoir plus
+                </motion.a>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+      </div>
 
       {/* ── Stats — below the fold, animates on scroll ── */}
       <section className="py-20">
