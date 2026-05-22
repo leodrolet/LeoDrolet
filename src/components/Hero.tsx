@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, TrendingUp, ShieldCheck, Users } from 'lucide-react';
 import { GlowCard } from './GlowCard';
+import { FallingPattern } from './ui/falling-pattern';
 const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
 
 const Hero = () => {
@@ -97,7 +98,19 @@ const Hero = () => {
   return (
     <div id="home">
       {/* ── Main hero — full viewport ── */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 bg-black">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+        {/* Falling pattern background */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <FallingPattern
+            color="rgba(249, 115, 22, 0.55)"
+            backgroundColor="#000000"
+            duration={120}
+            blurIntensity="1.5px"
+            density={1}
+            className="[mask-image:radial-gradient(ellipse_80%_80%_at_50%_50%,transparent_40%,black_100%)]"
+          />
+        </div>
+
         {/* Background blobs — fastest layer, follows cursor */}
         <div ref={blobsRef} className="absolute inset-0 z-0 pointer-events-none">
           <div className="absolute top-1/4 -left-10 w-72 h-72 bg-orange-500/20 rounded-full blur-3xl animate-pulse" />
