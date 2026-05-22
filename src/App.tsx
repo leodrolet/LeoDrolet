@@ -4,6 +4,7 @@ import Hero from './components/Hero';
 import { About, Services } from './components/AboutServices';
 import WhyLandingPage from './components/WhyLandingPage';
 import BeforeAfter from './components/BeforeAfter';
+import { Portfolio } from './components/Portfolio';
 import Process from './components/Process';
 import Pricing from './components/Pricing';
 import ContactForm from './components/ContactForm';
@@ -36,6 +37,7 @@ function App() {
         <Hero />
         <WhyLandingPage />
         <BeforeAfter />
+        <Portfolio />
         <About />
         <Services />
         <Process />
