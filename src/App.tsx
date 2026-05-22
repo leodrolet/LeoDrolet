@@ -10,7 +10,6 @@ import ContactForm from './components/ContactForm';
 import FinalCTA from './components/FinalCTA';
 import Footer from './components/Footer';
 import { smoothScrollTo } from './components/utils';
-import { FluidParticlesBackground } from './components/FluidParticlesBackground';
 import { GlowStyles } from './components/GlowCard';
 import { ScrollProgress } from './components/ScrollProgress';
 import './index.css';
@@ -33,20 +32,18 @@ function App() {
       <GlowStyles />
       <ScrollProgress />
       <Navbar />
-      <FluidParticlesBackground>
-        <main>
-          <Hero />
-          <WhyLandingPage />
-          <BeforeAfter />
-          <About />
-          <Services />
-          <Process />
-          <Pricing />
-          <ContactForm />
-          <FinalCTA />
-        </main>
-        <Footer />
-      </FluidParticlesBackground>
+      <main>
+        <Hero />
+        <WhyLandingPage />
+        <BeforeAfter />
+        <About />
+        <Services />
+        <Process />
+        <Pricing />
+        <ContactForm />
+        <FinalCTA />
+      </main>
+      <Footer />
     </div>
   );
 }
