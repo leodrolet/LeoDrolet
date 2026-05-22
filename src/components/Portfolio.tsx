@@ -1,13 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ArrowUpRight } from 'lucide-react';
+
+// Bundled directly into the JS — no server file needed on any host
+import studioOneHtml from '../../public/previews/studio-one.html?raw';
+import salonGatineauHtml from '../../public/previews/salon-gatineau/index.html?raw';
 
 interface Project {
   num: string;
   title: string;
   type: string;
   desc: string;
-  url: string;
+  srcdoc?: string;        // inline HTML (no server needed)
+  src?: string;           // URL fallback for built React apps
   accentColor: string;
   bgFrom: string;
   bgTo: string;
@@ -18,8 +23,8 @@ const PROJECTS: Project[] = [
     num: '01',
     title: 'Studio One',
     type: 'Studio musical',
-    desc: 'Site vitrine premium pour un studio d\'enregistrement professionnel à Gatineau.',
-    url: '/previews/studio-one.html',
+    desc: "Site vitrine premium pour un studio d'enregistrement professionnel à Gatineau.",
+    srcdoc: studioOneHtml,
     accentColor: '#818cf8',
     bgFrom: '#0d0f1a',
     bgTo: '#111827',
@@ -28,8 +33,8 @@ const PROJECTS: Project[] = [
     num: '02',
     title: 'Salon Gatineau',
     type: 'Salon esthétique',
-    desc: 'Expérience de luxe pour un salon d\'esthétique haut de gamme. Design épuré et élégant.',
-    url: '/previews/salon-gatineau/index.html',
+    desc: "Expérience de luxe pour un salon d'esthétique haut de gamme. Design épuré et élégant.",
+    srcdoc: salonGatineauHtml,
     accentColor: '#d4a853',
     bgFrom: '#110e08',
     bgTo: '#1a1409',
@@ -38,8 +43,8 @@ const PROJECTS: Project[] = [
     num: '03',
     title: 'Garage Gatineau',
     type: 'Garage automobile',
-    desc: 'Site moderne pour un garage automobile avec présentation des services et devis rapide.',
-    url: '/previews/garage-gatineau/index.html',
+    desc: 'Site moderne pour un garage automobile avec présentation des services.',
+    src: '/previews/garage-gatineau/index.html',
     accentColor: '#f97316',
     bgFrom: '#0f0d0b',
     bgTo: '#1a1208',
@@ -49,6 +54,7 @@ const PROJECTS: Project[] = [
 export const Portfolio = () => {
   const [active, setActive] = useState<Project | null>(null);
   const [iframeReady, setIframeReady] = useState(false);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') close(); };
@@ -72,7 +78,6 @@ export const Portfolio = () => {
       {/* ── SECTION ─────────────────────────────────────────── */}
       <section id="portfolio" className="py-32 bg-primary relative overflow-hidden">
 
-        {/* Subtle top border gradient */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-b from-transparent via-white/10 to-transparent" />
 
         <div className="container mx-auto px-6">
@@ -97,7 +102,7 @@ export const Portfolio = () => {
             </p>
           </motion.div>
 
-          {/* Cards grid */}
+          {/* Cards */}
           <div className="grid md:grid-cols-3 gap-5 max-w-5xl mx-auto">
             {PROJECTS.map((proj, i) => (
               <motion.div
@@ -114,14 +119,12 @@ export const Portfolio = () => {
                   className="h-48 relative overflow-hidden"
                   style={{ background: `linear-gradient(135deg, ${proj.bgFrom} 0%, ${proj.bgTo} 100%)` }}
                 >
-                  {/* Center glow */}
                   <div
                     className="absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
                     style={{
                       background: `radial-gradient(ellipse 80% 60% at 50% 60%, ${proj.accentColor}18 0%, transparent 70%)`,
                     }}
                   />
-                  {/* Ghost number */}
                   <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
                     <span
                       className="text-[7rem] font-black leading-none opacity-[0.04] transition-opacity duration-500 group-hover:opacity-[0.07]"
@@ -130,8 +133,7 @@ export const Portfolio = () => {
                       {proj.num}
                     </span>
                   </div>
-                  {/* Hover CTA overlay */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-400 bg-black/30 backdrop-blur-[2px]">
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 bg-black/30 backdrop-blur-[2px]">
                     <div
                       className="flex items-center gap-2 text-[0.6rem] font-semibold tracking-[0.3em] uppercase px-5 py-2.5 rounded-full border backdrop-blur-md"
                       style={{
@@ -177,10 +179,7 @@ export const Portfolio = () => {
             {/* Top bar */}
             <div className="h-11 flex items-center justify-between px-5 bg-zinc-950 border-b border-white/[0.08] flex-shrink-0">
               <div className="flex items-center gap-3">
-                <div
-                  className="w-2 h-2 rounded-full"
-                  style={{ background: active.accentColor }}
-                />
+                <div className="w-2 h-2 rounded-full" style={{ background: active.accentColor }} />
                 <span className="text-[0.6rem] font-semibold tracking-[0.35em] uppercase text-gray-300">
                   {active.title}
                 </span>
@@ -196,25 +195,29 @@ export const Portfolio = () => {
 
             {/* Loading bar */}
             {!iframeReady && (
-              <div className="h-[2px] bg-zinc-900 flex-shrink-0">
+              <div className="h-[2px] bg-zinc-900 flex-shrink-0 overflow-hidden">
                 <motion.div
                   className="h-full"
                   style={{ background: active.accentColor }}
                   initial={{ width: '0%' }}
-                  animate={{ width: '85%' }}
-                  transition={{ duration: 1.5, ease: 'easeOut' }}
+                  animate={{ width: '90%' }}
+                  transition={{ duration: 1.2, ease: 'easeOut' }}
                 />
               </div>
             )}
 
-            {/* iframe */}
+            {/* iframe — srcdoc for standalone HTML, src for built apps */}
             <iframe
-              key={active.url}
-              src={active.url}
+              ref={iframeRef}
+              key={active.title}
+              {...(active.srcdoc
+                ? { srcdoc: active.srcdoc }
+                : { src: active.src }
+              )}
               title={active.title}
-              className="flex-1 w-full border-none"
+              className="flex-1 w-full border-none bg-white"
               onLoad={() => setIframeReady(true)}
-              sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-modals"
+              sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals"
             />
           </motion.div>
         )}
