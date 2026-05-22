@@ -2,14 +2,15 @@ import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, TrendingUp, ShieldCheck, Users } from 'lucide-react';
 import { GlowCard } from './GlowCard';
+
 const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
 
 const Hero = () => {
-  const blobsRef  = useRef<HTMLDivElement>(null);
-  const h1Ref     = useRef<HTMLHeadingElement>(null);
+  const blobsRef    = useRef<HTMLDivElement>(null);
+  const h1Ref       = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
-  const ctasRef   = useRef<HTMLDivElement>(null);
-  const statsRef  = useRef<HTMLDivElement>(null);
+  const ctasRef     = useRef<HTMLDivElement>(null);
+  const statsRef    = useRef<HTMLDivElement>(null);
   const [count, setCount] = useState(0);
 
   // Multi-layer parallax
@@ -98,7 +99,7 @@ const Hero = () => {
     <div id="home">
       {/* ── Main hero — full viewport ── */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 bg-black">
-        {/* Background blobs — fastest layer, follows cursor */}
+        {/* Background blobs */}
         <div ref={blobsRef} className="absolute inset-0 z-0 pointer-events-none">
           <div className="absolute top-1/4 -left-10 w-72 h-72 bg-orange-500/20 rounded-full blur-3xl animate-pulse" />
           <div className="absolute bottom-1/4 -right-10 w-72 h-72 bg-red-500/20 rounded-full blur-3xl animate-pulse delay-700" />
@@ -147,7 +148,7 @@ const Hero = () => {
         </div>
       </section>
 
-      {/* ── Stats — below the fold, animates on scroll ── */}
+      {/* ── Stats — below the fold ── */}
       <section className="py-20">
         <div className="container mx-auto px-6">
           <div ref={statsRef} className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
