@@ -115,15 +115,18 @@ const Hero = () => {
               ref={h1Ref}
               className="text-5xl md:text-7xl font-bold tracking-tighter mb-6 leading-tight"
             >
-              Votre prochain client vous cherche <br className="hidden md:block" />
-              en ligne — <span className="text-gradient">assurez-vous qu'il vous trouve.</span>
+              <span className="block text-sm md:text-base font-normal text-accent tracking-[0.3em] uppercase mb-5">
+                Développeur Web · Gatineau, Québec
+              </span>
+              Votre prochain client à Gatineau <br className="hidden md:block" />
+              vous cherche en ligne — <span className="text-gradient">trouvez-le en premier.</span>
             </h1>
 
             <p
               ref={subtitleRef}
               className="max-w-2xl mx-auto text-gray-400 text-lg md:text-xl mb-10 leading-relaxed"
             >
-              Je crée des sites web rapides, modernes et optimisés pour attirer des clients locaux et transformer vos visiteurs en appels, réservations et ventes.
+              Développeur web freelance basé à Gatineau, je crée des sites rapides et optimisés pour les PME de l'Outaouais et d'Ottawa — livrés en&nbsp;14&nbsp;jours, garantis.
             </p>
 
             <div ref={ctasRef} className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -133,15 +136,15 @@ const Hero = () => {
                 whileTap={{ scale: 0.95 }}
                 className="px-8 py-4 bg-accent text-white rounded-full font-bold flex items-center justify-center gap-2 hover:bg-orange-600 transition-all shadow-xl shadow-orange-500/20"
               >
-                Lancer mon projet <ArrowRight size={18} />
+                Obtenir mon devis gratuit <ArrowRight size={18} />
               </motion.a>
               <motion.a
-                href="#why"
+                href="#portfolio"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="px-8 py-4 glass text-white rounded-full font-bold flex items-center justify-center gap-2 hover:bg-white/10 transition-all"
               >
-                En savoir plus
+                Voir les réalisations
               </motion.a>
             </div>
           </motion.div>

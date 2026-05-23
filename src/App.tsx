@@ -7,6 +7,7 @@ import BeforeAfter from './components/BeforeAfter';
 import { Portfolio } from './components/Portfolio';
 import Process from './components/Process';
 import Pricing from './components/Pricing';
+import { FAQ } from './components/FAQ';
 import ContactForm from './components/ContactForm';
 import FinalCTA from './components/FinalCTA';
 import Footer from './components/Footer';
@@ -42,6 +43,7 @@ function App() {
         <Services />
         <Process />
         <Pricing />
+        <FAQ />
         <ContactForm />
         <FinalCTA />
       </main>

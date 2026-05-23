@@ -10,8 +10,11 @@ const Footer = () => {
             <div className="text-lg font-bold tracking-tighter mb-2">
               NOVIO<span className="text-gradient">STUDIO</span>
             </div>
-            <p className="text-gray-500 text-xs">
+            <p className="text-gray-500 text-xs mb-3">
               © 2026 Novio Studio. Tous droits réservés. · Gatineau, Québec
+            </p>
+            <p className="text-[10px] text-gray-700 uppercase tracking-widest">
+              Zones desservies&nbsp;: Gatineau · Hull · Aylmer · Ottawa · Kanata · Orléans · Outaouais
             </p>
           </div>
 

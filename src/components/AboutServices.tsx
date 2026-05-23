@@ -36,7 +36,7 @@ export const About = () => {
             </h2>
             <div className="space-y-4 text-gray-400 text-lg leading-relaxed">
               <p>
-                Passionné par la programmation et le design numérique, je me spécialise dans la création d'expériences web qui allient <span className="text-white">performance technique</span> et <span className="text-white">esthétique moderne</span>.
+                Basé à <span className="text-white">Gatineau, Québec</span>, je travaille avec des entrepreneurs et des PME de l'<span className="text-white">Outaouais</span> et de la <span className="text-white">région d'Ottawa</span> pour bâtir leur présence en ligne.
               </p>
               <p>
                 Discipliné, ambitieux et orienté résultat, je ne me contente pas de coder des sites : je bâtis des outils de croissance pour les entreprises locales. Mon objectif est de transformer votre présence en ligne en un véritable avantage compétitif.
@@ -89,8 +89,8 @@ export const Services = () => {
       icon: <Settings size={32} />,
     },
     {
-      title: "SEO de Base",
-      desc: "Structure optimisée pour les moteurs de recherche afin de maximiser votre visibilité.",
+      title: "SEO Local Gatineau",
+      desc: "Optimisation pour apparaître en premier quand vos clients à Gatineau et Ottawa vous cherchent sur Google.",
       icon: <TrendingUp size={32} />,
     },
     {
