@@ -8,10 +8,6 @@ const QUESTIONS = [
     a: 'Le prix dépend de votre projet. Une landing page performante commence à partir de 899 $, un site vitrine complet à partir de 1 499 $. Je fournis toujours un devis gratuit et détaillé avant de commencer — aucune surprise.',
   },
   {
-    q: 'Combien de temps faut-il pour créer un site web ?',
-    a: 'La plupart des projets sont livrés en 14 jours ou moins, garanti par contrat. Pour des projets plus complexes avec plusieurs pages ou intégrations sur mesure, le délai peut être de 3 à 4 semaines.',
-  },
-  {
     q: "Est-ce qu'un site web aide vraiment à avoir plus de clients locaux ?",
     a: "Oui — à condition que le site soit optimisé pour le SEO local. Un site rapide, bien structuré et mentionnant votre région (Gatineau, Outaouais, Ottawa) permet d'apparaître dans les résultats Google quand vos clients cherchent vos services près de chez eux.",
   },
