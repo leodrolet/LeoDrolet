@@ -5,7 +5,7 @@ import { Plus, Minus } from 'lucide-react';
 const QUESTIONS = [
   {
     q: 'Combien coûte un site web à Gatineau ?',
-    a: 'Le prix dépend de votre projet. Une landing page performante commence à partir de 400 $, un site vitrine complet entre 800 $ et 1 500 $. Je fournis toujours un devis gratuit et détaillé avant de commencer — aucune surprise.',
+    a: 'Le prix dépend de votre projet. Une landing page performante commence à partir de 899 $, un site vitrine complet à partir de 1 499 $. Je fournis toujours un devis gratuit et détaillé avant de commencer — aucune surprise.',
   },
   {
     q: 'Combien de temps faut-il pour créer un site web ?',
