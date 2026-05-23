@@ -20,7 +20,7 @@ const hero = {
 const others = [
   {
     name: "Site Vitrine",
-    price: "1 499",
+    price: "1 799",
     features: [
       "Tout inclus dans la Landing Page",
       "Jusqu'à 5 pages personnalisées",
@@ -28,6 +28,7 @@ const others = [
       "Design sur mesure complet",
       "3 révisions incluses",
       "Support 30 jours inclus",
+      "Livraison en 2 à 3 semaines",
     ],
   },
   {
@@ -41,6 +42,7 @@ const others = [
       "SEO avancé multi-pages",
       "Panel admin pour modifier le contenu",
       "Support prioritaire 60 jours inclus",
+      "Livraison en 2 à 3 semaines",
     ],
   },
   {
@@ -49,11 +51,13 @@ const others = [
     features: [
       "Audit complet de l'existant",
       "Migration de tout le contenu",
+      "Redirections 301 incluses",
       "Nouveau design from scratch",
       "Optimisation des performances (Core Web Vitals)",
       "SEO optimisé par page",
       "Formation & documentation incluse",
       "Support 30 jours inclus",
+      "Livraison en 2 à 4 semaines",
     ],
   },
 ];
@@ -174,7 +178,7 @@ const Pricing = () => {
                   whileTap={{ scale: 0.97 }}
                   className="w-full py-3 border border-white/10 text-white rounded-xl font-bold flex items-center justify-center gap-2 hover:border-accent hover:text-accent transition-all text-sm"
                 >
-                  En savoir plus <ArrowRight size={15} />
+                  Démarrer mon projet <ArrowRight size={15} />
                 </motion.a>
               </div>
               </GlowCard>
