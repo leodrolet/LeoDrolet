@@ -23,7 +23,7 @@ const FinalCTA = () => {
               est un client <span className="text-gradient">chez la concurrence.</span>
             </h2>
             <p className="text-gray-400 text-lg mb-12 max-w-2xl mx-auto">
-              Que vous ayez besoin d'une landing page, d'un site vitrine ou d'une refonte complète — passons ensemble à l'étape supérieure.
+              Landing page, site vitrine ou refonte — commencez par un devis gratuit. Aucun engagement, réponse dans la journée.
             </p>
             <motion.a
               href="#contact"
@@ -31,7 +31,7 @@ const FinalCTA = () => {
               whileTap={{ scale: 0.95 }}
               className="px-10 py-5 bg-accent text-white rounded-full font-bold inline-flex items-center justify-center gap-3 hover:bg-orange-600 transition-all shadow-2xl shadow-orange-500/30 text-lg"
             >
-              Commencer maintenant <ArrowRight size={20} />
+              Obtenir mon devis gratuit <ArrowRight size={20} />
             </motion.a>
           </div>
           </GlowCard>

@@ -35,7 +35,7 @@ const BeforeAfter = () => {
             L'impact d'une <span className="text-gradient">Optimisation</span>
           </motion.h2>
           <p className="max-w-2xl mx-auto text-gray-400 text-lg">
-            Ne laissez pas vos visiteurs partir faute de clarté. Comparez la différence.
+            La différence entre un visiteur qui repart et un qui vous contacte tient souvent à ça.
           </p>
         </div>
 
@@ -60,7 +60,7 @@ const BeforeAfter = () => {
               ))}
             </div>
             <div className="mt-12 p-6 rounded-2xl bg-zinc-800/50 text-center border border-white/5">
-              <p className="text-sm text-gray-500 italic">"Je ne sais pas vraiment ce que propose cette entreprise..."</p>
+              <p className="text-sm text-gray-500 italic">"C'est quoi exactement ce qu'ils font ?"</p>
             </div>
           </motion.div>
 
@@ -84,7 +84,7 @@ const BeforeAfter = () => {
               ))}
             </div>
             <div className="mt-12 p-6 rounded-2xl bg-orange-500/10 text-center border border-orange-500/20">
-              <p className="text-sm text-orange-300 italic">"C'est exactement ce qu'il me faut, je commande maintenant !"</p>
+              <p className="text-sm text-orange-300 italic">"OK, je vais les appeler."</p>
             </div>
           </motion.div>
         </div>

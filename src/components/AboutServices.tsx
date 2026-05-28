@@ -36,27 +36,27 @@ export const About = () => {
             </h2>
             <div className="space-y-4 text-gray-400 text-lg leading-relaxed">
               <p>
-                Basé à <span className="text-white">Gatineau, Québec</span>, je travaille avec des entrepreneurs et des PME de l'<span className="text-white">Outaouais</span> et de la <span className="text-white">région d'Ottawa</span> pour bâtir leur présence en ligne.
+                Je travaille en solo depuis <span className="text-white">Gatineau</span> — pas d'agence, pas de sous-traitant. Vous avez affaire directement à la personne qui va coder votre site.
               </p>
               <p>
-                Discipliné, ambitieux et orienté résultat, je ne me contente pas de coder des sites : je bâtis des outils de croissance pour les entreprises locales. Mon objectif est de transformer votre présence en ligne en un véritable avantage compétitif.
+                Je me concentre sur les entrepreneurs et PME de l'<span className="text-white">Outaouais</span> qui ont besoin d'un site professionnel sans se faire facturer des honoraires d'agence. Un projet à la fois, bien fait.
               </p>
               <p>
-                Je m'efforce d'optimiser chaque pixel et chaque ligne de code pour garantir une expérience utilisateur fluide, rapide et intuitive.
+                Ce qui m'importe : que votre site charge vite, qu'il se retrouve sur Google, et qu'il donne envie de vous appeler. Le reste, c'est du décor.
               </p>
             </div>
-            <div className="mt-8 flex gap-4">
+            <div className="mt-8 flex flex-wrap gap-4">
               <div className="flex items-center gap-2 text-accent font-semibold">
                 <CheckCircle size={20} />
-                <span>Rigueur</span>
+                <span>Un projet à la fois</span>
               </div>
               <div className="flex items-center gap-2 text-accent font-semibold">
                 <CheckCircle size={20} />
-                <span>Ambition</span>
+                <span>Livraison en 14 jours</span>
               </div>
               <div className="flex items-center gap-2 text-accent font-semibold">
                 <CheckCircle size={20} />
-                <span>Performance</span>
+                <span>Disponible, pas juste joignable</span>
               </div>
             </div>
           </motion.div>
@@ -70,32 +70,32 @@ export const Services = () => {
   const services = [
     {
       title: "Sites Web Complets",
-      desc: "Des sites multi-pages sur mesure pour une présence en ligne professionnelle et complète.",
+      desc: "De 3 à 10 pages selon votre besoin : accueil, services, à propos, contact. Tout conçu et codé sur mesure.",
       icon: <Laptop size={32} />,
     },
     {
-      title: "Landing Pages Modernes",
-      desc: "Des pages haute-conversion conçues pour transformer vos visiteurs en clients fidèles.",
+      title: "Landing Pages",
+      desc: "Une seule page, un seul objectif. Idéal si vous faites de la pub ou que vous voulez juste que les gens vous appellent.",
       icon: <Code size={32} />,
     },
     {
-      title: "Design Professionnel",
-      desc: "Une esthétique premium et minimaliste qui renforce instantanément votre crédibilité.",
+      title: "Design sur mesure",
+      desc: "Pas de thème WordPress acheté en ligne. Chaque site est conçu à partir de zéro pour votre marque.",
       icon: <Paintbrush size={32} />,
     },
     {
-      title: "Intégration Formulaires",
-      desc: "Collecte de leads optimisée avec notifications instantanées et gestion automatisée.",
+      title: "Formulaires & intégrations",
+      desc: "Formulaires de contact, prise de rendez-vous, intégration carte Google Maps — ce dont vous avez besoin, pas plus.",
       icon: <Settings size={32} />,
     },
     {
-      title: "SEO Local Gatineau",
-      desc: "Optimisation pour apparaître en premier quand vos clients à Gatineau et Ottawa vous cherchent sur Google.",
+      title: "SEO local Gatineau",
+      desc: "Votre site apparaît sur Google quand quelqu'un cherche votre service à Gatineau ou Ottawa. C'est l'objectif principal.",
       icon: <TrendingUp size={32} />,
     },
     {
-      title: "Performance Rapide",
-      desc: "Temps de chargement ultra-rapide pour réduire le taux de rebond et booster le SEO.",
+      title: "Sites rapides",
+      desc: "Un site lent perd ses visiteurs en 3 secondes. Les miens chargent vite — Google et vos clients vous en remercient.",
       icon: <Zap size={32} />,
     },
   ];
@@ -113,7 +113,7 @@ export const Services = () => {
             Ce que <span className="text-gradient">je fais</span>
           </motion.h2>
           <p className="text-gray-400 max-w-xl mx-auto">
-            Une approche complète pour transformer votre présence en ligne en machine à leads.
+            Ce que je construis, selon où vous en êtes.
           </p>
         </div>
 

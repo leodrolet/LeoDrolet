@@ -5,20 +5,20 @@ import { Search, PenTool, Rocket } from 'lucide-react';
 const Process = () => {
   const steps = [
     {
-      title: "Analyse du besoin",
-      desc: "On discute de vos objectifs, de votre cible et de vos concurrents pour définir la meilleure stratégie de conversion.",
+      title: "On se parle",
+      desc: "On discute de votre business, de vos clients, de ce qui vous distingue de vos concurrents. Pas de formulaire de 40 questions — une vraie conversation.",
       icon: <Search className="text-orange-400" />,
       step: "01"
     },
     {
-      title: "Création du design",
-      desc: "Je conçois une interface premium et minimaliste, optimisée pour l'expérience utilisateur et l'impact visuel.",
+      title: "Je construis",
+      desc: "Design, développement, textes. Je construis le site autour de vos clients, pas autour de tendances visuelles du moment.",
       icon: <PenTool className="text-orange-400" />,
       step: "02"
     },
     {
       title: "Mise en ligne",
-      desc: "Développement rapide, tests de performance et déploiement. Votre machine à leads est prête à capturer des clients.",
+      desc: "Tests, optimisation de la vitesse, déploiement. Vous recevez un site fonctionnel avec un rapport de performance.",
       icon: <Rocket className="text-red-400" />,
       step: "03"
     }
@@ -37,7 +37,7 @@ const Process = () => {
             Comment ça <span className="text-gradient">fonctionne ?</span>
           </motion.h2>
           <p className="text-gray-400 max-w-xl mx-auto">
-            Un processus simple, transparent et efficace pour passer de l'idée au résultat.
+            De l'appel initial à la mise en ligne, voici comment ça se passe concrètement.
           </p>
         </div>
 

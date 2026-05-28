@@ -1,7 +1,12 @@
 import React from 'react';
-import { Github, Linkedin, Twitter, Mail } from 'lucide-react';
+import { Github, Linkedin, Mail } from 'lucide-react';
 
-const Footer = () => {
+interface Props {
+  onOpenPrivacy: () => void;
+  onOpenMentions: () => void;
+}
+
+const Footer = ({ onOpenPrivacy, onOpenMentions }: Props) => {
   return (
     <footer className="py-12 bg-black border-t border-white/5">
       <div className="container mx-auto px-6">
@@ -24,9 +29,11 @@ const Footer = () => {
             <a href="#contact" aria-label="Envoyer un email" className="text-gray-500 hover:text-white transition-colors"><Mail size={18} /></a>
           </div>
 
-          <div className="flex gap-6 text-[10px] font-medium text-gray-600 uppercase tracking-widest">
+          <div className="flex flex-wrap justify-center gap-4 text-[10px] font-medium text-gray-600 uppercase tracking-widest">
             <a href="#home" className="hover:text-white transition-colors">Accueil</a>
             <a href="#contact" className="hover:text-white transition-colors">Contact</a>
+            <button onClick={onOpenPrivacy} className="hover:text-white transition-colors">Confidentialité</button>
+            <button onClick={onOpenMentions} className="hover:text-white transition-colors">Mentions légales</button>
           </div>
         </div>
       </div>

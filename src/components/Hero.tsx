@@ -126,7 +126,7 @@ const Hero = () => {
               ref={subtitleRef}
               className="max-w-2xl mx-auto text-gray-400 text-lg md:text-xl mb-10 leading-relaxed"
             >
-              Développeur web freelance basé à Gatineau, je crée des sites rapides et optimisés pour les PME de l'Outaouais et d'Ottawa — livrés en&nbsp;14&nbsp;jours, garantis.
+              Je construis des sites web pour les entrepreneurs et PME de l'Outaouais. Rapides, bien référencés sur Google, livrés en&nbsp;14&nbsp;jours.
             </p>
 
             <div ref={ctasRef} className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -164,15 +164,15 @@ const Hero = () => {
               },
               {
                 icon: <ShieldCheck className="text-orange-400" />,
-                label: 'Révisions incluses',
-                value: 'Satisfaction garantie',
-                detail: "Jusqu'à la version finale",
+                label: 'Révisions',
+                value: 'Illimitées',
+                detail: "Jusqu'à ce que vous soyez satisfait",
               },
               {
                 icon: <Users className="text-orange-400" />,
-                label: 'Après livraison',
-                value: 'Support inclus',
-                detail: "30 jours d'accompagnement",
+                label: 'Support après mise en ligne',
+                value: '30 jours',
+                detail: "Inclus dans chaque projet",
               },
             ].map((stat, idx) => (
               <motion.div

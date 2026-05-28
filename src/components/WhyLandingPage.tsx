@@ -7,23 +7,23 @@ const WhyLandingPage = () => {
   const reasons = [
     {
       icon: <Target className="text-orange-400" />,
-      title: 'Plus de clients',
-      description: 'Une structure optimisée pour capturer l\'attention et transformer chaque visiteur en prospect qualifié.'
+      title: "Plus d'appels entrants",
+      description: "Un seul message, un seul bouton. Le visiteur comprend ce que vous faites et comment vous contacter en moins de 5 secondes."
     },
     {
       icon: <Zap className="text-orange-400" />,
-      title: 'Image de marque premium',
-      description: 'Un design haut de gamme qui inspire confiance instantanément et positionne votre entreprise comme leader.'
+      title: "Une bonne première impression",
+      description: "Un site qui a l'air professionnel dit à votre client qu'il peut vous faire confiance avant même que vous parliez."
     },
     {
       icon: <TrendingUp className="text-red-400" />,
-      title: 'Plus de rendez-vous',
-      description: 'Réduisez la friction : un chemin clair et direct vers la prise de contact ou la réservation.'
+      title: "Moins de friction",
+      description: "Pas de menu à 8 items, pas de 3 clics pour trouver votre numéro. Le chemin vers le contact est direct."
     },
     {
       icon: <Rocket className="text-orange-400" />,
-      title: 'Marketing efficace',
-      description: 'Maximisez vos campagnes pubs (Facebook, Google Ads) avec une page dédiée dont le seul but est la conversion.'
+      title: "Pub qui rentabilise",
+      description: "Si vous investissez en Google ou Facebook Ads, vous avez besoin d'une page qui ne gaspille pas vos clics."
     },
   ];
 
@@ -51,8 +51,8 @@ const WhyLandingPage = () => {
             transition={{ delay: 0.1 }}
             className="max-w-3xl mx-auto text-gray-400 text-lg leading-relaxed"
           >
-            Contrairement à un site web classique qui peut perdre le visiteur dans un labyrinthe de pages, une landing page est un instrument de précision.
-            Elle est conçue pour une seule chose : <span className="text-white font-medium">la conversion</span>.
+            Un site classique essaie de tout montrer. Une landing page choisit une seule chose à dire — et elle le dit bien.
+            La différence se mesure en nombre de <span className="text-white font-medium">contacts reçus par mois</span>.
           </motion.p>
         </div>
 
@@ -85,20 +85,13 @@ const WhyLandingPage = () => {
           transition={{ delay: 0.5 }}
           className="mt-20 max-w-4xl mx-auto"
         >
-          <GlowCard customSize glowColor="orange" className="w-full p-8 md:p-12 flex flex-col md:flex-row items-center gap-8">
-          <div className="flex-1">
-            <h3 className="text-2xl font-bold mb-4">Le secret de la conversion</h3>
-            <p className="text-gray-400 leading-relaxed">
-              En éliminant les distractions et en guidant l'utilisateur vers un appel à l'action unique et puissant,
-              nous augmentons drastiquement les chances qu'un visiteur devienne client. C'est la différence
-              entre "avoir un site" et "avoir un business qui génère des revenus".
+          <GlowCard customSize glowColor="orange" className="w-full p-8 md:p-12">
+            <p className="text-gray-300 text-lg md:text-xl leading-relaxed">
+              La majorité des sites de PME perdent leurs visiteurs parce qu'il y a trop d'information, trop de clics,
+              et pas assez de raisons claires de rester. Une landing page bien faite, c'est simplement un site{' '}
+              <span className="text-white font-medium">où le visiteur ne se perd pas</span> — il voit ce que vous faites,
+              pourquoi vous, et comment vous contacter.
             </p>
-          </div>
-          <div className="flex-shrink-0">
-            <div className="w-16 h-16 rounded-full bg-accent flex items-center justify-center text-white font-bold shadow-lg shadow-orange-500/50">
-              KPI
-            </div>
-          </div>
           </GlowCard>
         </motion.div>
       </div>

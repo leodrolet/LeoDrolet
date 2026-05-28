@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import { About, Services } from './components/AboutServices';
@@ -11,12 +11,18 @@ import { FAQ } from './components/FAQ';
 import ContactForm from './components/ContactForm';
 import FinalCTA from './components/FinalCTA';
 import Footer from './components/Footer';
+import { PrivacyPolicy } from './components/PrivacyPolicy';
+import { MentionsLegales } from './components/MentionsLegales';
+import { CookieBanner } from './components/CookieBanner';
 import { smoothScrollTo } from './components/utils';
 import { GlowStyles } from './components/GlowCard';
 import { ScrollProgress } from './components/ScrollProgress';
 import './index.css';
 
 function App() {
+  const [privacyOpen, setPrivacyOpen] = useState(false);
+  const [mentionsOpen, setMentionsOpen] = useState(false);
+
   useEffect(() => {
     function handleClick(e: MouseEvent) {
       const target = e.target as HTMLElement;
@@ -47,7 +53,13 @@ function App() {
         <ContactForm />
         <FinalCTA />
       </main>
-      <Footer />
+      <Footer
+        onOpenPrivacy={() => setPrivacyOpen(true)}
+        onOpenMentions={() => setMentionsOpen(true)}
+      />
+      <PrivacyPolicy open={privacyOpen} onClose={() => setPrivacyOpen(false)} />
+      <MentionsLegales open={mentionsOpen} onClose={() => setMentionsOpen(false)} />
+      <CookieBanner onOpenPrivacy={() => setPrivacyOpen(true)} />
     </div>
   );
 }
