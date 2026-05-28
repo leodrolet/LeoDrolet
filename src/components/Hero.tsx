@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, TrendingUp, ShieldCheck, Users } from 'lucide-react';
-import { GlowCard } from './GlowCard';
 
 const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
 
@@ -99,10 +98,10 @@ const Hero = () => {
     <div id="home">
       {/* ── Main hero — full viewport ── */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 bg-black">
-        {/* Background blobs */}
-        <div ref={blobsRef} className="absolute inset-0 z-0 pointer-events-none">
-          <div className="absolute top-1/4 -left-10 w-72 h-72 bg-orange-500/20 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute bottom-1/4 -right-10 w-72 h-72 bg-red-500/20 rounded-full blur-3xl animate-pulse delay-700" />
+        {/* Background */}
+        <div ref={blobsRef} className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
+          <div className="absolute -top-32 right-0 w-[700px] h-[700px] bg-orange-500/6 rounded-full blur-3xl" />
         </div>
 
         <div className="container mx-auto px-6 relative z-10 text-center">
@@ -126,7 +125,7 @@ const Hero = () => {
               ref={subtitleRef}
               className="max-w-2xl mx-auto text-gray-400 text-lg md:text-xl mb-10 leading-relaxed"
             >
-              Je construis des sites web pour les entrepreneurs et PME de l'Outaouais. Rapides, bien référencés sur Google, livrés en&nbsp;14&nbsp;jours.
+              Développeur web freelance basé à Gatineau, je crée des sites rapides et optimisés pour les PME de l'Outaouais et d'Ottawa — livrés en&nbsp;14&nbsp;jours, garantis.
             </p>
 
             <div ref={ctasRef} className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -152,42 +151,25 @@ const Hero = () => {
       </section>
 
       {/* ── Stats — below the fold ── */}
-      <section className="py-20">
-        <div className="container mx-auto px-6">
-          <div ref={statsRef} className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+      <section className="border-t border-white/5">
+        <div ref={statsRef} className="container mx-auto px-6">
+          <div className="flex flex-col sm:flex-row divide-y sm:divide-y-0 sm:divide-x divide-white/5 max-w-3xl mx-auto">
             {[
-              {
-                icon: <TrendingUp className="text-orange-400" />,
-                label: 'Délai de livraison',
-                value: '14 jours',
-                detail: 'Garanti par contrat',
-              },
-              {
-                icon: <ShieldCheck className="text-orange-400" />,
-                label: 'Révisions',
-                value: 'Illimitées',
-                detail: "Jusqu'à ce que vous soyez satisfait",
-              },
-              {
-                icon: <Users className="text-orange-400" />,
-                label: 'Support après mise en ligne',
-                value: '30 jours',
-                detail: "Inclus dans chaque projet",
-              },
+              { icon: <TrendingUp size={16} className="text-accent" />, value: '14 jours', label: 'Délai de livraison', detail: 'Garanti par contrat' },
+              { icon: <ShieldCheck size={16} className="text-accent" />, value: 'Satisfaction garantie', label: 'Révisions incluses', detail: "Jusqu'à la version finale" },
+              { icon: <Users size={16} className="text-accent" />, value: 'Support inclus', label: 'Après livraison', detail: "30 jours d'accompagnement" },
             ].map((stat, idx) => (
               <motion.div
                 key={idx}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
-                transition={{ delay: idx * 0.1, duration: 0.5 }}
+                transition={{ delay: idx * 0.1, duration: 0.4 }}
+                className="flex-1 px-6 py-8 sm:py-10"
               >
-                <GlowCard customSize glowColor="orange" className="w-full p-6 text-left">
-                  <div className="mb-4">{stat.icon}</div>
-                  <div className="text-2xl font-bold text-white mb-1">{stat.value}</div>
-                  <div className="text-sm font-semibold text-gray-300 mb-1">{stat.label}</div>
-                  <div className="text-xs text-gray-500">{stat.detail}</div>
-                </GlowCard>
+                <div className="flex items-center gap-2 mb-3">{stat.icon}<span className="text-[10px] uppercase tracking-[0.15em] text-gray-600">{stat.label}</span></div>
+                <div className="text-xl font-bold text-white mb-0.5">{stat.value}</div>
+                <div className="text-xs text-gray-600">{stat.detail}</div>
               </motion.div>
             ))}
           </div>
