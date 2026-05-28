@@ -1,15 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
-
-const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
+import { FluidParticlesBackground } from './FluidParticlesBackground';
 
 const Hero = () => {
   const h1Ref      = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const ctasRef    = useRef<HTMLDivElement>(null);
   const statsRef   = useRef<HTMLDivElement>(null);
-  const [count, setCount] = useState(0);
 
   // ── Multi-layer parallax (logique originale préservée) ──
   useEffect(() => {
@@ -57,38 +55,19 @@ const Hero = () => {
     };
   }, []);
 
-  // ── Compteur animé +150% (logique originale préservée) ──
-  useEffect(() => {
-    const el = statsRef.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (!entries[0].isIntersecting) return;
-        observer.disconnect();
-        const start = performance.now();
-        const duration = 1400;
-        const target = 150;
-        const animate = (now: number) => {
-          const progress = Math.min((now - start) / duration, 1);
-          setCount(Math.round(easeOutCubic(progress) * target));
-          if (progress < 1) requestAnimationFrame(animate);
-        };
-        requestAnimationFrame(animate);
-      },
-      { threshold: 0.3 }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <div id="home">
       {/* ── Hero principal ── */}
-      <section className="relative min-h-screen flex items-center overflow-hidden pt-20 bg-primary">
-
-        {/* Fond : zéro blob. Une seule ligne accent en haut. */}
+      <FluidParticlesBackground
+        particleCount={800}
+        noiseIntensity={0.0025}
+        particleSize={{ min: 0.4, max: 1.4 }}
+        className="min-h-screen pt-20"
+      >
+        {/* Accent line at top */}
         <div className="absolute top-0 left-0 right-0 h-px bg-accent/30 pointer-events-none" />
 
+        <div className="flex items-center min-h-screen">
         <div className="container mx-auto px-6 lg:px-12 w-full">
           <div className="max-w-4xl">
 
@@ -159,16 +138,16 @@ const Hero = () => {
 
           </div>
         </div>
-      </section>
+        </div>
+      </FluidParticlesBackground>
 
       {/* ── Stats strip ── */}
       <section ref={statsRef} className="border-t border-white/[0.06]">
         <div className="container mx-auto px-6 lg:px-12">
-          <div className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-white/[0.06]">
+          <div className="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-white/[0.06]">
             {[
-              { value: '14 jours',   label: 'Délai de livraison', sub: 'Garanti par contrat' },
-              { value: `+${count}%`, label: 'Taux de conversion',  sub: 'Comparé à la moyenne' },
-              { value: '30 jours',   label: 'Support inclus',      sub: 'Après la mise en ligne' },
+              { value: '14 jours', label: 'Délai de livraison', sub: 'Garanti par contrat' },
+              { value: '30 jours', label: 'Support inclus',     sub: 'Après la mise en ligne' },
             ].map((s, i) => (
               <motion.div
                 key={i}

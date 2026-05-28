@@ -125,9 +125,9 @@ export const FluidParticlesBackground = ({
   }, [particleCount, noiseIntensity, particleSize]);
 
   return (
-    <div className={cn('relative w-full min-h-screen', className)}>
-      <canvas ref={canvasRef} className="fixed inset-0 w-full h-full" style={{ zIndex: 0 }} />
-      <div className="relative w-full" style={{ zIndex: 1 }}>
+    <div className={cn('relative w-full overflow-hidden', className)}>
+      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
+      <div className="relative z-10 w-full h-full">
         {children}
       </div>
     </div>
