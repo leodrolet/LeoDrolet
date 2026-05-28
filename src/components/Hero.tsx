@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
-import { FluidParticlesBackground } from './FluidParticlesBackground';
 
 const Hero = () => {
   const h1Ref      = useRef<HTMLHeadingElement>(null);
@@ -58,12 +57,21 @@ const Hero = () => {
   return (
     <div id="home">
       {/* ── Hero principal ── */}
-      <FluidParticlesBackground
-        particleCount={800}
-        noiseIntensity={0.0025}
-        particleSize={{ min: 0.4, max: 1.4 }}
-        className="min-h-screen pt-20"
-      >
+      <div className="relative min-h-screen pt-20 bg-black overflow-hidden">
+        {/* Video Background integrated as the primary background */}
+        <div className="absolute inset-0 -z-10">
+           <video
+            className="h-full w-full object-cover opacity-40"
+            src="/videos/animation.mp4"
+            muted
+            playsInline
+            autoPlay
+            loop
+            preload="auto"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-primary via-transparent to-primary" />
+        </div>
+
         {/* Accent line at top */}
         <div className="absolute top-0 left-0 right-0 h-px bg-accent/30 pointer-events-none" />
 
@@ -139,7 +147,7 @@ const Hero = () => {
           </div>
         </div>
         </div>
-      </FluidParticlesBackground>
+      </div>
 
       {/* ── Stats strip ── */}
       <section ref={statsRef} className="border-t border-white/[0.06]">
