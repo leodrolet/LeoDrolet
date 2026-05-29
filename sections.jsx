@@ -368,7 +368,7 @@ const About = () => {
             <span>NOVIO</span>
             <span>2026.05</span>
           </div>
-          <div className="ph">Portrait — atelier maison · Hull</div>
+          <img src="leo.jpg" alt="Léo Drolet — Novio Studio" style={{ position:"absolute", inset:0, width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top" }} />
         </div>
         <AboutBody />
       </div>
