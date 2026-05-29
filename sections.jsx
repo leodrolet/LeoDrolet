@@ -415,7 +415,7 @@ const FinalCTA = () => {
         </div>
         <div className="actions">
           <a className="btn btn-accent" href="#devis">Réserver mon créneau <span className="arrow">→</span></a>
-          <a className="btn" href="mailto:hello@novio.studio">hello@novio.studio</a>
+          <a className="btn" href="mailto:leo_drolet@noviostudio.online">leo_drolet@noviostudio.online</a>
         </div>
         <div className="small">Premier appel · 15 min · gratuit · café offert si à Gatineau / Ottawa</div>
       </div>
@@ -484,7 +484,7 @@ const Footer = () => {
       <div>
         <h6>Légal</h6>
         <ul>
-          <li><a href="mailto:hello@novio.studio">hello@novio.studio</a></li>
+          <li><a href="mailto:leo_drolet@noviostudio.online">leo_drolet@noviostudio.online</a></li>
           <li><button onClick={() => setModal("privacy")} style={{ background:"none", border:"none", padding:0, color:"inherit", font:"inherit", cursor:"pointer", textAlign:"left" }}>Confidentialité</button></li>
           <li><button onClick={() => setModal("mentions")} style={{ background:"none", border:"none", padding:0, color:"inherit", font:"inherit", cursor:"pointer", textAlign:"left" }}>Mentions légales</button></li>
         </ul>
@@ -492,7 +492,7 @@ const Footer = () => {
       <div>
         <h6>Contact</h6>
         <ul>
-          <li><a href="mailto:hello@novio.studio">Email</a></li>
+          <li><a href="mailto:leo_drolet@noviostudio.online">Email</a></li>
           <li><a href="tel:+18736554684">1 873 655 4684</a></li>
         </ul>
       </div>
@@ -507,7 +507,7 @@ const Footer = () => {
       <ModalSection title="Responsable du traitement">
         <p style={{margin:"0 0 6px"}}><strong style={{color:"var(--ink)"}}>Novio Studio</strong> — Leo Drolet, développeur web freelance</p>
         <p style={{margin:"0 0 6px"}}>Gatineau, Québec, Canada</p>
-        <p style={{margin:0}}>Email : <a href="mailto:leodrolet07@gmail.com" style={{color:"var(--accent)"}}>leodrolet07@gmail.com</a></p>
+        <p style={{margin:0}}>Email : <a href="mailto:leo_drolet@noviostudio.online" style={{color:"var(--accent)"}}>leo_drolet@noviostudio.online</a></p>
       </ModalSection>
       <ModalSection title="Données collectées">
         <p style={{margin:"0 0 8px"}}>Lors de l'utilisation du formulaire de contact, nous collectons : nom, email, entreprise et description du projet.</p>
@@ -532,7 +532,7 @@ const Footer = () => {
       </ModalSection>
       <ModalSection title="Vos droits (RGPD / Loi 25 Québec)">
         <p style={{margin:"0 0 8px"}}>Vous disposez des droits d'accès, rectification, suppression, portabilité et opposition.</p>
-        <p style={{margin:0}}>Contact : <a href="mailto:leodrolet07@gmail.com" style={{color:"var(--accent)"}}>leodrolet07@gmail.com</a> — Réponse sous 30 jours.</p>
+        <p style={{margin:0}}>Contact : <a href="mailto:leo_drolet@noviostudio.online" style={{color:"var(--accent)"}}>leo_drolet@noviostudio.online</a> — Réponse sous 30 jours.</p>
       </ModalSection>
     </LegalModal>
 
@@ -541,7 +541,7 @@ const Footer = () => {
         <p style={{margin:"0 0 4px"}}><strong style={{color:"var(--ink)"}}>Novio Studio</strong> — travailleur autonome</p>
         <p style={{margin:"0 0 4px"}}>Représentant : Leo Drolet</p>
         <p style={{margin:"0 0 4px"}}>Gatineau, Québec, Canada</p>
-        <p style={{margin:"0 0 4px"}}>Email : <a href="mailto:leodrolet07@gmail.com" style={{color:"var(--accent)"}}>leodrolet07@gmail.com</a></p>
+        <p style={{margin:"0 0 4px"}}>Email : <a href="mailto:leo_drolet@noviostudio.online" style={{color:"var(--accent)"}}>leo_drolet@noviostudio.online</a></p>
         <p style={{margin:0}}>Activité : Développement web freelance</p>
       </ModalSection>
       <ModalSection title="Hébergeur">

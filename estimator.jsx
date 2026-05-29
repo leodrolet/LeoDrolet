@@ -110,6 +110,7 @@ const Estimator = () => {
   const [sent,       setSent]       = React.useState(false);
   const [sending,    setSending]    = React.useState(false);
   const [error,      setError]      = React.useState("");
+  const lastSubmit                  = React.useRef(0);
   const [estNum]                    = React.useState(() => Math.floor(2026000 + Math.random() * 999));
 
   const isMaint = type === "maintenance";
@@ -173,8 +174,24 @@ const Estimator = () => {
   const send = async (e) => {
     e.preventDefault();
     setError("");
+
+    const now = Date.now();
+    if (now - lastSubmit.current < 30000) {
+      setError("Merci de patienter 30 secondes avant de renvoyer.");
+      return;
+    }
+
     if (!name.trim()) { setError("Ton nom est requis."); return; }
-    if (!email.trim()) { setError("Ton email est requis."); return; }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    if (!email.trim() || !emailRegex.test(email.trim())) {
+      setError("Entre un email valide.");
+      return;
+    }
+
+    if (project.length > 2000) { setError("Description trop longue (max 2000 caractères)."); return; }
+
+    lastSubmit.current = now;
 
     setSending(true);
     try {
