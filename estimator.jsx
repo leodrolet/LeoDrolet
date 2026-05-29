@@ -215,25 +215,30 @@ const Estimator = () => {
           {/* 02 · Fonctionnalités (standard) or Forfait mensuel (maintenance) */}
           {isMaint ? (
             <div className="field">
-              <div className="field-label"><span>02 · Forfait mensuel</span></div>
-              <div className="maint-plans">
+              <div className="field-label">
+                <span>02 · Forfait mensuel</span>
+                <span className="field-help">sélectionne un plan</span>
+              </div>
+              <div className="field-options">
                 {MAINT_PLANS.map((p) => (
-                  <div
-                    key={p.id}
-                    className={`maint-card${maintPlan === p.id ? " active" : ""}`}
+                  <button
+                    type="button" key={p.id}
+                    className={maintPlan === p.id ? "active" : ""}
                     onClick={() => setMaintPlan(p.id)}
                   >
-                    <div className="maint-card-header">
-                      <span className="maint-card-name">{p.label}</span>
-                      <span className="maint-card-price">{p.price} $/mois</span>
-                    </div>
-                    <ul className="maint-card-feats">
-                      {p.features.map((f, i) => <li key={i}>{f}</li>)}
-                    </ul>
-                  </div>
+                    {p.label} · {p.price} $/mois
+                  </button>
                 ))}
               </div>
-              <p className="field-help" style={{ marginTop: 10 }}>
+
+              <p className="field-help" style={{ marginTop: 14, marginBottom: 8 }}>Inclus dans ce forfait</p>
+              <ul className="feat-included-list">
+                {(MAINT_PLANS.find((p) => p.id === maintPlan)?.features || []).map((f, i) => (
+                  <li key={i} className="feat-included-item">✓ {f}</li>
+                ))}
+              </ul>
+
+              <p className="field-help" style={{ marginTop: 12 }}>
                 Engagement min. 3 mois · Préavis résiliation 30 jours
               </p>
             </div>
