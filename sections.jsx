@@ -195,7 +195,7 @@ const SERVICES = [
   subtitle: "L'arsenal pour une PME qui scale.",
   desc: "CMS, blog, intégrations avancées. Quand le site devient un outil business.",
   items: ["CMS sur mesure", "Blog + intégrations API", "SEO avancé", "Support 60 jours"],
-  price: "3\u202F999",
+  price: "4\u202F299",
   delay: "2–3 semaines"
 }];
 

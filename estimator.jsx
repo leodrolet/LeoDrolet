@@ -15,7 +15,7 @@ const TYPE_OPTS = [
 const PLANS = {
   landing: { label: "Landing Page", base: 999,  days: "7 jours" },
   vitrine: { label: "Site Vitrine", base: 1899, days: "2–3 sem." },
-  complet: { label: "Site Complet", base: 3999, days: "2–3 sem." },
+  complet: { label: "Site Complet", base: 4299, days: "2–3 sem." },
   refonte: { label: "Refonte",      base: 3699, days: "2–4 sem." },
 };
 
@@ -136,7 +136,7 @@ const Estimator = () => {
     }
     const plan = PLANS[type];
     const u    = URGENCY_OPTS.find((u) => u.id === urgency);
-    const extraCost = extras.size * 100;
+    const extraCost = extras.size * 150;
     const total     = Math.round((plan.base + extraCost) * u.mult);
     return {
       maint: false,
@@ -259,7 +259,7 @@ const Estimator = () => {
               {availExtras.length > 0 && (
                 <>
                   <p className="field-help" style={{ marginTop: 14, marginBottom: 8 }}>
-                    En option · +100 $ chacune
+                    En option · +150 $ chacune
                   </p>
                   <div className="field-options">
                     {availExtras.map((o) => (
