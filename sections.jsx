@@ -427,39 +427,45 @@ const FinalCTA = () => {
 const Footer = () =>
 <>
     <footer className="footer">
-      <div className="brand-big">
-        novio<em>.studio</em>
+      <div>
+        <div className="brand-big">
+          novio<em>.studio</em>
+        </div>
+        <div className="mono" style={{ fontSize: 10, color: "var(--mute)", marginTop: 12, letterSpacing: "0.14em", textTransform: "uppercase" }}>
+          © 2026 · Gatineau, Québec
+        </div>
       </div>
       <div>
-        <h6>Studio</h6>
+        <h6>Navigation</h6>
         <ul>
+          <li><a href="#top">Accueil</a></li>
           <li><a href="#services">Services</a></li>
-          <li><a href="#process">Méthode</a></li>
           <li><a href="#travaux">Travaux</a></li>
-          <li><a href="#studio">À propos</a></li>
+          <li><a href="#devis">Contact</a></li>
         </ul>
       </div>
       <div>
-        <h6>Contact</h6>
+        <h6>Légal</h6>
         <ul>
           <li><a href="mailto:hello@novio.studio">hello@novio.studio</a></li>
-          <li>Gatineau · QC</li>
-          <li>+1 (819) 000-0000</li>
+          <li><a href="#">Confidentialité</a></li>
+          <li><a href="#">Mentions légales</a></li>
         </ul>
       </div>
       <div>
         <h6>Suivre</h6>
         <ul>
-          <li><a href="#">Instagram</a></li>
+          <li><a href="#">GitHub</a></li>
           <li><a href="#">LinkedIn</a></li>
-          <li><a href="#">Are.na</a></li>
-          <li><a href="#">Dribbble</a></li>
+          <li><a href="mailto:hello@novio.studio">Email</a></li>
         </ul>
       </div>
     </footer>
     <div className="footer-bot">
       <span>© 2026 Novio Studio</span>
-      <span>Conçu et codé à Gatineau, QC</span>
+      <span className="mono" style={{ letterSpacing: "0.14em" }}>
+        Zones desservies · Gatineau · Hull · Aylmer · Ottawa · Kanata · Orléans · Outaouais
+      </span>
       <span>v1.0 · cohorte fondateur</span>
     </div>
   </>;
