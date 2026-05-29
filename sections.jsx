@@ -423,15 +423,52 @@ const FinalCTA = () => {
 
 };
 
+// ====================== LEGAL MODAL ======================
+const LegalModal = ({ open, onClose, title, children }) => {
+  React.useEffect(() => {
+    if (!open) return;
+    document.body.style.overflow = "hidden";
+    const onKey = (e) => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", onKey);
+    return () => { document.body.style.overflow = ""; window.removeEventListener("keydown", onKey); };
+  }, [open, onClose]);
+
+  if (!open) return null;
+  return (
+    <div
+      onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
+      style={{ position:"fixed", inset:0, zIndex:200, background:"rgba(0,0,0,.82)", backdropFilter:"blur(8px)", display:"flex", alignItems:"center", justifyContent:"center", padding:"20px" }}
+    >
+      <div style={{ background:"var(--bg-2)", border:"1px solid var(--line-strong)", borderRadius:16, width:"100%", maxWidth:640, maxHeight:"85vh", display:"flex", flexDirection:"column" }}>
+        <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", padding:"24px 28px", borderBottom:"1px solid var(--line)" }}>
+          <span style={{ fontFamily:"var(--display)", fontSize:22, fontWeight:400, letterSpacing:"-.01em" }}>{title}</span>
+          <button onClick={onClose} style={{ fontFamily:"var(--mono)", fontSize:18, color:"var(--ink-2)", background:"none", border:"none", cursor:"pointer", lineHeight:1 }}>✕</button>
+        </div>
+        <div style={{ overflowY:"auto", padding:"28px", fontSize:14, lineHeight:1.65, color:"var(--ink-2)" }}>
+          {children}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const ModalSection = ({ title, children }) => (
+  <div style={{ marginBottom: 28 }}>
+    <div style={{ fontFamily:"var(--mono)", fontSize:10, letterSpacing:".16em", textTransform:"uppercase", color:"var(--accent)", marginBottom:10 }}>{title}</div>
+    <div>{children}</div>
+  </div>
+);
+
 // ====================== FOOTER ======================
-const Footer = () =>
-<>
+const Footer = () => {
+  const [modal, setModal] = React.useState(null); // "privacy" | "mentions" | null
+
+  return (
+  <>
     <footer className="footer">
       <div>
-        <div className="brand-big">
-          novio<em>.studio</em>
-        </div>
-        <div className="mono" style={{ fontSize: 10, color: "var(--mute)", marginTop: 12, letterSpacing: "0.14em", textTransform: "uppercase" }}>
+        <div className="brand-big">novio<em>.studio</em></div>
+        <div className="mono" style={{ fontSize:10, color:"var(--mute)", marginTop:12, letterSpacing:".14em", textTransform:"uppercase" }}>
           © 2026 · Gatineau, Québec
         </div>
       </div>
@@ -448,27 +485,84 @@ const Footer = () =>
         <h6>Légal</h6>
         <ul>
           <li><a href="mailto:hello@novio.studio">hello@novio.studio</a></li>
-          <li><a href="#">Confidentialité</a></li>
-          <li><a href="#">Mentions légales</a></li>
+          <li><button onClick={() => setModal("privacy")} style={{ background:"none", border:"none", padding:0, color:"inherit", font:"inherit", cursor:"pointer", textAlign:"left" }}>Confidentialité</button></li>
+          <li><button onClick={() => setModal("mentions")} style={{ background:"none", border:"none", padding:0, color:"inherit", font:"inherit", cursor:"pointer", textAlign:"left" }}>Mentions légales</button></li>
         </ul>
       </div>
       <div>
         <h6>Suivre</h6>
         <ul>
-          <li><a href="#">GitHub</a></li>
-          <li><a href="#">LinkedIn</a></li>
+          <li><a href="https://github.com/leodrolet" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+          <li><a href="https://linkedin.com/in/leodrolet" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
           <li><a href="mailto:hello@novio.studio">Email</a></li>
         </ul>
       </div>
     </footer>
     <div className="footer-bot">
       <span>© 2026 Novio Studio</span>
-      <span className="mono" style={{ letterSpacing: "0.14em" }}>
-        Zones desservies · Gatineau · Hull · Aylmer · Ottawa · Kanata · Orléans · Outaouais
-      </span>
+      <span className="mono" style={{ letterSpacing:".14em" }}>Zones desservies · Gatineau · Hull · Aylmer · Ottawa · Kanata · Orléans · Outaouais</span>
       <span>v1.0 · cohorte fondateur</span>
     </div>
-  </>;
+
+    <LegalModal open={modal === "privacy"} onClose={() => setModal(null)} title="Politique de confidentialité">
+      <ModalSection title="Responsable du traitement">
+        <p style={{margin:"0 0 6px"}}><strong style={{color:"var(--ink)"}}>Novio Studio</strong> — Leo Drolet, développeur web freelance</p>
+        <p style={{margin:"0 0 6px"}}>Gatineau, Québec, Canada</p>
+        <p style={{margin:0}}>Email : <a href="mailto:leodrolet07@gmail.com" style={{color:"var(--accent)"}}>leodrolet07@gmail.com</a></p>
+      </ModalSection>
+      <ModalSection title="Données collectées">
+        <p style={{margin:"0 0 8px"}}>Lors de l'utilisation du formulaire de contact, nous collectons : nom, email, entreprise et description du projet.</p>
+        <p style={{margin:0}}>Aucune autre donnée n'est collectée (pas de Google Analytics, pas de Meta Pixel, pas de trackers tiers).</p>
+      </ModalSection>
+      <ModalSection title="Finalité et base légale">
+        <p style={{margin:"0 0 6px"}}><strong style={{color:"var(--ink)"}}>Finalité :</strong> Répondre à vos demandes de devis et assurer le suivi de votre projet.</p>
+        <p style={{margin:0}}><strong style={{color:"var(--ink)"}}>Base légale :</strong> Consentement (art. 6(1)(a) RGPD). En soumettant le formulaire, vous consentez au traitement de vos données.</p>
+      </ModalSection>
+      <ModalSection title="Durée de conservation">
+        <p style={{margin:0}}>Vos données sont conservées pendant <strong style={{color:"var(--ink)"}}>12 mois</strong>, puis supprimées. En cas de relation commerciale établie, les données relatives aux contrats peuvent être conservées jusqu'à <strong style={{color:"var(--ink)"}}>5 ans</strong>.</p>
+      </ModalSection>
+      <ModalSection title="Sous-traitant — Formspree">
+        <p style={{margin:"0 0 6px"}}>Le formulaire utilise <strong style={{color:"var(--ink)"}}>Formspree Inc.</strong> comme processeur tiers, conforme au cadre EU-U.S. Data Privacy Framework.</p>
+        <p style={{margin:0}}><a href="https://formspree.io/legal/privacy-policy" target="_blank" rel="noopener noreferrer" style={{color:"var(--accent)"}}>formspree.io/legal/privacy-policy</a></p>
+      </ModalSection>
+      <ModalSection title="Hébergement">
+        <p style={{margin:0}}>Site hébergé par <strong style={{color:"var(--ink)"}}>Vercel Inc.</strong>, 340 Pine Street, Suite 701, San Francisco, CA 94104, USA.</p>
+      </ModalSection>
+      <ModalSection title="Cookies">
+        <p style={{margin:0}}>Ce site utilise uniquement des <strong style={{color:"var(--ink)"}}>cookies techniques essentiels</strong>. Aucun cookie publicitaire ou analytique.</p>
+      </ModalSection>
+      <ModalSection title="Vos droits (RGPD / Loi 25 Québec)">
+        <p style={{margin:"0 0 8px"}}>Vous disposez des droits d'accès, rectification, suppression, portabilité et opposition.</p>
+        <p style={{margin:0}}>Contact : <a href="mailto:leodrolet07@gmail.com" style={{color:"var(--accent)"}}>leodrolet07@gmail.com</a> — Réponse sous 30 jours.</p>
+      </ModalSection>
+    </LegalModal>
+
+    <LegalModal open={modal === "mentions"} onClose={() => setModal(null)} title="Mentions légales">
+      <ModalSection title="Éditeur du site">
+        <p style={{margin:"0 0 4px"}}><strong style={{color:"var(--ink)"}}>Novio Studio</strong> — travailleur autonome</p>
+        <p style={{margin:"0 0 4px"}}>Représentant : Leo Drolet</p>
+        <p style={{margin:"0 0 4px"}}>Gatineau, Québec, Canada</p>
+        <p style={{margin:"0 0 4px"}}>Email : <a href="mailto:leodrolet07@gmail.com" style={{color:"var(--accent)"}}>leodrolet07@gmail.com</a></p>
+        <p style={{margin:0}}>Activité : Développement web freelance</p>
+      </ModalSection>
+      <ModalSection title="Hébergeur">
+        <p style={{margin:"0 0 4px"}}><strong style={{color:"var(--ink)"}}>Vercel Inc.</strong></p>
+        <p style={{margin:"0 0 4px"}}>340 Pine Street, Suite 701, San Francisco, CA 94104, USA</p>
+        <p style={{margin:0}}><a href="https://vercel.com" target="_blank" rel="noopener noreferrer" style={{color:"var(--accent)"}}>vercel.com</a></p>
+      </ModalSection>
+      <ModalSection title="Propriété intellectuelle">
+        <p style={{margin:0}}>L'ensemble du contenu de ce site (textes, images, graphismes, logo) est la propriété exclusive de Novio Studio. Toute reproduction sans autorisation écrite préalable est interdite.</p>
+      </ModalSection>
+      <ModalSection title="Responsabilité">
+        <p style={{margin:0}}>Novio Studio s'efforce d'assurer l'exactitude des informations publiées. L'utilisation de ces informations se fait sous la responsabilité exclusive du visiteur.</p>
+      </ModalSection>
+      <ModalSection title="Données personnelles">
+        <p style={{margin:0}}>Le traitement des données est décrit dans notre Politique de confidentialité. Conformément à la Loi 25 du Québec et au RGPD, vous disposez de droits d'accès, rectification, suppression et portabilité.</p>
+      </ModalSection>
+    </LegalModal>
+  </>
+  );
+};
 
 
 Object.assign(window, {
