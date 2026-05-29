@@ -108,6 +108,8 @@ const Estimator = () => {
   const [email,      setEmail]      = React.useState("");
   const [project,    setProject]    = React.useState("");
   const [sent,       setSent]       = React.useState(false);
+  const [sending,    setSending]    = React.useState(false);
+  const [error,      setError]      = React.useState("");
   const [estNum]                    = React.useState(() => Math.floor(2026000 + Math.random() * 999));
 
   const isMaint = type === "maintenance";
@@ -168,10 +170,43 @@ const Estimator = () => {
     return () => cancelAnimationFrame(raf);
   }, [calc.total]);
 
-  const send = (e) => {
+  const send = async (e) => {
     e.preventDefault();
-    setSent(true);
-    setTimeout(() => setSent(false), 4500);
+    setError("");
+    if (!name.trim()) { setError("Ton nom est requis."); return; }
+    if (!email.trim()) { setError("Ton email est requis."); return; }
+
+    setSending(true);
+    try {
+      const body = isMaint
+        ? { name, email, project,
+            type: "Maintenance",
+            forfait: activeMaint?.label,
+            prix: `${activeMaint?.price} $/mois` }
+        : { name, email, project,
+            type: calc.label,
+            extras: [...extras].join(", ") || "aucune",
+            urgence: calc.urgencyLabel,
+            total: `${formatPrice(calc.total)} $`,
+            delai: calc.days };
+
+      const res = await fetch("https://formspree.io/f/xykvgwnz", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(body),
+      });
+
+      if (res.ok) {
+        setSent(true);
+        setName(""); setEmail(""); setProject("");
+      } else {
+        setError("Erreur lors de l'envoi. Réessaie ou écris-moi directement.");
+      }
+    } catch {
+      setError("Erreur réseau. Vérifie ta connexion.");
+    } finally {
+      setSending(false);
+    }
   };
 
   const includedFeats = isMaint ? [] : (INCLUDED_FEATURES[type] || []);
@@ -310,8 +345,11 @@ const Estimator = () => {
           <div className="field">
             <textarea placeholder="Décris ton projet en quelques lignes (optionnel)" value={project} onChange={(e) => setProject(e.target.value)} />
           </div>
-          <button type="submit" className="btn btn-accent" style={{ alignSelf: "flex-start", marginTop: 8 }} disabled={sent}>
-            {sent ? "✓ Reçu — réponse en 24h" : <>Envoyer ma demande <span className="arrow">→</span></>}
+          {error && (
+            <p style={{ color: "var(--accent)", fontSize: 12, margin: "4px 0 0" }}>{error}</p>
+          )}
+          <button type="submit" className="btn btn-accent" style={{ alignSelf: "flex-start", marginTop: 8 }} disabled={sent || sending}>
+            {sent ? "✓ Reçu — réponse en 24h" : sending ? "Envoi…" : <>Envoyer ma demande <span className="arrow">→</span></>}
           </button>
         </div>
 

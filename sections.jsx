@@ -493,6 +493,7 @@ const Footer = () => {
         <h6>Contact</h6>
         <ul>
           <li><a href="mailto:hello@novio.studio">Email</a></li>
+          <li><a href="tel:+18736554684">1 873 655 4684</a></li>
         </ul>
       </div>
     </footer>
