@@ -490,10 +490,8 @@ const Footer = () => {
         </ul>
       </div>
       <div>
-        <h6>Suivre</h6>
+        <h6>Contact</h6>
         <ul>
-          <li><a href="https://github.com/leodrolet" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-          <li><a href="https://linkedin.com/in/leodrolet" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
           <li><a href="mailto:hello@novio.studio">Email</a></li>
         </ul>
       </div>
