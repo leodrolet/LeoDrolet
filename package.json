@@ -5,11 +5,6 @@
     "build": "node build.js",
     "watch": "babel tweaks-panel.jsx effects.jsx sections.jsx cinema.jsx estimator.jsx tweaks.jsx app.jsx --out-dir dist --watch"
   },
-  "dependencies": {
-    "@react-three/drei": "^10.7.7",
-    "@react-three/fiber": "^9.6.1",
-"three": "^0.184.0"
-  },
   "devDependencies": {
     "@babel/cli": "^7.29.7",
     "@babel/core": "^7.29.7",

@@ -6,9 +6,53 @@
 <title>Novio Studio — Expériences web pour PME d'Outaouais & Ottawa</title>
 <meta name="description" content="Studio web freelance basé à Gatineau. Sites haute-performance livrés en 7 à 28 jours. Dès 999$." />
 
+<!-- Canonical -->
+<link rel="canonical" href="https://novio.studio/" />
+
+<!-- Open Graph -->
+<meta property="og:type"        content="website" />
+<meta property="og:url"         content="https://novio.studio/" />
+<meta property="og:title"       content="Novio Studio — Expériences web pour PME d'Outaouais & Ottawa" />
+<meta property="og:description" content="Studio web freelance basé à Gatineau. Sites haute-performance livrés en 7 à 28 jours. Dès 999$." />
+<meta property="og:image"       content="https://novio.studio/og-image.jpg" />
+<meta property="og:locale"      content="fr_CA" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card"        content="summary_large_image" />
+<meta name="twitter:title"       content="Novio Studio — Sites web haute-performance" />
+<meta name="twitter:description" content="Studio web freelance à Gatineau. Dès 999$, livré en 7 jours." />
+<meta name="twitter:image"       content="https://novio.studio/og-image.jpg" />
+
+<!-- Favicons -->
+<link rel="icon"             href="/favicon.ico" sizes="any" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+<!-- Schema.org JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Novio Studio",
+  "description": "Studio web freelance basé à Gatineau. Sites haute-performance livrés en 7 à 28 jours.",
+  "url": "https://novio.studio",
+  "telephone": "+18736554684",
+  "email": "leo_drolet@noviostudio.online",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Gatineau",
+    "addressRegion": "QC",
+    "addressCountry": "CA"
+  },
+  "priceRange": "$$",
+  "areaServed": ["Gatineau", "Ottawa", "Outaouais"],
+  "serviceType": "Web Design & Development",
+  "openingHours": "Mo-Fr 09:00-18:00"
+}
+</script>
+
 <!-- Critical CSS inline — prevents FOUC before stylesheet loads -->
 <style>
-:root{--display:"Instrument Serif","Fraunces",Georgia,serif;--sans:"Geist","Inter Tight",system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,monospace;--bg:#0a0a0a;--bg-2:#131313;--bg-3:#1a1a1a;--ink:#efece4;--ink-2:#b9b6ad;--mute:#6a6a64;--line:rgba(239,236,228,.10);--line-strong:rgba(239,236,228,.22);--accent:#ff5b2e;--accent-ink:#0a0a0a;--grain-opacity:.045;--anim-speed:1;--gutter:clamp(20px,4vw,64px)}
+:root{--display:"Instrument Serif","Fraunces",Georgia,serif;--sans:"Geist","Inter Tight",system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,monospace;--bg:#0a0a0a;--bg-2:#131313;--bg-3:#1a1a1a;--ink:#efece4;--ink-2:#b9b6ad;--mute:#7e7e77;--line:rgba(239,236,228,.10);--line-strong:rgba(239,236,228,.22);--accent:#ff5b2e;--accent-ink:#0a0a0a;--grain-opacity:.045;--anim-speed:1;--gutter:clamp(20px,4vw,64px)}
 :root[data-theme="light"]{--bg:#f0ece2;--bg-2:#e5dfd1;--bg-3:#d8d1c0;--ink:#0a0a0a;--ink-2:#2a2a2a;--accent-ink:#f0ece2}
 :root[data-display="grotesque"]{--display:"Bricolage Grotesque","Space Grotesk",sans-serif}
 :root[data-display="serif-classic"]{--display:"Cormorant Garamond","EB Garamond",serif}
@@ -48,34 +92,8 @@ main#root{min-height:100dvh}
 <!-- Framer Motion UMD (self-hosted, exposes window.Motion) -->
 <script defer src="framer-motion.min.js"></script>
 
-<!-- Grain canvas (runs inline, before deferred scripts) -->
-<script>
-(() => {
-  const c = document.getElementById('grain-canvas');
-  const ctx = c.getContext('2d', { alpha: true });
-  const SIZE = 220;
-  c.width = SIZE; c.height = SIZE;
-  c.style.width = '100vw'; c.style.height = '100vh';
-  c.style.imageRendering = 'pixelated';
-  const tiles = [];
-  for (let k = 0; k < 6; k++) {
-    const img = ctx.createImageData(SIZE, SIZE);
-    const d = img.data;
-    for (let i = 0; i < d.length; i += 4) {
-      const v = (Math.random() * 255) | 0;
-      d[i] = d[i+1] = d[i+2] = v;
-      d[i+3] = 255;
-    }
-    tiles.push(img);
-  }
-  let idx = 0;
-  ctx.putImageData(tiles[0], 0, 0);
-  setInterval(() => {
-    idx = (idx + 1) % tiles.length;
-    ctx.putImageData(tiles[idx], 0, 0);
-  }, 110);
-})();
-</script>
+<!-- Grain canvas (externalized — allows CSP without unsafe-inline) -->
+<script defer src="grain.js"></script>
 
 <!-- App bundle (pre-compiled + minified, defer = execute after React) -->
 <script defer src="dist/bundle.min.js"></script>

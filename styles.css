@@ -14,7 +14,7 @@
   --bg-3: #1a1a1a;
   --ink: #efece4;
   --ink-2: #b9b6ad;
-  --mute: #6a6a64;
+  --mute: #7e7e77;
   --line: rgba(239, 236, 228, 0.10);
   --line-strong: rgba(239, 236, 228, 0.22);
   --accent: #ff5b2e;
@@ -34,7 +34,7 @@
   --bg-3: #d8d1c0;
   --ink: #0a0a0a;
   --ink-2: #2a2a2a;
-  --mute: #6a6a64;
+  --mute: #7e7e77;
   --line: rgba(10, 10, 10, 0.12);
   --line-strong: rgba(10, 10, 10, 0.25);
   --accent-ink: #f0ece2;
@@ -72,6 +72,26 @@ a { color: inherit; text-decoration: none; }
 button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
 
 ::selection { background: var(--accent); color: var(--accent-ink); }
+
+/* Accessible focus ring for keyboard navigation */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* Screen-reader only utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
 
 /* Custom scrollbar */
 ::-webkit-scrollbar { width: 10px; height: 10px; }

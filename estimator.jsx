@@ -354,13 +354,16 @@ const Estimator = () => {
           {/* Contact */}
           <div className="field">
             <div className="field-label"><span>{contactNum} · Toi</span></div>
-            <input type="text" placeholder="Nom · entreprise" value={name} onChange={(e) => setName(e.target.value)} />
+            <label htmlFor="contact-name" className="sr-only">Nom et entreprise</label>
+            <input id="contact-name" type="text" placeholder="Nom · entreprise" value={name} onChange={(e) => setName(e.target.value)} />
           </div>
           <div className="field">
-            <input type="email" placeholder="Email professionnel" value={email} onChange={(e) => setEmail(e.target.value)} />
+            <label htmlFor="contact-email" className="sr-only">Email professionnel</label>
+            <input id="contact-email" type="email" placeholder="Email professionnel" value={email} onChange={(e) => setEmail(e.target.value)} />
           </div>
           <div className="field">
-            <textarea placeholder="Décris ton projet en quelques lignes (optionnel)" value={project} onChange={(e) => setProject(e.target.value)} />
+            <label htmlFor="contact-project" className="sr-only">Description du projet (optionnel)</label>
+            <textarea id="contact-project" placeholder="Décris ton projet en quelques lignes (optionnel)" value={project} onChange={(e) => setProject(e.target.value)} />
           </div>
           {error && (
             <p style={{ color: "var(--accent)", fontSize: 12, margin: "4px 0 0" }}>{error}</p>
