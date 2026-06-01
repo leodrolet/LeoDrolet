@@ -1243,7 +1243,6 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   .estimator-quote { position: relative; top: 0; }
   .footer { grid-template-columns: 1fr 1fr; }
   .manifesto-pin { padding: 0 var(--gutter); }
-  .specs-grid { grid-template-columns: 1fr 1fr; }
 }
 
 /* ============================================================
@@ -1265,7 +1264,6 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   .hero-meta { grid-template-columns: 1fr 1fr; }
   .process-grid { grid-template-columns: 1fr; }
   .process-step { border-right: none; }
-  .specs-grid { grid-template-columns: 1fr; }
   .footer { grid-template-columns: 1fr; }
   .footer-bot { flex-direction: column; gap: 8px; text-align: center; }
   .slot h4 { font-size: clamp(24px, 7vw, 40px); }
@@ -1465,3 +1463,10 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   transition: transform 0.6s cubic-bezier(.7,.1,.2,1);
 }
 .spec.reveal.in .spec-axis { transform: scaleX(1); }
+
+@media (max-width: 900px) {
+  .specs-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 480px) {
+  .specs-grid { grid-template-columns: 1fr; }
+}
