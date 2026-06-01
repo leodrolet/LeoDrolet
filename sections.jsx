@@ -20,26 +20,48 @@ const RevealItem = ({ as: Tag = "div", className = "", style = {}, delay = 0, ch
 const Nav = ({ headline }) => {
   const scrolled = useScrolled(40);
   const clock = useClock();
+  const [menuOpen, setMenuOpen] = React.useState(false);
+  const close = () => setMenuOpen(false);
   return (
-    <nav className={`nav ${scrolled ? "scrolled" : ""}`} style={{ opacity: "1" }}>
-      <a href="#top" className="brand">
-        <span className="dot"></span>
-        novio<span style={{ fontStyle: "italic", color: "var(--ink-2)" }}>.studio</span>
-      </a>
-      <div className="nav-links">
-        <a href="#services">Services</a>
-        <a href="#process">Méthode</a>
-        <a href="#travaux">Travaux</a>
-        <a href="#studio">Studio</a>
-        <a href="#devis">Devis</a>
-      </div>
-      <div className="nav-right">
-        <a className="btn" href="#devis" style={{ padding: "10px 16px" }}>
-          Démarrer <span className="arrow">→</span>
+    <React.Fragment>
+      <nav className={`nav ${scrolled ? "scrolled" : ""}`} style={{ opacity: "1" }}>
+        <a href="#top" className="brand">
+          <span className="dot"></span>
+          novio<span style={{ fontStyle: "italic", color: "var(--ink-2)" }}>.studio</span>
         </a>
-      </div>
-    </nav>);
-
+        <div className="nav-links">
+          <a href="#services">Services</a>
+          <a href="#process">Méthode</a>
+          <a href="#travaux">Travaux</a>
+          <a href="#studio">Studio</a>
+          <a href="#devis">Devis</a>
+        </div>
+        <div className="nav-right">
+          <button
+            className={`nav-burger${menuOpen ? " open" : ""}`}
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Menu"
+            aria-expanded={menuOpen}
+          >
+            <span></span><span></span><span></span>
+          </button>
+          <a className="btn nav-cta" href="#devis" style={{ padding: "10px 16px" }}>
+            Démarrer <span className="arrow">→</span>
+          </a>
+        </div>
+      </nav>
+      {menuOpen && (
+        <div className="mobile-menu">
+          <button className="mobile-menu-close" onClick={close} aria-label="Fermer">×</button>
+          <a href="#services" onClick={close}>Services</a>
+          <a href="#process" onClick={close}>Méthode</a>
+          <a href="#travaux" onClick={close}>Travaux</a>
+          <a href="#studio" onClick={close}>Studio</a>
+          <a href="#devis" className="mobile-menu-cta" onClick={close}>Démarrer →</a>
+        </div>
+      )}
+    </React.Fragment>
+  );
 };
 
 // ====================== HERO ======================
