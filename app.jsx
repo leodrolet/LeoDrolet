@@ -3,7 +3,7 @@
    ============================================================ */
 
 const {
-  Nav, Hero, MarqueeRow, Services, Process, Portfolio, About, FAQ,
+  Nav, Hero, MarqueeRow, Services, Portfolio, About, FAQ,
   FinalCTA, Footer, Estimator, useTweaksReactive, TWEAK_DEFAULTS, TweaksUI,
   ScrollProgress, Manifesto, Specs,
 } = window;
@@ -34,7 +34,6 @@ const App = () => {
 
       <Specs />
       <Services />
-      <Process />
 
       <MarqueeRow reverse items={[
         "Cohorte fondateur · 20% off",

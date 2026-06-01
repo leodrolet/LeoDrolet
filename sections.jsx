@@ -31,7 +31,6 @@ const Nav = ({ headline }) => {
         </a>
         <div className="nav-links">
           <a href="#services">Services</a>
-          <a href="#process">Méthode</a>
           <a href="#travaux">Travaux</a>
           <a href="#studio">Studio</a>
           <a href="#devis">Devis</a>
@@ -54,7 +53,6 @@ const Nav = ({ headline }) => {
         <div className="mobile-menu">
           <button className="mobile-menu-close" onClick={close} aria-label="Fermer">×</button>
           <a href="#services" onClick={close}>Services</a>
-          <a href="#process" onClick={close}>Méthode</a>
           <a href="#travaux" onClick={close}>Travaux</a>
           <a href="#studio" onClick={close}>Studio</a>
           <a href="#devis" className="mobile-menu-cta" onClick={close}>Démarrer →</a>
@@ -274,35 +272,6 @@ const Services = () => {
 };
 
 
-// ====================== PROCESS ======================
-const STEPS = [
-{ d: "Jour 1", t: "Brief", desc: "Appel de 30 min. On comprend ton business, ton public, ta voix." },
-{ d: "Jour 3", t: "Maquette", desc: "Direction visuelle dans Figma. Une ou deux révisions, pas dix." },
-{ d: "Jour 5–10", t: "Build", desc: "On code, optimise, intègre. Tu suis l'avancée sur un lien live." },
-{ d: "Jour 14", t: "Live", desc: "Mise en ligne. Formation 1h. 30 jours de support inclus." }];
-
-
-const Process = () =>
-<section className="section" id="process">
-    <SectionHead num="02" kicker="Méthode" title={<>Quatre étapes. <em style={{ fontStyle: "italic", color: "var(--ink-2)" }}>Zéro friction.</em></>} right="Délais signés au contrat" />
-    <div className="process-grid">
-      {STEPS.map((s, i) =>
-        <m.div
-          key={i}
-          className="process-step"
-          initial={{ opacity: 0, x: -32 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.65, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <div className="step-num">0{i + 1}</div>
-          <h4>{s.t}</h4>
-          <p>{s.desc}</p>
-          <div className="day">{s.d}</div>
-        </m.div>
-      )}
-    </div>
-  </section>;
 
 
 // ====================== PORTFOLIO — FOUNDER SLOTS ======================
@@ -590,6 +559,6 @@ const Footer = () => {
 
 
 Object.assign(window, {
-  Nav, Hero, MarqueeRow, SectionHead, Services, Process,
+  Nav, Hero, MarqueeRow, SectionHead, Services,
   Portfolio, About, FAQ, FinalCTA, Footer
 });
