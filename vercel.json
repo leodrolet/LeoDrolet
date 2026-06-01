@@ -35,5 +35,8 @@
   "routes": [
     { "handle": "filesystem" },
     { "src": "/(.*)", "dest": "/index.html" }
+  ],
+  "errors": [
+    { "statusCode": 404, "page": "/404.html" }
   ]
 }
