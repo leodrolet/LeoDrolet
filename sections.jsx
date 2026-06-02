@@ -86,25 +86,19 @@ const Hero = ({ headline, accent, shape }) => {
       <div className="hero-center">
 
         {/* Announcement pill */}
-        <m.div
+        <div
           className="hero-announce"
-          initial={{ opacity: 0, y: -8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
         >
           <span className="hero-announce-dot"></span>
           <span>Nouveau · </span>
           <a href="/diagnostic" className="hero-announce-link">
             Diagnostic gratuit en 15 secondes <span aria-hidden="true">→</span>
           </a>
-        </m.div>
+        </div>
 
         {/* Title */}
-        <m.h1
+        <h1
           className="hero-title"
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.22, ease: [0.22, 1, 0.36, 1] }}
         >
           {tokens.map((tok, i) => {
             let kind = "plain"; let display = tok;
@@ -119,7 +113,7 @@ const Hero = ({ headline, accent, shape }) => {
               </React.Fragment>
             );
           })}
-        </m.h1>
+        </h1>
 
         {/* Lead */}
         <p className="hero-lead">

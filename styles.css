@@ -121,6 +121,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   text-wrap: balance;
   text-align: center;
   margin: 0;
+  animation: hero-fade-up calc(0.7s / var(--anim-speed)) 0.22s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .mono {
@@ -382,6 +383,15 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   text-align: center;
 }
 
+@keyframes hero-fade-down {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes hero-fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 /* Announcement pill */
 .hero-announce {
   display: inline-flex;
@@ -397,6 +407,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   color: var(--ink-2);
   margin-bottom: 40px;
   transition: border-color calc(0.2s / var(--anim-speed)) ease;
+  animation: hero-fade-down calc(0.5s / var(--anim-speed)) 0.1s ease-out both;
 }
 .hero-announce:hover { border-color: var(--ink-2); }
 .hero-announce-dot {
