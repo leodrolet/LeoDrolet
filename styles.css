@@ -113,12 +113,14 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 
 .hero-title {
   font-family: var(--display);
-  font-size: clamp(52px, 9vw, 150px);
-  line-height: 0.92;
+  font-size: clamp(38px, 5.2vw, 80px);
+  line-height: 1.0;
   letter-spacing: -0.03em;
   word-spacing: 0.05em;
   font-weight: 400;
   text-wrap: balance;
+  text-align: center;
+  margin: 0;
 }
 
 .mono {
@@ -285,11 +287,11 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   top: 0;
   height: 100dvh;
   min-height: 100dvh;
-  padding-top: clamp(72px, 9vh, 130px);
+  padding-top: clamp(96px, 13vh, 160px);
   padding-bottom: clamp(32px, 5vh, 64px);
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   overflow: hidden;
 }
 
