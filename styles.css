@@ -274,113 +274,65 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 /* ============================================================
    Hero
    ============================================================ */
-/* Tall scroll region — the user must scroll its full length before
-   the page can move past the hero. The hero itself sticks to the top. */
-.hero-scroll {
-  position: relative;
-  /* 1vh = pinned view, the rest = scrub distance for the video */
-  height: 320vh;
+/* Card-based hero — full-width rounded card with dithering background */
+.hero-section {
+  padding: clamp(80px, 12vh, 120px) var(--gutter) 0;
   width: 100%;
 }
 
-.hero {
-  position: sticky;
-  top: 0;
-  height: 100dvh;
-  min-height: 100dvh;
-  padding-top: clamp(96px, 13vh, 160px);
-  padding-bottom: clamp(32px, 5vh, 64px);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+.hero-card {
+  position: relative;
   overflow: hidden;
-}
-
-.hero .hero-bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  overflow: hidden;
-  pointer-events: none;
-}
-.hero .webgl {
-  position: absolute;
-  inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover;
-  opacity: 0.92;
-  background: #000;
-}
-.hero .hero-bg-scrim {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse at 50% 60%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.35) 60%, rgba(10,10,10,0.85) 100%),
-    linear-gradient(to bottom, rgba(10,10,10,0.5) 0%, rgba(10,10,10,0) 22%, rgba(10,10,10,0) 65%, rgba(10,10,10,0.85) 100%);
-  pointer-events: none;
-}
-:root[data-theme="light"] .hero .webgl { opacity: 0.55; filter: invert(0.05) brightness(1.05); }
-:root[data-theme="light"] .hero .hero-bg-scrim {
-  background:
-    radial-gradient(ellipse at 50% 60%, rgba(240,236,226,0) 0%, rgba(240,236,226,0.35) 60%, rgba(240,236,226,0.85) 100%),
-    linear-gradient(to bottom, rgba(240,236,226,0.5) 0%, rgba(240,236,226,0) 22%, rgba(240,236,226,0) 65%, rgba(240,236,226,0.85) 100%);
-}
-
-.hero-bg-loading {
-  position: absolute;
-  bottom: 80px; left: 50%;
-  transform: translateX(-50%);
+  border-radius: 48px;
+  border: 1px solid var(--line-strong);
+  background: var(--bg-2);
+  min-height: clamp(560px, 82vh, 780px);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+  transition: border-color 0.5s ease;
+}
+.hero-card:hover { border-color: rgba(239,236,228,0.28); }
+
+.hero-card-dither {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.38;
+}
+:root[data-theme="light"] .hero-card-dither { opacity: 0.18; }
+
+.hero-card-scrim {
+  position: absolute;
+  inset: 0;
   z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 50%, rgba(10,10,10,0) 20%, rgba(10,10,10,0.6) 100%);
 }
-.hero-bg-loading .hbg-bar {
-  width: 220px; height: 1px;
-  background: rgba(239,236,228,0.15);
-  overflow: hidden;
-}
-.hero-bg-loading .hbg-bar-fill {
-  height: 100%;
-  background: var(--accent);
-  transition: width 0.18s linear;
-}
-.hero-bg-loading .hbg-meta {
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--mute);
+:root[data-theme="light"] .hero-card-scrim {
+  background: radial-gradient(ellipse at 50% 50%, rgba(245,242,235,0) 20%, rgba(245,242,235,0.65) 100%);
 }
 
-.hero-meta {
-  position: relative;
-  z-index: 2;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  padding: 0 var(--gutter);
-  gap: 18px;
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--ink-2);
-}
-.hero-meta .label { color: var(--mute); display: block; margin-bottom: 4px; }
-
-/* ── Centred hero layout ── */
-.hero-center {
+.hero-card-inner {
   position: relative;
   z-index: 2;
   width: 100%;
   max-width: 860px;
   margin: 0 auto;
-  padding: 0 var(--gutter);
+  padding: clamp(48px, 8vh, 80px) var(--gutter);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+}
+
+.hero-card .scroll-hint {
+  position: absolute;
+  left: var(--gutter);
+  bottom: 24px;
+  z-index: 3;
 }
 
 @keyframes hero-fade-down {

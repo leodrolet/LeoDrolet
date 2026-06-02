@@ -46,105 +46,141 @@ const Nav = ({ headline }) => {
             <span></span><span></span><span></span>
           </button>
           <a className="btn nav-cta" href="#devis" style={{ padding: "10px 16px" }}>
-            Démarrer <span className="arrow">→</span>
+            Démarrer <span className="arrow">&#8594;</span>
           </a>
         </div>
       </nav>
       {menuOpen && (
         <div className="mobile-menu">
-          <button className="mobile-menu-close" onClick={close} aria-label="Fermer">×</button>
+          <button className="mobile-menu-close" onClick={close} aria-label="Fermer">&#215;</button>
           <a href="#services" onClick={close}>Services</a>
           <a href="#travaux" onClick={close}>Travaux</a>
           <a href="#studio" onClick={close}>Studio</a>
           <a href="/diagnostic" onClick={close}>Diagnostic gratuit</a>
-          <a href="#devis" className="mobile-menu-cta" onClick={close}>Démarrer →</a>
+          <a href="#devis" className="mobile-menu-cta" onClick={close}>Démarrer &#8594;</a>
         </div>
       )}
     </React.Fragment>
   );
 };
 
+// ====================== HERO DITHERING ======================
+const BAYER4 = [[0,8,2,10],[12,4,14,6],[3,11,1,9],[15,7,13,5]];
+const HeroDithering = ({ speedRef }) => {
+  const canvasRef = React.useRef(null);
+  React.useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const CELL = 8;
+    let w = 0, h = 0, t = 0, raf = 0;
+    const resize = () => {
+      const r = canvas.getBoundingClientRect();
+      w = Math.floor(r.width); h = Math.floor(r.height);
+      canvas.width = w; canvas.height = h;
+    };
+    resize();
+    const ro = new ResizeObserver(resize);
+    ro.observe(canvas);
+    const getAccentRGB = () => {
+      const v = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#ff5b2e';
+      if (v.startsWith('#') && v.length === 7)
+        return [parseInt(v.slice(1,3),16), parseInt(v.slice(3,5),16), parseInt(v.slice(5,7),16)];
+      return [255, 91, 46];
+    };
+    const draw = () => {
+      t += (speedRef.current || 0.2) * 0.016;
+      ctx.clearRect(0, 0, w, h);
+      const [ar, ag, ab] = getAccentRGB();
+      ctx.fillStyle = `rgba(${ar},${ag},${ab},0.45)`;
+      const cols = Math.ceil(w / CELL), rows = Math.ceil(h / CELL);
+      for (let cy = 0; cy < rows; cy++) {
+        for (let cx = 0; cx < cols; cx++) {
+          const nx = cx / cols, ny = cy / rows;
+          const wx = nx + Math.sin(ny * 4.0 + t * 0.8) * 0.18;
+          const wy = ny + Math.cos(nx * 3.2 - t * 0.55) * 0.14;
+          const v = (Math.sin(wx * 5.5 + t) * Math.cos(wy * 4.8 - t * 0.65) * 0.6 +
+            Math.sin(wx * 2.5 - wy * 3.8 + t * 0.38) * 0.4) * 0.5 + 0.5;
+          if (v > BAYER4[cy % 4][cx % 4] / 16)
+            ctx.fillRect(cx * CELL, cy * CELL, CELL, CELL);
+        }
+      }
+      raf = requestAnimationFrame(draw);
+    };
+    raf = requestAnimationFrame(draw);
+    return () => { cancelAnimationFrame(raf); ro.disconnect(); };
+  }, []);
+  return React.createElement('canvas', {
+    ref: canvasRef,
+    style: { position:'absolute', inset:0, width:'100%', height:'100%', pointerEvents:'none', display:'block' }
+  });
+};
+
 // ====================== HERO ======================
-const Hero = ({ headline, accent, shape }) => {
-  // Build the hero title from the headline tweak.
-  // Default: "Expérience captivante et réfléchie"
-  // We'll wrap *italic* and **accent** tokens via WordReveal.
-  // For display we hand-format with our own line breaks for big drama.
+const Hero = ({ headline }) => {
+  const [hovered, setHovered] = React.useState(false);
+  const speedRef = React.useRef(0.2);
+  React.useEffect(() => { speedRef.current = hovered ? 0.6 : 0.2; }, [hovered]);
   const tokens = React.useMemo(() => {
-    const words = (headline || "Expérience captivante et réfléchie").trim().split(/\s+/);
-    // Default styling: italicize every other "key" word to feel editorial.
-    // If headline has explicit *...* / **...** markers, respect them via WordReveal logic.
-    return words;
+    return (headline || "Votre prochain client vous *cherche* &#8212; soyez **trouvé.**").trim().split(/\s+/);
   }, [headline]);
 
   return (
-    <div className="hero-scroll">
-    <header className="hero" id="top">
-      <HeroVideo />
-
-      {/* Centred hero content */}
-      <div className="hero-center">
-
-        {/* Announcement pill */}
-        <div
-          className="hero-announce"
-        >
-          <span className="hero-announce-dot"></span>
-          <span>Nouveau · </span>
-          <a href="/diagnostic" className="hero-announce-link">
-            Diagnostic gratuit en 15 secondes <span aria-hidden="true">→</span>
-          </a>
+    <section className="hero-section" id="top">
+      <div
+        className="hero-card"
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
+        <div className="hero-card-dither"><HeroDithering speedRef={speedRef} /></div>
+        <div className="hero-card-scrim" />
+        <div className="hero-card-inner">
+          <div className="hero-announce">
+            <span className="hero-announce-dot"></span>
+            <span>Nouveau · </span>
+            <a href="/diagnostic" className="hero-announce-link">
+              Diagnostic gratuit en 15 secondes <span aria-hidden="true">&#8594;</span>
+            </a>
+          </div>
+          <h1 className="hero-title">
+            {tokens.map((tok, i) => {
+              let kind = "plain"; let display = tok;
+              if (tok.startsWith("**") && tok.endsWith("**")) { kind = "accent"; display = tok.slice(2, -2); }
+              else if (tok.startsWith("*") && tok.endsWith("*")) { kind = "italic"; display = tok.slice(1, -1); }
+              return (
+                <React.Fragment key={i}>
+                  <span className={`word ${kind === "italic" ? "italic" : ""} ${kind === "accent" ? "accent" : ""}`}>
+                    {display}
+                  </span>
+                  {i < tokens.length - 1 ? " " : ""}
+                </React.Fragment>
+              );
+            })}
+          </h1>
+          <p className="hero-lead">
+            Votre site devrait vous amener des <em>appels</em> &#8212; pas juste des visites.<br />
+            Studio à Gatineau, livré en 7 à 28 jours, pensé pour les PME qui veulent croître.
+          </p>
+          <div className="hero-ctas">
+            <a className="btn btn-accent" href="#devis">Démarrer un projet <span className="arrow">&#8594;</span></a>
+            <a className="btn-diag" href="/diagnostic">Diagnostic gratuit <span className="arrow">&#8594;</span></a>
+          </div>
+          <div className="hero-center-meta">
+            <span className="hero-avail">
+              <span className="hero-avail-dot"></span>
+              Disponible
+            </span>
+            <span className="hero-center-sep" aria-hidden="true">·</span>
+            <span>Gatineau · Ottawa · Outaouais</span>
+          </div>
         </div>
-
-        {/* Title */}
-        <h1
-          className="hero-title"
-        >
-          {tokens.map((tok, i) => {
-            let kind = "plain"; let display = tok;
-            if (tok.startsWith("**") && tok.endsWith("**")) { kind = "accent"; display = tok.slice(2, -2); }
-            else if (tok.startsWith("*") && tok.endsWith("*")) { kind = "italic"; display = tok.slice(1, -1); }
-            return (
-              <React.Fragment key={i}>
-                <span className={`word ${kind === "italic" ? "italic" : ""} ${kind === "accent" ? "accent" : ""}`}>
-                  {display}
-                </span>
-                {i < tokens.length - 1 ? " " : ""}
-              </React.Fragment>
-            );
-          })}
-        </h1>
-
-        {/* Lead */}
-        <p className="hero-lead">
-          Votre site devrait vous amener des <em>appels</em> — pas juste des visites.<br />
-          Studio à Gatineau, livré en 7 à 28 jours, pensé pour les PME qui veulent croître.
-        </p>
-
-        {/* CTAs */}
-        <div className="hero-ctas">
-          <a className="btn btn-accent" href="#devis">Démarrer un projet <span className="arrow">→</span></a>
-          <a className="btn-diag" href="/diagnostic">Diagnostic gratuit <span className="arrow">→</span></a>
+        <div className="scroll-hint">
+          <span className="bar"></span>
+          Faire défiler
         </div>
-
-        {/* Status */}
-        <div className="hero-center-meta">
-          <span className="hero-avail">
-            <span className="hero-avail-dot"></span>
-            Disponible
-          </span>
-          <span className="hero-center-sep" aria-hidden="true">·</span>
-          <span>Gatineau · Ottawa · Outaouais</span>
-        </div>
-
       </div>
-
-      <div className="scroll-hint">
-        <span className="bar"></span>
-        Faire défiler
-      </div>
-    </header>
-    </div>);
+    </section>
+  );
 
 };
 
@@ -157,7 +193,7 @@ const MarqueeRow = ({ items, reverse = false }) =>
           {items.map((it, i) =>
       <React.Fragment key={i}>
               <span>{it}</span>
-              <span className="star">✦</span>
+              <span className="star">&#10022;</span>
             </React.Fragment>
       )}
         </span>
@@ -197,7 +233,7 @@ const SERVICES = [
   subtitle: "Votre vitrine. Votre crédibilité. Vos clients.",
   desc: "Pour artisans, restos, cliniques. Cinq pages pensées pour convertir, SEO local, design 100% sur mesure.",
   items: ["Classé sur Google local", "Jusqu'à 5 pages", "3 révisions incluses", "Support 30 jours"],
-  price: "1\u202F899",
+  price: "1 899",
   delay: "2–3 semaines"
 },
 {
@@ -206,7 +242,7 @@ const SERVICES = [
   subtitle: "Votre vieux site — transformé en machine à leads.",
   desc: "Site lent ou daté ? On préserve votre SEO existant, on change tout le reste. Vitesse ×10, redirections propres, trafic intact.",
   items: ["SEO existant préservé", "Vitesse ×10 garantie", "Migration de contenu", "Support 30 jours"],
-  price: "3\u202F699",
+  price: "3 699",
   delay: "2–4 semaines"
 },
 {
@@ -215,7 +251,7 @@ const SERVICES = [
   subtitle: "L'arsenal complet pour la PME qui domine sa niche.",
   desc: "CMS, blog, intégrations avancées. Quand votre site devient votre meilleur employé — disponible 24h/24.",
   items: ["CMS modifiable sans technicien", "Blog + intégrations API", "SEO avancé", "Support 60 jours"],
-  price: "4\u202F299",
+  price: "4 299",
   delay: "2–3 semaines"
 }];
 
@@ -255,7 +291,7 @@ const Services = () => {
                 <p className="desc">{s.desc}</p>
                 <ul>{s.items.map((it) => <li key={it}>{it}</li>)}</ul>
                 <a href="#devis" className="btn cta" style={{ marginTop: 20 }}>
-                  Choisir cette offre <span className="arrow">→</span>
+                  Choisir cette offre <span className="arrow">&#8594;</span>
                 </a>
               </div>
               <div className="price-block">
@@ -313,7 +349,7 @@ const Portfolio = () =>
           </div>
           <h4>{s.title}<br /><em>{s.sub}</em></h4>
           <div className="slot-bottom">
-            <span style={{ color: "var(--mute)" }}>↳ réclamer cette place</span>
+            <span style={{ color: "var(--mute)" }}>&#8627; réclamer cette place</span>
             <span className="deal">{s.deal}</span>
           </div>
         </m.article>
@@ -383,7 +419,7 @@ const FAQ = () => {
   const [open, setOpen] = React.useState(null);
   return (
     <section className="section" id="faq">
-      <SectionHead num="05" kicker="FAQ" title="Questions fréquentes." right="↑ cliquer pour ouvrir" />
+      <SectionHead num="05" kicker="FAQ" title="Questions fréquentes." right="&#8593; cliquer pour ouvrir" />
       <div className="faq">
         {FAQS.map((f, i) =>
         <div key={i} className={`faq-item ${open === i ? "open" : ""}`} onClick={() => setOpen(open === i ? null : i)}>
@@ -408,7 +444,7 @@ const FinalCTA = () => {
           Prochain client — <em>le tien.</em>
         </div>
         <div className="actions">
-          <a className="btn btn-accent" href="#devis">Réserver mon créneau <span className="arrow">→</span></a>
+          <a className="btn btn-accent" href="#devis">Réserver mon créneau <span className="arrow">&#8594;</span></a>
           <a className="btn" href="mailto:leo_drolet@noviostudio.online">leo_drolet@noviostudio.online</a>
         </div>
         <div className="small">Premier appel · 15 min · gratuit · café offert à Gatineau / Ottawa</div>
@@ -436,7 +472,7 @@ const LegalModal = ({ open, onClose, title, children }) => {
       <div style={{ background:"var(--bg-2)", border:"1px solid var(--line-strong)", borderRadius:16, width:"100%", maxWidth:640, maxHeight:"85vh", display:"flex", flexDirection:"column" }}>
         <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", padding:"24px 28px", borderBottom:"1px solid var(--line)" }}>
           <span style={{ fontFamily:"var(--display)", fontSize:22, fontWeight:400, letterSpacing:"-.01em" }}>{title}</span>
-          <button onClick={onClose} style={{ fontFamily:"var(--mono)", fontSize:18, color:"var(--ink-2)", background:"none", border:"none", cursor:"pointer", lineHeight:1 }}>✕</button>
+          <button onClick={onClose} style={{ fontFamily:"var(--mono)", fontSize:18, color:"var(--ink-2)", background:"none", border:"none", cursor:"pointer", lineHeight:1 }}>&#10005;</button>
         </div>
         <div style={{ overflowY:"auto", padding:"28px", fontSize:14, lineHeight:1.65, color:"var(--ink-2)" }}>
           {children}
