@@ -72,7 +72,7 @@ const HeroDithering = ({ speedRef }) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
-    const CELL = 8;
+    const CELL = 6;
     let w = 0, h = 0, t = 0, raf = 0;
     const resize = () => {
       const r = canvas.getBoundingClientRect();
@@ -92,16 +92,19 @@ const HeroDithering = ({ speedRef }) => {
       t += (speedRef.current || 0.2) * 0.016;
       ctx.clearRect(0, 0, w, h);
       const [ar, ag, ab] = getAccentRGB();
-      ctx.fillStyle = `rgba(${ar},${ag},${ab},0.45)`;
+      ctx.fillStyle = `rgba(${ar},${ag},${ab},0.55)`;
       const cols = Math.ceil(w / CELL), rows = Math.ceil(h / CELL);
       for (let cy = 0; cy < rows; cy++) {
         for (let cx = 0; cx < cols; cx++) {
           const nx = cx / cols, ny = cy / rows;
-          const wx = nx + Math.sin(ny * 4.0 + t * 0.8) * 0.18;
-          const wy = ny + Math.cos(nx * 3.2 - t * 0.55) * 0.14;
-          const v = (Math.sin(wx * 5.5 + t) * Math.cos(wy * 4.8 - t * 0.65) * 0.6 +
-            Math.sin(wx * 2.5 - wy * 3.8 + t * 0.38) * 0.4) * 0.5 + 0.5;
-          if (v > BAYER4[cy % 4][cx % 4] / 16)
+          // Concentrate toward edges — center stays clear for readability
+          const ex = Math.abs(nx - 0.5) * 2;
+          const ey = Math.abs(ny - 0.5) * 2;
+          const edge = Math.pow(Math.max(ex, ey), 1.8);
+          const wx = nx + Math.sin(ny * 3.0 + t * 0.7) * 0.12;
+          const wy = ny + Math.cos(nx * 2.8 - t * 0.5) * 0.10;
+          const noise = (Math.sin(wx * 4.8 + t) * Math.cos(wy * 4.2 - t * 0.7)) * 0.5 + 0.5;
+          if (noise * edge > BAYER4[cy % 4][cx % 4] / 16)
             ctx.fillRect(cx * CELL, cy * CELL, CELL, CELL);
         }
       }
