@@ -5,18 +5,18 @@
 // ── Data ─────────────────────────────────────────────────────
 
 const TYPE_OPTS = [
-  { id: "landing",     label: "Landing Page" },
-  { id: "vitrine",     label: "Site Vitrine" },
-  { id: "complet",     label: "Site Complet" },
-  { id: "refonte",     label: "Refonte" },
+  { id: "landing",     label: "Starter" },
+  { id: "vitrine",     label: "Présence" },
+  { id: "complet",     label: "Domination" },
+  { id: "refonte",     label: "Résurrection" },
   { id: "maintenance", label: "Maintenance" },
 ];
 
 const PLANS = {
-  landing: { label: "Landing Page", base: 999,  days: "7 jours" },
-  vitrine: { label: "Site Vitrine", base: 1899, days: "2–3 sem." },
-  complet: { label: "Site Complet", base: 4299, days: "2–3 sem." },
-  refonte: { label: "Refonte",      base: 3699, days: "2–4 sem." },
+  landing: { label: "Starter",      base: 999,  days: "7 jours" },
+  vitrine: { label: "Présence",     base: 1899, days: "2–3 sem." },
+  complet: { label: "Domination",   base: 4299, days: "2–3 sem." },
+  refonte: { label: "Résurrection", base: 3699, days: "2–4 sem." },
 };
 
 const INCLUDED_FEATURES = {

@@ -128,7 +128,7 @@ const Hero = ({ headline, accent, shape }) => {
       {/* Bottom row */}
       <div className="hero-foot">
         <p className="lead">
-          Studio web freelance pour les PME d'<em>ici</em>. Des sites pensés ligne par ligne — livrés en 7 à 28 jours, sans agence, sans gabarit.
+          Votre site devrait vous amener des <em>appels</em> — pas juste des visites. Studio à Gatineau, livré en 7 à 28 jours, pensé pour les PME qui veulent croître.
         </p>
         <div className="row gap-3">
           <a className="btn btn-accent" href="#devis">Démarrer un projet <span className="arrow">→</span></a>
@@ -184,37 +184,37 @@ const SectionHead = ({ num, kicker, title, right }) => {
 const SERVICES = [
 {
   n: "01",
-  title: "Landing Page",
-  subtitle: "Un message · une page · une conversion.",
-  desc: "Page taillée pour convertir. Hébergement, formulaire et SSL — tout inclus.",
-  items: ["Design sur mesure", "Mobile parfait", "Formulaire + hébergement", "2 révisions"],
+  title: "Starter",
+  subtitle: "Une page. Un message. Des appels.",
+  desc: "La page qui transforme vos visiteurs en clients. Design sur mesure, formulaire et hébergement — tout inclus. Opérationnel en 7 jours.",
+  items: ["Visible sur Google", "Formulaire de contact", "Hébergement 1 an inclus", "Parfait sur mobile"],
   price: "999",
   delay: "7 jours"
 },
 {
   n: "02",
-  title: "Site Vitrine",
-  subtitle: "Cinq pages. Cinq portes d'entrée.",
-  desc: "Pour artisans, restos, cliniques. SEO local, design 100% sur mesure.",
-  items: ["Jusqu'à 5 pages", "SEO par page", "3 révisions", "Support 30 jours"],
+  title: "Présence",
+  subtitle: "Votre vitrine. Votre crédibilité. Vos clients.",
+  desc: "Pour artisans, restos, cliniques. Cinq pages pensées pour convertir, SEO local, design 100% sur mesure.",
+  items: ["Classé sur Google local", "Jusqu'à 5 pages", "3 révisions incluses", "Support 30 jours"],
   price: "1\u202F899",
   delay: "2–3 semaines"
 },
 {
   n: "03",
-  title: "Refonte Complète",
-  subtitle: "Tu gardes ton SEO. On change tout le reste.",
-  desc: "Site lent ou daté ? Audit, migration propre, redirections — vitesse ×10.",
-  items: ["Audit + redirections 301", "Core Web Vitals", "Migration de contenu", "Support 30 jours"],
+  title: "Résurrection",
+  subtitle: "Votre vieux site — transformé en machine à leads.",
+  desc: "Site lent ou daté ? On préserve votre SEO existant, on change tout le reste. Vitesse ×10, redirections propres, trafic intact.",
+  items: ["SEO existant préservé", "Vitesse ×10 garantie", "Migration de contenu", "Support 30 jours"],
   price: "3\u202F699",
   delay: "2–4 semaines"
 },
 {
   n: "04",
-  title: "Site Complet",
-  subtitle: "L'arsenal pour une PME qui scale.",
-  desc: "CMS, blog, intégrations avancées. Quand le site devient un outil business.",
-  items: ["CMS sur mesure", "Blog + intégrations API", "SEO avancé", "Support 60 jours"],
+  title: "Domination",
+  subtitle: "L'arsenal complet pour la PME qui domine sa niche.",
+  desc: "CMS, blog, intégrations avancées. Quand votre site devient votre meilleur employé — disponible 24h/24.",
+  items: ["CMS modifiable sans technicien", "Blog + intégrations API", "SEO avancé", "Support 60 jours"],
   price: "4\u202F299",
   delay: "2–3 semaines"
 }];
@@ -287,12 +287,12 @@ const Portfolio = () =>
     <SectionHead
     num="03"
     kicker="Travaux"
-    title={<>Le studio est <em style={{ fontStyle: "italic", color: "var(--ink-2)" }}>tout neuf.</em></>}
+    title={<>4 PME vont <em style={{ fontStyle: "italic", color: "var(--ink-2)" }}>dominer leur secteur.</em></>}
     right="Cohorte fondateur · 04 places" />
-  
+
     <RevealItem className="founders-banner">
-      <div className="big">Quatre places · réservées aux PME fondatrices.</div>
-      <div>20% off · listés en première page · pour la vie.</div>
+      <div className="big">4 places fondateur — 20% de réduction permanente.</div>
+      <div>Votre concurrent n'est pas encore dans notre galerie. Soyez le premier.</div>
     </RevealItem>
     <div className="portfolio">
       {SLOTS.map((s, i) =>
@@ -405,13 +405,13 @@ const FinalCTA = () => {
     <section className="final-cta" id="cta-final">
       <div className="reveal" ref={ref}>
         <div className="huge">
-          Prochain projet — <em>le tien.</em>
+          Prochain client — <em>le tien.</em>
         </div>
         <div className="actions">
           <a className="btn btn-accent" href="#devis">Réserver mon créneau <span className="arrow">→</span></a>
           <a className="btn" href="mailto:leo_drolet@noviostudio.online">leo_drolet@noviostudio.online</a>
         </div>
-        <div className="small">Premier appel · 15 min · gratuit · café offert si à Gatineau / Ottawa</div>
+        <div className="small">Premier appel · 15 min · gratuit · café offert à Gatineau / Ottawa</div>
       </div>
     </section>);
 

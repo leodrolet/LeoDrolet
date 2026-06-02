@@ -24,12 +24,12 @@ const App = () => {
       <Manifesto />
 
       <MarqueeRow items={[
-        "Expériences immersives",
-        "Gatineau / Outaouais",
+        "Plus de clients locaux",
+        "Gatineau · Ottawa · Outaouais",
         "Dès 999 $ CAD",
-        "Livré 7–28 jours",
+        "Livré en 7–28 jours",
         "100 / 100 Lighthouse",
-        "Support 30–60 jours",
+        "Sans agence · sans template",
       ]} />
 
       <Specs />

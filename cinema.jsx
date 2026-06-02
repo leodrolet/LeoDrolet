@@ -40,9 +40,9 @@ const ScrollProgress = () => {
 /* ---------- Manifesto ---------- */
 const MANIFESTO_LINES = [
   ["Pas un", "template"],
-  ["Pas une", "agence"],
-  ["Pas un", "compromis"],
-  ["Un site qui", "te ressemble"],
+  ["Pas une", "dépense"],
+  ["Pas un", "intermédiaire"],
+  ["Un site qui", "convertit."],
 ];
 
 const Manifesto = () => {
@@ -121,19 +121,19 @@ const Manifesto = () => {
 const SPECS = [
   {
     v: "100", u: "/100", k: "Lighthouse",
-    d: "Performance, accessibilité, SEO, best practices — visés à chaque livraison.",
+    d: "Performance, accessibilité, SEO — 100/100 visé à chaque livraison. Un site lent coûte des clients.",
   },
   {
-    v: "0.9", u: "s", k: "LCP médian",
-    d: "Largest Contentful Paint sous la seconde. Edge runtime, WebP / AVIF, polices subset.",
+    v: "0.9", u: "s", k: "Chargement",
+    d: "Vos visiteurs n'attendent pas. Un site rapide = plus de conversions, moins de rebonds, mieux classé.",
   },
   {
-    v: "999", u: "$", k: "Prix plancher",
-    d: "Landing complète et livrée prête à convertir. Aucune ligne cachée dans le devis.",
+    v: "999", u: "$", k: "Prix de départ",
+    d: "Landing complète livrée prête à convertir. Aucun frais caché, aucune surprise dans le devis.",
   },
   {
-    v: "07", u: "j", k: "Délai minimum",
-    d: "Du brief au live. Pas de queue de projet, pas de sous-traitance overseas.",
+    v: "07", u: "j", k: "Livraison minimum",
+    d: "Du brief au live en 7 jours. Pendant ce temps, votre concurrent attend encore son devis d'agence.",
   },
 ];
 
