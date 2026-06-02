@@ -113,7 +113,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 
 .hero-title {
   font-family: var(--display);
-  font-size: clamp(64px, 13vw, 220px);
+  font-size: clamp(52px, 9vw, 150px);
   line-height: 0.92;
   letter-spacing: -0.03em;
   word-spacing: 0.05em;
@@ -285,8 +285,8 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   top: 0;
   height: 100dvh;
   min-height: 100dvh;
-  padding-top: clamp(120px, 16vh, 200px);
-  padding-bottom: clamp(40px, 6vh, 80px);
+  padding-top: clamp(72px, 9vh, 130px);
+  padding-bottom: clamp(32px, 5vh, 64px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -414,6 +414,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   grid-template-columns: 1fr auto;
   gap: clamp(24px, 5vw, 72px);
   align-items: end;
+  flex-shrink: 0;
 }
 .hero-foot .lead {
   max-width: 38ch;
