@@ -134,13 +134,6 @@ const Hero = ({ headline }) => {
         <div className="hero-card-dither"><HeroDithering speedRef={speedRef} /></div>
         <div className="hero-card-scrim" />
         <div className="hero-card-inner">
-          <div className="hero-announce">
-            <span className="hero-announce-dot"></span>
-            <span>Nouveau · </span>
-            <a href="/diagnostic" className="hero-announce-link">
-              Diagnostic gratuit en 15 secondes <span aria-hidden="true">&#8594;</span>
-            </a>
-          </div>
           <h1 className="hero-title">
             {tokens.map((tok, i) => {
               let kind = "plain"; let display = tok;
@@ -156,21 +149,9 @@ const Hero = ({ headline }) => {
               );
             })}
           </h1>
-          <p className="hero-lead">
-            Votre site devrait vous amener des <em>appels</em> &#8212; pas juste des visites.<br />
-            Studio à Gatineau, livré en 7 à 28 jours, pensé pour les PME qui veulent croître.
-          </p>
           <div className="hero-ctas">
             <a className="btn btn-accent" href="#devis">Démarrer un projet <span className="arrow">&#8594;</span></a>
             <a className="btn-diag" href="/diagnostic">Diagnostic gratuit <span className="arrow">&#8594;</span></a>
-          </div>
-          <div className="hero-center-meta">
-            <span className="hero-avail">
-              <span className="hero-avail-dot"></span>
-              Disponible
-            </span>
-            <span className="hero-center-sep" aria-hidden="true">·</span>
-            <span>Gatineau · Ottawa · Outaouais</span>
           </div>
         </div>
         <div className="scroll-hint">

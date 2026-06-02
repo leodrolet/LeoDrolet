@@ -333,7 +333,9 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .hero-card-inner .hero-title {
   font-size: clamp(30px, 3.8vw, 58px);
   margin-bottom: 0;
+  color: #ffffff;
 }
+.hero-card-inner .hero-title .word.italic { color: rgba(255,255,255,0.72); }
 
 .hero-card .scroll-hint {
   position: absolute;
