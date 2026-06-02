@@ -5,7 +5,7 @@
 
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   accent: "#ff5b2e",
-  headline: "Sites web qui *ramènent des clients* — pour les **PME de Gatineau.**",
+  headline: "Site Web *Fiable* en **Outaouais**",
   display: "instrument",
   theme: "dark",
   grain: 0.045,
