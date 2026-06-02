@@ -5,7 +5,7 @@
 
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   accent: "#ff5b2e",
-  headline: "Votre prochain client *arrive* par **votre site.**",
+  headline: "Votre prochain client vous *cherche* — soyez **trouvé.**",
   display: "instrument",
   theme: "dark",
   grain: 0.045,
