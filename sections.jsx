@@ -97,6 +97,10 @@ const Hero = ({ headline, accent, shape }) => {
 
       {/* Big title */}
       <div className="hero-body">
+        <div className="hero-eyebrow">
+          <span className="hero-eyebrow-dot"></span>
+          <span>Studio web · Gatineau, QC</span>
+        </div>
         <m.h1
           className="hero-title"
           initial="hidden"
@@ -129,15 +133,23 @@ const Hero = ({ headline, accent, shape }) => {
 
       {/* Bottom row */}
       <div className="hero-foot">
-        <p className="lead">
-          Votre site devrait vous amener des <em>appels</em> — pas juste des visites. Studio à Gatineau, livré en 7 à 28 jours, pensé pour les PME qui veulent croître.
-        </p>
-        <div className="row gap-3">
-          <a className="btn btn-accent" href="#devis">Démarrer un projet <span className="arrow">→</span></a>
-          <a className="btn" href="#travaux">Voir les travaux</a>
+        <div className="hero-foot-left">
+          <p className="lead">
+            Votre site devrait vous amener des <em>appels</em> — pas juste des visites. Studio à Gatineau, livré en 7 à 28 jours.
+          </p>
+          <div className="hero-foot-meta">
+            <span className="hero-avail">
+              <span className="hero-avail-dot"></span>
+              Disponible
+            </span>
+            <span className="hero-foot-sep" aria-hidden="true">·</span>
+            <span>Gatineau · Ottawa · Outaouais</span>
+          </div>
         </div>
-        <div className="mono" style={{ fontSize: 11, color: "var(--mute)", letterSpacing: "0.14em", textTransform: "uppercase", textAlign: "right" }}>
-          Disponible
+        <div className="hero-ctas">
+          <a className="btn btn-accent" href="#devis">Démarrer un projet <span className="arrow">→</span></a>
+          <a className="btn-diag" href="/diagnostic">Diagnostic gratuit <span className="arrow">→</span></a>
+          <a className="hero-text-link" href="#travaux">Voir les travaux →</a>
         </div>
       </div>
 
