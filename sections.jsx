@@ -72,7 +72,7 @@ const HeroDithering = ({ speedRef }) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
-    const CELL = 6;
+    const CELL = 3;
     let w = 0, h = 0, t = 0, raf = 0;
     const resize = () => {
       const r = canvas.getBoundingClientRect();
@@ -97,14 +97,10 @@ const HeroDithering = ({ speedRef }) => {
       for (let cy = 0; cy < rows; cy++) {
         for (let cx = 0; cx < cols; cx++) {
           const nx = cx / cols, ny = cy / rows;
-          // Concentrate toward edges — center stays clear for readability
-          const ex = Math.abs(nx - 0.5) * 2;
-          const ey = Math.abs(ny - 0.5) * 2;
-          const edge = Math.pow(Math.max(ex, ey), 1.8);
           const wx = nx + Math.sin(ny * 3.0 + t * 0.7) * 0.12;
           const wy = ny + Math.cos(nx * 2.8 - t * 0.5) * 0.10;
           const noise = (Math.sin(wx * 4.8 + t) * Math.cos(wy * 4.2 - t * 0.7)) * 0.5 + 0.5;
-          if (noise * edge > BAYER4[cy % 4][cx % 4] / 16)
+          if (noise > BAYER4[cy % 4][cx % 4] / 16)
             ctx.fillRect(cx * CELL, cy * CELL, CELL, CELL);
         }
       }
