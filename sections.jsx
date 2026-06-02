@@ -116,13 +116,26 @@ const HeroDithering = ({ speedRef }) => {
 };
 
 // ====================== HERO ======================
+const parseHeadline = (text) => {
+  const segments = [];
+  const re = /(\*\*[^*]+\*\*|\*[^*]+\*|[^*]+)/g;
+  let m;
+  while ((m = re.exec(text)) !== null) {
+    const t = m[0];
+    if (t.startsWith('**') && t.endsWith('**')) segments.push({ kind: 'accent', text: t.slice(2, -2) });
+    else if (t.startsWith('*') && t.endsWith('*')) segments.push({ kind: 'italic', text: t.slice(1, -1) });
+    else segments.push({ kind: 'plain', text: t });
+  }
+  return segments;
+};
+
 const Hero = ({ headline }) => {
   const [hovered, setHovered] = React.useState(false);
   const speedRef = React.useRef(0.2);
   React.useEffect(() => { speedRef.current = hovered ? 0.6 : 0.2; }, [hovered]);
-  const tokens = React.useMemo(() => {
-    return (headline || "Votre prochain client vous *cherche* &#8212; soyez **trouvé.**").trim().split(/\s+/);
-  }, [headline]);
+  const segments = React.useMemo(() =>
+    parseHeadline(headline || "Sites web qui *ramènent des clients* — pour les **PME de Gatineau.**"),
+  [headline]);
 
   return (
     <section className="hero-section" id="top">
@@ -135,19 +148,11 @@ const Hero = ({ headline }) => {
         <div className="hero-card-scrim" />
         <div className="hero-card-inner">
           <h1 className="hero-title">
-            {tokens.map((tok, i) => {
-              let kind = "plain"; let display = tok;
-              if (tok.startsWith("**") && tok.endsWith("**")) { kind = "accent"; display = tok.slice(2, -2); }
-              else if (tok.startsWith("*") && tok.endsWith("*")) { kind = "italic"; display = tok.slice(1, -1); }
-              return (
-                <React.Fragment key={i}>
-                  <span className={`word ${kind === "italic" ? "italic" : ""} ${kind === "accent" ? "accent" : ""}`}>
-                    {display}
-                  </span>
-                  {i < tokens.length - 1 ? " " : ""}
-                </React.Fragment>
-              );
-            })}
+            {segments.map((seg, i) => (
+              <span key={i} className={seg.kind === 'italic' ? 'word italic' : seg.kind === 'accent' ? 'word accent' : ''}>
+                {seg.text}
+              </span>
+            ))}
           </h1>
           <div className="hero-ctas">
             <a className="btn btn-accent" href="#devis">Démarrer un projet <span className="arrow">&#8594;</span></a>
