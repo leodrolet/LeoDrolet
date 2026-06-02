@@ -33,6 +33,7 @@ const Nav = ({ headline }) => {
           <a href="#services">Services</a>
           <a href="#travaux">Travaux</a>
           <a href="#studio">Studio</a>
+          <a href="/diagnostic">Diagnostic</a>
           <a href="#devis">Devis</a>
         </div>
         <div className="nav-right">
@@ -55,6 +56,7 @@ const Nav = ({ headline }) => {
           <a href="#services" onClick={close}>Services</a>
           <a href="#travaux" onClick={close}>Travaux</a>
           <a href="#studio" onClick={close}>Studio</a>
+          <a href="/diagnostic" onClick={close}>Diagnostic gratuit</a>
           <a href="#devis" className="mobile-menu-cta" onClick={close}>Démarrer →</a>
         </div>
       )}
@@ -472,6 +474,7 @@ const Footer = () => {
           <li><a href="#top">Accueil</a></li>
           <li><a href="#services">Services</a></li>
           <li><a href="#travaux">Travaux</a></li>
+          <li><a href="/diagnostic">Diagnostic gratuit</a></li>
           <li><a href="#devis">Contact</a></li>
         </ul>
       </div>
