@@ -77,19 +77,6 @@ const Hero = ({ headline, accent, shape }) => {
     return words;
   }, [headline]);
 
-  const titleVariants = {
-    hidden: {},
-    visible: { transition: { staggerChildren: 0.028, delayChildren: 0.1 } },
-  };
-  const wordVariants = {
-    hidden: {},
-    visible: { transition: { staggerChildren: 0.022 } },
-  };
-  const charVariants = {
-    hidden: { opacity: 0, y: "0.45em" },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] } },
-  };
-
   return (
     <div className="hero-scroll">
     <header className="hero" id="top">
@@ -99,20 +86,25 @@ const Hero = ({ headline, accent, shape }) => {
       <div className="hero-center">
 
         {/* Announcement pill */}
-        <div className="hero-announce">
+        <m.div
+          className="hero-announce"
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
+        >
           <span className="hero-announce-dot"></span>
           <span>Nouveau · </span>
           <a href="/diagnostic" className="hero-announce-link">
             Diagnostic gratuit en 15 secondes <span aria-hidden="true">→</span>
           </a>
-        </div>
+        </m.div>
 
         {/* Title */}
         <m.h1
           className="hero-title"
-          initial="hidden"
-          animate="visible"
-          variants={titleVariants}
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.22, ease: [0.22, 1, 0.36, 1] }}
         >
           {tokens.map((tok, i) => {
             let kind = "plain"; let display = tok;
@@ -120,17 +112,9 @@ const Hero = ({ headline, accent, shape }) => {
             else if (tok.startsWith("*") && tok.endsWith("*")) { kind = "italic"; display = tok.slice(1, -1); }
             return (
               <React.Fragment key={i}>
-                <m.span
-                  className={`word ${kind === "italic" ? "italic" : ""} ${kind === "accent" ? "accent" : ""}`}
-                  style={{ display: "inline-block", overflow: "hidden", verticalAlign: "bottom" }}
-                  variants={wordVariants}
-                >
-                  {display.split("").map((char, j) => (
-                    <m.span key={j} style={{ display: "inline-block" }} variants={charVariants}>
-                      {char}
-                    </m.span>
-                  ))}
-                </m.span>
+                <span className={`word ${kind === "italic" ? "italic" : ""} ${kind === "accent" ? "accent" : ""}`}>
+                  {display}
+                </span>
                 {i < tokens.length - 1 ? " " : ""}
               </React.Fragment>
             );
