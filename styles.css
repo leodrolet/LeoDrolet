@@ -296,9 +296,9 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.19;
+  opacity: 0.39;
 }
-:root[data-theme="light"] .hero-card-dither { opacity: 0.12; }
+:root[data-theme="light"] .hero-card-dither { opacity: 0.22; }
 
 .hero-card-scrim {
   position: absolute;
