@@ -95,12 +95,19 @@ const Hero = ({ headline, accent, shape }) => {
     <header className="hero" id="top">
       <HeroVideo />
 
-      {/* Big title */}
-      <div className="hero-body">
-        <div className="hero-eyebrow">
-          <span className="hero-eyebrow-dot"></span>
-          <span>Studio web · Gatineau, QC</span>
+      {/* Centred hero content */}
+      <div className="hero-center">
+
+        {/* Announcement pill */}
+        <div className="hero-announce">
+          <span className="hero-announce-dot"></span>
+          <span>Nouveau · </span>
+          <a href="/diagnostic" className="hero-announce-link">
+            Diagnostic gratuit en 15 secondes <span aria-hidden="true">→</span>
+          </a>
         </div>
+
+        {/* Title */}
         <m.h1
           className="hero-title"
           initial="hidden"
@@ -124,33 +131,34 @@ const Hero = ({ headline, accent, shape }) => {
                     </m.span>
                   ))}
                 </m.span>
-                {i < tokens.length - 1 ? " " : ""}
+                {i < tokens.length - 1 ? " " : ""}
               </React.Fragment>
             );
           })}
         </m.h1>
-      </div>
 
-      {/* Bottom row */}
-      <div className="hero-foot">
-        <div className="hero-foot-left">
-          <p className="lead">
-            Votre site devrait vous amener des <em>appels</em> — pas juste des visites. Studio à Gatineau, livré en 7 à 28 jours.
-          </p>
-          <div className="hero-foot-meta">
-            <span className="hero-avail">
-              <span className="hero-avail-dot"></span>
-              Disponible
-            </span>
-            <span className="hero-foot-sep" aria-hidden="true">·</span>
-            <span>Gatineau · Ottawa · Outaouais</span>
-          </div>
-        </div>
+        {/* Lead */}
+        <p className="hero-lead">
+          Votre site devrait vous amener des <em>appels</em> — pas juste des visites.<br />
+          Studio à Gatineau, livré en 7 à 28 jours, pensé pour les PME qui veulent croître.
+        </p>
+
+        {/* CTAs */}
         <div className="hero-ctas">
           <a className="btn btn-accent" href="#devis">Démarrer un projet <span className="arrow">→</span></a>
           <a className="btn-diag" href="/diagnostic">Diagnostic gratuit <span className="arrow">→</span></a>
-          <a className="hero-text-link" href="#travaux">Voir les travaux →</a>
         </div>
+
+        {/* Status */}
+        <div className="hero-center-meta">
+          <span className="hero-avail">
+            <span className="hero-avail-dot"></span>
+            Disponible
+          </span>
+          <span className="hero-center-sep" aria-hidden="true">·</span>
+          <span>Gatineau · Ottawa · Outaouais</span>
+        </div>
+
       </div>
 
       <div className="scroll-hint">
