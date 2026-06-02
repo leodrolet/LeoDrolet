@@ -113,10 +113,10 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 
 .hero-title {
   font-family: var(--display);
-  font-size: clamp(38px, 5.2vw, 80px);
-  line-height: 1.0;
-  letter-spacing: -0.03em;
-  word-spacing: 0.05em;
+  font-size: clamp(44px, 6.5vw, 96px);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  word-spacing: 0;
   font-weight: 400;
   text-wrap: balance;
   text-align: center;
@@ -329,13 +329,13 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   gap: 0;
 }
 
-/* Tighten title to fit card */
+/* Hero card title — large, clean, white */
 .hero-card-inner .hero-title {
-  font-size: clamp(30px, 3.8vw, 58px);
-  margin-bottom: 0;
+  font-size: clamp(44px, 6.5vw, 96px);
+  margin-bottom: 32px;
   color: #ffffff;
 }
-.hero-card-inner .hero-title .word.italic { color: rgba(255,255,255,0.72); }
+.hero-card-inner .hero-title .word.italic { color: rgba(255,255,255,0.68); }
 
 .hero-card .scroll-hint {
   position: absolute;
