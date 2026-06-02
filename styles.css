@@ -274,29 +274,21 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 /* ============================================================
    Hero
    ============================================================ */
-/* Card-based hero — full-width rounded card with dithering background */
+/* Full-bleed hero — no card frame */
 .hero-section {
-  padding: clamp(76px, 11vh, 112px) clamp(16px, 2.5vw, 40px) 0;
+  padding-top: clamp(76px, 11vh, 112px);
   width: 100%;
 }
 
 .hero-card {
   position: relative;
   overflow: hidden;
-  border-radius: 40px;
-  border: 1px solid rgba(239,236,228,0.10);
   background: var(--bg-2);
   min-height: clamp(520px, 78vh, 740px);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  transition: border-color 0.6s ease, box-shadow 0.6s ease;
-  box-shadow: 0 0 0 1px rgba(239,236,228,0.04), 0 32px 80px rgba(0,0,0,0.55);
-}
-.hero-card:hover {
-  border-color: rgba(239,236,228,0.20);
-  box-shadow: 0 0 0 1px rgba(239,236,228,0.07), 0 32px 80px rgba(0,0,0,0.55);
 }
 
 .hero-card-dither {
@@ -304,9 +296,9 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.09;
+  opacity: 0.19;
 }
-:root[data-theme="light"] .hero-card-dither { opacity: 0.06; }
+:root[data-theme="light"] .hero-card-dither { opacity: 0.12; }
 
 .hero-card-scrim {
   position: absolute;
