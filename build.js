@@ -31,17 +31,6 @@ execSync(
   { stdio: "inherit" }
 );
 
-// 5. Compile + minify diagnostic page (standalone bundle)
-execSync(
-  "npx babel diagnostic.jsx --out-file dist/diagnostic.js",
-  { stdio: "inherit" }
-);
-execSync(
-  "npx terser dist/diagnostic.js --compress --mangle --output dist/diagnostic.min.js",
-  { stdio: "inherit" }
-);
-
-const jsSize   = fs.statSync("dist/bundle.min.js").size;
-const diagSize = fs.statSync("dist/diagnostic.min.js").size;
-const cssSize  = fs.statSync("styles.min.css").size;
-console.log(`Build complete → bundle: ${(jsSize/1024).toFixed(1)}KB  diagnostic: ${(diagSize/1024).toFixed(1)}KB  CSS: ${(cssSize/1024).toFixed(1)}KB`);
+const jsSize  = fs.statSync("dist/bundle.min.js").size;
+const cssSize = fs.statSync("styles.min.css").size;
+console.log(`Build complete → bundle: ${(jsSize/1024).toFixed(1)}KB  CSS: ${(cssSize/1024).toFixed(1)}KB`);

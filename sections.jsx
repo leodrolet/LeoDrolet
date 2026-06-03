@@ -43,7 +43,6 @@ const Nav = ({ headline }) => {
           <a href="#services">Services</a>
           <a href="#travaux">Travaux</a>
           <a href="#studio">Studio</a>
-          <a href="/diagnostic">Diagnostic</a>
           <a href="#devis">Devis</a>
         </div>
         <div className="nav-right">
@@ -66,7 +65,6 @@ const Nav = ({ headline }) => {
           <a href="#services" onClick={close}>Services</a>
           <a href="#travaux" onClick={close}>Travaux</a>
           <a href="#studio" onClick={close}>Studio</a>
-          <a href="/diagnostic" onClick={close}>Diagnostic gratuit</a>
           <a href="#devis" className="mobile-menu-cta" onClick={close}>Démarrer &#8594;</a>
         </div>
       )}
@@ -166,7 +164,6 @@ const Hero = ({ headline }) => {
           </h1>
           <div className="hero-ctas">
             <a className="btn btn-accent" href="#devis">Démarrer un projet <span className="arrow">&#8594;</span></a>
-            <a className="btn-diag" href="/diagnostic">Diagnostic gratuit <span className="arrow">&#8594;</span></a>
           </div>
         </div>
         <div className="scroll-hint">
@@ -503,7 +500,7 @@ const Footer = () => {
           <li><a href="#top">Accueil</a></li>
           <li><a href="#services">Services</a></li>
           <li><a href="#travaux">Travaux</a></li>
-          <li><a href="/diagnostic">Diagnostic gratuit</a></li>
+
           <li><a href="#devis">Contact</a></li>
         </ul>
       </div>
