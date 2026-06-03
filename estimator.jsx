@@ -104,6 +104,7 @@ const Estimator = () => {
   const [extras,     setExtras]     = React.useState(new Set());
   const [urgency,    setUrgency]    = React.useState("normal");
   const [maintPlan,  setMaintPlan]  = React.useState("standard");
+  const [monthly,    setMonthly]    = React.useState(false);
   const [name,       setName]       = React.useState("");
   const [email,      setEmail]      = React.useState("");
   const [project,    setProject]    = React.useState("");
@@ -376,6 +377,19 @@ const Estimator = () => {
         {/* ── RIGHT ───────────────────────────────────────── */}
         <aside className="estimator-quote">
 
+          {!isMaint && (
+            <div className="price-toggle">
+              <span className={!monthly ? "price-toggle-label active" : "price-toggle-label"}>Paiement unique</span>
+              <button
+                type="button"
+                className={`toggle-switch${monthly ? " on" : ""}`}
+                onClick={() => setMonthly((v) => !v)}
+                aria-label="Basculer vers paiement mensuel"
+              />
+              <span className={monthly ? "price-toggle-label active" : "price-toggle-label"}>Mensuel</span>
+            </div>
+          )}
+
           <div className="quote-head">
             <span>{isMaint ? "Abonnement" : "Estimation"} #{estNum}</span>
             <span>{isMaint ? "Maintenance" : calc.label}</span>
@@ -446,11 +460,15 @@ const Estimator = () => {
                 </div>
               </div>
               <div className="quote-total">
-                <div className="label">Total estimé · CAD</div>
+                <div className="label">{monthly ? "Mensuel estimé · CAD" : "Total estimé · CAD"}</div>
                 <div className="amount">
-                  {formatPrice(displayTotal)}<sup>$</sup>
+                  {monthly ? formatPrice(Math.round(displayTotal / 12)) : formatPrice(displayTotal)}<sup>{monthly ? "$/mois" : "$"}</sup>
                 </div>
-                <div className="note">Livraison estimée : {calc.days} · devis ferme sous 24h après envoi</div>
+                <div className="note">
+                  {monthly
+                    ? "* Engagement 12 mois · devis ferme sous 24h"
+                    : `Livraison estimée : ${calc.days} · devis ferme sous 24h après envoi`}
+                </div>
               </div>
             </>
           )}
