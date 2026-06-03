@@ -1337,18 +1337,24 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   align-items: stretch;
 }
 
+@keyframes plan-float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-6px); }
+}
 .plan-card {
   position: relative;
   height: 100%;
   border: 1px solid var(--line-strong);
   background: linear-gradient(135deg, var(--bg-2) 0%, var(--bg-3) 100%);
   padding: 24px;
+  border-radius: 12px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  transition: border-color 0.25s ease;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  animation: plan-float 5s ease-in-out infinite;
 }
-.plan-card:hover { border-color: rgba(239,236,228,0.35); }
+.plan-card:hover { border-color: rgba(239,236,228,0.35); animation-play-state: paused; }
 
 .plan-card--featured {
   border-color: var(--accent);

@@ -220,7 +220,7 @@ const PLANS = [
       { text: "Optimisation mobile (100 % responsive)", checked: true },
       { text: "Formulaire de contact", checked: true },
       { text: "SEO local de base (Google, carte, fiche)", checked: true },
-      { text: "1 heure de modifications / mois", checked: true },
+      { text: "1 modification / mois", checked: true },
       { text: "Formulaires avancés (devis, soumissions)", checked: false },
       { text: "Rapport mensuel de performance", checked: false },
       { text: "Support prioritaire — réponse < 4 h", checked: false },
@@ -238,7 +238,7 @@ const PLANS = [
       { text: "Optimisation mobile (100 % responsive)", checked: true },
       { text: "Formulaires avancés (devis, soumissions)", checked: true },
       { text: "SEO avancé + Google Business optimisé", checked: true },
-      { text: "2 heures de modifications / mois", checked: true },
+      { text: "2 modifications / mois", checked: true },
       { text: "Rapport mensuel de performance", checked: true },
       { text: "Temps de réponse < 24 h", checked: true },
       { text: "Support prioritaire — réponse < 4 h", checked: false },
@@ -256,7 +256,7 @@ const PLANS = [
       { text: "Optimisation mobile (100 % responsive)", checked: true },
       { text: "Formulaires + intégrations (CRM, email, etc.)", checked: true },
       { text: "SEO avancé + suivi de positionnement mensuel", checked: true },
-      { text: "4 heures de modifications / mois", checked: true },
+      { text: "4 modifications / mois", checked: true },
       { text: "Rapport mensuel + recommandations", checked: true },
       { text: "Révisions illimitées", checked: true },
       { text: "Support prioritaire — réponse < 4 h", checked: true },
@@ -282,7 +282,7 @@ const PlanCard = ({ plan, i }) => (
     transition={{ duration: 0.5, ease: "easeInOut", delay: 0.1 + i * 0.12 }}
     style={{ height: "100%" }}
   >
-    <div className={`plan-card${plan.featured ? " plan-card--featured" : ""}`}>
+    <div className={`plan-card${plan.featured ? " plan-card--featured" : ""}`} style={{ animationDelay: `${-i * 1.6}s` }}>
       <div className="plan-card-header">
         <div className="plan-card-top">
           <span className="plan-tier">{plan.tier}</span>
