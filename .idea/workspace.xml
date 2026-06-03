@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d90ceb1b-7a57-4f53-bb54-fe7386eec621" name="Changes" comment="t">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sections.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/sections.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,14 +62,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1779201719557</updated>
-    </task>
-    <task id="LOCAL-00106" summary="feat: orange color scheme + fix process timeline line">
-      <option name="closed" value="true" />
-      <created>1780017780336</created>
-      <option name="number" value="00106" />
-      <option name="presentableId" value="LOCAL-00106" />
-      <option name="project" value="LOCAL" />
-      <updated>1780017780337</updated>
     </task>
     <task id="LOCAL-00107" summary="feat: orange color scheme + fix process timeline line">
       <option name="closed" value="true" />
@@ -455,7 +447,15 @@
       <option name="project" value="LOCAL" />
       <updated>1780516225300</updated>
     </task>
-    <option name="localTasksCounter" value="155" />
+    <task id="LOCAL-00155" summary="t">
+      <option name="closed" value="true" />
+      <created>1780521126078</created>
+      <option name="number" value="00155" />
+      <option name="presentableId" value="LOCAL-00155" />
+      <option name="project" value="LOCAL" />
+      <updated>1780521126078</updated>
+    </task>
+    <option name="localTasksCounter" value="156" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

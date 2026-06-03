@@ -215,7 +215,7 @@ const SERVICES = [
   title: "Essentiel",
   subtitle: "Présence en ligne. Appels entrants.",
   desc: "Le plan de départ pour les indépendants et très petites entreprises. Domaine, hébergement et maintenance — tout inclus, sans surprise.",
-  items: ["Domaine inclus", "Hébergement inclus", "Maintenance de base", "Site vitrine simple"],
+  items: ["Domaine inclus", "Hébergement inclus", "Maintenance de base", "Site vitrine simple", "Idéal pour indépendants et très petites entreprises"],
   price: "300",
   cadence: "/mois",
   engagement: "Engagement min. 3 mois",
@@ -226,7 +226,7 @@ const SERVICES = [
   title: "Professionnel",
   subtitle: "La meilleure valeur pour la majorité des PME.",
   desc: "Pour les contractors qui veulent des leads réguliers. Tout ce qu'Essentiel inclut, plus 2 révisions par mois et SEO de base pour dominer ta ville.",
-  items: ["Tout le plan Essentiel", "2 révisions par mois", "SEO de base", "Idéal PME locales"],
+  items: ["Tout ce qu'Essentiel inclut", "2 révisions par mois", "SEO de base", "Idéal pour la majorité des PME locales"],
   price: "450",
   cadence: "/mois",
   engagement: "Engagement min. 3 mois",
@@ -237,7 +237,7 @@ const SERVICES = [
   title: "Premium",
   subtitle: "L'arsenal complet pour l'entreprise qui veut tout.",
   desc: "Tout ce que Pro inclut, plus boutique en ligne, SEO avancé, support prioritaire et analytiques poussées. Quand votre site devient votre meilleur employé.",
-  items: ["Tout le plan Pro", "Boutique en ligne (e-commerce)", "SEO avancé", "Support prioritaire", "Analytiques poussées"],
+  items: ["Tout ce que Pro inclut", "Boutique en ligne (e-commerce)", "SEO avancé", "Support prioritaire", "Analytiques poussées", "Idéal pour les entreprises qui veulent tout"],
   price: "700",
   cadence: "/mois",
   engagement: "Engagement min. 3 mois",
@@ -252,7 +252,7 @@ const Services = () => {
 
   return (
     <section className="section" id="services">
-      <SectionHead num="01" kicker="Services" title={<>Trois plans. <em style={{ fontStyle: "italic", color: "var(--ink-2)" }}>Tout inclus.</em></>} right="Engagement 3 mois · préavis 30 jours" />
+      <SectionHead num="01" kicker="Services" title={<>Trois plans. <em style={{ fontStyle: "italic", color: "var(--ink-2)" }}>Tout inclus.</em></>} right="Engagement 3 mois · préavis 30 jours · aucun frais caché" />
       <div className="services-layout">
         <nav className="services-nav">
           {SERVICES.map((s) =>
