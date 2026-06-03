@@ -110,7 +110,7 @@ const Manifesto = () => {
         <div className="manifesto-foot mono">
           <span>{String(Math.round(t * 100)).padStart(3, "0")}</span>
           <span>·</span>
-          <span>scroll</span>
+          <span>défiler</span>
         </div>
       </div>
     </section>
