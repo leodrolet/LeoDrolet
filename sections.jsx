@@ -254,7 +254,6 @@ const PLANS = [
       { text: "SEO avancé + suivi de positionnement mensuel", checked: true },
       { text: "4 modifications / mois", checked: true },
       { text: "Rapport mensuel + recommandations", checked: true },
-      { text: "Révisions illimitées", checked: true },
       { text: "Support prioritaire — réponse < 4 h", checked: true },
     ],
   },
@@ -270,12 +269,14 @@ const Benefit = ({ text, checked }) => (
   </div>
 );
 
+const EASE_OUT_EXPO = [0.16, 1, 0.3, 1];
+
 const PlanCard = ({ plan, i }) => (
   <m.div
-    initial={{ filter: "blur(2px)", opacity: 0 }}
-    whileInView={{ filter: "blur(0px)", opacity: 1 }}
-    viewport={{ once: true, amount: 0.1 }}
-    transition={{ duration: 0.5, ease: "easeInOut", delay: 0.1 + i * 0.12 }}
+    initial={{ opacity: 0, y: 40, scale: 0.97 }}
+    whileInView={{ opacity: 1, y: 0, scale: 1 }}
+    viewport={{ once: true, amount: 0.08 }}
+    transition={{ duration: 0.75, ease: EASE_OUT_EXPO, delay: 0.28 + i * 0.16 }}
     style={{ height: "100%" }}
   >
     <div className={`plan-card${plan.featured ? " plan-card--featured" : ""}`} style={{ animationDelay: `${-i * 1.6}s` }}>
@@ -314,7 +315,13 @@ const Services = () => {
         right="Engagement 3 mois · préavis 30 jours · aucun frais caché"
       />
 
-      <p className="plans-global-note">Domaine et hébergement inclus dans tous les forfaits.</p>
+      <m.p
+        className="plans-global-note"
+        initial={{ opacity: 0, y: 14 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.5 }}
+        transition={{ duration: 0.55, ease: EASE_OUT_EXPO, delay: 0.05 }}
+      >Domaine et hébergement inclus dans tous les forfaits.</m.p>
 
       <div className="plans-grid">
         {PLANS.map((plan, i) => (
