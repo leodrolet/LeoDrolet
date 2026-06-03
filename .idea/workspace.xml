@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d90ceb1b-7a57-4f53-bb54-fe7386eec621" name="Changes" comment="t">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="d90ceb1b-7a57-4f53-bb54-fe7386eec621" name="Changes" comment="tdwadwa">
+      <change beforePath="$PROJECT_DIR$/sections.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/sections.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,14 +63,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1779201719557</updated>
-    </task>
-    <task id="LOCAL-00110" summary="feat: orange color scheme + fix process timeline line">
-      <option name="closed" value="true" />
-      <created>1780019444644</created>
-      <option name="number" value="00110" />
-      <option name="presentableId" value="LOCAL-00110" />
-      <option name="project" value="LOCAL" />
-      <updated>1780019444645</updated>
     </task>
     <task id="LOCAL-00111" summary="feat: orange color scheme + fix process timeline line">
       <option name="closed" value="true" />
@@ -455,7 +448,15 @@
       <option name="project" value="LOCAL" />
       <updated>1780525346975</updated>
     </task>
-    <option name="localTasksCounter" value="159" />
+    <task id="LOCAL-00159" summary="tdwadwa">
+      <option name="closed" value="true" />
+      <created>1780525677463</created>
+      <option name="number" value="00159" />
+      <option name="presentableId" value="LOCAL-00159" />
+      <option name="project" value="LOCAL" />
+      <updated>1780525677463</updated>
+    </task>
+    <option name="localTasksCounter" value="160" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -475,7 +476,8 @@
     <MESSAGE value="feat: orange color scheme + fix process timeline line" />
     <MESSAGE value="Google" />
     <MESSAGE value="t" />
-    <option name="LAST_COMMIT_MESSAGE" value="t" />
+    <MESSAGE value="tdwadwa" />
+    <option name="LAST_COMMIT_MESSAGE" value="tdwadwa" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

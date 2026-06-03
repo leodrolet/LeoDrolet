@@ -210,60 +210,57 @@ const SectionHead = ({ num, kicker, title, right }) => {
 const PLANS = [
   {
     id: "essentiel",
-    title: "Essentiel",
-    price: "300",
-    subtitle: "Présence en ligne. Appels entrants.",
-    features: [
-      "Site jusqu'à 5 pages",
-      "Domaine inclus (valeur 20 $/an)",
-      "Hébergement haute performance inclus",
-      "Formulaire de contact",
-      "Optimisation mobile (100 % responsive)",
-      "SEO local de base (Google, carte, fiche)",
-      "1 heure de modifications / mois",
-      "Temps de réponse < 48 h",
-    ],
+    tier: "Essentiel",
+    price: "300 $",
+    bestFor: "Présence en ligne. Appels entrants.",
     featured: false,
     badge: null,
+    benefits: [
+      { text: "Domaine + hébergement inclus", checked: true },
+      { text: "Optimisation mobile (100 % responsive)", checked: true },
+      { text: "Formulaire de contact", checked: true },
+      { text: "SEO local de base (Google, carte, fiche)", checked: true },
+      { text: "1 heure de modifications / mois", checked: true },
+      { text: "Formulaires avancés (devis, soumissions)", checked: false },
+      { text: "Rapport mensuel de performance", checked: false },
+      { text: "Support prioritaire — réponse < 4 h", checked: false },
+    ],
   },
   {
     id: "pro",
-    title: "Professionnel",
-    price: "450",
-    subtitle: "La meilleure valeur pour la majorité des PME.",
-    features: [
-      "Site jusqu'à 10 pages",
-      "Domaine inclus",
-      "Hébergement inclus",
-      "Formulaires avancés (soumissions, devis)",
-      "SEO local avancé + Google Business optimisé",
-      "2 révisions / mois",
-      "2 heures de modifications / mois",
-      "Rapport mensuel de performance",
-      "Temps de réponse < 24 h",
-    ],
+    tier: "Professionnel",
+    price: "450 $",
+    bestFor: "La meilleure valeur pour la majorité des PME.",
     featured: true,
     badge: "Le plus populaire",
+    benefits: [
+      { text: "Domaine + hébergement inclus", checked: true },
+      { text: "Optimisation mobile (100 % responsive)", checked: true },
+      { text: "Formulaires avancés (devis, soumissions)", checked: true },
+      { text: "SEO avancé + Google Business optimisé", checked: true },
+      { text: "2 heures de modifications / mois", checked: true },
+      { text: "Rapport mensuel de performance", checked: true },
+      { text: "Temps de réponse < 24 h", checked: true },
+      { text: "Support prioritaire — réponse < 4 h", checked: false },
+    ],
   },
   {
     id: "premium",
-    title: "Premium",
-    price: "700",
-    subtitle: "L'arsenal complet pour l'entreprise qui veut tout.",
-    features: [
-      "Pages illimitées",
-      "Domaine inclus",
-      "Hébergement inclus",
-      "Formulaires + intégrations (CRM, email, etc.)",
-      "SEO avancé + suivi de positionnement mensuel",
-      "Révisions illimitées",
-      "4 heures de modifications / mois",
-      "Rapport mensuel détaillé avec recommandations",
-      "Support prioritaire — réponse garantie < 4 h",
-      "Appel stratégique mensuel (30 min)",
-    ],
+    tier: "Premium",
+    price: "700 $",
+    bestFor: "L'arsenal complet pour l'entreprise qui veut tout.",
     featured: false,
     badge: null,
+    benefits: [
+      { text: "Domaine + hébergement inclus", checked: true },
+      { text: "Optimisation mobile (100 % responsive)", checked: true },
+      { text: "Formulaires + intégrations (CRM, email, etc.)", checked: true },
+      { text: "SEO avancé + suivi de positionnement mensuel", checked: true },
+      { text: "4 heures de modifications / mois", checked: true },
+      { text: "Rapport mensuel + recommandations", checked: true },
+      { text: "Révisions illimitées", checked: true },
+      { text: "Support prioritaire — réponse < 4 h", checked: true },
+    ],
   },
 ];
 
@@ -273,37 +270,45 @@ const PRICING_STATS = [
   { value: "7–28 jours", label: "Délai de livraison" },
 ];
 
+const Benefit = ({ text, checked }) => (
+  <div className="benefit-row">
+    <span className={`benefit-icon${checked ? " benefit-icon--check" : " benefit-icon--x"}`}>
+      {checked ? "✓" : "✕"}
+    </span>
+    <span className={`benefit-text${checked ? "" : " benefit-text--muted"}`}>{text}</span>
+  </div>
+);
+
 const PlanCard = ({ plan, i }) => (
-  <m.article
-    className={`plan-card${plan.featured ? " plan-card--featured" : ""}`}
-    initial={{ opacity: 0, y: 32 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, amount: 0.12 }}
-    transition={{ duration: 0.65, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+  <m.div
+    initial={{ filter: "blur(2px)", opacity: 0 }}
+    whileInView={{ filter: "blur(0px)", opacity: 1 }}
+    viewport={{ once: true, amount: 0.1 }}
+    transition={{ duration: 0.5, ease: "easeInOut", delay: 0.1 + i * 0.12 }}
+    style={{ height: "100%" }}
   >
-    <div className="plan-card-top">
-      <span className="plan-num">0{i + 1} / 03</span>
-      {plan.badge && <span className="plan-badge">{plan.badge}</span>}
+    <div className={`plan-card${plan.featured ? " plan-card--featured" : ""}`}>
+      <div className="plan-card-header">
+        <div className="plan-card-top">
+          <span className="plan-tier">{plan.tier}</span>
+          {plan.badge && <span className="plan-badge">{plan.badge}</span>}
+        </div>
+        <span className="plan-amount">{plan.price}</span>
+        <p className="plan-best-for">{plan.bestFor}</p>
+      </div>
+      <div className="plan-benefits">
+        {plan.benefits.map((b, j) => (
+          <Benefit key={j} text={b.text} checked={b.checked} />
+        ))}
+      </div>
+      <a
+        href="mailto:leo_drolet@noviostudio.online"
+        className={`btn plan-cta${plan.featured ? " plan-cta--featured" : ""}`}
+      >
+        Démarrer mon projet <span className="arrow">&#8594;</span>
+      </a>
     </div>
-    <h3 className="plan-title">{plan.title}</h3>
-    <p className="plan-subtitle">{plan.subtitle}</p>
-    <div className="plan-price-block">
-      <span className="plan-amount">{plan.price}</span>
-      <div className="plan-price-meta">$ · mensuel</div>
-    </div>
-    <ul className="plan-features">
-      {plan.features.map((f) => (
-        <li key={f}><span className="plan-plus">+</span>{f}</li>
-      ))}
-    </ul>
-    <a
-      href="mailto:leo_drolet@noviostudio.online"
-      className={`btn plan-cta${plan.featured ? " plan-cta--featured" : ""}`}
-    >
-      Démarrer mon projet <span className="arrow">&#8594;</span>
-    </a>
-    <p className="plan-note">Engagement 3 mois · Sans frais cachés</p>
-  </m.article>
+  </m.div>
 );
 
 const Services = () => {
