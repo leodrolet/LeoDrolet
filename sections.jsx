@@ -344,10 +344,10 @@ const Services = () => {
 
 // ====================== PORTFOLIO — FOUNDER SLOTS ======================
 const SLOTS = [
-{ n: "01", status: "Disponible", title: "Couvreur ou entreprise de toiture", sub: "— secteur Gatineau / Hull / Aylmer", deal: "−20% fondateur" },
-{ n: "02", status: "Disponible", title: "Plombier ou technicien HVAC", sub: "— services résidentiels Outaouais", deal: "−20% fondateur" },
-{ n: "03", status: "Disponible", title: "Paysagiste ou entrepreneur paysagement", sub: "— Gatineau · Ottawa · Cantley", deal: "−20% fondateur" },
-{ n: "04", status: "Disponible", title: "Entrepreneur général ou rénovateur", sub: "— cuisine · salle de bain · sous-sol", deal: "−20% fondateur" }];
+{ n: "01", status: "Disponible", title: "Couvreur ou entreprise de toiture", sub: "— secteur Gatineau / Hull / Aylmer" },
+{ n: "02", status: "Disponible", title: "Plombier ou technicien HVAC", sub: "— services résidentiels Outaouais" },
+{ n: "03", status: "Disponible", title: "Paysagiste ou entrepreneur paysagement", sub: "— Gatineau · Ottawa · Cantley" },
+{ n: "04", status: "Disponible", title: "Entrepreneur général ou rénovateur", sub: "— cuisine · salle de bain · sous-sol" }];
 
 
 const Portfolio = () =>
@@ -359,7 +359,7 @@ const Portfolio = () =>
     right="Cohorte fondateur · 04 places" />
 
     <RevealItem className="founders-banner">
-      <div className="big">4 places fondateur — 20% de réduction permanente.</div>
+      <div className="big">4 places fondateur disponibles.</div>
       <div>Votre concurrent n'est pas encore dans notre galerie. Soyez le premier.</div>
     </RevealItem>
     <div className="portfolio">
@@ -382,7 +382,6 @@ const Portfolio = () =>
           <h4>{s.title}<br /><em>{s.sub}</em></h4>
           <div className="slot-bottom">
             <span style={{ color: "var(--mute)" }}>&#8627; réclamer cette place</span>
-            <span className="deal">{s.deal}</span>
           </div>
         </m.article>
     )}

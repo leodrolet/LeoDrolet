@@ -36,7 +36,7 @@ const App = () => {
       <Specs />
 
       <MarqueeRow reverse items={[
-        "Cohorte fondateur · 20% off",
+        "Cohorte fondateur · 04 places",
         "04 places · printemps 2026",
         "Pas d'agence · pas d'intermédiaire",
         "hello@novio.studio",
