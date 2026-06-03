@@ -264,11 +264,6 @@ const PLANS = [
   },
 ];
 
-const PRICING_STATS = [
-  { value: "20+", label: "Entreprises accompagnées" },
-  { value: "+180 %", label: "Trafic moyen généré en 90 jours" },
-  { value: "7–28 jours", label: "Délai de livraison" },
-];
 
 const Benefit = ({ text, checked }) => (
   <div className="benefit-row">
@@ -312,9 +307,7 @@ const PlanCard = ({ plan, i }) => (
 );
 
 const Services = () => {
-  const statsRef    = useReveal();
-  const quoteRef    = useReveal();
-  const whyRef      = useReveal();
+  const whyRef = useReveal();
 
   return (
     <section className="section" id="devis">
@@ -329,25 +322,6 @@ const Services = () => {
         {PLANS.map((plan, i) => (
           <PlanCard key={plan.id} plan={plan} i={i} />
         ))}
-      </div>
-
-      <div className="pricing-stats reveal" ref={statsRef}>
-        {PRICING_STATS.map((s) => (
-          <div key={s.value} className="pricing-stat">
-            <div className="pricing-stat-value">{s.value}</div>
-            <div className="pricing-stat-label">{s.label}</div>
-          </div>
-        ))}
-      </div>
-
-      <div className="pricing-testimonial reveal" ref={quoteRef}>
-        <span className="pricing-aside-label">Témoignage client</span>
-        <div>
-          <blockquote className="pricing-quote">
-            "Nous recevons maintenant 3 à 5 demandes de soumission par semaine depuis la refonte de notre site. Le retour sur investissement est réel."
-          </blockquote>
-          <p className="pricing-quote-author">— Jean-François B., entrepreneur, Gatineau</p>
-        </div>
       </div>
 
       <div className="pricing-why reveal" ref={whyRef}>

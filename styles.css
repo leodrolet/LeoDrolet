@@ -1470,74 +1470,6 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   border-color: var(--ink);
 }
 
-/* ----  Stats  ---- */
-.pricing-stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  margin: 0 var(--gutter);
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-}
-
-.pricing-stat {
-  padding: 28px;
-  border-right: 1px solid var(--line-strong);
-}
-.pricing-stat:last-child { border-right: none; }
-
-.pricing-stat-value {
-  font-family: var(--display);
-  font-size: clamp(40px, 4.5vw, 64px);
-  letter-spacing: -0.03em;
-  line-height: 0.9;
-  color: var(--ink);
-  margin-bottom: 6px;
-}
-
-.pricing-stat-label {
-  font-size: 13px;
-  color: var(--ink-2);
-  line-height: 1.4;
-}
-
-/* ----  Testimonial  ---- */
-.pricing-testimonial {
-  padding: clamp(32px, 5vh, 52px) var(--gutter);
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 32px;
-  align-items: start;
-  border-bottom: 1px solid var(--line);
-}
-
-.pricing-aside-label {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--mute);
-  border-top: 1px solid var(--line-strong);
-  padding-top: 14px;
-}
-
-.pricing-quote {
-  font-family: var(--display);
-  font-style: italic;
-  font-size: clamp(18px, 2.2vw, 26px);
-  line-height: 1.55;
-  color: var(--ink);
-  margin: 0 0 12px;
-}
-
-.pricing-quote-author {
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--mute);
-  margin: 0;
-}
-
 /* ----  Pourquoi mensuel  ---- */
 .pricing-why {
   padding: clamp(32px, 5vh, 52px) var(--gutter);
@@ -1586,8 +1518,6 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   .footer { grid-template-columns: 1fr 1fr; }
   .manifesto-pin { padding: 0 var(--gutter); }
   .plans-grid { grid-template-columns: 1fr; }
-  .pricing-stats { grid-template-columns: 1fr 1fr; }
-  .pricing-testimonial { grid-template-columns: 1fr; gap: 16px; }
   .pricing-why { grid-template-columns: 1fr; gap: 16px; }
 }
 
@@ -1616,9 +1546,6 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   .final-cta .actions { flex-direction: column; align-items: center; }
   .service-card h3 { font-size: clamp(32px, 9vw, 64px); }
   .manifesto-line { font-size: clamp(32px, 9.5vw, 168px); }
-  .pricing-stats { grid-template-columns: 1fr; }
-  .pricing-stat { border-right: none; border-bottom: 1px solid var(--line); }
-  .pricing-stat:last-child { border-bottom: none; }
 }
 
 /* ============================================================
