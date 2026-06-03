@@ -212,39 +212,36 @@ const SectionHead = ({ num, kicker, title, right }) => {
 const SERVICES = [
 {
   n: "01",
-  title: "Starter",
-  subtitle: "Une page. Un message. Des appels.",
-  desc: "La page qui transforme vos visiteurs en appels et soumissions. Design sur mesure, formulaire de contact et hébergement — tout inclus. Opérationnel en 7 jours.",
-  items: ["Visible sur Google", "Formulaire de contact", "Hébergement 1 an inclus", "Parfait sur mobile"],
-  price: "999",
-  delay: "7 jours"
+  title: "Essentiel",
+  subtitle: "Présence en ligne. Appels entrants.",
+  desc: "Le plan de départ pour les indépendants et très petites entreprises. Domaine, hébergement et maintenance — tout inclus, sans surprise.",
+  items: ["Domaine inclus", "Hébergement inclus", "Maintenance de base", "Site vitrine simple"],
+  price: "300",
+  cadence: "/mois",
+  engagement: "Engagement min. 3 mois",
+  badge: null
 },
 {
   n: "02",
-  title: "Présence",
-  subtitle: "Votre vitrine. Votre crédibilité. Vos clients.",
-  desc: "Pour les couvreurs qui veulent dominer leur secteur local. Cinq pages pensées pour générer des soumissions de toiture — bardeaux, tôle, membrane, résidentiel et commercial. SEO local, design 100% sur mesure.",
-  items: ["Classé sur Google local", "Jusqu'à 5 pages", "3 révisions incluses", "Support 30 jours"],
-  price: "1 899",
-  delay: "2–3 semaines"
+  title: "Professionnel",
+  subtitle: "La meilleure valeur pour la majorité des PME.",
+  desc: "Pour les contractors qui veulent des leads réguliers. Tout ce qu'Essentiel inclut, plus 2 révisions par mois et SEO de base pour dominer ta ville.",
+  items: ["Tout le plan Essentiel", "2 révisions par mois", "SEO de base", "Idéal PME locales"],
+  price: "450",
+  cadence: "/mois",
+  engagement: "Engagement min. 3 mois",
+  badge: "Meilleure valeur"
 },
 {
   n: "03",
-  title: "Résurrection",
-  subtitle: "Votre vieux site — transformé en machine à leads.",
-  desc: "Site lent ou daté ? On préserve votre SEO existant, on change tout le reste. Vitesse ×10, redirections propres, trafic intact.",
-  items: ["SEO existant préservé", "Vitesse ×10 garantie", "Migration de contenu", "Support 30 jours"],
-  price: "3 699",
-  delay: "2–4 semaines"
-},
-{
-  n: "04",
-  title: "Domination",
-  subtitle: "L'arsenal complet pour le couvreur qui veut être le #1 sur Google à Gatineau et Ottawa.",
-  desc: "CMS, blog, intégrations avancées. Quand votre site devient votre meilleur employé — disponible 24h/24.",
-  items: ["CMS modifiable sans technicien", "Blog + intégrations API", "SEO avancé", "Support 60 jours"],
-  price: "4 299",
-  delay: "2–3 semaines"
+  title: "Premium",
+  subtitle: "L'arsenal complet pour l'entreprise qui veut tout.",
+  desc: "Tout ce que Pro inclut, plus boutique en ligne, SEO avancé, support prioritaire et analytiques poussées. Quand votre site devient votre meilleur employé.",
+  items: ["Tout le plan Pro", "Boutique en ligne (e-commerce)", "SEO avancé", "Support prioritaire", "Analytiques poussées"],
+  price: "700",
+  cadence: "/mois",
+  engagement: "Engagement min. 3 mois",
+  badge: null
 }];
 
 
@@ -255,14 +252,14 @@ const Services = () => {
 
   return (
     <section className="section" id="services">
-      <SectionHead num="01" kicker="Services" title={<>Quatre offres. <em style={{ fontStyle: "italic", color: "var(--ink-2)" }}>Zéro flou.</em></>} right="Tarifs ferme · devis 24h" />
+      <SectionHead num="01" kicker="Services" title={<>Trois plans. <em style={{ fontStyle: "italic", color: "var(--ink-2)" }}>Tout inclus.</em></>} right="Engagement 3 mois · préavis 30 jours" />
       <div className="services-layout">
         <nav className="services-nav">
           {SERVICES.map((s) =>
             <button key={s.n} className="svc-nav-item" onClick={() => scrollToService(s.n)}>
               <span className="svc-nav-num">{s.n}</span>
               <span className="svc-nav-title">{s.title}</span>
-              <span className="svc-nav-price">{s.price} $</span>
+              <span className="svc-nav-price">{s.price} $/mois</span>
             </button>
           )}
         </nav>
@@ -277,7 +274,7 @@ const Services = () => {
               viewport={{ once: true, amount: 0.15 }}
               transition={{ duration: 0.75, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
             >
-              <div className="idx">{s.n} / 04</div>
+              <div className="idx">{s.n} / 03</div>
               <div>
                 <h3>{s.title}<br /><em>{s.subtitle}</em></h3>
                 <p className="desc">{s.desc}</p>
@@ -287,9 +284,10 @@ const Services = () => {
                 </a>
               </div>
               <div className="price-block">
-                <div className="mono" style={{ fontSize: 10, letterSpacing: "0.16em", color: "var(--mute)", textTransform: "uppercase" }}>à partir de</div>
-                <div className="price">{s.price}<span style={{ fontSize: "0.4em", color: "var(--ink-2)", marginLeft: 6 }}>$</span></div>
-                <div className="delay">Livré en {s.delay}</div>
+                {s.badge && <div className="mono" style={{ fontSize: 10, letterSpacing: "0.16em", color: "var(--accent)", textTransform: "uppercase", marginBottom: 4 }}>{s.badge}</div>}
+                <div className="mono" style={{ fontSize: 10, letterSpacing: "0.16em", color: "var(--mute)", textTransform: "uppercase" }}>mensuel</div>
+                <div className="price">{s.price}<span style={{ fontSize: "0.4em", color: "var(--ink-2)", marginLeft: 6 }}>$/mois</span></div>
+                <div className="delay">{s.engagement}</div>
               </div>
             </m.article>
           )}
@@ -304,10 +302,10 @@ const Services = () => {
 
 // ====================== PORTFOLIO — FOUNDER SLOTS ======================
 const SLOTS = [
-{ n: "01", status: "Disponible", title: "Couvreur résidentiel — bardeaux et tôle", sub: "— secteur Gatineau / Hull", deal: "−20% fondateur" },
-{ n: "02", status: "Disponible", title: "Couvreur résidentiel — toiture plate et membrane", sub: "— secteur Aylmer / Buckingham", deal: "−20% fondateur" },
-{ n: "03", status: "Disponible", title: "Couvreur commercial ou industriel", sub: "— Ottawa / Kanata / Orléans", deal: "−20% fondateur" },
-{ n: "04", status: "Disponible", title: "Couvreur ou entrepreneur général", sub: "— Cantley / Chelsea / Outaouais rural", deal: "−20% fondateur" }];
+{ n: "01", status: "Disponible", title: "Couvreur ou entreprise de toiture", sub: "— secteur Gatineau / Hull / Aylmer", deal: "−20% fondateur" },
+{ n: "02", status: "Disponible", title: "Plombier ou technicien HVAC", sub: "— services résidentiels Outaouais", deal: "−20% fondateur" },
+{ n: "03", status: "Disponible", title: "Paysagiste ou entrepreneur paysagement", sub: "— Gatineau · Ottawa · Cantley", deal: "−20% fondateur" },
+{ n: "04", status: "Disponible", title: "Entrepreneur général ou rénovateur", sub: "— cuisine · salle de bain · sous-sol", deal: "−20% fondateur" }];
 
 
 const Portfolio = () =>
@@ -361,7 +359,7 @@ const AboutBody = () => {
   return (
     <div className="about-body reveal" ref={ref}>
       <p>
-        Bonjour. Je suis <em>Léo</em>. J'ai monté ce studio à Gatineau pour une raison simple : les couvreurs de l'Outaouais méritent des sites à la hauteur de leur travail — un couvreur avec un bon site reçoit des soumissions pendant qu'il est sur un toit, pas seulement par bouche-à-oreille.
+        Bonjour. Je suis <em>Léo</em>. J'ai monté ce studio à Gatineau pour une raison simple : les contractors de l'Outaouais méritent des sites à la hauteur de leur travail — un plombier, couvreur ou paysagiste avec un bon site reçoit des soumissions pendant qu'il travaille, pas seulement par bouche-à-oreille.
       </p>
       <p>
         Pas un template <em>recyclé.</em> Pas une agence à 50K. Du sur-mesure, livré en quelques semaines, par la personne qui te répond au téléphone.
@@ -405,7 +403,7 @@ const FAQS = [
 { q: "Et si j'ai déjà un logo ou une identité visuelle ?", a: "Parfait — je travaille avec. Si tu n'en as pas, on peut en créer une minimaliste ensemble dans le cadre du projet, ou je te recommande un graphiste de la région." },
 { q: "Travailles-tu à distance ou en personne ?", a: "Les deux. Premier appel en visio ou en personne (café offert à Gatineau ou Ottawa). Build à distance avec liens live. Formation finale en personne si tu préfères." },
 { q: "Et si je veux modifier le site moi-même après ?", a: "Avec l'offre Site Complet, tu reçois un CMS pour tout modifier sans toucher au code. Avec les autres offres, modifications mineures incluses 30 jours, puis 75$/h après." },
-{ q: "Je suis couvreur, pas technicien — est-ce que je vais comprendre comment gérer mon site ?", a: "Oui. C'est exactement pourquoi je reste 30 à 60 jours après le lancement. Je te montre comment mettre à jour ton contenu, ajouter des photos de projets, et répondre aux soumissions. Pas de jargon technique — tu apprends ce dont tu as besoin, rien de plus." },
+{ q: "Je suis contractor, pas technicien — est-ce que je vais comprendre comment gérer mon site ?", a: "Oui. C'est exactement pourquoi je reste 30 à 60 jours après le lancement. Je te montre comment mettre à jour ton contenu, ajouter des photos de projets, et répondre aux soumissions. Pas de jargon technique — tu apprends ce dont tu as besoin, rien de plus." },
 { q: "Mon téléphone sonne déjà par bouche-à-oreille, pourquoi aurais-je besoin d'un site ?", a: "Parce que ton prochain client te cherche sur Google avant même de t'appeler. S'il ne te trouve pas, il appelle ton concurrent. Un site bien fait capte ces leads que tu ne savais même pas que tu perdais." }];
 
 
@@ -435,7 +433,7 @@ const FinalCTA = () => {
     <section className="final-cta" id="cta-final">
       <div className="reveal" ref={ref}>
         <div className="huge">
-          Prochain couvreur dans la galerie — <em>toi.</em>
+          Prochain contractor dans la galerie — <em>toi.</em>
         </div>
         <div className="actions">
           <a className="btn btn-accent" href="#devis">Réserver mon créneau <span className="arrow">&#8594;</span></a>
@@ -524,7 +522,7 @@ const Footer = () => {
     </footer>
     <div className="footer-bot">
       <span>© 2026 Novio Studio</span>
-      <span className="mono" style={{ letterSpacing:".14em" }}>Spécialité · Toiture résidentielle · Bardeaux · Tôle · Membrane · Toiture plate · Couvreurs · Gatineau · Hull · Aylmer · Ottawa · Outaouais</span>
+      <span className="mono" style={{ letterSpacing:".14em" }}>Secteurs · Toiture · HVAC · Plomberie · Paysagement · Rénovation · Entrepreneur général · Gatineau · Hull · Aylmer · Ottawa · Outaouais</span>
       <span>v1.0 · cohorte fondateur</span>
     </div>
 
