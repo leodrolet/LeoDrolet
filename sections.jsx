@@ -214,7 +214,7 @@ const SERVICES = [
   n: "01",
   title: "Starter",
   subtitle: "Une page. Un message. Des appels.",
-  desc: "La page qui transforme vos visiteurs en clients. Design sur mesure, formulaire et hébergement — tout inclus. Opérationnel en 7 jours.",
+  desc: "La page qui transforme vos visiteurs en appels et soumissions. Design sur mesure, formulaire de contact et hébergement — tout inclus. Opérationnel en 7 jours.",
   items: ["Visible sur Google", "Formulaire de contact", "Hébergement 1 an inclus", "Parfait sur mobile"],
   price: "999",
   delay: "7 jours"
@@ -223,7 +223,7 @@ const SERVICES = [
   n: "02",
   title: "Présence",
   subtitle: "Votre vitrine. Votre crédibilité. Vos clients.",
-  desc: "Pour artisans, restos, cliniques. Cinq pages pensées pour convertir, SEO local, design 100% sur mesure.",
+  desc: "Pour les entrepreneurs en rénovation, plombiers, électriciens et couvreurs. Cinq pages pensées pour générer des soumissions, SEO local, design 100% sur mesure.",
   items: ["Classé sur Google local", "Jusqu'à 5 pages", "3 révisions incluses", "Support 30 jours"],
   price: "1 899",
   delay: "2–3 semaines"
@@ -240,7 +240,7 @@ const SERVICES = [
 {
   n: "04",
   title: "Domination",
-  subtitle: "L'arsenal complet pour la PME qui domine sa niche.",
+  subtitle: "L'arsenal complet pour l'entrepreneur qui domine son secteur.",
   desc: "CMS, blog, intégrations avancées. Quand votre site devient votre meilleur employé — disponible 24h/24.",
   items: ["CMS modifiable sans technicien", "Blog + intégrations API", "SEO avancé", "Support 60 jours"],
   price: "4 299",
@@ -304,10 +304,10 @@ const Services = () => {
 
 // ====================== PORTFOLIO — FOUNDER SLOTS ======================
 const SLOTS = [
-{ n: "01", status: "Disponible", title: "Restaurant ou café", sub: "— prochain projet 2026", deal: "−20% fondateur" },
-{ n: "02", status: "Disponible", title: "Clinique ou cabinet", sub: "— santé / pro services", deal: "−20% fondateur" },
-{ n: "03", status: "Disponible", title: "Artisan ou boutique", sub: "— commerce local", deal: "−20% fondateur" },
-{ n: "04", status: "Disponible", title: "Service B2B local", sub: "— immobilier / juridique / autre", deal: "−20% fondateur" }];
+{ n: "01", status: "Disponible", title: "Entrepreneur général ou rénovateur", sub: "— prochain projet 2026", deal: "−20% fondateur" },
+{ n: "02", status: "Disponible", title: "Plombier ou électricien", sub: "— services résidentiels", deal: "−20% fondateur" },
+{ n: "03", status: "Disponible", title: "Couvreur, paysagiste ou peintre", sub: "— extérieur / finition", deal: "−20% fondateur" },
+{ n: "04", status: "Disponible", title: "Service B2B local", sub: "— fournisseur ou sous-traitant construction", deal: "−20% fondateur" }];
 
 
 const Portfolio = () =>
@@ -361,7 +361,7 @@ const AboutBody = () => {
   return (
     <div className="about-body reveal" ref={ref}>
       <p>
-        Bonjour. Je suis <em>Léo</em>. J'ai monté ce studio à Gatineau pour une raison simple : les PME d'ici méritent des sites à la hauteur de leur travail.
+        Bonjour. Je suis <em>Léo</em>. J'ai monté ce studio à Gatineau pour une raison simple : les entrepreneurs en construction et rénovation de l'Outaouais méritent des sites à la hauteur de leur travail — pas un template Wix, pas une agence à 50K.
       </p>
       <p>
         Pas un template <em>recyclé.</em> Pas une agence à 50K. Du sur-mesure, livré en quelques semaines, par la personne qui te répond au téléphone.
@@ -433,13 +433,13 @@ const FinalCTA = () => {
     <section className="final-cta" id="cta-final">
       <div className="reveal" ref={ref}>
         <div className="huge">
-          Prochain client — <em>le tien.</em>
+          Prochain entrepreneur dans la galerie — <em>toi.</em>
         </div>
         <div className="actions">
           <a className="btn btn-accent" href="#devis">Réserver mon créneau <span className="arrow">&#8594;</span></a>
           <a className="btn" href="mailto:leo_drolet@noviostudio.online">leo_drolet@noviostudio.online</a>
         </div>
-        <div className="small">Premier appel · 15 min · gratuit · café offert à Gatineau / Ottawa</div>
+        <div className="small">Premier appel · 15 min · gratuit · on parle chiffres, pas jargon</div>
       </div>
     </section>);
 
@@ -522,7 +522,7 @@ const Footer = () => {
     </footer>
     <div className="footer-bot">
       <span>© 2026 Novio Studio</span>
-      <span className="mono" style={{ letterSpacing:".14em" }}>Zones desservies · Gatineau · Hull · Aylmer · Ottawa · Kanata · Orléans · Outaouais</span>
+      <span className="mono" style={{ letterSpacing:".14em" }}>Secteurs · Rénovation · Construction · Plomberie · Électricité · Toiture · Paysagement · Peinture · Gatineau · Ottawa · Outaouais</span>
       <span>v1.0 · cohorte fondateur</span>
     </div>
 

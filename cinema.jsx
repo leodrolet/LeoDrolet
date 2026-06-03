@@ -42,7 +42,7 @@ const MANIFESTO_LINES = [
   ["Pas un", "template"],
   ["Pas une", "dépense"],
   ["Pas un", "intermédiaire"],
-  ["Un site qui", "convertit."],
+  ["Un site qui", "génère des soumissions."],
 ];
 
 const Manifesto = () => {

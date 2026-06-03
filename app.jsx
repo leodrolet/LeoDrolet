@@ -24,7 +24,8 @@ const App = () => {
       <Manifesto />
 
       <MarqueeRow items={[
-        "Plus de clients locaux",
+        "Plus de contrats",
+        "Entrepreneurs · Rénovation · Construction",
         "Gatineau · Ottawa · Outaouais",
         "Dès 999 $ CAD",
         "Livré en 7–28 jours",
