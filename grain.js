@@ -17,10 +17,29 @@
     }
     tiles.push(img);
   }
+
+  // Neutralise the grain over the portrait (overlay at 128/255 = no-op).
+  function clearPortrait() {
+    const el = document.querySelector('.about-portrait');
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    const sx = SIZE / window.innerWidth;
+    const sy = SIZE / window.innerHeight;
+    ctx.fillStyle = 'rgb(128,128,128)';
+    ctx.fillRect(
+      Math.floor(r.left * sx),
+      Math.floor(r.top  * sy),
+      Math.ceil(r.width  * sx) + 1,
+      Math.ceil(r.height * sy) + 1
+    );
+  }
+
   let idx = 0;
   ctx.putImageData(tiles[0], 0, 0);
+  clearPortrait();
   setInterval(() => {
     idx = (idx + 1) % tiles.length;
     ctx.putImageData(tiles[idx], 0, 0);
+    clearPortrait();
   }, 110);
 })();
