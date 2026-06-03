@@ -1409,6 +1409,15 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   margin-bottom: 12px;
 }
 
+.plan-amount-unit {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--mute);
+  vertical-align: super;
+  margin-left: 4px;
+}
 .plan-best-for {
   font-size: 13px;
   line-height: 1.5;

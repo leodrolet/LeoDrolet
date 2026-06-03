@@ -288,7 +288,7 @@ const PlanCard = ({ plan, i }) => (
           <span className="plan-tier">{plan.tier}</span>
           {plan.badge && <span className="plan-badge">{plan.badge}</span>}
         </div>
-        <span className="plan-amount">{plan.price}</span>
+        <span className="plan-amount">{plan.price}<sup className="plan-amount-unit">/mois</sup></span>
         <p className="plan-best-for">{plan.bestFor}</p>
       </div>
       <div className="plan-benefits">
