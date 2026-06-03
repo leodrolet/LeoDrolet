@@ -216,7 +216,7 @@ const PLANS = [
     featured: false,
     badge: null,
     benefits: [
-      { text: "Domaine + hébergement inclus", checked: true },
+      { text: "Jusqu'à 5 pages", checked: true },
       { text: "Optimisation mobile (100 % responsive)", checked: true },
       { text: "Formulaire de contact", checked: true },
       { text: "SEO local de base (Google, carte, fiche)", checked: true },
@@ -234,7 +234,7 @@ const PLANS = [
     featured: true,
     badge: "Le plus populaire",
     benefits: [
-      { text: "Domaine + hébergement inclus", checked: true },
+      { text: "Jusqu'à 10 pages", checked: true },
       { text: "Optimisation mobile (100 % responsive)", checked: true },
       { text: "Formulaires avancés (devis, soumissions)", checked: true },
       { text: "SEO avancé + Google Business optimisé", checked: true },
@@ -252,7 +252,7 @@ const PLANS = [
     featured: false,
     badge: null,
     benefits: [
-      { text: "Domaine + hébergement inclus", checked: true },
+      { text: "Pages illimitées", checked: true },
       { text: "Optimisation mobile (100 % responsive)", checked: true },
       { text: "Formulaires + intégrations (CRM, email, etc.)", checked: true },
       { text: "SEO avancé + suivi de positionnement mensuel", checked: true },
@@ -317,6 +317,8 @@ const Services = () => {
         title={<>Trois forfaits. <em style={{ fontStyle: "italic", color: "var(--ink-2)" }}>Tout inclus.</em></>}
         right="Engagement 3 mois · préavis 30 jours · aucun frais caché"
       />
+
+      <p className="plans-global-note">Domaine et hébergement inclus dans tous les forfaits.</p>
 
       <div className="plans-grid">
         {PLANS.map((plan, i) => (
