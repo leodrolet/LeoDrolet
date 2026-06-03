@@ -871,32 +871,6 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   border: 1px solid var(--line);
   overflow: hidden;
 }
-/* Cinematic registration marks at the four corners. */
-.about-portrait::before,
-.about-portrait::after {
-  content: "";
-  position: absolute;
-  left: 12px; right: 12px;
-  height: 14px;
-  pointer-events: none;
-  z-index: 2;
-}
-.about-portrait::before {
-  top: 12px;
-  background:
-    linear-gradient(var(--accent), var(--accent)) left top / 14px 1px no-repeat,
-    linear-gradient(var(--accent), var(--accent)) left top / 1px 14px no-repeat,
-    linear-gradient(var(--accent), var(--accent)) right top / 14px 1px no-repeat,
-    linear-gradient(var(--accent), var(--accent)) right top / 1px 14px no-repeat;
-}
-.about-portrait::after {
-  bottom: 12px;
-  background:
-    linear-gradient(var(--accent), var(--accent)) left bottom / 14px 1px no-repeat,
-    linear-gradient(var(--accent), var(--accent)) left bottom / 1px 14px no-repeat,
-    linear-gradient(var(--accent), var(--accent)) right bottom / 14px 1px no-repeat,
-    linear-gradient(var(--accent), var(--accent)) right bottom / 1px 14px no-repeat;
-}
 .about-portrait .ph {
   position: absolute; inset: 0;
   background:
