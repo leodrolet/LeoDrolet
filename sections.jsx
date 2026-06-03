@@ -18,13 +18,23 @@ const RevealItem = ({ as: Tag = "div", className = "", style = {}, delay = 0, ch
 
 // ====================== NAV ======================
 const Nav = ({ headline }) => {
-  const scrolled = useScrolled(40);
+  const [pastHero, setPastHero] = React.useState(false);
+  React.useEffect(() => {
+    const hero = document.getElementById('top');
+    if (!hero) return;
+    const obs = new IntersectionObserver(
+      ([e]) => setPastHero(!e.isIntersecting),
+      { threshold: 0 }
+    );
+    obs.observe(hero);
+    return () => obs.disconnect();
+  }, []);
   const clock = useClock();
   const [menuOpen, setMenuOpen] = React.useState(false);
   const close = () => setMenuOpen(false);
   return (
     <React.Fragment>
-      <nav className={`nav ${scrolled ? "scrolled" : ""}`} style={{ opacity: "1" }}>
+      <nav className={`nav ${pastHero ? "scrolled" : ""}`} style={{ opacity: "1" }}>
         <a href="#top" className="brand">
           <span className="dot"></span>
           novio<span style={{ fontStyle: "italic", color: "var(--ink-2)" }}>.studio</span>
