@@ -61,14 +61,6 @@
       <option name="presentableId" value="Default" />
       <updated>1779201719557</updated>
     </task>
-    <task id="LOCAL-00099" summary="feat: orange color scheme + fix process timeline line">
-      <option name="closed" value="true" />
-      <created>1779997420793</created>
-      <option name="number" value="00099" />
-      <option name="presentableId" value="LOCAL-00099" />
-      <option name="project" value="LOCAL" />
-      <updated>1779997420793</updated>
-    </task>
     <task id="LOCAL-00100" summary="feat: orange color scheme + fix process timeline line">
       <option name="closed" value="true" />
       <created>1779997717331</created>
@@ -453,7 +445,15 @@
       <option name="project" value="LOCAL" />
       <updated>1780454347336</updated>
     </task>
-    <option name="localTasksCounter" value="148" />
+    <task id="LOCAL-00148" summary="Google">
+      <option name="closed" value="true" />
+      <created>1780454880697</created>
+      <option name="number" value="00148" />
+      <option name="presentableId" value="LOCAL-00148" />
+      <option name="project" value="LOCAL" />
+      <updated>1780454880698</updated>
+    </task>
+    <option name="localTasksCounter" value="149" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
