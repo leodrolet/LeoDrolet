@@ -208,90 +208,151 @@ const SectionHead = ({ num, kicker, title, right }) => {
 
 };
 
-// ====================== SERVICES ======================
-const SERVICES = [
-{
-  n: "01",
-  title: "Essentiel",
-  subtitle: "Présence en ligne. Appels entrants.",
-  desc: "Le plan de départ pour les indépendants et très petites entreprises. Domaine, hébergement et maintenance — tout inclus, sans surprise.",
-  items: ["Domaine inclus", "Hébergement inclus", "Maintenance de base", "Site vitrine simple", "Idéal pour indépendants et très petites entreprises"],
-  price: "300",
-  cadence: "/mois",
-  engagement: "Engagement min. 3 mois",
-  badge: null
-},
-{
-  n: "02",
-  title: "Professionnel",
-  subtitle: "La meilleure valeur pour la majorité des PME.",
-  desc: "Pour les contractors qui veulent des leads réguliers. Tout ce qu'Essentiel inclut, plus 2 révisions par mois et SEO de base pour dominer ta ville.",
-  items: ["Tout ce qu'Essentiel inclut", "2 révisions par mois", "SEO de base", "Idéal pour la majorité des PME locales"],
-  price: "450",
-  cadence: "/mois",
-  engagement: "Engagement min. 3 mois",
-  badge: "Meilleure valeur"
-},
-{
-  n: "03",
-  title: "Premium",
-  subtitle: "L'arsenal complet pour l'entreprise qui veut tout.",
-  desc: "Tout ce que Pro inclut, plus boutique en ligne, SEO avancé, support prioritaire et analytiques poussées. Quand votre site devient votre meilleur employé.",
-  items: ["Tout ce que Pro inclut", "Boutique en ligne (e-commerce)", "SEO avancé", "Support prioritaire", "Analytiques poussées", "Idéal pour les entreprises qui veulent tout"],
-  price: "700",
-  cadence: "/mois",
-  engagement: "Engagement min. 3 mois",
-  badge: null
-}];
+// ====================== PRICING (FORFAITS) ======================
+const GOLD = "#b8973a";
 
+const PLANS = [
+  {
+    id: "essentiel",
+    title: "Essentiel",
+    price: "300",
+    subtitle: "Présence en ligne. Appels entrants.",
+    features: [
+      "Site jusqu'à 5 pages",
+      "Domaine inclus (valeur 20 $/an)",
+      "Hébergement haute performance inclus",
+      "Formulaire de contact",
+      "Optimisation mobile (100 % responsive)",
+      "SEO local de base (Google, carte, fiche)",
+      "1 heure de modifications / mois",
+      "Temps de réponse < 48 h",
+    ],
+    featured: false,
+    badge: null,
+  },
+  {
+    id: "pro",
+    title: "Professionnel",
+    price: "450",
+    subtitle: "La meilleure valeur pour la majorité des PME.",
+    features: [
+      "Site jusqu'à 10 pages",
+      "Domaine inclus",
+      "Hébergement inclus",
+      "Formulaires avancés (soumissions, devis)",
+      "SEO local avancé + Google Business optimisé",
+      "2 révisions / mois",
+      "2 heures de modifications / mois",
+      "Rapport mensuel de performance",
+      "Temps de réponse < 24 h",
+    ],
+    featured: true,
+    badge: "Le plus populaire",
+  },
+  {
+    id: "premium",
+    title: "Premium",
+    price: "700",
+    subtitle: "L'arsenal complet pour l'entreprise qui veut tout.",
+    features: [
+      "Pages illimitées",
+      "Domaine inclus",
+      "Hébergement inclus",
+      "Formulaires + intégrations (CRM, email, etc.)",
+      "SEO avancé + suivi de positionnement mensuel",
+      "Révisions illimitées",
+      "4 heures de modifications / mois",
+      "Rapport mensuel détaillé avec recommandations",
+      "Support prioritaire — réponse garantie < 4 h",
+      "Appel stratégique mensuel (30 min)",
+    ],
+    featured: false,
+    badge: null,
+  },
+];
+
+const PRICING_STATS = [
+  { value: "20+", label: "Entreprises accompagnées" },
+  { value: "+180 %", label: "Trafic moyen généré en 90 jours" },
+  { value: "7–28 jours", label: "Délai de livraison" },
+];
+
+const PlanCard = ({ plan, i }) => (
+  <m.article
+    className={`plan-card${plan.featured ? " plan-card--featured" : ""}`}
+    initial={{ opacity: 0, y: 40 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, amount: 0.1 }}
+    transition={{ duration: 0.7, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+  >
+    {plan.badge && (
+      <div className="plan-badge">{plan.badge}</div>
+    )}
+    <h3 className="plan-title">{plan.title}</h3>
+    <p className="plan-subtitle">{plan.subtitle}</p>
+    <div className="plan-price-row">
+      <span className="plan-amount">{plan.price} $</span>
+      <span className="plan-cadence">/mois</span>
+    </div>
+    <ul className="plan-features">
+      {plan.features.map((f) => (
+        <li key={f}>
+          <span className="plan-check">&#10003;</span>
+          <span>{f}</span>
+        </li>
+      ))}
+    </ul>
+    <a href="#devis" className={`btn plan-cta${plan.featured ? " plan-cta--featured" : ""}`}>
+      Démarrer mon projet <span className="arrow">&#8594;</span>
+    </a>
+    <div className="plan-note">Engagement 3 mois · Sans frais cachés</div>
+  </m.article>
+);
 
 const Services = () => {
-  const scrollToService = (n) => {
-    document.getElementById(`service-${n}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
+  const statsRef = useReveal();
+  const testimonialRef = useReveal();
+  const whyRef = useReveal();
 
   return (
     <section className="section" id="services">
-      <SectionHead num="01" kicker="Services" title={<>Trois plans. <em style={{ fontStyle: "italic", color: "var(--ink-2)" }}>Tout inclus.</em></>} right="Engagement 3 mois · préavis 30 jours · aucun frais caché" />
-      <div className="services-layout">
-        <nav className="services-nav">
-          {SERVICES.map((s) =>
-            <button key={s.n} className="svc-nav-item" onClick={() => scrollToService(s.n)}>
-              <span className="svc-nav-num">{s.n}</span>
-              <span className="svc-nav-title">{s.title}</span>
-              <span className="svc-nav-price">{s.price} $/mois</span>
-            </button>
-          )}
-        </nav>
-        <div className="service-stack">
-          {SERVICES.map((s, i) =>
-            <m.article
-              className="service-card"
-              key={s.n}
-              id={`service-${s.n}`}
-              initial={{ opacity: 0, y: 48 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.15 }}
-              transition={{ duration: 0.75, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <div className="idx">{s.n} / 03</div>
-              <div>
-                <h3>{s.title}<br /><em>{s.subtitle}</em></h3>
-                <p className="desc">{s.desc}</p>
-                <ul>{s.items.map((it) => <li key={it}>{it}</li>)}</ul>
-                <a href="#devis" className="btn cta" style={{ marginTop: 20 }}>
-                  Choisir cette offre <span className="arrow">&#8594;</span>
-                </a>
-              </div>
-              <div className="price-block">
-                {s.badge && <div className="mono" style={{ fontSize: 10, letterSpacing: "0.16em", color: "var(--accent)", textTransform: "uppercase", marginBottom: 4 }}>{s.badge}</div>}
-                <div className="mono" style={{ fontSize: 10, letterSpacing: "0.16em", color: "var(--mute)", textTransform: "uppercase" }}>mensuel</div>
-                <div className="price">{s.price}<span style={{ fontSize: "0.4em", color: "var(--ink-2)", marginLeft: 6 }}>$/mois</span></div>
-                <div className="delay">{s.engagement}</div>
-              </div>
-            </m.article>
-          )}
-        </div>
+      <SectionHead
+        num="01"
+        kicker="Services"
+        title={<>Trois forfaits. <em style={{ fontStyle: "italic", color: "var(--ink-2)" }}>Tout inclus.</em></>}
+        right="Engagement 3 mois · préavis 30 jours · aucun frais caché"
+      />
+
+      <div className="plans-grid">
+        {PLANS.map((plan, i) => (
+          <PlanCard key={plan.id} plan={plan} i={i} />
+        ))}
+      </div>
+
+      <div className="pricing-stats reveal" ref={statsRef}>
+        {PRICING_STATS.map((s) => (
+          <div key={s.value} className="pricing-stat">
+            <div className="pricing-stat-value">{s.value}</div>
+            <div className="pricing-stat-label">{s.label}</div>
+          </div>
+        ))}
+      </div>
+
+      <div className="pricing-testimonial reveal" ref={testimonialRef}>
+        <blockquote className="pricing-quote">
+          "Nous recevons maintenant 3 à 5 demandes de soumission par semaine depuis la refonte de notre site. Le retour sur investissement est réel."
+        </blockquote>
+        <div className="pricing-quote-author">— Jean-François B., entrepreneur, Gatineau</div>
+      </div>
+
+      <div className="pricing-why reveal" ref={whyRef}>
+        <div className="pricing-why-title">Pourquoi un abonnement mensuel ?</div>
+        <p className="pricing-why-text">
+          Contrairement aux agences qui facturent 5 000 $ à 15 000 $ d'entrée de jeu,
+          notre modèle mensuel vous permet de lancer sans investissement massif.
+          Chaque mois : votre site est maintenu, sécurisé, mis à jour et optimisé.
+          Vous ne payez pas seulement un site — vous payez un partenaire web actif.
+        </p>
       </div>
     </section>
   );

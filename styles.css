@@ -1320,6 +1320,230 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 }
 
 /* ============================================================
+   Pricing — forfaits grid
+   ============================================================ */
+.plans-grid {
+  padding: 0 var(--gutter);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--col-gap);
+  align-items: start;
+}
+
+.plan-card {
+  position: relative;
+  border: 0.5px solid var(--line-strong);
+  background: var(--bg-2);
+  padding: 28px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.plan-card--featured {
+  border-color: #b8973a;
+  background: var(--bg-3);
+  transform: translateY(-6px);
+}
+
+.plan-badge {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #b8973a;
+  color: #0a0a0a;
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.plan-title {
+  font-family: var(--display);
+  font-size: clamp(28px, 2.8vw, 40px);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin: 0 0 8px;
+  color: var(--ink);
+}
+
+.plan-subtitle {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ink-2);
+  margin: 0 0 20px;
+}
+
+.plan-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  padding: 18px 0;
+  border-top: 0.5px solid var(--line-strong);
+  border-bottom: 0.5px solid var(--line-strong);
+  margin-bottom: 22px;
+}
+
+.plan-amount {
+  font-family: var(--display);
+  font-size: clamp(44px, 4.5vw, 60px);
+  letter-spacing: -0.03em;
+  line-height: 0.92;
+  color: var(--ink);
+}
+
+.plan-cadence {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--ink-2);
+}
+
+.plan-features {
+  list-style: none;
+  margin: 0 0 24px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  flex: 1;
+}
+
+.plan-features li {
+  font-size: 13.5px;
+  color: var(--ink-2);
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  line-height: 1.45;
+}
+
+.plan-check {
+  color: #b8973a;
+  flex-shrink: 0;
+  margin-top: 1px;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.plan-cta {
+  width: 100%;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.plan-cta--featured {
+  background: #b8973a;
+  color: #0a0a0a;
+  border-color: #b8973a;
+}
+.plan-cta--featured:not(:active):hover {
+  background: var(--ink);
+  color: var(--bg);
+  border-color: var(--ink);
+}
+
+.plan-note {
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+
+/* ----  Stats row  ---- */
+.pricing-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  margin: 52px var(--gutter) 0;
+  border-top: 0.5px solid var(--line-strong);
+}
+
+.pricing-stat {
+  padding: 28px 24px;
+  text-align: center;
+  border-right: 0.5px solid var(--line);
+}
+.pricing-stat:last-child { border-right: none; }
+
+.pricing-stat-value {
+  font-family: var(--display);
+  font-size: clamp(40px, 5vw, 64px);
+  letter-spacing: -0.03em;
+  line-height: 0.9;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.pricing-stat-label {
+  font-size: 13px;
+  color: var(--ink-2);
+  max-width: 18ch;
+  margin: 0 auto;
+  line-height: 1.4;
+}
+
+/* ----  Testimonial  ---- */
+.pricing-testimonial {
+  padding: 40px var(--gutter) 0;
+  text-align: center;
+  max-width: 620px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.pricing-quote {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: clamp(17px, 2vw, 22px);
+  line-height: 1.6;
+  color: var(--ink);
+  margin: 0 0 14px;
+  quotes: "\201C" "\201D";
+}
+
+.pricing-quote-author {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+
+/* ----  Why monthly  ---- */
+.pricing-why {
+  max-width: 580px;
+  margin: 40px auto 0;
+  padding: 32px var(--gutter);
+  text-align: center;
+  border-top: 0.5px solid #b8973a;
+}
+
+.pricing-why-title {
+  font-family: var(--display);
+  font-size: clamp(20px, 2.2vw, 28px);
+  letter-spacing: -0.01em;
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: 14px;
+}
+
+.pricing-why-text {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--ink-2);
+  margin: 0;
+}
+
+/* ============================================================
    Responsive — tablets (≤900px)
    ============================================================ */
 @media (max-width: 900px) {
@@ -1339,6 +1563,9 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   .estimator-quote { position: relative; top: 0; }
   .footer { grid-template-columns: 1fr 1fr; }
   .manifesto-pin { padding: 0 var(--gutter); }
+  .plans-grid { grid-template-columns: 1fr; }
+  .plan-card--featured { transform: none; }
+  .pricing-stats { grid-template-columns: 1fr 1fr; }
 }
 
 /* ============================================================
@@ -1366,6 +1593,9 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   .final-cta .actions { flex-direction: column; align-items: center; }
   .service-card h3 { font-size: clamp(32px, 9vw, 64px); }
   .manifesto-line { font-size: clamp(32px, 9.5vw, 168px); }
+  .pricing-stats { grid-template-columns: 1fr; }
+  .pricing-stat { border-right: none; border-bottom: 0.5px solid var(--line); }
+  .pricing-stat:last-child { border-bottom: none; }
 }
 
 /* ============================================================
