@@ -187,13 +187,17 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: background calc(0.18s / var(--anim-speed)) ease, color calc(0.18s / var(--anim-speed)) ease, transform calc(0.18s / var(--anim-speed)) ease;
+  transition: background calc(0.2s / var(--anim-speed)) cubic-bezier(0.23,1,0.32,1),
+              color    calc(0.2s / var(--anim-speed)) cubic-bezier(0.23,1,0.32,1),
+              transform calc(0.15s / var(--anim-speed)) cubic-bezier(0.23,1,0.32,1),
+              border-color calc(0.2s / var(--anim-speed)) cubic-bezier(0.23,1,0.32,1);
 }
-.btn:hover { background: var(--ink); color: var(--bg); transform: translateY(-1px); }
+.btn:not(:active):hover { background: var(--ink); color: var(--bg); transform: translateY(-2px); }
+.btn:active { transform: scale(0.97); }
 .btn-accent { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
-.btn-accent:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.btn-accent:not(:active):hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
 .btn .arrow { transition: transform calc(0.25s / var(--anim-speed)) cubic-bezier(.7,.1,.2,1); }
-.btn:hover .arrow { transform: translateX(4px); }
+.btn:not(:active):hover .arrow { transform: translateX(4px); }
 
 /* ============================================================
    Nav
@@ -559,9 +563,9 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
    ============================================================ */
 .reveal {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity calc(0.9s / var(--anim-speed)) cubic-bezier(.2,.7,.2,1),
-              transform calc(0.9s / var(--anim-speed)) cubic-bezier(.2,.7,.2,1);
+  transform: translateY(14px);
+  transition: opacity calc(0.55s / var(--anim-speed)) cubic-bezier(0.23,1,0.32,1),
+              transform calc(0.55s / var(--anim-speed)) cubic-bezier(0.23,1,0.32,1);
 }
 .reveal.in { opacity: 1; transform: translateY(0); }
 
@@ -999,9 +1003,13 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   letter-spacing: 0.05em;
   color: var(--ink-2);
   background: transparent;
-  transition: border-color calc(0.2s / var(--anim-speed)) ease, color calc(0.2s / var(--anim-speed)) ease, background calc(0.2s / var(--anim-speed)) ease;
+  transition: border-color calc(0.2s / var(--anim-speed)) cubic-bezier(0.23,1,0.32,1),
+              color       calc(0.2s / var(--anim-speed)) cubic-bezier(0.23,1,0.32,1),
+              background  calc(0.2s / var(--anim-speed)) cubic-bezier(0.23,1,0.32,1),
+              transform   calc(0.15s / var(--anim-speed)) cubic-bezier(0.23,1,0.32,1);
 }
-.field-options button:hover { border-color: var(--ink-2); color: var(--ink); }
+.field-options button:not(:active):hover { border-color: var(--ink-2); color: var(--ink); }
+.field-options button:active { transform: scale(0.96); }
 .field-options button.active {
   border-color: var(--accent);
   color: var(--accent);
@@ -1244,6 +1252,14 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .nav-burger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
 .nav-burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
+@keyframes menu-in {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes menu-link-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
 .mobile-menu {
   position: fixed;
   inset: 0;
@@ -1255,7 +1271,16 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   justify-content: center;
   gap: 8px;
   padding: 40px var(--gutter);
+  animation: menu-in 0.22s cubic-bezier(0.23,1,0.32,1) both;
 }
+.mobile-menu a {
+  animation: menu-link-in 0.35s cubic-bezier(0.23,1,0.32,1) both;
+}
+/* close button is child 1; links start at child 2 */
+.mobile-menu a:nth-child(2) { animation-delay: 0.04s; }
+.mobile-menu a:nth-child(3) { animation-delay: 0.08s; }
+.mobile-menu a:nth-child(4) { animation-delay: 0.12s; }
+.mobile-menu a:nth-child(5) { animation-delay: 0.16s; }
 .mobile-menu a {
   font-family: var(--display);
   font-size: clamp(36px, 10vw, 56px);
@@ -1540,4 +1565,26 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 }
 @media (max-width: 480px) {
   .specs-grid { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   Reduced motion
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .reveal.in {
+    transition: opacity 0.2s ease;
+    transform: none;
+  }
+  .mobile-menu, .mobile-menu a {
+    animation: none;
+  }
+  .btn, .field-options button {
+    transition: background 0.1s ease, color 0.1s ease, border-color 0.1s ease;
+  }
+  .btn:active, .field-options button:active {
+    transform: none;
+  }
+  .marquee-track {
+    animation: none;
+  }
 }
