@@ -223,7 +223,7 @@ const SERVICES = [
   n: "02",
   title: "Présence",
   subtitle: "Votre vitrine. Votre crédibilité. Vos clients.",
-  desc: "Pour les entrepreneurs en rénovation, plombiers, électriciens et couvreurs. Cinq pages pensées pour générer des soumissions, SEO local, design 100% sur mesure.",
+  desc: "Pour les couvreurs qui veulent dominer leur secteur local. Cinq pages pensées pour générer des soumissions de toiture — bardeaux, tôle, membrane, résidentiel et commercial. SEO local, design 100% sur mesure.",
   items: ["Classé sur Google local", "Jusqu'à 5 pages", "3 révisions incluses", "Support 30 jours"],
   price: "1 899",
   delay: "2–3 semaines"
@@ -240,7 +240,7 @@ const SERVICES = [
 {
   n: "04",
   title: "Domination",
-  subtitle: "L'arsenal complet pour l'entrepreneur qui domine son secteur.",
+  subtitle: "L'arsenal complet pour le couvreur qui veut être le #1 sur Google à Gatineau et Ottawa.",
   desc: "CMS, blog, intégrations avancées. Quand votre site devient votre meilleur employé — disponible 24h/24.",
   items: ["CMS modifiable sans technicien", "Blog + intégrations API", "SEO avancé", "Support 60 jours"],
   price: "4 299",
@@ -304,10 +304,10 @@ const Services = () => {
 
 // ====================== PORTFOLIO — FOUNDER SLOTS ======================
 const SLOTS = [
-{ n: "01", status: "Disponible", title: "Entrepreneur général ou rénovateur", sub: "— prochain projet 2026", deal: "−20% fondateur" },
-{ n: "02", status: "Disponible", title: "Plombier ou électricien", sub: "— services résidentiels", deal: "−20% fondateur" },
-{ n: "03", status: "Disponible", title: "Couvreur, paysagiste ou peintre", sub: "— extérieur / finition", deal: "−20% fondateur" },
-{ n: "04", status: "Disponible", title: "Service B2B local", sub: "— fournisseur ou sous-traitant construction", deal: "−20% fondateur" }];
+{ n: "01", status: "Disponible", title: "Couvreur résidentiel — bardeaux et tôle", sub: "— secteur Gatineau / Hull", deal: "−20% fondateur" },
+{ n: "02", status: "Disponible", title: "Couvreur résidentiel — toiture plate et membrane", sub: "— secteur Aylmer / Buckingham", deal: "−20% fondateur" },
+{ n: "03", status: "Disponible", title: "Couvreur commercial ou industriel", sub: "— Ottawa / Kanata / Orléans", deal: "−20% fondateur" },
+{ n: "04", status: "Disponible", title: "Couvreur ou entrepreneur général", sub: "— Cantley / Chelsea / Outaouais rural", deal: "−20% fondateur" }];
 
 
 const Portfolio = () =>
@@ -361,7 +361,7 @@ const AboutBody = () => {
   return (
     <div className="about-body reveal" ref={ref}>
       <p>
-        Bonjour. Je suis <em>Léo</em>. J'ai monté ce studio à Gatineau pour une raison simple : les entrepreneurs en construction et rénovation de l'Outaouais méritent des sites à la hauteur de leur travail — pas un template Wix, pas une agence à 50K.
+        Bonjour. Je suis <em>Léo</em>. J'ai monté ce studio à Gatineau pour une raison simple : les couvreurs de l'Outaouais méritent des sites à la hauteur de leur travail — un couvreur avec un bon site reçoit des soumissions pendant qu'il est sur un toit, pas seulement par bouche-à-oreille.
       </p>
       <p>
         Pas un template <em>recyclé.</em> Pas une agence à 50K. Du sur-mesure, livré en quelques semaines, par la personne qui te répond au téléphone.
@@ -404,7 +404,9 @@ const FAQS = [
 { q: "Tu héberges aussi le site ?", a: "Oui — hébergement premium inclus la première année (Vercel ou équivalent). Domaine séparé. Ensuite, ~120$/an si tu veux que je continue, ou je te transfère le tout." },
 { q: "Et si j'ai déjà un logo ou une identité visuelle ?", a: "Parfait — je travaille avec. Si tu n'en as pas, on peut en créer une minimaliste ensemble dans le cadre du projet, ou je te recommande un graphiste de la région." },
 { q: "Travailles-tu à distance ou en personne ?", a: "Les deux. Premier appel en visio ou en personne (café offert à Gatineau ou Ottawa). Build à distance avec liens live. Formation finale en personne si tu préfères." },
-{ q: "Et si je veux modifier le site moi-même après ?", a: "Avec l'offre Site Complet, tu reçois un CMS pour tout modifier sans toucher au code. Avec les autres offres, modifications mineures incluses 30 jours, puis 75$/h après." }];
+{ q: "Et si je veux modifier le site moi-même après ?", a: "Avec l'offre Site Complet, tu reçois un CMS pour tout modifier sans toucher au code. Avec les autres offres, modifications mineures incluses 30 jours, puis 75$/h après." },
+{ q: "Je suis couvreur, pas technicien — est-ce que je vais comprendre comment gérer mon site ?", a: "Oui. C'est exactement pourquoi je reste 30 à 60 jours après le lancement. Je te montre comment mettre à jour ton contenu, ajouter des photos de projets, et répondre aux soumissions. Pas de jargon technique — tu apprends ce dont tu as besoin, rien de plus." },
+{ q: "Mon téléphone sonne déjà par bouche-à-oreille, pourquoi aurais-je besoin d'un site ?", a: "Parce que ton prochain client te cherche sur Google avant même de t'appeler. S'il ne te trouve pas, il appelle ton concurrent. Un site bien fait capte ces leads que tu ne savais même pas que tu perdais." }];
 
 
 const FAQ = () => {
@@ -433,7 +435,7 @@ const FinalCTA = () => {
     <section className="final-cta" id="cta-final">
       <div className="reveal" ref={ref}>
         <div className="huge">
-          Prochain entrepreneur dans la galerie — <em>toi.</em>
+          Prochain couvreur dans la galerie — <em>toi.</em>
         </div>
         <div className="actions">
           <a className="btn btn-accent" href="#devis">Réserver mon créneau <span className="arrow">&#8594;</span></a>
@@ -522,7 +524,7 @@ const Footer = () => {
     </footer>
     <div className="footer-bot">
       <span>© 2026 Novio Studio</span>
-      <span className="mono" style={{ letterSpacing:".14em" }}>Secteurs · Rénovation · Construction · Plomberie · Électricité · Toiture · Paysagement · Peinture · Gatineau · Ottawa · Outaouais</span>
+      <span className="mono" style={{ letterSpacing:".14em" }}>Spécialité · Toiture résidentielle · Bardeaux · Tôle · Membrane · Toiture plate · Couvreurs · Gatineau · Hull · Aylmer · Ottawa · Outaouais</span>
       <span>v1.0 · cohorte fondateur</span>
     </div>
 

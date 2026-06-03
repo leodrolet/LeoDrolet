@@ -25,7 +25,7 @@ const App = () => {
 
       <MarqueeRow items={[
         "Plus de contrats",
-        "Entrepreneurs · Rénovation · Construction",
+        "Couvreurs · Toiture résidentielle · Bardeaux · Tôle · Membrane",
         "Gatineau · Ottawa · Outaouais",
         "Dès 999 $ CAD",
         "Livré en 7–28 jours",

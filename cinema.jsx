@@ -42,7 +42,7 @@ const MANIFESTO_LINES = [
   ["Pas un", "template"],
   ["Pas une", "dépense"],
   ["Pas un", "intermédiaire"],
-  ["Un site qui", "génère des soumissions."],
+  ["Un site qui", "génère des soumissions de toiture."],
 ];
 
 const Manifesto = () => {
@@ -129,11 +129,11 @@ const SPECS = [
   },
   {
     v: "999", u: "$", k: "Prix de départ",
-    d: "Landing complète livrée prête à convertir. Aucun frais caché, aucune surprise dans le devis.",
+    d: "Page de soumission livrée prête à convertir. Un couvreur qui gagne 1 contrat de plus rembourse son site en 3 semaines.",
   },
   {
     v: "07", u: "j", k: "Livraison minimum",
-    d: "Du brief au live en 7 jours. Pendant ce temps, votre concurrent attend encore son devis d'agence.",
+    d: "Du brief au live en 7 jours. Pendant ce temps, ton concurrent couvreur prend tes leads sur Google.",
   },
 ];
 
