@@ -1,175 +1,76 @@
 /* ============================================================
-   estimator.jsx — Live price calculator + contact form
+   estimator.jsx — Plan selector + contact form
    ============================================================ */
 
-// ── Data ─────────────────────────────────────────────────────
-
-const TYPE_OPTS = [
-  { id: "landing",     label: "Page d'atterrissage" },
-  { id: "vitrine",     label: "Site vitrine" },
-  { id: "complet",     label: "Site complet" },
-  { id: "refonte",     label: "Refonte" },
-  { id: "maintenance", label: "Maintenance" },
-];
-
-const PLANS = {
-  landing: { label: "Page d'atterrissage", base: 999,  days: "7 jours" },
-  vitrine: { label: "Site vitrine",         base: 1899, days: "2–3 sem." },
-  complet: { label: "Site complet",         base: 4299, days: "2–3 sem." },
-  refonte: { label: "Refonte",              base: 3699, days: "2–4 sem." },
-};
-
-const INCLUDED_FEATURES = {
-  landing: [
-    "SEO de base", "Formulaire contact", "Hébergement 1 an",
-    "Optimisation mobile", "Optimisation vitesse",
-  ],
-  vitrine: [
-    "SEO de base", "Formulaire contact", "Hébergement 1 an",
-    "Optimisation mobile", "Optimisation vitesse",
-    "SEO par page", "CMS éditable", "Blog / journal",
-  ],
-  complet: [
-    "SEO de base", "Formulaire contact", "Hébergement 1 an",
-    "Optimisation mobile", "Optimisation vitesse",
-    "SEO par page", "CMS éditable", "Blog / journal",
-    "SEO avancé", "Panel admin", "Architecture avancée",
-  ],
-  refonte: [
-    "SEO de base", "Hébergement 1 an", "Optimisation vitesse (Core Web Vitals)",
-    "SEO par page", "Audit complet", "Migration contenu",
-    "Redirections 301", "Formation incluse",
-  ],
-};
-
-const EXTRA_OPTS = [
-  { id: "calendar", label: "Réservation / calendrier" },
-  { id: "maps",     label: "Carte interactive" },
-  { id: "anim",     label: "Animations premium" },
-  { id: "i18n",     label: "Bilingue FR/EN" },
-];
-
-const EXTRA_AVAILABLE = {
-  landing: ["calendar", "maps", "anim", "i18n"],
-  vitrine: ["calendar", "maps", "anim", "i18n"],
-  complet: ["calendar", "maps", "anim", "i18n"],
-  refonte: ["calendar", "maps", "anim", "i18n"],
-};
-
-const URGENCY_OPTS = [
-  { id: "normal", label: "Délai normal", mult: 1 },
-  { id: "fast",   label: "Rapide (+30%)", mult: 1.3 },
-  { id: "urgent", label: "Urgent (+60%)", mult: 1.6 },
-];
-
-const MAINT_PLANS = [
+const PLANS = [
   {
-    id: "essentiel", label: "Essentiel", price: 99,
+    id: "essentiel",
+    label: "Essentiel",
+    price: 300,
+    subtitle: "Présence en ligne. Appels entrants.",
     features: [
-      "Mises à jour CMS / plugins",
-      "Sauvegardes hebdomadaires",
-      "Monitoring 24/7",
-      "SSL actif",
-      "Rapport mensuel",
+      "Domaine inclus",
+      "Hébergement inclus",
+      "Maintenance de base",
+      "Site vitrine simple",
     ],
   },
   {
-    id: "standard", label: "Standard", price: 199,
+    id: "professionnel",
+    label: "Professionnel",
+    price: 450,
+    badge: "Meilleure valeur",
+    subtitle: "La meilleure valeur pour la majorité des PME.",
     features: [
-      "Tout Essentiel",
-      "Modifications mineures 2h/mois",
+      "Tout le plan Essentiel",
+      "2 révisions par mois",
+      "SEO de base",
+    ],
+  },
+  {
+    id: "premium",
+    label: "Premium",
+    price: 700,
+    subtitle: "L'arsenal complet pour l'entreprise qui veut tout.",
+    features: [
+      "Tout le plan Professionnel",
+      "Boutique en ligne (e-commerce)",
+      "SEO avancé",
       "Support prioritaire",
-      "Rapport détaillé",
-    ],
-  },
-  {
-    id: "croissance", label: "Croissance", price: 349,
-    features: [
-      "Tout Standard",
-      "SEO local mensuel",
-      "Ajout de contenu 4h/mois",
-      "Rapport analytics",
-      "Appel mensuel 30 min",
+      "Analytiques poussées",
     ],
   },
 ];
-
-const formatPrice = (n) =>
-  n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-
-// ── Component ────────────────────────────────────────────────
 
 const Estimator = () => {
-  const [type,       setType]       = React.useState("vitrine");
-  const [extras,     setExtras]     = React.useState(new Set());
-  const [urgency,    setUrgency]    = React.useState("normal");
-  const [maintPlan,  setMaintPlan]  = React.useState("standard");
-  const [name,       setName]       = React.useState("");
-  const [email,      setEmail]      = React.useState("");
-  const [project,    setProject]    = React.useState("");
-  const [sent,       setSent]       = React.useState(false);
-  const [sending,    setSending]    = React.useState(false);
-  const [error,      setError]      = React.useState("");
-  const lastSubmit                  = React.useRef(0);
-  const [estNum]                    = React.useState(() => Math.floor(2026000 + Math.random() * 999));
+  const [planId,   setPlanId]   = React.useState("professionnel");
+  const [name,     setName]     = React.useState("");
+  const [email,    setEmail]    = React.useState("");
+  const [project,  setProject]  = React.useState("");
+  const [sent,     setSent]     = React.useState(false);
+  const [sending,  setSending]  = React.useState(false);
+  const [error,    setError]    = React.useState("");
+  const lastSubmit               = React.useRef(0);
+  const [estNum]                 = React.useState(() => Math.floor(2026000 + Math.random() * 999));
 
-  const isMaint = type === "maintenance";
+  const plan = PLANS.find((p) => p.id === planId);
 
-  const handleTypeChange = (t) => {
-    setType(t);
-    if (t !== "maintenance") {
-      const avail = EXTRA_AVAILABLE[t] || [];
-      setExtras((prev) => new Set([...prev].filter((e) => avail.includes(e))));
-    }
-  };
-
-  const toggleExtra = (id) => {
-    setExtras((s) => {
-      const n = new Set(s);
-      n.has(id) ? n.delete(id) : n.add(id);
-      return n;
-    });
-  };
-
-  const calc = React.useMemo(() => {
-    if (isMaint) {
-      const p = MAINT_PLANS.find((p) => p.id === maintPlan);
-      return { maint: true, plan: p, total: p.price };
-    }
-    const plan = PLANS[type];
-    const u    = URGENCY_OPTS.find((u) => u.id === urgency);
-    const extraCost = extras.size * 150;
-    const total     = Math.round((plan.base + extraCost) * u.mult);
-    return {
-      maint: false,
-      base: plan.base,
-      extraCost,
-      extrasCount: extras.size,
-      urgencyMult: u.mult,
-      urgencyLabel: u.label,
-      total,
-      label: plan.label,
-      days: plan.days,
-    };
-  }, [type, extras, urgency, maintPlan, isMaint]);
-
-  // Animate the total number
-  const [displayTotal, setDisplayTotal] = React.useState(calc.total);
+  const [displayPrice, setDisplayPrice] = React.useState(plan.price);
   React.useEffect(() => {
     let raf;
-    const start = displayTotal;
-    const end   = calc.total;
+    const start = displayPrice;
+    const end   = plan.price;
     const t0    = performance.now();
-    const dur   = 450;
+    const dur   = 350;
     const step  = (now) => {
       const k = Math.min(1, (now - t0) / dur);
       const e = 1 - Math.pow(1 - k, 3);
-      setDisplayTotal(Math.round(start + (end - start) * e));
+      setDisplayPrice(Math.round(start + (end - start) * e));
       if (k < 1) raf = requestAnimationFrame(step);
     };
     raf = requestAnimationFrame(step);
     return () => cancelAnimationFrame(raf);
-  }, [calc.total]);
+  }, [plan.price]);
 
   const send = async (e) => {
     e.preventDefault();
@@ -195,17 +96,13 @@ const Estimator = () => {
 
     setSending(true);
     try {
-      const body = isMaint
-        ? { name, email, project,
-            type: "Maintenance",
-            forfait: activeMaint?.label,
-            prix: `${activeMaint?.price} $/mois` }
-        : { name, email, project,
-            type: calc.label,
-            extras: [...extras].join(", ") || "aucune",
-            urgence: calc.urgencyLabel,
-            total: `${formatPrice(calc.total)} $`,
-            delai: calc.days };
+      const body = {
+        name,
+        email,
+        project,
+        plan: plan.label,
+        prix: `${plan.price} $/mois`,
+      };
 
       const res = await fetch("https://formspree.io/f/xykvgwnz", {
         method: "POST",
@@ -226,134 +123,58 @@ const Estimator = () => {
     }
   };
 
-  const includedFeats = isMaint ? [] : (INCLUDED_FEATURES[type] || []);
-  const availExtras   = isMaint ? [] : EXTRA_OPTS.filter((o) => (EXTRA_AVAILABLE[type] || []).includes(o.id));
-  const activeMaint   = isMaint ? MAINT_PLANS.find((p) => p.id === maintPlan) : null;
-  const contactNum    = isMaint ? "03" : "04";
-
   return (
     <section className="section" id="devis">
       <SectionHead
         num="06"
         kicker="Devis"
         title={<>Estime ton projet — <em style={{ fontStyle: "italic", color: "var(--ink-2)" }}>en direct.</em></>}
-        right="Tarif ferme · pas d'arnaque"
+        right="Engagement 3 mois · préavis 30 jours"
       />
       <form className="estimator" onSubmit={send}>
 
         {/* ── LEFT ────────────────────────────────────────── */}
         <div className="estimator-form">
 
-          {/* 01 · Type */}
+          {/* 01 · Plan */}
           <div className="field">
             <div className="field-label">
-              <span>01 · Type de projet</span>
+              <span>01 · Plan mensuel</span>
               <span className="req">requis</span>
             </div>
             <div className="field-options">
-              {TYPE_OPTS.map((o) => (
+              {PLANS.map((p) => (
                 <button
-                  type="button" key={o.id}
-                  className={type === o.id ? "active" : ""}
-                  onClick={() => handleTypeChange(o.id)}
+                  type="button" key={p.id}
+                  className={planId === p.id ? "active" : ""}
+                  onClick={() => setPlanId(p.id)}
                 >
-                  {o.label}
+                  {p.label} · {p.price} $/mois{p.badge ? ` ★` : ""}
                 </button>
               ))}
             </div>
           </div>
 
-          {/* 02 · Fonctionnalités (standard) or Forfait mensuel (maintenance) */}
-          {isMaint ? (
-            <div className="field">
-              <div className="field-label">
-                <span>02 · Forfait mensuel</span>
-                <span className="field-help">sélectionne un plan</span>
-              </div>
-              <div className="field-options">
-                {MAINT_PLANS.map((p) => (
-                  <button
-                    type="button" key={p.id}
-                    className={maintPlan === p.id ? "active" : ""}
-                    onClick={() => setMaintPlan(p.id)}
-                  >
-                    {p.label} · {p.price} $/mois
-                  </button>
-                ))}
-              </div>
-
-              <p className="field-help" style={{ marginTop: 14, marginBottom: 8 }}>Inclus dans ce forfait</p>
-              <ul className="feat-included-list">
-                {(MAINT_PLANS.find((p) => p.id === maintPlan)?.features || []).map((f, i) => (
-                  <li key={i} className="feat-included-item">✓ {f}</li>
-                ))}
-              </ul>
-
-              <p className="field-help" style={{ marginTop: 12 }}>
-                Engagement min. 3 mois · Préavis résiliation 30 jours
-              </p>
+          {/* 02 · Inclus */}
+          <div className="field">
+            <div className="field-label">
+              <span>02 · Inclus dans ce plan</span>
             </div>
-          ) : (
-            <div className="field">
-              <div className="field-label">
-                <span>02 · Fonctionnalités</span>
-                <span className="field-help">options en extra</span>
-              </div>
-
-              <p className="field-help" style={{ marginBottom: 8 }}>Inclus dans ce forfait</p>
-              <ul className="feat-included-list">
-                {includedFeats.map((f, i) => (
-                  <li key={i} className="feat-included-item">✓ {f}</li>
-                ))}
-              </ul>
-
-              {availExtras.length > 0 && (
-                <>
-                  <p className="field-help" style={{ marginTop: 14, marginBottom: 8 }}>
-                    En option · +150 $ chacune
-                  </p>
-                  <div className="field-options">
-                    {availExtras.map((o) => (
-                      <button
-                        type="button" key={o.id}
-                        className={extras.has(o.id) ? "active" : ""}
-                        onClick={() => toggleExtra(o.id)}
-                      >
-                        + {o.label}
-                      </button>
-                    ))}
-                  </div>
-                </>
-              )}
-            </div>
-          )}
-
-          {/* 03 · Délai (standard only) */}
-          {!isMaint && (
-            <div className="field">
-              <div className="field-label">
-                <span>03 · Délai</span>
-                <span className="field-help">l'urgence ajuste le tarif</span>
-              </div>
-              <div className="field-options">
-                {URGENCY_OPTS.map((o) => (
-                  <button
-                    type="button" key={o.id}
-                    className={urgency === o.id ? "active" : ""}
-                    onClick={() => setUrgency(o.id)}
-                  >
-                    {o.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
+            <ul className="feat-included-list">
+              {plan.features.map((f, i) => (
+                <li key={i} className="feat-included-item">✓ {f}</li>
+              ))}
+            </ul>
+            <p className="field-help" style={{ marginTop: 12 }}>
+              Domaine inclus · engagement min. 3 mois · préavis résiliation 30 jours · aucun frais caché
+            </p>
+          </div>
 
           <div className="divider" style={{ margin: "16px 0" }} />
 
           {/* Contact */}
           <div className="field">
-            <div className="field-label"><span>{contactNum} · Toi</span></div>
+            <div className="field-label"><span>03 · Toi</span></div>
             <label htmlFor="contact-name" className="sr-only">Nom et entreprise</label>
             <input id="contact-name" type="text" placeholder="Nom · entreprise" value={name} onChange={(e) => setName(e.target.value)} />
           </div>
@@ -377,89 +198,52 @@ const Estimator = () => {
         <aside className="estimator-quote">
 
           <div className="quote-head">
-            <span>{isMaint ? "Abonnement" : "Estimation"} #{estNum}</span>
-            <span>{isMaint ? "Maintenance" : calc.label}</span>
+            <span>Abonnement #{estNum}</span>
+            <span>{plan.label}</span>
           </div>
 
-          {isMaint ? (
-            /* ── Maintenance quote ── */
-            <>
-              <div className="quote-rows">
-                <div className="quote-row">
-                  <span>Forfait {activeMaint.label}</span>
-                  <span className="v">{activeMaint.price} $/mois</span>
-                </div>
-                {activeMaint.features.map((f, i) => (
-                  <div className="quote-row muted" key={i}>
-                    <span>{f}</span>
-                    <span>inclus</span>
-                  </div>
-                ))}
-                <div className="quote-row muted">
-                  <span>Engagement minimum</span>
-                  <span>3 mois</span>
-                </div>
-                <div className="quote-row muted">
-                  <span>Préavis résiliation</span>
-                  <span>30 jours</span>
-                </div>
+          <div className="quote-rows">
+            <div className="quote-row">
+              <span>Plan {plan.label}</span>
+              <span className="v">{plan.price} $/mois</span>
+            </div>
+            {plan.features.map((f, i) => (
+              <div className="quote-row muted" key={i}>
+                <span>{f}</span>
+                <span>inclus</span>
               </div>
-              <div className="quote-total">
-                <div className="label">Mensuel · CAD</div>
-                <div className="amount">
-                  {formatPrice(activeMaint.price)}<sup>$/mois</sup>
-                </div>
-                <div className="note">Facturation mensuelle · sans engagement au-delà de 3 mois</div>
-              </div>
-            </>
-          ) : (
-            /* ── Standard quote ── */
-            <>
-              <div className="quote-rows">
-                <div className="quote-row">
-                  <span>Base · {calc.label}</span>
-                  <span className="v">{formatPrice(calc.base)} $</span>
-                </div>
-                {calc.extrasCount > 0 && (
-                  <div className="quote-row">
-                    <span>+ {calc.extrasCount} option{calc.extrasCount > 1 ? "s" : ""} extra</span>
-                    <span className="v">+{formatPrice(calc.extraCost)} $</span>
-                  </div>
-                )}
-                {calc.urgencyMult > 1 && (
-                  <div className="quote-row">
-                    <span>× urgence ({calc.urgencyLabel})</span>
-                    <span className="v">×{calc.urgencyMult}</span>
-                  </div>
-                )}
-                <div className="quote-row muted">
-                  <span>Hébergement (1 an)</span>
-                  <span>inclus</span>
-                </div>
-                <div className="quote-row muted">
-                  <span>Support post-launch</span>
-                  <span>inclus 30–60j</span>
-                </div>
-                <div className="quote-row muted">
-                  <span>Révisions</span>
-                  <span>2–3 incluses</span>
-                </div>
-              </div>
-              <div className="quote-total">
-                <div className="label">Total estimé · CAD</div>
-                <div className="amount">
-                  {formatPrice(displayTotal)}<sup>$</sup>
-                </div>
-                <div className="note">Livraison estimée : {calc.days} · devis ferme sous 24h après envoi</div>
-              </div>
-            </>
-          )}
+            ))}
+            <div className="quote-row muted">
+              <span>Domaine</span>
+              <span>inclus</span>
+            </div>
+            <div className="quote-row muted">
+              <span>Hébergement</span>
+              <span>inclus</span>
+            </div>
+            <div className="quote-row muted">
+              <span>Engagement minimum</span>
+              <span>3 mois</span>
+            </div>
+            <div className="quote-row muted">
+              <span>Préavis résiliation</span>
+              <span>30 jours</span>
+            </div>
+          </div>
+
+          <div className="quote-total">
+            <div className="label">Mensuel · CAD</div>
+            <div className="amount">
+              {displayPrice}<sup>$/mois</sup>
+            </div>
+            <div className="note">Facturation mensuelle · sans engagement au-delà de 3 mois</div>
+          </div>
 
           <div className="mono" style={{ fontSize: 10, color: "var(--mute)", letterSpacing: "0.12em", textTransform: "uppercase", marginTop: 24, lineHeight: 1.6 }}>
-            ✓ Pas de frais cachés<br/>
-            ✓ Tarif signé au contrat<br/>
-            ✓ Acompte 50% au démarrage<br/>
-            ✓ Solde à la mise en ligne
+            ✓ Aucun frais caché<br/>
+            ✓ Tarif fixe mensuel<br/>
+            ✓ Résiliation sans pénalité<br/>
+            ✓ Domaine inclus sur tous les plans
           </div>
 
         </aside>
