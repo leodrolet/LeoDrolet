@@ -4,7 +4,7 @@
 
 const {
   Nav, Hero, MarqueeRow, Services, Portfolio, About, FAQ,
-  FinalCTA, Footer, Estimator, useTweaksReactive, TWEAK_DEFAULTS, TweaksUI,
+  FinalCTA, Footer, useTweaksReactive, TWEAK_DEFAULTS, TweaksUI,
   ScrollProgress, Manifesto, Specs,
 } = window;
 
@@ -34,7 +34,6 @@ const App = () => {
       ]} />
 
       <Specs />
-      <Services />
 
       <MarqueeRow reverse items={[
         "Cohorte fondateur · 20% off",
@@ -45,7 +44,7 @@ const App = () => {
 
       <Portfolio />
       <About />
-      <Estimator />
+      <Services />
       <FAQ />
       <FinalCTA />
       <Footer />

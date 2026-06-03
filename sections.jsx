@@ -40,10 +40,9 @@ const Nav = ({ headline }) => {
           novio<span style={{ fontStyle: "italic", color: "var(--ink-2)" }}>.studio</span>
         </a>
         <div className="nav-links">
-          <a href="#services">Services</a>
           <a href="#travaux">Travaux</a>
           <a href="#studio">Studio</a>
-          <a href="#devis">Devis</a>
+          <a href="#devis">Forfaits</a>
         </div>
         <div className="nav-right">
           <button
@@ -62,7 +61,6 @@ const Nav = ({ headline }) => {
       {menuOpen && (
         <div className="mobile-menu">
           <button className="mobile-menu-close" onClick={close} aria-label="Fermer">&#215;</button>
-          <a href="#services" onClick={close}>Services</a>
           <a href="#travaux" onClick={close}>Travaux</a>
           <a href="#studio" onClick={close}>Studio</a>
           <a href="#devis" className="mobile-menu-cta" onClick={close}>Démarrer &#8594;</a>
@@ -209,8 +207,6 @@ const SectionHead = ({ num, kicker, title, right }) => {
 };
 
 // ====================== PRICING (FORFAITS) ======================
-const GOLD = "#b8973a";
-
 const PLANS = [
   {
     id: "essentiel",
@@ -280,45 +276,46 @@ const PRICING_STATS = [
 const PlanCard = ({ plan, i }) => (
   <m.article
     className={`plan-card${plan.featured ? " plan-card--featured" : ""}`}
-    initial={{ opacity: 0, y: 40 }}
+    initial={{ opacity: 0, y: 32 }}
     whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, amount: 0.1 }}
-    transition={{ duration: 0.7, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+    viewport={{ once: true, amount: 0.12 }}
+    transition={{ duration: 0.65, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
   >
-    {plan.badge && (
-      <div className="plan-badge">{plan.badge}</div>
-    )}
+    <div className="plan-card-top">
+      <span className="plan-num">0{i + 1} / 03</span>
+      {plan.badge && <span className="plan-badge">{plan.badge}</span>}
+    </div>
     <h3 className="plan-title">{plan.title}</h3>
     <p className="plan-subtitle">{plan.subtitle}</p>
-    <div className="plan-price-row">
-      <span className="plan-amount">{plan.price} $</span>
-      <span className="plan-cadence">/mois</span>
+    <div className="plan-price-block">
+      <span className="plan-amount">{plan.price}</span>
+      <div className="plan-price-meta">$ · mensuel</div>
     </div>
     <ul className="plan-features">
       {plan.features.map((f) => (
-        <li key={f}>
-          <span className="plan-check">&#10003;</span>
-          <span>{f}</span>
-        </li>
+        <li key={f}><span className="plan-plus">+</span>{f}</li>
       ))}
     </ul>
-    <a href="#devis" className={`btn plan-cta${plan.featured ? " plan-cta--featured" : ""}`}>
+    <a
+      href="mailto:leo_drolet@noviostudio.online"
+      className={`btn plan-cta${plan.featured ? " plan-cta--featured" : ""}`}
+    >
       Démarrer mon projet <span className="arrow">&#8594;</span>
     </a>
-    <div className="plan-note">Engagement 3 mois · Sans frais cachés</div>
+    <p className="plan-note">Engagement 3 mois · Sans frais cachés</p>
   </m.article>
 );
 
 const Services = () => {
-  const statsRef = useReveal();
-  const testimonialRef = useReveal();
-  const whyRef = useReveal();
+  const statsRef    = useReveal();
+  const quoteRef    = useReveal();
+  const whyRef      = useReveal();
 
   return (
-    <section className="section" id="services">
+    <section className="section" id="devis">
       <SectionHead
-        num="01"
-        kicker="Services"
+        num="06"
+        kicker="Forfaits"
         title={<>Trois forfaits. <em style={{ fontStyle: "italic", color: "var(--ink-2)" }}>Tout inclus.</em></>}
         right="Engagement 3 mois · préavis 30 jours · aucun frais caché"
       />
@@ -338,21 +335,24 @@ const Services = () => {
         ))}
       </div>
 
-      <div className="pricing-testimonial reveal" ref={testimonialRef}>
-        <blockquote className="pricing-quote">
-          "Nous recevons maintenant 3 à 5 demandes de soumission par semaine depuis la refonte de notre site. Le retour sur investissement est réel."
-        </blockquote>
-        <div className="pricing-quote-author">— Jean-François B., entrepreneur, Gatineau</div>
+      <div className="pricing-testimonial reveal" ref={quoteRef}>
+        <span className="pricing-aside-label">Témoignage client</span>
+        <div>
+          <blockquote className="pricing-quote">
+            "Nous recevons maintenant 3 à 5 demandes de soumission par semaine depuis la refonte de notre site. Le retour sur investissement est réel."
+          </blockquote>
+          <p className="pricing-quote-author">— Jean-François B., entrepreneur, Gatineau</p>
+        </div>
       </div>
 
       <div className="pricing-why reveal" ref={whyRef}>
-        <div className="pricing-why-title">Pourquoi un abonnement mensuel ?</div>
-        <p className="pricing-why-text">
-          Contrairement aux agences qui facturent 5 000 $ à 15 000 $ d'entrée de jeu,
-          notre modèle mensuel vous permet de lancer sans investissement massif.
-          Chaque mois : votre site est maintenu, sécurisé, mis à jour et optimisé.
-          Vous ne payez pas seulement un site — vous payez un partenaire web actif.
-        </p>
+        <span className="pricing-aside-label">Abonnement mensuel</span>
+        <div>
+          <div className="pricing-why-title">Pourquoi mensuel ?</div>
+          <p className="pricing-why-text">
+            Contrairement aux agences qui facturent 5 000 $ à 15 000 $ d'entrée de jeu, notre modèle mensuel vous permet de lancer sans investissement massif. Chaque mois : votre site est maintenu, sécurisé, mis à jour et optimisé. Vous ne payez pas seulement un site — vous payez un partenaire web actif.
+          </p>
+        </div>
       </div>
     </section>
   );
