@@ -869,6 +869,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   aspect-ratio: 4/5;
   background: var(--bg-2);
   border: 1px solid var(--line);
+  border-radius: 16px;
   overflow: hidden;
 }
 .about-portrait .ph {
