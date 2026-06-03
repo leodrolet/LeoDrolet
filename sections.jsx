@@ -197,11 +197,11 @@ const SectionHead = ({ num, kicker, title, right }) => {
   const ref = useReveal();
   return (
     <div className="section-head reveal" ref={ref}>
+      <h2 className="section-title">{title}</h2>
       <div className="section-num">
         <span>§ {num} — {kicker}</span>
         {right && <span>{right}</span>}
       </div>
-      <h2 className="section-title">{title}</h2>
     </div>);
 
 };
