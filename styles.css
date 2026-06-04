@@ -909,22 +909,24 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   height: 100%;
 }
 .cslider-head {
-  padding: 14px 24px;
+  padding: 16px 24px;
   font-family: var(--mono);
   font-size: 10px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   border-bottom: 1px solid var(--line-strong);
-  white-space: nowrap;
+  text-align: center;
 }
 .cslider-side--agency .cslider-head { color: var(--mute); }
 .cslider-side--novio  .cslider-head { color: var(--accent); }
 .cslider-row {
-  padding: 14px 24px;
+  padding: 18px 24px;
   border-bottom: 1px solid var(--line);
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
 }
 .cslider-row:last-child { border-bottom: none; }
 .cslider-feat {
@@ -939,6 +941,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   line-height: 1.4;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 7px;
 }
 .cslider-side--agency .cslider-val { color: var(--ink-2); font-style: italic; }
