@@ -386,6 +386,60 @@ const CompareTable = () => (
   </div>
 );
 
+// ====================== IMAGE COMPARISON SLIDER ======================
+const ImageComparison = ({ beforeImage, afterImage, altBefore = 'Avant', altAfter = 'Après' }) => {
+  const [pos, setPos] = React.useState(50);
+  const [dragging, setDragging] = React.useState(false);
+  const ref = React.useRef(null);
+
+  const move = React.useCallback((clientX) => {
+    if (!dragging || !ref.current) return;
+    const r = ref.current.getBoundingClientRect();
+    setPos(Math.max(0, Math.min(100, ((clientX - r.left) / r.width) * 100)));
+  }, [dragging]);
+
+  const stop = React.useCallback(() => setDragging(false), []);
+
+  React.useEffect(() => {
+    window.addEventListener('mouseup', stop);
+    return () => window.removeEventListener('mouseup', stop);
+  }, [stop]);
+
+  return (
+    <div
+      ref={ref}
+      className="imgcmp"
+      onMouseMove={(e) => move(e.clientX)}
+      onMouseLeave={stop}
+      onTouchMove={(e) => { e.preventDefault(); move(e.touches[0].clientX); }}
+      onTouchEnd={stop}
+    >
+      {/* After image — clipped by slider position */}
+      <div className="imgcmp-layer" style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}>
+        <img src={afterImage} alt={altAfter} draggable="false" />
+      </div>
+      {/* Before image — base layer */}
+      <img className="imgcmp-base" src={beforeImage} alt={altBefore} draggable="false" />
+      {/* Labels */}
+      <span className="imgcmp-label imgcmp-label--l">Avant</span>
+      <span className="imgcmp-label imgcmp-label--r">Après</span>
+      {/* Divider + knob */}
+      <div
+        className={`imgcmp-track${dragging ? ' imgcmp-track--active' : ''}`}
+        style={{ left: `${pos}%` }}
+        onMouseDown={() => setDragging(true)}
+        onTouchStart={() => setDragging(true)}
+      >
+        <div className="imgcmp-knob">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M9 18L3 12L9 6"/><path d="M15 18L21 12L15 6"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 // ====================== PORTFOLIO — FOUNDER SLOTS ======================
 const SLOTS = [
 { n: "01", status: "Disponible", title: "Couvreur ou entreprise de toiture", sub: "— secteur Gatineau / Hull / Aylmer" },
@@ -430,11 +484,24 @@ const Portfolio = () =>
         </m.article>
     )}
     </div>
-    <div style={{ padding: "40px var(--gutter) 0", textAlign: "center" }}>
-      <p className="mono" style={{ fontSize: 12, color: "var(--mute)", letterSpacing: "0.1em", textTransform: "uppercase", margin: 0 }}>
-        Aucun projet à montrer encore — c'est la vérité. Tu seras peut-être le premier dans la galerie.
-      </p>
-    </div>
+    <m.div
+      className="imgcmp-wrap"
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 0.7, ease: EASE_OUT_EXPO, delay: 0.1 }}
+    >
+      <div className="imgcmp-eyebrow mono">
+        <span className="dash"></span>
+        <span>Aperçu — glisse pour comparer</span>
+      </div>
+      <ImageComparison
+        beforeImage="https://placehold.co/1200x720/131313/7e7e77?text=Site+actuel+(avant)"
+        afterImage="https://placehold.co/1200x720/0a0a0a/ff5b2e?text=Site+Novio+Studio+(après)"
+        altBefore="Site web avant Novio Studio"
+        altAfter="Site web après Novio Studio"
+      />
+    </m.div>
   </section>;
 
 
