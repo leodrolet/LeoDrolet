@@ -876,10 +876,10 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   background: var(--line-strong);
   flex-shrink: 0;
 }
-.imgcmp {
+/* ── Compare Slider (content) ── */
+.cslider {
   position: relative;
   width: 100%;
-  aspect-ratio: 16/9;
   overflow: hidden;
   border-radius: 10px;
   border: 1px solid var(--line-strong);
@@ -887,74 +887,95 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   user-select: none;
   touch-action: pan-y;
 }
-.imgcmp-base,
-.imgcmp-layer img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: left center;
-  pointer-events: none;
-  draggable: false;
+.cslider--drag { cursor: ew-resize; }
+
+/* Both sides share the same layout so rows align */
+.cslider-side {
+  display: flex;
+  flex-direction: column;
 }
-.imgcmp-layer {
+.cslider-side--agency {
+  background: var(--bg-2);
+}
+.cslider-side--novio {
+  background: var(--bg-3);
+  border-left: 2px solid var(--accent);
+}
+.cslider-novio-clip {
   position: absolute;
   inset: 0;
-  overflow: hidden;
 }
-.imgcmp-label {
-  position: absolute;
-  top: 16px;
+.cslider-novio-clip .cslider-side--novio {
+  height: 100%;
+}
+.cslider-head {
+  padding: 14px 24px;
   font-family: var(--mono);
   font-size: 10px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  padding: 5px 10px;
-  border-radius: 4px;
-  pointer-events: none;
+  border-bottom: 1px solid var(--line-strong);
+  white-space: nowrap;
 }
-.imgcmp-label--l {
-  left: 16px;
-  background: rgba(10,10,10,0.7);
+.cslider-side--agency .cslider-head { color: var(--mute); }
+.cslider-side--novio  .cslider-head { color: var(--accent); }
+.cslider-row {
+  padding: 14px 24px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.cslider-row:last-child { border-bottom: none; }
+.cslider-feat {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   color: var(--mute);
-  border: 1px solid var(--line-strong);
 }
-.imgcmp-label--r {
-  right: 16px;
-  background: rgba(255,91,46,0.15);
+.cslider-val {
+  font-size: 14px;
+  line-height: 1.4;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.cslider-side--agency .cslider-val { color: var(--ink-2); font-style: italic; }
+.cslider-side--novio  .cslider-val { color: var(--ink); font-style: normal; }
+.cslider-check {
   color: var(--accent);
-  border: 1px solid rgba(255,91,46,0.4);
+  font-size: 12px;
+  flex-shrink: 0;
 }
-.imgcmp-track {
+.cslider-track {
   position: absolute;
   top: 0;
   bottom: 0;
   width: 2px;
-  background: rgba(255,255,255,0.75);
+  background: rgba(255,255,255,0.7);
   transform: translateX(-50%);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.2s;
+  z-index: 2;
 }
-.imgcmp-track--active { background: #fff; }
-.imgcmp-knob {
-  width: 40px;
-  height: 40px;
+.cslider-knob {
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   background: #fff;
-  border: 2px solid rgba(0,0,0,0.08);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #222;
+  color: #1a1a1a;
   flex-shrink: 0;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.35);
+  box-shadow: 0 2px 14px rgba(0,0,0,0.4);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
-.imgcmp-track--active .imgcmp-knob {
-  transform: scale(1.1);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+.cslider--drag .cslider-knob {
+  transform: scale(1.12);
+  box-shadow: 0 4px 22px rgba(0,0,0,0.55);
 }
 
 /* ============================================================

@@ -386,8 +386,17 @@ const CompareTable = () => (
   </div>
 );
 
-// ====================== IMAGE COMPARISON SLIDER ======================
-const ImageComparison = ({ beforeImage, afterImage, altBefore = 'Avant', altAfter = 'Après' }) => {
+// ====================== COMPARE SLIDER ======================
+const SLIDER_ROWS = [
+  { feature: "Création du site",      agency: "5 000 $ – 15 000 $ one-shot", novio: "Inclus" },
+  { feature: "Maintenance",           agency: "Facturée en extra",            novio: "Incluse" },
+  { feature: "Modifications",         agency: "100 $ – 200 $/heure",          novio: "50 $/page" },
+  { feature: "Support",               agency: "Non garanti",                  novio: "< 4h à 24h" },
+  { feature: "Mises à jour sécurité", agency: "Non incluses",                 novio: "Incluses" },
+  { feature: "Rapport mensuel",       agency: "Non inclus",                   novio: "Inclus" },
+];
+
+const CompareSlider = () => {
   const [pos, setPos] = React.useState(50);
   const [dragging, setDragging] = React.useState(false);
   const ref = React.useRef(null);
@@ -395,7 +404,7 @@ const ImageComparison = ({ beforeImage, afterImage, altBefore = 'Avant', altAfte
   const move = React.useCallback((clientX) => {
     if (!dragging || !ref.current) return;
     const r = ref.current.getBoundingClientRect();
-    setPos(Math.max(0, Math.min(100, ((clientX - r.left) / r.width) * 100)));
+    setPos(Math.max(4, Math.min(96, ((clientX - r.left) / r.width) * 100)));
   }, [dragging]);
 
   const stop = React.useCallback(() => setDragging(false), []);
@@ -408,30 +417,47 @@ const ImageComparison = ({ beforeImage, afterImage, altBefore = 'Avant', altAfte
   return (
     <div
       ref={ref}
-      className="imgcmp"
+      className={`cslider${dragging ? ' cslider--drag' : ''}`}
       onMouseMove={(e) => move(e.clientX)}
       onMouseLeave={stop}
       onTouchMove={(e) => { e.preventDefault(); move(e.touches[0].clientX); }}
       onTouchEnd={stop}
     >
-      {/* After image — clipped by slider position */}
-      <div className="imgcmp-layer" style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}>
-        <img src={afterImage} alt={altAfter} draggable="false" />
+      {/* ── Agency — base layer ── */}
+      <div className="cslider-side cslider-side--agency">
+        <div className="cslider-head">Agence traditionnelle</div>
+        {SLIDER_ROWS.map((row, i) => (
+          <div key={i} className="cslider-row">
+            <span className="cslider-feat">{row.feature}</span>
+            <span className="cslider-val">{row.agency}</span>
+          </div>
+        ))}
       </div>
-      {/* Before image — base layer */}
-      <img className="imgcmp-base" src={beforeImage} alt={altBefore} draggable="false" />
-      {/* Labels */}
-      <span className="imgcmp-label imgcmp-label--l">Avant</span>
-      <span className="imgcmp-label imgcmp-label--r">Après</span>
-      {/* Divider + knob */}
+
+      {/* ── Novio — clipped top layer, reveals from right ── */}
+      <div className="cslider-novio-clip" style={{ clipPath: `inset(0 0 0 ${pos}%)` }}>
+        <div className="cslider-side cslider-side--novio">
+          <div className="cslider-head">Novio Studio</div>
+          {SLIDER_ROWS.map((row, i) => (
+            <div key={i} className="cslider-row">
+              <span className="cslider-feat">{row.feature}</span>
+              <span className="cslider-val">
+                <span className="cslider-check">✓</span>{row.novio}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ── Divider + knob ── */}
       <div
-        className={`imgcmp-track${dragging ? ' imgcmp-track--active' : ''}`}
+        className="cslider-track"
         style={{ left: `${pos}%` }}
         onMouseDown={() => setDragging(true)}
         onTouchStart={() => setDragging(true)}
       >
-        <div className="imgcmp-knob">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <div className="cslider-knob">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <path d="M9 18L3 12L9 6"/><path d="M15 18L21 12L15 6"/>
           </svg>
         </div>
@@ -493,14 +519,9 @@ const Portfolio = () =>
     >
       <div className="imgcmp-eyebrow mono">
         <span className="dash"></span>
-        <span>Aperçu — glisse pour comparer</span>
+        <span>Glisse pour comparer</span>
       </div>
-      <ImageComparison
-        beforeImage="https://placehold.co/1200x720/131313/7e7e77?text=Site+actuel+(avant)"
-        afterImage="https://placehold.co/1200x720/0a0a0a/ff5b2e?text=Site+Novio+Studio+(après)"
-        altBefore="Site web avant Novio Studio"
-        altAfter="Site web après Novio Studio"
-      />
+      <CompareSlider />
     </m.div>
   </section>;
 
