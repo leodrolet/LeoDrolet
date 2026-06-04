@@ -1496,6 +1496,93 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 }
 
 /* ============================================================
+   Compare Table
+   ============================================================ */
+.compare-wrap {
+  padding: clamp(32px, 5vh, 56px) var(--gutter);
+  border-top: 1px solid var(--line-strong);
+}
+.compare-title-row {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: clamp(24px, 3vh, 40px);
+}
+.compare-heading {
+  font-family: var(--display);
+  font-size: clamp(28px, 3.2vw, 44px);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  color: var(--ink);
+  margin: 0;
+}
+.compare-table {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--line-strong);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.compare-row {
+  display: grid;
+  grid-template-columns: 1.4fr 1.6fr 1.6fr;
+  border-bottom: 1px solid var(--line);
+}
+.compare-row:last-child { border-bottom: none; }
+.compare-row--head { background: var(--bg-2); }
+.compare-cell {
+  padding: 14px 18px;
+  font-size: 13px;
+  line-height: 1.4;
+  border-right: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.compare-cell:last-child { border-right: none; }
+.compare-cell--label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+.compare-row--head .compare-cell--label { color: transparent; }
+.compare-cell--agency {
+  color: var(--mute);
+  font-style: italic;
+}
+.compare-row--head .compare-cell--agency {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-style: normal;
+  color: var(--mute);
+}
+.compare-cell--novio {
+  color: var(--ink);
+  font-weight: 500;
+  background: rgba(255, 91, 46, 0.04);
+  border-left: 2px solid var(--accent);
+}
+.compare-row--head .compare-cell--novio {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--accent);
+}
+.compare-check {
+  color: var(--accent);
+  font-size: 12px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+/* ============================================================
    Responsive — tablets (≤900px)
    ============================================================ */
 @media (max-width: 900px) {
@@ -1545,6 +1632,11 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   .final-cta .actions { flex-direction: column; align-items: center; }
   .service-card h3 { font-size: clamp(32px, 9vw, 64px); }
   .manifesto-line { font-size: clamp(32px, 9.5vw, 168px); }
+  .compare-row { grid-template-columns: 1fr; }
+  .compare-cell { border-right: none; border-bottom: 1px solid var(--line); }
+  .compare-cell:last-child { border-bottom: none; }
+  .compare-row--head .compare-cell--label { display: none; }
+  .compare-cell--label::before { content: attr(data-label); }
 }
 
 /* ============================================================

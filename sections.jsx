@@ -347,12 +347,74 @@ const Services = () => {
           </p>
         </div>
       </div>
+
+      <CompareTable />
     </section>
   );
 };
 
 
 
+
+// ====================== COMPARE TABLE ======================
+const COMPARE_ROWS = [
+  { feature: "Création du site",        agency: "5 000 $ – 15 000 $ one-shot", novio: "Inclus" },
+  { feature: "Maintenance",             agency: "Facturée en extra",            novio: "Incluse" },
+  { feature: "Modifications",           agency: "100 $ – 200 $/heure",          novio: "50 $/page" },
+  { feature: "Support",                 agency: "Non garanti",                  novio: "< 4h à 24h" },
+  { feature: "Mises à jour sécurité",   agency: "Non incluses",                 novio: "Incluses" },
+  { feature: "Rapport mensuel",         agency: "Non inclus",                   novio: "Inclus" },
+];
+
+const CompareTable = () => (
+  <div className="compare-wrap">
+    <m.div
+      className="compare-title-row"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 0.6, ease: EASE_OUT_EXPO }}
+    >
+      <span className="pricing-aside-label">Comparatif</span>
+      <h3 className="compare-heading">Pourquoi choisir Novio Studio ?</h3>
+    </m.div>
+
+    <div className="compare-table" role="table">
+      {/* Header */}
+      <m.div
+        className="compare-row compare-row--head"
+        role="row"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, amount: 0.5 }}
+        transition={{ duration: 0.4, ease: EASE_OUT_EXPO, delay: 0.1 }}
+      >
+        <div className="compare-cell compare-cell--label" role="columnheader" />
+        <div className="compare-cell compare-cell--agency" role="columnheader">Agence traditionnelle</div>
+        <div className="compare-cell compare-cell--novio" role="columnheader">Novio Studio</div>
+      </m.div>
+
+      {/* Data rows */}
+      {COMPARE_ROWS.map((row, i) => (
+        <m.div
+          key={i}
+          className="compare-row"
+          role="row"
+          initial={{ opacity: 0, x: -12 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.5, ease: EASE_OUT_EXPO, delay: 0.15 + i * 0.07 }}
+        >
+          <div className="compare-cell compare-cell--label" role="cell">{row.feature}</div>
+          <div className="compare-cell compare-cell--agency" role="cell">{row.agency}</div>
+          <div className="compare-cell compare-cell--novio" role="cell">
+            <span className="compare-check">✓</span>{row.novio}
+          </div>
+        </m.div>
+      ))}
+    </div>
+  </div>
+);
 
 // ====================== PORTFOLIO — FOUNDER SLOTS ======================
 const SLOTS = [
