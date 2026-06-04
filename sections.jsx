@@ -268,25 +268,44 @@ const PlanCard = ({ plan, i }) => (
   </m.div>
 );
 
-const Services = () => {
-  return (
-    <section className="section" id="devis">
-      <SectionHead
-        num="06"
-        kicker="Forfaits"
-        title={<>Un forfait. <em style={{ fontStyle: "italic", color: "var(--ink-2)" }}>Tout inclus.</em></>}
-        right="Engagement 3 mois · préavis 30 jours · aucun frais caché"
-      />
+const Services = () => (
+  <section className="section" id="devis">
+    <div className="plans-layout">
 
-      <div className="plans-grid">
+      <RevealItem className="plans-intro" as="div">
+        <span className="eyebrow" style={{ color: "var(--accent)", marginBottom: 20, display: "block" }}>Forfaits</span>
+        <h2 className="section-title" style={{ marginBottom: 20 }}>
+          Un forfait.<br/>
+          <em style={{ fontStyle: "italic", color: "var(--ink-2)" }}>Tout inclus.</em>
+        </h2>
+        <p className="plans-intro-body">
+          Pas de surprise, pas d'extras cachés. Tout ce dont un entrepreneur a besoin pour dominer son marché local — en un seul abonnement mensuel.
+        </p>
+        <ul className="plans-promises">
+          {[
+            "Livré en 7 à 28 jours",
+            "Domaine + hébergement inclus",
+            "Résiliation sans pénalité après 3 mois",
+            "Support réponse garantie &lt; 4 h",
+            "Aucun frais caché",
+          ].map((item, i) => (
+            <li key={i}>
+              <span className="plans-promise-dot">→</span>
+              <span dangerouslySetInnerHTML={{ __html: item }} />
+            </li>
+          ))}
+        </ul>
+      </RevealItem>
+
+      <div className="plans-card-col">
         {PLANS.map((plan, i) => (
           <PlanCard key={plan.id} plan={plan} i={i} />
         ))}
       </div>
 
-    </section>
-  );
-};
+    </div>
+  </section>
+);
 
 
 
