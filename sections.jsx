@@ -312,14 +312,6 @@ const Services = () => {
         right="Engagement 3 mois · préavis 30 jours · aucun frais caché"
       />
 
-      <m.p
-        className="plans-global-note"
-        initial={{ opacity: 0, y: 14 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.5 }}
-        transition={{ duration: 0.55, ease: EASE_OUT_EXPO, delay: 0.05 }}
-      >Engagement 3 mois · préavis 30 jours · aucun frais caché</m.p>
-
       <div className="plans-grid">
         {PLANS.map((plan, i) => (
           <PlanCard key={plan.id} plan={plan} i={i} />
