@@ -212,7 +212,7 @@ const PLANS = [
     featured: true,
     badge: null,
     benefits: [
-      { text: "Jusqu'à 5 pages clés (Accueil, Services, À propos, Réalisations, Contact)", checked: true },
+      { text: "Jusqu'à 5 pages clés", checked: true },
       { text: "Mobile responsive", checked: true },
       { text: "Formulaires + intégrations (CRM, email)", checked: true },
       { text: "SEO local optimisé", checked: true },
@@ -220,7 +220,7 @@ const PLANS = [
       { text: "Support prioritaire — réponse < 4 h", checked: true },
       { text: "Hébergement + sécurité + domaine inclus", checked: true },
       { text: "4 révisions gratuites le 1er mois", checked: true },
-      { text: "Modifications post-lancement : 50 $/page (après le 1er mois)", checked: true },
+      { text: "Modifications post-lancement : 50 $/page (après les révisions)", checked: true },
     ],
   },
 ];

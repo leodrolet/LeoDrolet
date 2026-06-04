@@ -10,7 +10,7 @@ const PLANS = [
     subtitle: "L'arsenal complet pour l'entrepreneur qui veut des résultats.",
     features: [
       "Jusqu'à 20 pages",
-      "Jusqu'à 5 pages clés (Accueil, Services, À propos, Réalisations, Contact)",
+      "Jusqu'à 5 pages clés",
       "Mobile responsive",
       "Formulaires + intégrations (CRM, email)",
       "SEO local optimisé",
@@ -18,7 +18,7 @@ const PLANS = [
       "Support prioritaire — réponse < 4 h",
       "Hébergement + sécurité + domaine inclus",
       "4 révisions gratuites le 1er mois",
-      "Modifications post-lancement : 50 $/page (après le 1er mois)",
+      "Modifications post-lancement : 50 $/page (après les révisions)",
     ],
   },
 ];
