@@ -205,45 +205,11 @@ const SectionHead = ({ num, kicker, title, right }) => {
 // ====================== PRICING (FORFAITS) ======================
 const PLANS = [
   {
-    id: "essentiel",
-    tier: "Essentiel",
-    price: "300 $",
-    bestFor: "Présence en ligne. Appels entrants.",
-    featured: false,
-    badge: null,
-    benefits: [
-      { text: "Jusqu'à 5 pages", checked: true },
-      { text: "Mobile responsive", checked: true },
-      { text: "Formulaire de contact", checked: true },
-      { text: "SEO local de base", checked: true },
-      { text: "Hébergement + sécurité inclus", checked: true },
-      { text: "1 révision gratuite le 1er mois", checked: true },
-    ],
-  },
-  {
-    id: "pro",
-    tier: "Professionnel",
-    price: "450 $",
-    bestFor: "La meilleure valeur pour la majorité des PME.",
+    id: "complet",
+    tier: "Tout inclus",
+    price: "500 $",
+    bestFor: "L'arsenal complet pour l'entrepreneur qui veut des résultats.",
     featured: true,
-    badge: "Le plus populaire",
-    benefits: [
-      { text: "Jusqu'à 10 pages", checked: true },
-      { text: "Mobile responsive", checked: true },
-      { text: "Formulaires avancés (devis, soumissions)", checked: true },
-      { text: "SEO avancé + Google Business", checked: true },
-      { text: "Rapport mensuel de performance", checked: true },
-      { text: "Réponse < 24 h", checked: true },
-      { text: "Hébergement + sécurité inclus", checked: true },
-      { text: "2 révisions gratuites le 1er mois", checked: true },
-    ],
-  },
-  {
-    id: "premium",
-    tier: "Premium",
-    price: "700 $",
-    bestFor: "L'arsenal complet pour l'entreprise qui veut tout.",
-    featured: false,
     badge: null,
     benefits: [
       { text: "Jusqu'à 20 pages", checked: true },
@@ -308,7 +274,7 @@ const Services = () => {
       <SectionHead
         num="06"
         kicker="Forfaits"
-        title={<>Trois forfaits. <em style={{ fontStyle: "italic", color: "var(--ink-2)" }}>Tout inclus.</em></>}
+        title={<>Un forfait. <em style={{ fontStyle: "italic", color: "var(--ink-2)" }}>Tout inclus.</em></>}
         right="Engagement 3 mois · préavis 30 jours · aucun frais caché"
       />
 

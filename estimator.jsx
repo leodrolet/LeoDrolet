@@ -4,41 +4,10 @@
 
 const PLANS = [
   {
-    id: "essentiel",
-    label: "Essentiel",
-    price: 300,
-    subtitle: "Présence en ligne. Appels entrants.",
-    features: [
-      "Jusqu'à 5 pages",
-      "Mobile responsive",
-      "Formulaire de contact",
-      "SEO local de base",
-      "Hébergement + sécurité inclus",
-      "1 révision gratuite le 1er mois",
-    ],
-  },
-  {
-    id: "professionnel",
-    label: "Professionnel",
-    price: 450,
-    badge: "Meilleure valeur",
-    subtitle: "La meilleure valeur pour la majorité des PME.",
-    features: [
-      "Jusqu'à 10 pages",
-      "Mobile responsive",
-      "Formulaires avancés",
-      "SEO avancé + Google Business",
-      "Rapport mensuel de performance",
-      "Réponse < 24 h",
-      "Hébergement + sécurité inclus",
-      "2 révisions gratuites le 1er mois",
-    ],
-  },
-  {
-    id: "premium",
-    label: "Premium",
-    price: 700,
-    subtitle: "L'arsenal complet pour l'entreprise qui veut tout.",
+    id: "complet",
+    label: "Tout inclus",
+    price: 500,
+    subtitle: "L'arsenal complet pour l'entrepreneur qui veut des résultats.",
     features: [
       "Jusqu'à 20 pages",
       "Mobile responsive",
@@ -53,7 +22,7 @@ const PLANS = [
 ];
 
 const Estimator = () => {
-  const [planId,   setPlanId]   = React.useState("professionnel");
+  const [planId,   setPlanId]   = React.useState("complet");
   const [name,     setName]     = React.useState("");
   const [email,    setEmail]    = React.useState("");
   const [project,  setProject]  = React.useState("");
@@ -146,29 +115,10 @@ const Estimator = () => {
         {/* ── LEFT ────────────────────────────────────────── */}
         <div className="estimator-form">
 
-          {/* 01 · Plan */}
+          {/* 01 · Inclus */}
           <div className="field">
             <div className="field-label">
-              <span>01 · Plan mensuel</span>
-              <span className="req">requis</span>
-            </div>
-            <div className="field-options">
-              {PLANS.map((p) => (
-                <button
-                  type="button" key={p.id}
-                  className={planId === p.id ? "active" : ""}
-                  onClick={() => setPlanId(p.id)}
-                >
-                  {p.label} · {p.price} $/mois{p.badge ? ` ★` : ""}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* 02 · Inclus */}
-          <div className="field">
-            <div className="field-label">
-              <span>02 · Inclus dans ce plan</span>
+              <span>01 · Inclus dans ce plan</span>
             </div>
             <ul className="feat-included-list">
               {plan.features.map((f, i) => (
@@ -184,7 +134,7 @@ const Estimator = () => {
 
           {/* Contact */}
           <div className="field">
-            <div className="field-label"><span>03 · Toi</span></div>
+            <div className="field-label"><span>02 · Toi</span></div>
             <label htmlFor="contact-name" className="sr-only">Nom et entreprise</label>
             <input id="contact-name" type="text" placeholder="Nom · entreprise" value={name} onChange={(e) => setName(e.target.value)} />
           </div>

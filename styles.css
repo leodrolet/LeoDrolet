@@ -1500,7 +1500,8 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .plans-grid {
   padding: 0 var(--gutter);
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: minmax(280px, 520px);
+  justify-content: center;
   gap: clamp(12px, 1.5vw, 20px);
   align-items: stretch;
 }
