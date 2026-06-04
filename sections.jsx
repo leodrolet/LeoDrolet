@@ -212,14 +212,15 @@ const PLANS = [
     featured: true,
     badge: null,
     benefits: [
-      { text: "Jusqu'à 20 pages", checked: true },
-      { text: "Adapté mobile, tablette et ordinateur", checked: true },
-      { text: "Formulaires de contact + connexion à tes outils", checked: true },
-      { text: "Visibilité Google + suivi de classement mensuel", checked: true },
+      { text: "Jusqu'à 5 pages clés (Accueil, Services, À propos, Réalisations, Contact)", checked: true },
+      { text: "Mobile responsive", checked: true },
+      { text: "Formulaires + intégrations (CRM, email)", checked: true },
+      { text: "SEO local optimisé", checked: true },
       { text: "Rapport mensuel + recommandations", checked: true },
       { text: "Support prioritaire — réponse < 4 h", checked: true },
-      { text: "Hébergement + sécurité inclus", checked: true },
+      { text: "Hébergement + sécurité + domaine inclus", checked: true },
       { text: "4 révisions gratuites le 1er mois", checked: true },
+      { text: "Modifications post-lancement : 50 $/page (après le 1er mois)", checked: true },
     ],
   },
 ];
@@ -283,11 +284,12 @@ const Services = () => (
         </p>
         <ul className="plans-promises">
           {[
-            "Livré en 7 à 28 jours",
+            "Livré en 7 à 21 jours",
             "Domaine + hébergement inclus",
             "Résiliation sans pénalité après 3 mois",
             "Support réponse garantie &lt; 4 h",
             "Aucun frais caché",
+            "Modifications à la carte : 50 $/page après le 1er mois",
           ].map((item, i) => (
             <li key={i}>
               <span className="plans-promise-dot">→</span>
