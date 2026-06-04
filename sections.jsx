@@ -213,13 +213,11 @@ const PLANS = [
     badge: null,
     benefits: [
       { text: "Jusqu'à 5 pages", checked: true },
-      { text: "Optimisation mobile (100 % responsive)", checked: true },
+      { text: "Mobile responsive", checked: true },
       { text: "Formulaire de contact", checked: true },
-      { text: "SEO local de base (Google, carte, fiche)", checked: true },
-      { text: "1 modification / mois", checked: true },
-      { text: "Formulaires avancés (devis, soumissions)", checked: false },
-      { text: "Rapport mensuel de performance", checked: false },
-      { text: "Support prioritaire — réponse < 4 h", checked: false },
+      { text: "SEO local de base", checked: true },
+      { text: "Hébergement + sécurité inclus", checked: true },
+      { text: "1 révision gratuite le 1er mois", checked: true },
     ],
   },
   {
@@ -231,13 +229,13 @@ const PLANS = [
     badge: "Le plus populaire",
     benefits: [
       { text: "Jusqu'à 10 pages", checked: true },
-      { text: "Optimisation mobile (100 % responsive)", checked: true },
+      { text: "Mobile responsive", checked: true },
       { text: "Formulaires avancés (devis, soumissions)", checked: true },
-      { text: "SEO avancé + Google Business optimisé", checked: true },
-      { text: "2 modifications / mois", checked: true },
+      { text: "SEO avancé + Google Business", checked: true },
       { text: "Rapport mensuel de performance", checked: true },
-      { text: "Temps de réponse < 24 h", checked: true },
-      { text: "Support prioritaire — réponse < 4 h", checked: false },
+      { text: "Réponse < 24 h", checked: true },
+      { text: "Hébergement + sécurité inclus", checked: true },
+      { text: "2 révisions gratuites le 1er mois", checked: true },
     ],
   },
   {
@@ -248,13 +246,14 @@ const PLANS = [
     featured: false,
     badge: null,
     benefits: [
-      { text: "Pages illimitées", checked: true },
-      { text: "Optimisation mobile (100 % responsive)", checked: true },
-      { text: "Formulaires + intégrations (CRM, email, etc.)", checked: true },
+      { text: "Jusqu'à 20 pages", checked: true },
+      { text: "Mobile responsive", checked: true },
+      { text: "Formulaires + intégrations (CRM, email)", checked: true },
       { text: "SEO avancé + suivi de positionnement mensuel", checked: true },
-      { text: "4 modifications / mois", checked: true },
       { text: "Rapport mensuel + recommandations", checked: true },
       { text: "Support prioritaire — réponse < 4 h", checked: true },
+      { text: "Hébergement + sécurité inclus", checked: true },
+      { text: "4 révisions gratuites le 1er mois", checked: true },
     ],
   },
 ];
@@ -321,7 +320,7 @@ const Services = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.5 }}
         transition={{ duration: 0.55, ease: EASE_OUT_EXPO, delay: 0.05 }}
-      >Domaine et hébergement inclus dans tous les forfaits.</m.p>
+      >Engagement 3 mois · préavis 30 jours · aucun frais caché</m.p>
 
       <div className="plans-grid">
         {PLANS.map((plan, i) => (
@@ -335,6 +334,16 @@ const Services = () => {
           <div className="pricing-why-title">Pourquoi mensuel ?</div>
           <p className="pricing-why-text">
             Contrairement aux agences qui facturent 5 000 $ à 15 000 $ d'entrée de jeu, notre modèle mensuel vous permet de lancer sans investissement massif. Chaque mois : votre site est maintenu, sécurisé, mis à jour et optimisé. Vous ne payez pas seulement un site — vous payez un partenaire web actif.
+          </p>
+        </div>
+      </div>
+
+      <div className="pricing-clause reveal" ref={useReveal()}>
+        <span className="pricing-aside-label">Politique de révisions</span>
+        <div>
+          <div className="pricing-why-title">Après le 1er mois</div>
+          <p className="pricing-why-text">
+            Le client dispose de 1, 2 ou 4 révisions gratuites (selon le forfait) durant le premier mois suivant la mise en ligne. Une révision consiste en un fichier texte listant les modifications souhaitées. Une fois les révisions épuisées ou le premier mois écoulé, chaque modification est facturée à <strong style={{ color: "var(--ink)" }}>50 $ par page modifiée</strong>. La création d'une nouvelle page est facturée à <strong style={{ color: "var(--ink)" }}>200 $</strong>.
           </p>
         </div>
       </div>
@@ -446,7 +455,7 @@ const FAQS = [
 { q: "Tu héberges aussi le site ?", a: "Oui — hébergement premium inclus la première année (Vercel ou équivalent). Domaine séparé. Ensuite, ~120$/an si tu veux que je continue, ou je te transfère le tout." },
 { q: "Et si j'ai déjà un logo ou une identité visuelle ?", a: "Parfait — je travaille avec. Si tu n'en as pas, on peut en créer une minimaliste ensemble dans le cadre du projet, ou je te recommande un graphiste de la région." },
 { q: "Travailles-tu à distance ou en personne ?", a: "Les deux. Premier appel en visio ou en personne (café offert à Gatineau ou Ottawa). Build à distance avec liens live. Formation finale en personne si tu préfères." },
-{ q: "Et si je veux modifier le site moi-même après ?", a: "Avec l'offre Site Complet, tu reçois un CMS pour tout modifier sans toucher au code. Avec les autres offres, modifications mineures incluses 30 jours, puis 75$/h après." },
+{ q: "Et si je veux modifier le site après la mise en ligne ?", a: "Chaque forfait inclut 1, 2 ou 4 révisions gratuites durant le premier mois. Une révision = un fichier texte listant les changements souhaités. Après le premier mois ou les révisions épuisées : 50 $ par page modifiée, 200 $ pour une nouvelle page. Simple, transparent, sans surprise." },
 { q: "Je suis contractor, pas technicien — est-ce que je vais comprendre comment gérer mon site ?", a: "Oui. C'est exactement pourquoi je reste 30 à 60 jours après le lancement. Je te montre comment mettre à jour ton contenu, ajouter des photos de projets, et répondre aux soumissions. Pas de jargon technique — tu apprends ce dont tu as besoin, rien de plus." },
 { q: "Mon téléphone sonne déjà par bouche-à-oreille, pourquoi aurais-je besoin d'un site ?", a: "Parce que ton prochain client te cherche sur Google avant même de t'appeler. S'il ne te trouve pas, il appelle ton concurrent. Un site bien fait capte ces leads que tu ne savais même pas que tu perdais." }];
 

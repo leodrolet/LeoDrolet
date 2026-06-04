@@ -1464,12 +1464,17 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 }
 
 /* ----  Pourquoi mensuel  ---- */
-.pricing-why {
+.pricing-why,
+.pricing-clause {
   padding: clamp(32px, 5vh, 52px) var(--gutter);
   display: grid;
   grid-template-columns: 1fr 2fr;
   gap: 32px;
   align-items: start;
+}
+.pricing-clause {
+  border-top: 1px solid var(--line-strong);
+  padding-top: clamp(24px, 4vh, 40px);
 }
 
 .pricing-why-title {
@@ -1511,7 +1516,8 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   .footer { grid-template-columns: 1fr 1fr; }
   .manifesto-pin { padding: 0 var(--gutter); }
   .plans-grid { grid-template-columns: 1fr; }
-  .pricing-why { grid-template-columns: 1fr; gap: 16px; }
+  .pricing-why,
+  .pricing-clause { grid-template-columns: 1fr; gap: 16px; }
 }
 
 /* ============================================================
