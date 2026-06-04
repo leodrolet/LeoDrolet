@@ -876,6 +876,76 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   background: var(--line-strong);
   flex-shrink: 0;
 }
+/* ── Compare Table (static) ── */
+.ctable-wrap {
+  margin-top: clamp(40px, 6vh, 72px);
+  padding: 0 var(--gutter);
+}
+.ctable {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--line-strong);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.ctable-head,
+.ctable-row {
+  display: grid;
+  grid-template-columns: 1.4fr 1.6fr 1.6fr;
+  border-bottom: 1px solid var(--line);
+}
+.ctable-row:last-child { border-bottom: none; }
+.ctable-head { background: var(--bg-2); }
+.ctable-cell {
+  padding: 14px 18px;
+  font-size: 13px;
+  line-height: 1.4;
+  border-right: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ctable-cell:last-child { border-right: none; }
+.ctable-cell--label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+.ctable-head .ctable-cell--label { color: transparent; }
+.ctable-cell--agency {
+  color: var(--ink-2);
+  font-style: italic;
+}
+.ctable-head .ctable-cell--agency {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-style: normal;
+  color: var(--mute);
+}
+.ctable-cell--novio {
+  color: var(--ink);
+  font-weight: 500;
+  background: rgba(255, 91, 46, 0.04);
+  border-left: 2px solid var(--accent);
+}
+.ctable-head .ctable-cell--novio {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--accent);
+}
+.ctable-check {
+  color: var(--accent);
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
 /* ── Compare Slider (content) ── */
 .cslider {
   position: relative;

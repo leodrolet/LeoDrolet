@@ -319,17 +319,26 @@ const Services = () => {
       </div>
 
       <m.div
-        className="imgcmp-wrap"
+        className="ctable-wrap"
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.1 }}
         transition={{ duration: 0.7, ease: EASE_OUT_EXPO, delay: 0.1 }}
       >
-        <div className="imgcmp-eyebrow mono">
-          <span className="dash"></span>
-          <span>Glisse pour comparer</span>
+        <div className="ctable">
+          <div className="ctable-head">
+            <div className="ctable-cell ctable-cell--label" />
+            <div className="ctable-cell ctable-cell--agency">Agence traditionnelle</div>
+            <div className="ctable-cell ctable-cell--novio">Novio Studio</div>
+          </div>
+          {SLIDER_ROWS.map((row, i) => (
+            <div className="ctable-row" key={i}>
+              <div className="ctable-cell ctable-cell--label">{row.feature}</div>
+              <div className="ctable-cell ctable-cell--agency">{row.agency}</div>
+              <div className="ctable-cell ctable-cell--novio"><span className="ctable-check">✓</span>{row.novio}</div>
+            </div>
+          ))}
         </div>
-        <CompareSlider />
       </m.div>
     </section>
   );
