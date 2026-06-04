@@ -303,8 +303,6 @@ const PlanCard = ({ plan, i }) => (
 );
 
 const Services = () => {
-  const whyRef = useReveal();
-
   return (
     <section className="section" id="devis">
       <SectionHead
@@ -326,26 +324,6 @@ const Services = () => {
         {PLANS.map((plan, i) => (
           <PlanCard key={plan.id} plan={plan} i={i} />
         ))}
-      </div>
-
-      <div className="pricing-why reveal" ref={whyRef}>
-        <span className="pricing-aside-label">Abonnement mensuel</span>
-        <div>
-          <div className="pricing-why-title">Pourquoi mensuel ?</div>
-          <p className="pricing-why-text">
-            Contrairement aux agences qui facturent 5 000 $ à 15 000 $ d'entrée de jeu, notre modèle mensuel vous permet de lancer sans investissement massif. Chaque mois : votre site est maintenu, sécurisé, mis à jour et optimisé. Vous ne payez pas seulement un site — vous payez un partenaire web actif.
-          </p>
-        </div>
-      </div>
-
-      <div className="pricing-clause reveal" ref={useReveal()}>
-        <span className="pricing-aside-label">Politique de révisions</span>
-        <div>
-          <div className="pricing-why-title">Après le 1er mois</div>
-          <p className="pricing-why-text">
-            Le client dispose de 1, 2 ou 4 révisions gratuites (selon le forfait) durant le premier mois suivant la mise en ligne. Une révision consiste en un fichier texte listant les modifications souhaitées. Une fois les révisions épuisées ou le premier mois écoulé, chaque modification est facturée à <strong style={{ color: "var(--ink)" }}>50 $ par page modifiée</strong>. La création d'une nouvelle page est facturée à <strong style={{ color: "var(--ink)" }}>200 $</strong>.
-          </p>
-        </div>
       </div>
 
       <CompareTable />
