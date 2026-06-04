@@ -203,40 +203,34 @@ const SectionHead = ({ num, kicker, title, right }) => {
 };
 
 // ====================== PRICING (FORFAITS) ======================
-const WAVE_PATH = "M11.2131 11L106.283 106.07M106.283 106.07L117.279 117.066M106.283 106.07L22.2962 190.003M106.283 106.07L116.688 95.6708M11.2962 200.997L22.2962 190.003M22.2962 190.003L11.2529 178.96M22.2962 190.003L106.323 274.03M106.323 274.03L117.319 285.026M106.323 274.03L22.4537 357.846M106.323 274.03L116.728 263.631M11.3361 368.957L22.4537 357.846M22.4537 357.846L11.5493 346.901M22.4537 357.846L106.44 442.149M106.44 442.149L117.416 453.166M106.44 442.149L22.2962 525.925M106.44 442.149L116.865 431.769M11.2756 536.897L22.2962 525.925M22.2962 525.925L11.2737 514.861M22.2962 525.925L106.165 610.109M106.165 610.109L117.14 621.126M106.165 610.109L11 704.857M106.165 610.109L116.59 599.729M11.2131 683L106.283 778.07M106.283 778.07L117.279 789.066M106.283 778.07L22.2962 862.003M106.283 778.07L116.688 767.671M11.2962 872.997L22.2962 862.003M22.2962 862.003L11.2529 850.96M22.2962 862.003L106.323 946.03M106.323 946.03L117.319 957.026M106.323 946.03L22.4537 1029.85M106.323 946.03L116.728 935.631M11.3361 1040.96L22.4537 1029.85M22.4537 1029.85L11.5493 1018.9M22.4537 1029.85L106.44 1114.15M106.44 1114.15L117.416 1125.17M106.44 1114.15L22.2962 1197.92M106.44 1114.15L116.865 1103.77M11.2756 1208.9L22.2962 1197.92M22.2962 1197.92L11.2737 1186.86M22.2962 1197.92L106.165 1282.11M106.165 1282.11L117.14 1293.13M106.165 1282.11L11 1376.86M106.165 1282.11L116.59 1271.73";
-
 const PLANS = [
   {
     id: "complet",
     tier: "Tout inclus",
-    price: "500",
-    bestFor: "L'arsenal complet pour l'entrepreneur qui veut des résultats, sans gérer 5 fournisseurs.",
+    price: "500 $",
+    bestFor: "L'arsenal complet pour l'entrepreneur qui veut des résultats.",
     featured: true,
+    badge: null,
     benefits: [
-      { text: "Jusqu'à 20 pages",                            desc: "Site complet livré clé en main" },
-      { text: "Mobile responsive",                           desc: "Parfait sur tous les écrans" },
-      { text: "Formulaires + intégrations (CRM, email)" },
-      { text: "SEO avancé + suivi de positionnement mensuel" },
-      { text: "Rapport mensuel + recommandations concrètes" },
-      { text: "Support prioritaire",                         desc: "Réponse garantie en moins de 4 h" },
-      { text: "Hébergement + sécurité inclus",               desc: "Zéro stress" },
-      { text: "4 révisions gratuites le 1er mois" },
+      { text: "Jusqu'à 20 pages", checked: true },
+      { text: "Mobile responsive", checked: true },
+      { text: "Formulaires + intégrations (CRM, email)", checked: true },
+      { text: "SEO avancé + suivi de positionnement mensuel", checked: true },
+      { text: "Rapport mensuel + recommandations", checked: true },
+      { text: "Support prioritaire — réponse < 4 h", checked: true },
+      { text: "Hébergement + sécurité inclus", checked: true },
+      { text: "4 révisions gratuites le 1er mois", checked: true },
     ],
   },
 ];
 
 
-const Benefit = ({ text, desc }) => (
+const Benefit = ({ text, checked }) => (
   <div className="benefit-row">
-    <div className="benefit-check">
-      <svg width="9" height="9" viewBox="0 0 12 12" fill="none">
-        <polyline points="1.5,6 4.5,9.5 10.5,2.5" stroke="var(--accent)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    </div>
-    <div className="benefit-body">
-      <span className="benefit-text">{text}</span>
-      {desc && <span className="benefit-desc">{desc}</span>}
-    </div>
+    <span className={`benefit-icon${checked ? " benefit-icon--check" : " benefit-icon--x"}`}>
+      {checked ? "✓" : "✕"}
+    </span>
+    <span className={`benefit-text${checked ? "" : " benefit-text--muted"}`}>{text}</span>
   </div>
 );
 
@@ -251,34 +245,25 @@ const PlanCard = ({ plan, i }) => (
     style={{ height: "100%" }}
   >
     <div className={`plan-card${plan.featured ? " plan-card--featured" : ""}`} style={{ animationDelay: `${-i * 1.6}s` }}>
-      <svg className="plan-wave plan-wave--left" width="129" height="1387" viewBox="0 0 129 1387" fill="none" aria-hidden="true">
-        <path d={WAVE_PATH} stroke="var(--accent)" strokeWidth="31"/>
-      </svg>
-      <svg className="plan-wave plan-wave--right" width="129" height="1387" viewBox="0 0 129 1387" fill="none" aria-hidden="true">
-        <path d={WAVE_PATH} stroke="var(--accent)" strokeWidth="31"/>
-      </svg>
-      <div className="plan-card-inner">
-        <span className="plan-badge-pill">Un seul forfait · Tout inclus</span>
-        <h3 className="plan-tier">{plan.tier}</h3>
+      <div className="plan-card-header">
+        <div className="plan-card-top">
+          <span className="plan-tier">{plan.tier}</span>
+          {plan.badge && <span className="plan-badge">{plan.badge}</span>}
+        </div>
+        <span className="plan-amount">{plan.price}<sup className="plan-amount-unit">/mois</sup></span>
         <p className="plan-best-for">{plan.bestFor}</p>
-        <div className="plan-sep" />
-        <div className="plan-price-block">
-          <div className="plan-price-row">
-            <span className="plan-amount">{plan.price}</span>
-            <span className="plan-amount-unit">$ /mois</span>
-          </div>
-          <p className="plan-price-engagement">· sans engagement</p>
-          <p className="plan-price-note">↳ Équivaut à 3–4× moins qu'une agence traditionnelle</p>
-        </div>
-        <div className="plan-benefits">
-          {plan.benefits.map((b, j) => (
-            <Benefit key={j} text={b.text} desc={b.desc} />
-          ))}
-        </div>
-        <a href="mailto:leo_drolet@noviostudio.online" className="btn plan-cta plan-cta--featured">
-          Démarrer mon projet <span className="arrow">&#8594;</span>
-        </a>
       </div>
+      <div className="plan-benefits">
+        {plan.benefits.map((b, j) => (
+          <Benefit key={j} text={b.text} checked={b.checked} />
+        ))}
+      </div>
+      <a
+        href="mailto:leo_drolet@noviostudio.online"
+        className={`btn plan-cta${plan.featured ? " plan-cta--featured" : ""}`}
+      >
+        Démarrer mon projet <span className="arrow">&#8594;</span>
+      </a>
     </div>
   </m.div>
 );
