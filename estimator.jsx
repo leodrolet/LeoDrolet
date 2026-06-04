@@ -10,9 +10,9 @@ const PLANS = [
     subtitle: "L'arsenal complet pour l'entrepreneur qui veut des résultats.",
     features: [
       "Jusqu'à 20 pages",
-      "Mobile responsive",
-      "Formulaires + intégrations (CRM, email)",
-      "SEO avancé + suivi de positionnement mensuel",
+      "Adapté mobile, tablette et ordinateur",
+      "Formulaires de contact + connexion à tes outils",
+      "Visibilité Google + suivi de classement mensuel",
       "Rapport mensuel + recommandations",
       "Support prioritaire — réponse < 4 h",
       "Hébergement + sécurité inclus",
