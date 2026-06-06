@@ -208,19 +208,22 @@ const PLANS = [
     id: "complet",
     tier: "Tout inclus",
     price: "500 $",
-    bestFor: "L'arsenal complet pour l'entrepreneur qui veut des résultats.",
+    bestFor: "L'arsenal complet — sans surprise, sans extras cachés.",
     featured: true,
     badge: null,
     benefits: [
-      { text: "Jusqu'à 5 pages clés", checked: true },
+      { text: "Jusqu'à 7 pages clés", checked: true },
       { text: "Mobile responsive", checked: true },
       { text: "Formulaires + intégrations (CRM, email)", checked: true },
       { text: "SEO local optimisé", checked: true },
       { text: "Rapport mensuel + recommandations", checked: true },
       { text: "Support prioritaire — réponse < 4 h", checked: true },
       { text: "Hébergement + sécurité + domaine inclus", checked: true },
-      { text: "4 révisions gratuites le 1er mois", checked: true },
-      { text: "Modifications post-lancement : 50 $/page (après les révisions)", checked: true },
+      { text: "4 révisions illimitées pendant le lancement", checked: true },
+      { text: "1 heure de modifications incluse / mois", checked: true },
+      { text: "Modifications supplémentaires : 75 $/heure", checked: true },
+      { text: "Engagement minimum : 3 mois", checked: true },
+      { text: "Résiliation sans pénalité après 3 mois — préavis 30 jours", checked: true },
     ],
   },
 ];
@@ -286,10 +289,10 @@ const Services = () => (
           {[
             "Livré en 7 à 21 jours",
             "Domaine + hébergement inclus",
-            "Résiliation sans pénalité après 3 mois",
+            "Engagement minimum 3 mois, résiliation libre ensuite",
             "Support réponse garantie &lt; 4 h",
+            "1 heure de retouches incluse chaque mois",
             "Aucun frais caché",
-            "Modifications à la carte : 50 $/page après le 1er mois",
           ].map((item, i) => (
             <li key={i}>
               <span className="plans-promise-dot">→</span>
