@@ -2,6 +2,7 @@
   "buildCommand": "npm run build",
   "cleanUrls": true,
   "outputDirectory": ".",
+  "toolbar": false,
   "headers": [
     {
       "source": "/vendor/(.*)",
