@@ -326,52 +326,6 @@ const PlanCard = ({ plan, i }) => (
   </m.div>
 );
 
-// ====================== HOW IT WORKS ======================
-const HOW_STEPS = [
-  {
-    num: "01",
-    title: "Prise de contact",
-    icon: "messagecircle",
-    text: "On discute de votre projet en 15 minutes. Pas de jargon, pas de pression.",
-  },
-  {
-    num: "02",
-    title: "Livraison en moins de 3 semaines",
-    icon: "rocket",
-    text: "Votre site est construit, testé et mis en ligne. Vous n'avez rien à gérer.",
-  },
-  {
-    num: "03",
-    title: "On s'occupe du reste",
-    icon: "refresh",
-    text: "Maintenance, SEO, support. Vous vous concentrez sur vos clients.",
-  },
-];
-
-const HowItWorks = () => (
-  <section className="section hiw-section">
-    <RevealItem as="div" className="hiw-head">
-      <h2 className="hiw-title">Simple comme bonjour.</h2>
-      <p className="hiw-subtitle">Trois étapes. Zéro prise de tête.</p>
-    </RevealItem>
-    <div className="hiw-steps">
-      {HOW_STEPS.map((step, i) => (
-        <React.Fragment key={i}>
-          <RevealItem as="div" className="hiw-step" delay={i * 120}>
-            <div className="hiw-step-num">{step.num}</div>
-            <div className="hiw-icon-wrap">{BENEFIT_ICONS[step.icon]}</div>
-            <div className="hiw-step-title">{step.title}</div>
-            <p className="hiw-step-text">{step.text}</p>
-          </RevealItem>
-          {i < HOW_STEPS.length - 1 && (
-            <div className="hiw-connector" aria-hidden="true" />
-          )}
-        </React.Fragment>
-      ))}
-    </div>
-  </section>
-);
-
 const PROMISES = [
   { icon: "rocket",        bold: "En ligne",              rest: " en moins de 3 semaines" },
   { icon: "server",        bold: "Domaine + hébergement",  rest: " inclus" },
@@ -792,6 +746,6 @@ const Footer = () => {
 
 
 Object.assign(window, {
-  Nav, Hero, MarqueeRow, SectionHead, HowItWorks, Services,
+  Nav, Hero, MarqueeRow, SectionHead, Services,
   Portfolio, About, FAQ, FinalCTA, Footer
 });

@@ -1498,86 +1498,6 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   padding: 0 var(--gutter);
 }
 
-/* ====================== HOW IT WORKS ====================== */
-.hiw-section {
-  background: #0d0d0d;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-}
-.hiw-head {
-  text-align: center;
-  padding: 0 var(--gutter);
-  margin-bottom: 52px;
-}
-.hiw-title {
-  font-family: var(--display);
-  font-size: clamp(36px, 5vw, 72px);
-  line-height: 0.95;
-  letter-spacing: -0.02em;
-  font-weight: 400;
-  color: var(--ink);
-  margin: 0 0 14px 0;
-}
-.hiw-subtitle {
-  font-size: 16px;
-  color: var(--ink-2);
-  margin: 0;
-}
-.hiw-steps {
-  display: flex;
-  align-items: flex-start;
-  padding: 0 var(--gutter);
-}
-.hiw-step {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 0 20px;
-}
-.hiw-connector {
-  flex-shrink: 0;
-  width: 32px;
-  margin-top: 50px;
-  border-top: 1px dashed rgba(239, 236, 228, 0.22);
-}
-.hiw-step-num {
-  font-family: var(--display);
-  font-size: 40px;
-  font-weight: 700;
-  color: var(--accent);
-  letter-spacing: -0.04em;
-  line-height: 1;
-  margin-bottom: 14px;
-}
-.hiw-icon-wrap {
-  width: 24px;
-  height: 24px;
-  color: var(--accent);
-  margin-bottom: 14px;
-}
-.hiw-icon-wrap svg {
-  width: 24px;
-  height: 24px;
-  display: block;
-}
-.hiw-step-title {
-  font-family: var(--display);
-  font-size: 18px;
-  font-weight: 400;
-  color: var(--ink);
-  margin-bottom: 10px;
-  letter-spacing: -0.01em;
-  line-height: 1.25;
-}
-.hiw-step-text {
-  font-size: 14px;
-  color: var(--ink-2);
-  line-height: 1.6;
-  margin: 0;
-}
-
 .plans-layout {
   padding: 0 var(--gutter);
   display: grid;
@@ -1969,9 +1889,6 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   .plan-card { padding: 18px; }
   .plan-featured-badge { margin: -18px -18px 16px -18px; }
   .plan-amount { font-size: clamp(52px, 12vw, 64px); }
-  .hiw-steps { flex-direction: column; gap: 32px; }
-  .hiw-connector { display: none; }
-  .hiw-step { padding: 0; text-align: left; align-items: flex-start; }
 }
 
 /* ============================================================
