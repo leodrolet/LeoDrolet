@@ -395,11 +395,11 @@ const PlanCard = ({ plan, i }) => (
           <div style={{
             marginTop: "12px",
             padding: "10px 14px",
-            background: "rgba(34,197,94,0.08)",
-            border: "1px solid rgba(34,197,94,0.25)",
+            background: "rgba(255,91,46,0.08)",
+            border: "1px solid rgba(255,91,46,0.25)",
             borderRadius: "8px",
             fontSize: "13px",
-            color: "#22c55e",
+            color: "var(--accent)",
             fontFamily: "var(--mono)",
             letterSpacing: ".02em"
           }}>
