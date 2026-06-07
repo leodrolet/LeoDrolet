@@ -8,7 +8,7 @@ const ORDER = ["tweaks-panel", "effects", "sections", "cinema", "tweaks", "app"]
 
 // 1. Compile JSX
 execSync(
-  `npx babel ${ORDER.map((f) => f + ".jsx").join(" ")} --out-dir dist`,
+  `npx babel ${ORDER.map((f) => "src/" + f + ".jsx").join(" ")} --out-dir dist`,
   { stdio: "inherit" }
 );
 
@@ -27,10 +27,10 @@ execSync(
 
 // 4. Minify CSS
 execSync(
-  "npx cleancss -o styles.min.css styles.css",
+  "npx cleancss -o dist/styles.min.css src/styles.css",
   { stdio: "inherit" }
 );
 
 const jsSize  = fs.statSync("dist/bundle.min.js").size;
-const cssSize = fs.statSync("styles.min.css").size;
+const cssSize = fs.statSync("dist/styles.min.css").size;
 console.log(`Build complete → bundle: ${(jsSize/1024).toFixed(1)}KB  CSS: ${(cssSize/1024).toFixed(1)}KB`);

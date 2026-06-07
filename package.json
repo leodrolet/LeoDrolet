@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "build": "node build.js",
-    "watch": "babel tweaks-panel.jsx effects.jsx sections.jsx cinema.jsx estimator.jsx tweaks.jsx app.jsx --out-dir dist --watch"
+    "watch": "babel src/tweaks-panel.jsx src/effects.jsx src/sections.jsx src/cinema.jsx src/tweaks.jsx src/app.jsx --out-dir dist --watch"
   },
   "devDependencies": {
     "@babel/cli": "^7.29.7",

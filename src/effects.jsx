@@ -706,4 +706,27 @@ const useClock = () => {
   return t;
 };
 
-Object.assign(window, { useReveal, WordReveal, HeroCanvas, HeroVideo, useScrolled, useClock });
+// useMagnetic — cursor-following spring transform for CTA buttons
+// Returns { ref, style, onMouseMove, onMouseLeave }
+const useMagnetic = (maxDelta = 12) => {
+  const ref = React.useRef(null);
+  const [xy, setXY] = React.useState({ x: 0, y: 0 });
+  const onMouseMove = React.useCallback((e) => {
+    const el = ref.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    setXY({
+      x: ((e.clientX - r.left) / r.width  - 0.5) * maxDelta * 2,
+      y: ((e.clientY - r.top)  / r.height - 0.5) * maxDelta * 2,
+    });
+  }, [maxDelta]);
+  const onMouseLeave = React.useCallback(() => setXY({ x: 0, y: 0 }), []);
+  return {
+    ref,
+    onMouseMove,
+    onMouseLeave,
+    style: { transform: `translate(${xy.x.toFixed(2)}px,${xy.y.toFixed(2)}px)` },
+  };
+};
+
+Object.assign(window, { useReveal, WordReveal, HeroCanvas, HeroVideo, useScrolled, useClock, useMagnetic });

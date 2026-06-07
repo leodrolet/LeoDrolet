@@ -3,7 +3,7 @@
                   Portfolio, About, FAQ, Final CTA, Footer
    ============================================================ */
 
-const { useReveal, WordReveal, HeroCanvas, HeroVideo, useScrolled, useClock } = window;
+const { useReveal, WordReveal, HeroCanvas, HeroVideo, useScrolled, useClock, useMagnetic } = window;
 const { motion: m } = window.Motion || {};
 
 // Helper component so we can call useReveal once per item without breaking Rules of Hooks in .map()
@@ -32,6 +32,7 @@ const Nav = ({ headline }) => {
   const clock = useClock();
   const [menuOpen, setMenuOpen] = React.useState(false);
   const close = () => setMenuOpen(false);
+  const navCtaMagnetic = useMagnetic(8);
   return (
     <React.Fragment>
       <nav className={`nav ${pastHero ? "scrolled" : ""}`} style={{ opacity: "1" }}>
@@ -53,7 +54,14 @@ const Nav = ({ headline }) => {
           >
             <span></span><span></span><span></span>
           </button>
-          <a className="btn nav-cta" href="#devis" style={{ padding: "10px 16px" }}>
+          <a
+            className="btn nav-cta"
+            href="#devis"
+            ref={navCtaMagnetic.ref}
+            onMouseMove={navCtaMagnetic.onMouseMove}
+            onMouseLeave={navCtaMagnetic.onMouseLeave}
+            style={{ padding: "10px 16px", ...navCtaMagnetic.style }}
+          >
             Démarrer <span className="arrow">&#8594;</span>
           </a>
         </div>
@@ -121,6 +129,50 @@ const HeroDithering = ({ speedRef }) => {
   });
 };
 
+// ====================== HERO STATS ======================
+const HERO_STATS = [
+  { to: 100, suffix: "%", label: "Lighthouse score" },
+  { to: 7,   suffix: "j", label: "Délai moyen" },
+  { to: 24,  suffix: "h", label: "Temps de réponse" },
+];
+
+const StatCounter = ({ to, suffix, label }) => {
+  const [n, setN] = React.useState(0);
+  const ref = React.useRef(null);
+  React.useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) return;
+      let start = null;
+      const dur = 1400;
+      const tick = (ts) => {
+        if (!start) start = ts;
+        const p = Math.min(1, (ts - start) / dur);
+        const ease = 1 - Math.pow(1 - p, 3);
+        setN(Math.round(to * ease));
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+      io.unobserve(el);
+    }, { threshold: 0.5 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, [to]);
+  return (
+    <div ref={ref} className="stat-item">
+      <span className="stat-num">{n}{suffix}</span>
+      <span className="stat-label">{label}</span>
+    </div>
+  );
+};
+
+const HeroStats = () => (
+  <div className="hero-stats">
+    {HERO_STATS.map((s, i) => <StatCounter key={i} {...s} />)}
+  </div>
+);
+
 // ====================== HERO ======================
 const parseHeadline = (text) => {
   const segments = [];
@@ -139,19 +191,32 @@ const Hero = ({ headline }) => {
   const [hovered, setHovered] = React.useState(false);
   const speedRef = React.useRef(0.2);
   React.useEffect(() => { speedRef.current = hovered ? 0.6 : 0.2; }, [hovered]);
+  const ctaMagnetic = useMagnetic(10);
   const segments = React.useMemo(() =>
     parseHeadline(headline || "Sites web qui *ramènent des clients* — pour les **PME de Gatineau.**"),
   [headline]);
+
+  const onCardMouseMove = React.useCallback((e) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    e.currentTarget.style.setProperty('--hx', `${e.clientX - r.left}px`);
+    e.currentTarget.style.setProperty('--hy', `${e.clientY - r.top}px`);
+  }, []);
 
   return (
     <section className="hero-section" id="top">
       <div
         className="hero-card"
+        onMouseMove={onCardMouseMove}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
         <div className="hero-card-dither"><HeroDithering speedRef={speedRef} /></div>
         <div className="hero-card-scrim" />
+        <div className="hero-mesh" aria-hidden="true">
+          <div className="hero-mesh-orb hero-mesh-orb--1" />
+          <div className="hero-mesh-orb hero-mesh-orb--2" />
+          <div className="hero-mesh-orb hero-mesh-orb--3" />
+        </div>
         <div className="hero-card-inner">
           <h1 className="hero-title">
             {segments.map((seg, i) => (
@@ -161,8 +226,18 @@ const Hero = ({ headline }) => {
             ))}
           </h1>
           <div className="hero-ctas">
-            <a className="btn btn-accent" href="#devis">Démarrer mon projet <span className="arrow">&#8594;</span></a>
+            <a
+              className="btn btn-accent"
+              href="#devis"
+              ref={ctaMagnetic.ref}
+              onMouseMove={ctaMagnetic.onMouseMove}
+              onMouseLeave={ctaMagnetic.onMouseLeave}
+              style={ctaMagnetic.style}
+            >
+              Démarrer mon projet <span className="arrow">&#8594;</span>
+            </a>
           </div>
+          <HeroStats />
         </div>
         <div className="scroll-hint">
           <span className="bar"></span>
@@ -554,8 +629,8 @@ const About = () => {
             <span>2026.05</span>
           </div>
           <picture>
-            <source srcSet="leo.webp" type="image/webp" />
-            <img src="leo.jpg" alt="Léo Drolet — Novio Studio" loading="lazy" width="600" height="750" style={{ position:"absolute", inset:0, width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top" }} />
+            <source srcSet="assets/leo.webp" type="image/webp" />
+            <img src="assets/leo.jpg" alt="Léo Drolet — Novio Studio" loading="lazy" width="600" height="750" style={{ position:"absolute", inset:0, width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top" }} />
           </picture>
         </div>
         <AboutBody />
@@ -597,6 +672,7 @@ const FAQ = () => {
 // ====================== FINAL CTA ======================
 const FinalCTA = () => {
   const ref = useReveal();
+  const ctaMagnetic = useMagnetic(10);
   return (
     <section className="final-cta" id="cta-final">
       <div className="reveal" ref={ref}>
@@ -604,7 +680,16 @@ const FinalCTA = () => {
           Prochain contractor dans la galerie — <em>toi.</em>
         </div>
         <div className="actions">
-          <a className="btn btn-accent" href="#devis">Démarrer mon projet <span className="arrow">&#8594;</span></a>
+          <a
+            className="btn btn-accent"
+            href="#devis"
+            ref={ctaMagnetic.ref}
+            onMouseMove={ctaMagnetic.onMouseMove}
+            onMouseLeave={ctaMagnetic.onMouseLeave}
+            style={ctaMagnetic.style}
+          >
+            Démarrer mon projet <span className="arrow">&#8594;</span>
+          </a>
           <a className="btn" href="mailto:leo_drolet@noviostudio.online">leo_drolet@noviostudio.online</a>
         </div>
         <div className="small">Premier appel · 15 min · gratuit · on parle chiffres, pas jargon</div>
