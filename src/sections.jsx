@@ -276,56 +276,47 @@ const SectionHead = ({ num, kicker, title, right }) => {
 // ====================== PRICING (FORFAITS) ======================
 const PLANS = [
   {
-    id: "setup",
-    tier: "Création du site",
-    price: "999 $",
-    priceUnit: "one-shot",
-    bestFor: "Payé une fois. Votre site vous appartient.",
-    featured: false,
-    badge: "Étape 1",
+    id: "arsenal",
+    tier: "L'Arsenal Web Évolutif",
+    price: "500 $",
+    priceUnit: "mois",
+    bestFor: "Site pro · SEO · Technicien privé. Tout inclus, sans compromis.",
+    featured: true,
+    badge: null,
+    optionB: "ou 4 500 $ comptant — économisez 1 500 $",
     groups: [
       {
-        label: "Votre site",
+        label: "🌐 Votre site clé en main",
         items: [
-          { bold: "Jusqu'à 8 pages", rest: " clés", icon: "layout" },
-          { bold: "Mobile", rest: " responsive", icon: "smartphone" },
-          { bold: "Formulaires", rest: " + intégrations (CRM, email)", icon: "link" },
-        ],
-      },
-      {
-        label: "Inclus au lancement",
-        items: [
-          { bold: "Domaine + hébergement", rest: " première année", icon: "server" },
-          { bold: "4 révisions", rest: " pendant le lancement", icon: "refresh" },
-          { bold: "Trouvé sur Google", rest: " — SEO local de base", icon: "search" },
+          { bold: "Jusqu'à 8 pages", rest: " clés (Accueil, Services, À propos, Contact…)", icon: "layout" },
+          { bold: "Mobile responsive", rest: " — parfait sur cellulaire, tablette et ordi", icon: "smartphone" },
+          { bold: "Formulaires", rest: " + intégrations (CRM, email, logiciel)", icon: "link" },
           { bold: "Livraison", rest: " en moins de 3 semaines", icon: "rocket" },
         ],
       },
-    ],
-  },
-  {
-    id: "maintenance",
-    tier: "Maintenance mensuelle",
-    price: "199 $",
-    priceUnit: "mois",
-    bestFor: "Votre site toujours à jour, toujours en ligne.",
-    featured: true,
-    badge: "Étape 2",
-    groups: [
       {
-        label: "Tranquillité d'esprit",
+        label: "📈 Votre visibilité (chaque mois)",
         items: [
-          { bold: "Site toujours en ligne,", rest: " toujours sécurisé", icon: "server" },
-          { bold: "Quelqu'un répond", rest: " en moins de 24 h", icon: "messagecircle" },
-          { bold: "Rapport mensuel", rest: " : vous voyez ce qui marche", icon: "barchart" },
+          { bold: "SEO local optimisé", rest: " — trouvé sur Google dans votre région", icon: "search" },
+          { bold: "Rapport mensuel", rest: " de performance + recommandations", icon: "barchart" },
+          { bold: "1 heure", rest: " de modifications incluse / mois", icon: "clock" },
+          { bold: "Heures supplémentaires", rest: " : 75 $/heure", icon: "dollar", addOn: true },
         ],
       },
       {
-        label: "Vos mises à jour",
+        label: "🔒 Votre tranquillité d'esprit",
         items: [
-          { bold: "2 heures", rest: " de modifications incluses / mois", icon: "clock" },
-          { bold: "Modifications supplémentaires", rest: " : 75 $/heure", icon: "dollar", addOn: true },
-          { bold: "Sans engagement", rest: " — annulez en tout temps", icon: "unlock" },
+          { bold: "Hébergement ultra-rapide", rest: " + sécurité SSL inclus", icon: "server" },
+          { bold: "Gestion du domaine", rest: " incluse", icon: "shield" },
+          { bold: "Support prioritaire", rest: " — réponse en < 24 h", icon: "messagecircle" },
+          { bold: "4 rondes de révisions", rest: " pendant le lancement", icon: "refresh" },
+        ],
+      },
+      {
+        label: "🤝 Clause de transparence",
+        items: [
+          { bold: "Après 12 mois :", rest: " le site vous appartient entièrement", icon: "unlock" },
+          { bold: "Quitter sans frais", rest: " avec votre site, ou continuer à 199 $/mois", icon: "checkcircle" },
         ],
       },
     ],
@@ -400,6 +391,21 @@ const PlanCard = ({ plan, i }) => (
         </div>
         <span className="plan-amount">{plan.price}<sup className="plan-amount-unit">/{plan.priceUnit}</sup></span>
         <p className="plan-best-for">{plan.bestFor}</p>
+        {plan.optionB && (
+          <div style={{
+            marginTop: "12px",
+            padding: "10px 14px",
+            background: "rgba(34,197,94,0.08)",
+            border: "1px solid rgba(34,197,94,0.25)",
+            borderRadius: "8px",
+            fontSize: "13px",
+            color: "#22c55e",
+            fontFamily: "var(--mono)",
+            letterSpacing: ".02em"
+          }}>
+            💰 {plan.optionB}
+          </div>
+        )}
       </div>
       <div className="plan-benefits">
         {plan.groups.map((g, i) => (
@@ -417,12 +423,12 @@ const PlanCard = ({ plan, i }) => (
 );
 
 const PROMISES = [
-  { icon: "rocket",        bold: "En ligne",              rest: " en moins de 3 semaines" },
-  { icon: "server",        bold: "Domaine + hébergement",  rest: " inclus" },
-  { icon: "unlock",        bold: "Sans engagement",        rest: " après 3 mois" },
-  { icon: "messagecircle", bold: "Quelqu'un vous répond",  rest: " en < 24 h" },
-  { icon: "refresh",       bold: "Votre site évolue",      rest: " avec vous" },
-  { icon: "checkcircle",   bold: "Aucun frais caché",      rest: "" },
+  { icon: "rocket",        bold: "En ligne",               rest: " en moins de 3 semaines" },
+  { icon: "server",        bold: "Domaine + hébergement",   rest: " inclus" },
+  { icon: "unlock",        bold: "Le site vous appartient", rest: " après 12 mois" },
+  { icon: "messagecircle", bold: "Support",                 rest: " en < 24 h" },
+  { icon: "checkcircle",   bold: "Option comptant",         rest: " — 4 500 $ · économie de 1 500 $" },
+  { icon: "dollar",        bold: "Aucun frais caché",       rest: "" },
 ];
 
 const PromiseItem = ({ icon, bold, rest }) => (
@@ -442,14 +448,14 @@ const Services = () => (
       <RevealItem className="plans-intro" as="div">
         <span className="eyebrow" style={{ color: "var(--accent)", marginBottom: 20, display: "block" }}>Forfaits</span>
         <h2 className="section-title" style={{ marginBottom: 20 }}>
-          Setup + maintenance.<br/>
-          <em style={{ fontStyle: "italic", color: "var(--ink-2)" }}>Simple et transparent.</em>
+          L'Arsenal Web<br/>
+          <em style={{ fontStyle: "italic", color: "var(--ink-2)" }}>Évolutif.</em>
         </h2>
         <p className="plans-intro-body">
-          Le site qui travaille pendant que vous travaillez.
+          500 $/mois · 12 mois · Puis libre.
         </p>
         <p className="plans-intro-sub">
-          Pendant que vous êtes avec vos clients, votre site en attire de nouveaux.
+          Ou payez 4 500 $ comptant et économisez 1 500 $. Même service, zéro mensualité.
         </p>
         <ul className="plans-promises">
           {PROMISES.map((p, i) => (
@@ -473,10 +479,10 @@ const Services = () => (
 
 // ====================== COMPARE SLIDER ======================
 const SLIDER_ROWS = [
-  { feature: "Création du site",      agency: "5 000 $ – 15 000 $ one-shot", novio: "999 $ one-shot" },
-  { feature: "Maintenance",           agency: "Facturée en extra",            novio: "199 $/mois" },
-  { feature: "Modifications",         agency: "100 $ – 200 $/heure",          novio: "75 $/heure" },
-  { feature: "Support",               agency: "Non garanti",                  novio: "< 4h à 24h" },
+  { feature: "Création du site",      agency: "5 000 $ – 15 000 $ one-shot", novio: "Inclus (vous en êtes proprio après 12 mois)" },
+  { feature: "Maintenance",           agency: "Facturée en extra",            novio: "Incluse" },
+  { feature: "Modifications",         agency: "100 $ – 200 $/heure",          novio: "1h/mois incluse · 75 $/h ensuite" },
+  { feature: "Support",               agency: "Non garanti",                  novio: "< 24h garanti" },
   { feature: "Mises à jour sécurité", agency: "Non incluses",                 novio: "Incluses" },
   { feature: "Rapport mensuel",       agency: "Non inclus",                   novio: "Inclus" },
 ];
