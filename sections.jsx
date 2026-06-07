@@ -226,7 +226,7 @@ const PLANS = [
           { bold: "SEO local", rest: " optimisé", icon: "search" },
           { bold: "Rapport mensuel", rest: " + recommandations", icon: "barchart" },
           { bold: "1 heure", rest: " de modifications incluse / mois", icon: "clock" },
-          { bold: "Modifications supplémentaires", rest: " : 75 $/heure", icon: "dollar" },
+          { bold: "Modifications supplémentaires", rest: " : 75 $/heure", icon: "dollar", addOn: true },
         ],
       },
       {
@@ -266,10 +266,12 @@ const BENEFIT_ICONS = {
   refresh:    (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>),
   calendar:   (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>),
   shield:     (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>),
+  check:      (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>),
+  pencil:     (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>),
 };
 
-const BenefitItem = ({ bold, rest, icon }) => (
-  <div className="benefit-row">
+const BenefitItem = ({ bold, rest, icon, addOn }) => (
+  <div className={`benefit-row${addOn ? " benefit-row--addon" : ""}`}>
     <span className="benefit-icon-svg">{BENEFIT_ICONS[icon]}</span>
     <span className="benefit-text">
       <strong className="benefit-bold">{bold}</strong>
@@ -298,6 +300,7 @@ const PlanCard = ({ plan, i }) => (
     style={{ height: "100%" }}
   >
     <div className={`plan-card${plan.featured ? " plan-card--featured" : ""}`} style={{ animationDelay: `${-i * 1.6}s` }}>
+      {plan.featured && <div className="plan-featured-badge">Le plus populaire</div>}
       <div className="plan-card-header">
         <div className="plan-card-top">
           <span className="plan-tier">{plan.tier}</span>
@@ -321,6 +324,25 @@ const PlanCard = ({ plan, i }) => (
   </m.div>
 );
 
+const PROMISES = [
+  { icon: "clock",   bold: "Livré",                      rest: " en 7 à 21 jours" },
+  { icon: "server",  bold: "Domaine + hébergement",       rest: " inclus" },
+  { icon: "shield",  bold: "Engagement minimum 3 mois,",  rest: " résiliation libre ensuite" },
+  { icon: "zap",     bold: "Support",                     rest: " — réponse garantie < 4 h" },
+  { icon: "pencil",  bold: "1 heure de retouches",        rest: " incluse chaque mois" },
+  { icon: "check",   bold: "Aucun frais caché",           rest: "" },
+];
+
+const PromiseItem = ({ icon, bold, rest }) => (
+  <li>
+    <span className="promise-icon-svg">{BENEFIT_ICONS[icon]}</span>
+    <span>
+      <strong className="promise-bold">{bold}</strong>
+      {rest && <span className="promise-rest">{rest}</span>}
+    </span>
+  </li>
+);
+
 const Services = () => (
   <section className="section" id="devis">
     <div className="plans-layout">
@@ -335,18 +357,8 @@ const Services = () => (
           Pas de surprise, pas d'extras cachés. Tout ce dont un entrepreneur a besoin pour dominer son marché local — en un seul abonnement mensuel.
         </p>
         <ul className="plans-promises">
-          {[
-            "Livré en 7 à 21 jours",
-            "Domaine + hébergement inclus",
-            "Engagement minimum 3 mois, résiliation libre ensuite",
-            "Support réponse garantie &lt; 4 h",
-            "1 heure de retouches incluse chaque mois",
-            "Aucun frais caché",
-          ].map((item, i) => (
-            <li key={i}>
-              <span className="plans-promise-dot">→</span>
-              <span dangerouslySetInnerHTML={{ __html: item }} />
-            </li>
+          {PROMISES.map((p, i) => (
+            <PromiseItem key={i} {...p} />
           ))}
         </ul>
       </RevealItem>
