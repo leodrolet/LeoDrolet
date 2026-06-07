@@ -221,19 +221,19 @@ const PLANS = [
         ],
       },
       {
-        label: "Votre visibilité",
+        label: "Vos nouveaux clients",
         items: [
-          { bold: "SEO local", rest: " optimisé", icon: "search" },
-          { bold: "Rapport mensuel", rest: " + recommandations", icon: "barchart" },
+          { bold: "Trouvé sur Google", rest: " par vos clients locaux", icon: "search" },
+          { bold: "Rapport mensuel", rest: " : vous voyez ce qui marche", icon: "barchart" },
           { bold: "1 heure", rest: " de modifications incluse / mois", icon: "clock" },
           { bold: "Modifications supplémentaires", rest: " : 75 $/heure", icon: "dollar", addOn: true },
         ],
       },
       {
-        label: "Votre tranquillité",
+        label: "Zéro souci technique",
         items: [
-          { bold: "Support prioritaire", rest: " — réponse < 24 h", icon: "zap" },
-          { bold: "Hébergement + sécurité", rest: " + domaine inclus", icon: "server" },
+          { bold: "Quelqu'un répond", rest: " en moins de 24 h", icon: "messagecircle" },
+          { bold: "Site toujours en ligne,", rest: " toujours sécurisé", icon: "server" },
           { bold: "4 révisions maximum", rest: " pendant le lancement", icon: "refresh" },
           { bold: "Engagement minimum", rest: " : 3 mois", icon: "calendar" },
           { bold: "Résiliation sans pénalité", rest: " après 3 mois — préavis 30 jours", icon: "shield" },
@@ -267,7 +267,11 @@ const BENEFIT_ICONS = {
   calendar:   (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>),
   shield:     (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>),
   check:      (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>),
-  pencil:     (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>),
+  pencil:       (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>),
+  rocket:       (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>),
+  unlock:       (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg>),
+  messagecircle:(<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>),
+  checkcircle:  (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>),
 };
 
 const BenefitItem = ({ bold, rest, icon, addOn }) => (
@@ -325,12 +329,12 @@ const PlanCard = ({ plan, i }) => (
 );
 
 const PROMISES = [
-  { icon: "clock",   bold: "Livré",                      rest: " en 7 à 21 jours" },
-  { icon: "server",  bold: "Domaine + hébergement",       rest: " inclus" },
-  { icon: "shield",  bold: "Engagement minimum 3 mois,",  rest: " résiliation libre ensuite" },
-  { icon: "zap",     bold: "Support",                     rest: " — réponse garantie < 4 h" },
-  { icon: "pencil",  bold: "1 heure de retouches",        rest: " incluse chaque mois" },
-  { icon: "check",   bold: "Aucun frais caché",           rest: "" },
+  { icon: "rocket",        bold: "En ligne",              rest: " en moins de 3 semaines" },
+  { icon: "server",        bold: "Domaine + hébergement",  rest: " inclus" },
+  { icon: "unlock",        bold: "Sans engagement",        rest: " après 3 mois" },
+  { icon: "messagecircle", bold: "Quelqu'un vous répond",  rest: " en < 24 h" },
+  { icon: "refresh",       bold: "Votre site évolue",      rest: " avec vous" },
+  { icon: "checkcircle",   bold: "Aucun frais caché",      rest: "" },
 ];
 
 const PromiseItem = ({ icon, bold, rest }) => (
@@ -354,7 +358,10 @@ const Services = () => (
           <em style={{ fontStyle: "italic", color: "var(--ink-2)" }}>Tout inclus.</em>
         </h2>
         <p className="plans-intro-body">
-          Pas de surprise, pas d'extras cachés. Tout ce dont un entrepreneur a besoin pour dominer son marché local — en un seul abonnement mensuel.
+          Le site qui travaille pendant que vous travaillez.
+        </p>
+        <p className="plans-intro-sub">
+          Pendant que vous êtes avec vos clients, votre site en attire de nouveaux.
         </p>
         <ul className="plans-promises">
           {PROMISES.map((p, i) => (
