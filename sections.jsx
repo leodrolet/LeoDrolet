@@ -161,7 +161,7 @@ const Hero = ({ headline }) => {
             ))}
           </h1>
           <div className="hero-ctas">
-            <a className="btn btn-accent" href="#devis">Démarrer un projet <span className="arrow">&#8594;</span></a>
+            <a className="btn btn-accent" href="#devis">Démarrer mon projet <span className="arrow">&#8594;</span></a>
           </div>
         </div>
         <div className="scroll-hint">
@@ -236,7 +236,6 @@ const PLANS = [
           { bold: "Site toujours en ligne,", rest: " toujours sécurisé", icon: "server" },
           { bold: "4 révisions maximum", rest: " pendant le lancement", icon: "refresh" },
           { bold: "Engagement minimum", rest: " : 3 mois", icon: "calendar" },
-          { bold: "Résiliation sans pénalité", rest: " après 3 mois — préavis 30 jours", icon: "shield" },
         ],
       },
     ],
@@ -304,8 +303,7 @@ const PlanCard = ({ plan, i }) => (
     style={{ height: "100%" }}
   >
     <div className={`plan-card${plan.featured ? " plan-card--featured" : ""}`} style={{ animationDelay: `${-i * 1.6}s` }}>
-      {plan.featured && <div className="plan-featured-badge">Le plus populaire</div>}
-      <div className="plan-card-header">
+<div className="plan-card-header">
         <div className="plan-card-top">
           <span className="plan-tier">{plan.tier}</span>
           {plan.badge && <span className="plan-badge">{plan.badge}</span>}
@@ -326,6 +324,52 @@ const PlanCard = ({ plan, i }) => (
       </a>
     </div>
   </m.div>
+);
+
+// ====================== HOW IT WORKS ======================
+const HOW_STEPS = [
+  {
+    num: "01",
+    title: "Prise de contact",
+    icon: "messagecircle",
+    text: "On discute de votre projet en 15 minutes. Pas de jargon, pas de pression.",
+  },
+  {
+    num: "02",
+    title: "Livraison en moins de 3 semaines",
+    icon: "rocket",
+    text: "Votre site est construit, testé et mis en ligne. Vous n'avez rien à gérer.",
+  },
+  {
+    num: "03",
+    title: "On s'occupe du reste",
+    icon: "refresh",
+    text: "Maintenance, SEO, support. Vous vous concentrez sur vos clients.",
+  },
+];
+
+const HowItWorks = () => (
+  <section className="section hiw-section">
+    <RevealItem as="div" className="hiw-head">
+      <h2 className="hiw-title">Simple comme bonjour.</h2>
+      <p className="hiw-subtitle">Trois étapes. Zéro prise de tête.</p>
+    </RevealItem>
+    <div className="hiw-steps">
+      {HOW_STEPS.map((step, i) => (
+        <React.Fragment key={i}>
+          <RevealItem as="div" className="hiw-step" delay={i * 120}>
+            <div className="hiw-step-num">{step.num}</div>
+            <div className="hiw-icon-wrap">{BENEFIT_ICONS[step.icon]}</div>
+            <div className="hiw-step-title">{step.title}</div>
+            <p className="hiw-step-text">{step.text}</p>
+          </RevealItem>
+          {i < HOW_STEPS.length - 1 && (
+            <div className="hiw-connector" aria-hidden="true" />
+          )}
+        </React.Fragment>
+      ))}
+    </div>
+  </section>
 );
 
 const PROMISES = [
@@ -606,7 +650,7 @@ const FinalCTA = () => {
           Prochain contractor dans la galerie — <em>toi.</em>
         </div>
         <div className="actions">
-          <a className="btn btn-accent" href="#devis">Réserver mon créneau <span className="arrow">&#8594;</span></a>
+          <a className="btn btn-accent" href="#devis">Démarrer mon projet <span className="arrow">&#8594;</span></a>
           <a className="btn" href="mailto:leo_drolet@noviostudio.online">leo_drolet@noviostudio.online</a>
         </div>
         <div className="small">Premier appel · 15 min · gratuit · on parle chiffres, pas jargon</div>
@@ -678,7 +722,7 @@ const Footer = () => {
         <h6>Légal</h6>
         <ul>
           <li><a href="mailto:leo_drolet@noviostudio.online">leo_drolet@noviostudio.online</a></li>
-          <li><button onClick={() => setModal("privacy")} style={{ background:"none", border:"none", padding:0, color:"inherit", font:"inherit", cursor:"pointer", textAlign:"left" }}>Confidentialité</button></li>
+          <li><button onClick={() => setModal("privacy")} style={{ background:"none", border:"none", padding:0, color:"inherit", font:"inherit", cursor:"pointer", textAlign:"left" }}>Politique de confidentialité</button></li>
           <li><button onClick={() => setModal("mentions")} style={{ background:"none", border:"none", padding:0, color:"inherit", font:"inherit", cursor:"pointer", textAlign:"left" }}>Mentions légales</button></li>
         </ul>
       </div>
@@ -697,35 +741,25 @@ const Footer = () => {
     </div>
 
     <LegalModal open={modal === "privacy"} onClose={() => setModal(null)} title="Politique de confidentialité">
-      <ModalSection title="Responsable du traitement">
-        <p style={{margin:"0 0 6px"}}><strong style={{color:"var(--ink)"}}>Novio Studio</strong> — Leo Drolet, développeur web freelance</p>
-        <p style={{margin:"0 0 6px"}}>Gatineau, Québec, Canada</p>
-        <p style={{margin:0}}>Email : <a href="mailto:leo_drolet@noviostudio.online" style={{color:"var(--accent)"}}>leo_drolet@noviostudio.online</a></p>
+      <p style={{margin:"0 0 20px", fontSize:12, color:"var(--mute)"}}>Dernière mise à jour : juin 2026</p>
+      <p style={{margin:"0 0 24px"}}>Novio Studio (« nous ») s'engage à protéger la vie privée des visiteurs de ce site.</p>
+      <ModalSection title="1. Informations collectées">
+        <p style={{margin:0}}>Nous collectons uniquement les informations que vous nous fournissez volontairement via le formulaire de contact : nom, adresse courriel, et message.</p>
       </ModalSection>
-      <ModalSection title="Données collectées">
-        <p style={{margin:"0 0 8px"}}>Lors de l'utilisation du formulaire de contact, nous collectons : nom, email, entreprise et description du projet.</p>
-        <p style={{margin:0}}>Aucune autre donnée n'est collectée (pas de Google Analytics, pas de Meta Pixel, pas de trackers tiers).</p>
+      <ModalSection title="2. Utilisation des informations">
+        <p style={{margin:"0 0 8px"}}>Ces informations sont utilisées uniquement pour répondre à vos demandes.</p>
+        <p style={{margin:0}}>Nous ne vendons, ne louons et ne partageons pas vos données avec des tiers.</p>
       </ModalSection>
-      <ModalSection title="Finalité et base légale">
-        <p style={{margin:"0 0 6px"}}><strong style={{color:"var(--ink)"}}>Finalité :</strong> Répondre à vos demandes de devis et assurer le suivi de votre projet.</p>
-        <p style={{margin:0}}><strong style={{color:"var(--ink)"}}>Base légale :</strong> Consentement (art. 6(1)(a) RGPD). En soumettant le formulaire, vous consentez au traitement de vos données.</p>
+      <ModalSection title="3. Hébergement et cookies">
+        <p style={{margin:"0 0 8px"}}>Ce site est hébergé sur Vercel. Des cookies techniques peuvent être utilisés pour assurer le bon fonctionnement du site.</p>
+        <p style={{margin:0}}>Aucun cookie publicitaire n'est utilisé.</p>
       </ModalSection>
-      <ModalSection title="Durée de conservation">
-        <p style={{margin:0}}>Vos données sont conservées pendant <strong style={{color:"var(--ink)"}}>12 mois</strong>, puis supprimées. En cas de relation commerciale établie, les données relatives aux contrats peuvent être conservées jusqu'à <strong style={{color:"var(--ink)"}}>5 ans</strong>.</p>
+      <ModalSection title="4. Vos droits (Loi 25 — Québec)">
+        <p style={{margin:"0 0 10px"}}>Conformément à la Loi sur la protection des renseignements personnels dans le secteur privé (Loi 25), vous avez le droit d'accéder à vos données, de les corriger ou d'en demander la suppression en nous contactant à :</p>
+        <p style={{margin:0}}><a href="mailto:info@noviostudio.ca" style={{color:"var(--accent)"}}>info@noviostudio.ca</a></p>
       </ModalSection>
-      <ModalSection title="Sous-traitant — Formspree">
-        <p style={{margin:"0 0 6px"}}>Le formulaire utilise <strong style={{color:"var(--ink)"}}>Formspree Inc.</strong> comme processeur tiers, conforme au cadre EU-U.S. Data Privacy Framework.</p>
-        <p style={{margin:0}}><a href="https://formspree.io/legal/privacy-policy" target="_blank" rel="noopener noreferrer" style={{color:"var(--accent)"}}>formspree.io/legal/privacy-policy</a></p>
-      </ModalSection>
-      <ModalSection title="Hébergement">
-        <p style={{margin:0}}>Site hébergé par <strong style={{color:"var(--ink)"}}>Vercel Inc.</strong>, 340 Pine Street, Suite 701, San Francisco, CA 94104, USA.</p>
-      </ModalSection>
-      <ModalSection title="Cookies">
-        <p style={{margin:0}}>Ce site utilise uniquement des <strong style={{color:"var(--ink)"}}>cookies techniques essentiels</strong>. Aucun cookie publicitaire ou analytique.</p>
-      </ModalSection>
-      <ModalSection title="Vos droits (RGPD / Loi 25 Québec)">
-        <p style={{margin:"0 0 8px"}}>Vous disposez des droits d'accès, rectification, suppression, portabilité et opposition.</p>
-        <p style={{margin:0}}>Contact : <a href="mailto:leo_drolet@noviostudio.online" style={{color:"var(--accent)"}}>leo_drolet@noviostudio.online</a> — Réponse sous 30 jours.</p>
+      <ModalSection title="5. Contact">
+        <p style={{margin:0}}>Pour toute question : <a href="mailto:info@noviostudio.ca" style={{color:"var(--accent)"}}>info@noviostudio.ca</a></p>
       </ModalSection>
     </LegalModal>
 
@@ -758,6 +792,6 @@ const Footer = () => {
 
 
 Object.assign(window, {
-  Nav, Hero, MarqueeRow, SectionHead, Services,
+  Nav, Hero, MarqueeRow, SectionHead, HowItWorks, Services,
   Portfolio, About, FAQ, FinalCTA, Footer
 });

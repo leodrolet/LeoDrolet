@@ -4,7 +4,7 @@
 const { execSync } = require("child_process");
 const fs = require("fs");
 
-const ORDER = ["tweaks-panel", "effects", "sections", "cinema", "estimator", "tweaks", "app"];
+const ORDER = ["tweaks-panel", "effects", "sections", "cinema", "tweaks", "app"];
 
 // 1. Compile JSX
 execSync(
