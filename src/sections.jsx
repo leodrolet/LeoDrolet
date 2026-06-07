@@ -286,7 +286,7 @@ const PLANS = [
     optionB: "ou 4 500 $ comptant — économisez 1 500 $",
     groups: [
       {
-        label: "🌐 Votre site clé en main",
+        label: "Votre site clé en main",
         items: [
           { bold: "Jusqu'à 8 pages", rest: " clés (Accueil, Services, À propos, Contact…)", icon: "layout" },
           { bold: "Mobile responsive", rest: " — parfait sur cellulaire, tablette et ordi", icon: "smartphone" },
@@ -295,7 +295,7 @@ const PLANS = [
         ],
       },
       {
-        label: "📈 Votre visibilité (chaque mois)",
+        label: "Votre visibilité (chaque mois)",
         items: [
           { bold: "SEO local optimisé", rest: " — trouvé sur Google dans votre région", icon: "search" },
           { bold: "Rapport mensuel", rest: " de performance + recommandations", icon: "barchart" },
@@ -304,7 +304,7 @@ const PLANS = [
         ],
       },
       {
-        label: "🔒 Votre tranquillité d'esprit",
+        label: "Votre tranquillité d'esprit",
         items: [
           { bold: "Hébergement ultra-rapide", rest: " + sécurité SSL inclus", icon: "server" },
           { bold: "Gestion du domaine", rest: " incluse", icon: "shield" },
@@ -313,7 +313,7 @@ const PLANS = [
         ],
       },
       {
-        label: "🤝 Clause de transparence",
+        label: "Clause de transparence",
         items: [
           { bold: "Après 12 mois :", rest: " le site vous appartient entièrement", icon: "unlock" },
           { bold: "Quitter sans frais", rest: " avec votre site, ou continuer à 199 $/mois", icon: "checkcircle" },
@@ -403,7 +403,7 @@ const PlanCard = ({ plan, i }) => (
             fontFamily: "var(--mono)",
             letterSpacing: ".02em"
           }}>
-            💰 {plan.optionB}
+            {plan.optionB}
           </div>
         )}
       </div>
