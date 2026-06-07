@@ -6,23 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d90ceb1b-7a57-4f53-bb54-fe7386eec621" name="Changes" comment="ménage">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.js" beforeDir="false" afterPath="$PROJECT_DIR$/build.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cinema.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/cinema.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/effects.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/effects.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framer-motion.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/framer-motion.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/grain.js" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/grain.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/leo.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/assets/leo.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/leo.webp" beforeDir="false" afterPath="$PROJECT_DIR$/assets/leo.webp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react-dom.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/react-dom.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/react.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sections.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/sections.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tweaks-panel.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/tweaks-panel.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tweaks.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/tweaks.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vercel.json" beforeDir="false" afterPath="$PROJECT_DIR$/vercel.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sections.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/sections.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,30 +63,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1779201719557</updated>
-    </task>
-    <task id="LOCAL-00118" summary="feat: orange color scheme + fix process timeline line">
-      <option name="closed" value="true" />
-      <created>1780024801352</created>
-      <option name="number" value="00118" />
-      <option name="presentableId" value="LOCAL-00118" />
-      <option name="project" value="LOCAL" />
-      <updated>1780024801352</updated>
-    </task>
-    <task id="LOCAL-00119" summary="feat: orange color scheme + fix process timeline line">
-      <option name="closed" value="true" />
-      <created>1780024993351</created>
-      <option name="number" value="00119" />
-      <option name="presentableId" value="LOCAL-00119" />
-      <option name="project" value="LOCAL" />
-      <updated>1780024993351</updated>
-    </task>
-    <task id="LOCAL-00120" summary="feat: orange color scheme + fix process timeline line">
-      <option name="closed" value="true" />
-      <created>1780025336489</created>
-      <option name="number" value="00120" />
-      <option name="presentableId" value="LOCAL-00120" />
-      <option name="project" value="LOCAL" />
-      <updated>1780025336489</updated>
     </task>
     <task id="LOCAL-00121" summary="feat: orange color scheme + fix process timeline line">
       <option name="closed" value="true" />
@@ -472,7 +432,31 @@
       <option name="project" value="LOCAL" />
       <updated>1780805051533</updated>
     </task>
-    <option name="localTasksCounter" value="167" />
+    <task id="LOCAL-00167" summary="ménage">
+      <option name="closed" value="true" />
+      <created>1780849062705</created>
+      <option name="number" value="00167" />
+      <option name="presentableId" value="LOCAL-00167" />
+      <option name="project" value="LOCAL" />
+      <updated>1780849062706</updated>
+    </task>
+    <task id="LOCAL-00168" summary="ménage">
+      <option name="closed" value="true" />
+      <created>1780849220770</created>
+      <option name="number" value="00168" />
+      <option name="presentableId" value="LOCAL-00168" />
+      <option name="project" value="LOCAL" />
+      <updated>1780849220771</updated>
+    </task>
+    <task id="LOCAL-00169" summary="ménage">
+      <option name="closed" value="true" />
+      <created>1780849374552</created>
+      <option name="number" value="00169" />
+      <option name="presentableId" value="LOCAL-00169" />
+      <option name="project" value="LOCAL" />
+      <updated>1780849374552</updated>
+    </task>
+    <option name="localTasksCounter" value="170" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

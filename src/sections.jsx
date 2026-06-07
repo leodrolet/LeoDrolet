@@ -276,12 +276,13 @@ const SectionHead = ({ num, kicker, title, right }) => {
 // ====================== PRICING (FORFAITS) ======================
 const PLANS = [
   {
-    id: "complet",
-    tier: "Tout inclus",
-    price: "500 $",
-    bestFor: "L'arsenal complet — sans surprise, sans extras cachés.",
-    featured: true,
-    badge: null,
+    id: "setup",
+    tier: "Création du site",
+    price: "999 $",
+    priceUnit: "one-shot",
+    bestFor: "Payé une fois. Votre site vous appartient.",
+    featured: false,
+    badge: "Étape 1",
     groups: [
       {
         label: "Votre site",
@@ -292,21 +293,39 @@ const PLANS = [
         ],
       },
       {
-        label: "Vos nouveaux clients",
+        label: "Inclus au lancement",
         items: [
-          { bold: "Trouvé sur Google", rest: " par vos clients locaux", icon: "search" },
+          { bold: "Domaine + hébergement", rest: " première année", icon: "server" },
+          { bold: "4 révisions", rest: " pendant le lancement", icon: "refresh" },
+          { bold: "Trouvé sur Google", rest: " — SEO local de base", icon: "search" },
+          { bold: "Livraison", rest: " en moins de 3 semaines", icon: "rocket" },
+        ],
+      },
+    ],
+  },
+  {
+    id: "maintenance",
+    tier: "Maintenance mensuelle",
+    price: "199 $",
+    priceUnit: "mois",
+    bestFor: "Votre site toujours à jour, toujours en ligne.",
+    featured: true,
+    badge: "Étape 2",
+    groups: [
+      {
+        label: "Tranquillité d'esprit",
+        items: [
+          { bold: "Site toujours en ligne,", rest: " toujours sécurisé", icon: "server" },
+          { bold: "Quelqu'un répond", rest: " en moins de 24 h", icon: "messagecircle" },
           { bold: "Rapport mensuel", rest: " : vous voyez ce qui marche", icon: "barchart" },
-          { bold: "1 heure", rest: " de modifications incluse / mois", icon: "clock" },
-          { bold: "Modifications supplémentaires", rest: " : 75 $/heure", icon: "dollar", addOn: true },
         ],
       },
       {
-        label: "Zéro souci technique",
+        label: "Vos mises à jour",
         items: [
-          { bold: "Quelqu'un répond", rest: " en moins de 24 h", icon: "messagecircle" },
-          { bold: "Site toujours en ligne,", rest: " toujours sécurisé", icon: "server" },
-          { bold: "4 révisions maximum", rest: " pendant le lancement", icon: "refresh" },
-          { bold: "Engagement minimum", rest: " : 3 mois", icon: "calendar" },
+          { bold: "2 heures", rest: " de modifications incluses / mois", icon: "clock" },
+          { bold: "Modifications supplémentaires", rest: " : 75 $/heure", icon: "dollar", addOn: true },
+          { bold: "Sans engagement", rest: " — annulez en tout temps", icon: "unlock" },
         ],
       },
     ],
@@ -379,7 +398,7 @@ const PlanCard = ({ plan, i }) => (
           <span className="plan-tier">{plan.tier}</span>
           {plan.badge && <span className="plan-badge">{plan.badge}</span>}
         </div>
-        <span className="plan-amount">{plan.price}<sup className="plan-amount-unit">/mois</sup></span>
+        <span className="plan-amount">{plan.price}<sup className="plan-amount-unit">/{plan.priceUnit}</sup></span>
         <p className="plan-best-for">{plan.bestFor}</p>
       </div>
       <div className="plan-benefits">
@@ -423,8 +442,8 @@ const Services = () => (
       <RevealItem className="plans-intro" as="div">
         <span className="eyebrow" style={{ color: "var(--accent)", marginBottom: 20, display: "block" }}>Forfaits</span>
         <h2 className="section-title" style={{ marginBottom: 20 }}>
-          Un forfait.<br/>
-          <em style={{ fontStyle: "italic", color: "var(--ink-2)" }}>Tout inclus.</em>
+          Setup + maintenance.<br/>
+          <em style={{ fontStyle: "italic", color: "var(--ink-2)" }}>Simple et transparent.</em>
         </h2>
         <p className="plans-intro-body">
           Le site qui travaille pendant que vous travaillez.
@@ -454,9 +473,9 @@ const Services = () => (
 
 // ====================== COMPARE SLIDER ======================
 const SLIDER_ROWS = [
-  { feature: "Création du site",      agency: "5 000 $ – 15 000 $ one-shot", novio: "Inclus" },
-  { feature: "Maintenance",           agency: "Facturée en extra",            novio: "Incluse" },
-  { feature: "Modifications",         agency: "100 $ – 200 $/heure",          novio: "50 $/page" },
+  { feature: "Création du site",      agency: "5 000 $ – 15 000 $ one-shot", novio: "999 $ one-shot" },
+  { feature: "Maintenance",           agency: "Facturée en extra",            novio: "199 $/mois" },
+  { feature: "Modifications",         agency: "100 $ – 200 $/heure",          novio: "75 $/heure" },
   { feature: "Support",               agency: "Non garanti",                  novio: "< 4h à 24h" },
   { feature: "Mises à jour sécurité", agency: "Non incluses",                 novio: "Incluses" },
   { feature: "Rapport mensuel",       agency: "Non inclus",                   novio: "Inclus" },
