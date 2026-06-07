@@ -167,11 +167,7 @@ const StatCounter = ({ to, suffix, label }) => {
   );
 };
 
-const HeroStats = () => (
-  <div className="hero-stats">
-    {HERO_STATS.map((s, i) => <StatCounter key={i} {...s} />)}
-  </div>
-);
+const HeroStats = () => null;
 
 // ====================== HERO ======================
 const parseHeadline = (text) => {
