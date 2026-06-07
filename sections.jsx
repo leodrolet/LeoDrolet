@@ -211,19 +211,34 @@ const PLANS = [
     bestFor: "L'arsenal complet — sans surprise, sans extras cachés.",
     featured: true,
     badge: null,
-    benefits: [
-      { text: "Jusqu'à 7 pages clés", checked: true },
-      { text: "Mobile responsive", checked: true },
-      { text: "Formulaires + intégrations (CRM, email)", checked: true },
-      { text: "SEO local optimisé", checked: true },
-      { text: "Rapport mensuel + recommandations", checked: true },
-      { text: "Support prioritaire — réponse < 4 h", checked: true },
-      { text: "Hébergement + sécurité + domaine inclus", checked: true },
-      { text: "4 révisions illimitées pendant le lancement", checked: true },
-      { text: "1 heure de modifications incluse / mois", checked: true },
-      { text: "Modifications supplémentaires : 75 $/heure", checked: true },
-      { text: "Engagement minimum : 3 mois", checked: true },
-      { text: "Résiliation sans pénalité après 3 mois — préavis 30 jours", checked: true },
+    groups: [
+      {
+        label: "Votre site",
+        items: [
+          { bold: "Jusqu'à 8 pages", rest: " clés", icon: "layout" },
+          { bold: "Mobile", rest: " responsive", icon: "smartphone" },
+          { bold: "Formulaires", rest: " + intégrations (CRM, email)", icon: "link" },
+        ],
+      },
+      {
+        label: "Votre visibilité",
+        items: [
+          { bold: "SEO local", rest: " optimisé", icon: "search" },
+          { bold: "Rapport mensuel", rest: " + recommandations", icon: "barchart" },
+          { bold: "1 heure", rest: " de modifications incluse / mois", icon: "clock" },
+          { bold: "Modifications supplémentaires", rest: " : 75 $/heure", icon: "dollar" },
+        ],
+      },
+      {
+        label: "Votre tranquillité",
+        items: [
+          { bold: "Support prioritaire", rest: " — réponse < 24 h", icon: "zap" },
+          { bold: "Hébergement + sécurité", rest: " + domaine inclus", icon: "server" },
+          { bold: "4 révisions maximum", rest: " pendant le lancement", icon: "refresh" },
+          { bold: "Engagement minimum", rest: " : 3 mois", icon: "calendar" },
+          { bold: "Résiliation sans pénalité", rest: " après 3 mois — préavis 30 jours", icon: "shield" },
+        ],
+      },
     ],
   },
 ];
@@ -235,6 +250,40 @@ const Benefit = ({ text, checked }) => (
       {checked ? "✓" : "✕"}
     </span>
     <span className={`benefit-text${checked ? "" : " benefit-text--muted"}`}>{text}</span>
+  </div>
+);
+
+const BENEFIT_ICONS = {
+  layout:     (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>),
+  smartphone: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>),
+  link:       (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 17H7A5 5 0 0 1 7 7h2"/><path d="M15 7h2a5 5 0 1 1 0 10h-2"/><line x1="8" x2="16" y1="12" y2="12"/></svg>),
+  search:     (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>),
+  barchart:   (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" x2="18" y1="20" y2="10"/><line x1="12" x2="12" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="14"/></svg>),
+  clock:      (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>),
+  dollar:     (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>),
+  zap:        (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>),
+  server:     (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" x2="6.01" y1="6" y2="6"/><line x1="6" x2="6.01" y1="18" y2="18"/></svg>),
+  refresh:    (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>),
+  calendar:   (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>),
+  shield:     (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>),
+};
+
+const BenefitItem = ({ bold, rest, icon }) => (
+  <div className="benefit-row">
+    <span className="benefit-icon-svg">{BENEFIT_ICONS[icon]}</span>
+    <span className="benefit-text">
+      <strong className="benefit-bold">{bold}</strong>
+      {rest && <span className="benefit-rest">{rest}</span>}
+    </span>
+  </div>
+);
+
+const BenefitGroup = ({ label, items }) => (
+  <div className="benefit-group">
+    <span className="benefit-group-label">{label}</span>
+    <div className="benefit-group-items">
+      {items.map((item, i) => <BenefitItem key={i} {...item} />)}
+    </div>
   </div>
 );
 
@@ -258,8 +307,8 @@ const PlanCard = ({ plan, i }) => (
         <p className="plan-best-for">{plan.bestFor}</p>
       </div>
       <div className="plan-benefits">
-        {plan.benefits.map((b, j) => (
-          <Benefit key={j} text={b.text} checked={b.checked} />
+        {plan.groups.map((g, i) => (
+          <BenefitGroup key={i} label={g.label} items={g.items} />
         ))}
       </div>
       <a

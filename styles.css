@@ -1639,7 +1639,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   padding: 24px 0;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 0;
 }
 
 .benefit-row {
@@ -1679,6 +1679,56 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 
 .benefit-text--muted {
   color: var(--mute);
+}
+
+/* ---- Grouped benefits ---- */
+.benefit-group {
+  display: flex;
+  flex-direction: column;
+}
+.benefit-group + .benefit-group {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line-strong);
+}
+.benefit-group-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 11px;
+  opacity: 0.85;
+}
+.benefit-group-items {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.benefit-icon-svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  margin-top: 1px;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.benefit-icon-svg svg {
+  width: 15px;
+  height: 15px;
+  display: block;
+}
+.benefit-bold {
+  font-weight: 600;
+  color: var(--ink);
+  font-style: normal;
+}
+.benefit-rest {
+  color: var(--ink-2);
 }
 
 /* ---- CTA ---- */
