@@ -128,7 +128,7 @@ const PlanCard = ({ plan, i }) => (
       <div className="plan-benefits">
         {plan.groups.map((g, i) => <BenefitGroup key={i} label={g.label} items={g.items} />)}
       </div>
-      <a href="mailto:leo_drolet@noviostudio.online" className={`btn plan-cta${plan.featured ? " plan-cta--featured" : ""}`}>
+      <a href="https://calendly.com/leo_drolet-noviostudio/30min" target="_blank" rel="noopener noreferrer" className={`btn plan-cta${plan.featured ? " plan-cta--featured" : ""}`}>
         Démarrer mon projet <span className="arrow">&#8594;</span>
       </a>
     </div>

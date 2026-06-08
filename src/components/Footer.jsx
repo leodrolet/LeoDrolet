@@ -18,7 +18,9 @@ const FinalCTA = () => {
         <div className="actions">
           <a
             className="btn btn-accent"
-            href="#devis"
+            href="https://calendly.com/leo_drolet-noviostudio/30min"
+            target="_blank"
+            rel="noopener noreferrer"
             ref={ctaMagnetic.ref}
             onMouseMove={ctaMagnetic.onMouseMove}
             onMouseLeave={ctaMagnetic.onMouseLeave}
