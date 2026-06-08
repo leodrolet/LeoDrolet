@@ -30,7 +30,7 @@ const PLANS = [
     featured: false,
     badge: null,
     subPrice: null,
-    paymentNote: "50 % à la signature · 50 % à la livraison",
+    paymentNote: null,
     items: [
       { icon: "layout",     bold: "5 pages",               rest: " (Accueil, Services, À propos, Portfolio, Contact)" },
       { icon: "smartphone", bold: "Mobile responsive",     rest: " — parfait sur tous les appareils" },
