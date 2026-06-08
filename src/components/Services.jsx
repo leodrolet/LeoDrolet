@@ -34,7 +34,7 @@ const PLANS = [
     tier: "L'Arsenal Web Évolutif",
     price: "500 $",
     priceUnit: "mois",
-    bestFor: "Site pro · SEO · Technicien privé. Tout inclus, sans compromis.",
+    bestFor: "Site pro · SEO · Support. Tout inclus, sans compromis.",
     featured: true,
     badge: null,
     optionB: "ou 4 500 $ comptant — économisez 1 500 $",
@@ -42,35 +42,25 @@ const PLANS = [
       {
         label: "Votre site clé en main",
         items: [
-          { bold: "Jusqu'à 8 pages", rest: " clés (Accueil, Services, À propos, Contact…)", icon: "layout" },
-          { bold: "Mobile responsive", rest: " — parfait sur cellulaire, tablette et ordi", icon: "smartphone" },
-          { bold: "Formulaires", rest: " + intégrations (CRM, email, logiciel)", icon: "link" },
-          { bold: "Livraison", rest: " en moins de 3 semaines", icon: "rocket" },
+          { bold: "Site sur mesure", rest: " — jusqu'à 8 pages, livré en 3 semaines", icon: "layout" },
+          { bold: "Mobile responsive", rest: " — parfait sur tous les appareils", icon: "smartphone" },
+          { bold: "Formulaires & intégrations", rest: " inclus", icon: "link" },
         ],
       },
       {
         label: "Votre visibilité (chaque mois)",
         items: [
           { bold: "SEO local optimisé", rest: " — trouvé sur Google dans votre région", icon: "search" },
-          { bold: "Rapport mensuel", rest: " de performance + recommandations", icon: "barchart" },
-          { bold: "1 heure", rest: " de modifications incluse / mois", icon: "clock" },
-          { bold: "Heures supplémentaires", rest: " : 75 $/heure", icon: "dollar", addOn: true },
+          { bold: "Rapport mensuel", rest: " de performance", icon: "barchart" },
+          { bold: "Modifications incluses", rest: " chaque mois", icon: "clock" },
         ],
       },
       {
         label: "Votre tranquillité d'esprit",
         items: [
-          { bold: "Hébergement ultra-rapide", rest: " + sécurité SSL inclus", icon: "server" },
-          { bold: "Gestion du domaine", rest: " incluse", icon: "shield" },
-          { bold: "Support prioritaire", rest: " — réponse en < 24 h", icon: "messagecircle" },
-          { bold: "4 rondes de révisions", rest: " pendant le lancement", icon: "refresh" },
-        ],
-      },
-      {
-        label: "Clause de transparence",
-        items: [
-          { bold: "Après 12 mois :", rest: " le site vous appartient entièrement", icon: "unlock" },
-          { bold: "Quitter sans frais", rest: " avec votre site, ou continuer à 199 $/mois", icon: "checkcircle" },
+          { bold: "Hébergement + domaine", rest: " inclus", icon: "server" },
+          { bold: "Support prioritaire", rest: " — réponse rapide garantie", icon: "messagecircle" },
+          { bold: "Le site vous appartient", rest: " après 12 mois", icon: "unlock" },
         ],
       },
     ],
