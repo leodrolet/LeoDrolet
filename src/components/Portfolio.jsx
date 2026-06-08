@@ -26,77 +26,99 @@ const SLOTS = [
 ];
 
 // ── Comparateur agence vs Novio ──
-const SLIDER_ROWS = [
-  { feature: "Création du site",      agency: "5 000 $ – 15 000 $ one-shot", novio: "Inclus (vous en êtes proprio après 12 mois)" },
-  { feature: "Maintenance",           agency: "Facturée en extra",            novio: "Incluse" },
-  { feature: "Modifications",         agency: "100 $ – 200 $/heure",          novio: "1h/mois incluse · 75 $/h ensuite" },
-  { feature: "Support",               agency: "Non garanti",                  novio: "< 24h garanti" },
-  { feature: "Mises à jour sécurité", agency: "Non incluses",                 novio: "Incluses" },
-  { feature: "Rapport mensuel",       agency: "Non inclus",                   novio: "Inclus" },
+const COMPARE_ROWS = [
+  {
+    feature: "Site web complet",
+    agency:  "5 000 $ – 15 000 $",
+    novio:   "1 500 $ · 5 pages · livré en 2–3 semaines",
+    novioOk: true,
+  },
+  {
+    feature: "Propriété du site",
+    agency:  "Dépend du contrat",
+    novio:   "Vous en êtes propriétaire dès la livraison",
+    novioOk: true,
+  },
+  {
+    feature: "Hébergement & SSL",
+    agency:  "Facturé en supplément",
+    novio:   "250 $/mois · tout inclus · sans engagement",
+    novioOk: true,
+  },
+  {
+    feature: "Modifications",
+    agency:  "100 $ – 200 $/heure",
+    novio:   "1h/mois incluse dans la maintenance",
+    novioOk: true,
+  },
+  {
+    feature: "Support",
+    agency:  "Délais variables · non garanti",
+    novio:   "Réponse garantie en moins de 24h",
+    novioOk: true,
+  },
+  {
+    feature: "Rapport de performance",
+    agency:  "Non inclus",
+    novio:   "Inclus chaque mois",
+    novioOk: true,
+  },
 ];
 
-const CompareSlider = () => {
-  const [pos, setPos] = React.useState(50);
-  const [dragging, setDragging] = React.useState(false);
-  const ref = React.useRef(null);
+const CheckIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginRight: 6, color: "var(--accent)" }}>
+    <polyline points="20 6 9 17 4 12"/>
+  </svg>
+);
 
-  const move = React.useCallback((clientX) => {
-    if (!dragging || !ref.current) return;
-    const r = ref.current.getBoundingClientRect();
-    setPos(Math.max(4, Math.min(96, ((clientX - r.left) / r.width) * 100)));
-  }, [dragging]);
+const CrossIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginRight: 6, opacity: 0.35 }}>
+    <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+  </svg>
+);
 
-  const stop = React.useCallback(() => setDragging(false), []);
-
-  React.useEffect(() => {
-    window.addEventListener('mouseup', stop);
-    return () => window.removeEventListener('mouseup', stop);
-  }, [stop]);
-
-  return (
-    <div
-      ref={ref}
-      className={`cslider${dragging ? ' cslider--drag' : ''}`}
-      onMouseMove={(e) => move(e.clientX)}
-      onMouseLeave={stop}
-      onTouchMove={(e) => { e.preventDefault(); move(e.touches[0].clientX); }}
-      onTouchEnd={stop}
-    >
-      <div className="cslider-side cslider-side--agency">
-        <div className="cslider-head">Agence traditionnelle</div>
-        {SLIDER_ROWS.map((row, i) => (
-          <div key={i} className="cslider-row">
-            <span className="cslider-feat">{row.feature}</span>
-            <span className="cslider-val">{row.agency}</span>
-          </div>
-        ))}
-      </div>
-      <div className="cslider-novio-clip" style={{ clipPath: `inset(0 0 0 ${pos}%)` }}>
-        <div className="cslider-side cslider-side--novio">
-          <div className="cslider-head">Novio Studio</div>
-          {SLIDER_ROWS.map((row, i) => (
-            <div key={i} className="cslider-row">
-              <span className="cslider-feat">{row.feature}</span>
-              <span className="cslider-val"><span className="cslider-check">✓</span>{row.novio}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-      <div
-        className="cslider-track"
-        style={{ left: `${pos}%` }}
-        onMouseDown={() => setDragging(true)}
-        onTouchStart={() => setDragging(true)}
-      >
-        <div className="cslider-knob">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M9 18L3 12L9 6"/><path d="M15 18L21 12L15 6"/>
-          </svg>
-        </div>
-      </div>
+const CompareTable = () => (
+  <div style={{
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr 1fr",
+    borderRadius: 12,
+    overflow: "hidden",
+    border: "1px solid rgba(255,255,255,0.07)",
+    fontSize: "0.88rem",
+  }}>
+    {/* En-têtes */}
+    <div style={{ padding: "14px 18px", fontWeight: 600, fontSize: "0.75rem", letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--ink-2)", background: "rgba(255,255,255,0.03)", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
+      Critère
     </div>
-  );
-};
+    <div style={{ padding: "14px 18px", fontWeight: 600, fontSize: "0.75rem", letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--ink-2)", background: "rgba(255,255,255,0.03)", borderBottom: "1px solid rgba(255,255,255,0.07)", borderLeft: "1px solid rgba(255,255,255,0.07)" }}>
+      Agence traditionnelle
+    </div>
+    <div style={{ padding: "14px 18px", fontWeight: 700, fontSize: "0.75rem", letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--accent)", background: "rgba(232,98,26,0.08)", borderBottom: "1px solid rgba(232,98,26,0.2)", borderLeft: "1px solid rgba(232,98,26,0.2)" }}>
+      Novio Studio
+    </div>
+
+    {/* Lignes */}
+    {COMPARE_ROWS.map((row, i) => {
+      const rowBg = i % 2 === 0 ? "rgba(255,255,255,0.015)" : "transparent";
+      const sep = "1px solid rgba(255,255,255,0.05)";
+      return (
+        <React.Fragment key={i}>
+          <div style={{ padding: "13px 18px", borderBottom: sep, background: rowBg, fontWeight: 500, color: "var(--ink-2)" }}>
+            {row.feature}
+          </div>
+          <div style={{ padding: "13px 18px", borderBottom: sep, background: rowBg, borderLeft: sep, color: "var(--ink-2)", display: "flex", alignItems: "flex-start" }}>
+            <CrossIcon />
+            <span>{row.agency}</span>
+          </div>
+          <div style={{ padding: "13px 18px", borderBottom: sep, background: i % 2 === 0 ? "rgba(232,98,26,0.05)" : "rgba(232,98,26,0.03)", borderLeft: "1px solid rgba(232,98,26,0.15)", color: "var(--ink)", display: "flex", alignItems: "flex-start" }}>
+            <CheckIcon />
+            <span>{row.novio}</span>
+          </div>
+        </React.Fragment>
+      );
+    })}
+  </div>
+);
 
 // ── Section principale ──
 const Portfolio = () => (
@@ -144,9 +166,9 @@ const Portfolio = () => (
     >
       <div className="imgcmp-eyebrow mono">
         <span className="dash"></span>
-        <span>Glisse pour comparer</span>
+        <span>Novio Studio vs agence traditionnelle</span>
       </div>
-      <CompareSlider />
+      <CompareTable />
     </m.div>
   </section>
 );
