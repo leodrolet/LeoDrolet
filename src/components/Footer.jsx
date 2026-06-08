@@ -118,7 +118,7 @@ const Footer = () => {
       </div>
 
       <LegalModal open={modal === "privacy"} onClose={() => setModal(null)} title="Politique de confidentialité">
-        <p style={{margin:"0 0 20px", fontSize:12, color:"var(--mute)"}}>Dernière mise à jour : juin 2026</p>
+        <p style={{margin:"0 0 20px", fontSize:12, color:"var(--mute)"}}>Dernière mise à jour : 8 juin 2026</p>
         <p style={{margin:"0 0 24px"}}>Novio Studio (« nous ») s'engage à protéger la vie privée des visiteurs de ce site.</p>
         <ModalSection title="1. Informations collectées">
           <p style={{margin:0}}>Nous collectons uniquement les informations que vous nous fournissez volontairement via le formulaire de contact : nom, adresse courriel, et message.</p>
@@ -127,15 +127,28 @@ const Footer = () => {
           <p style={{margin:"0 0 8px"}}>Ces informations sont utilisées uniquement pour répondre à vos demandes.</p>
           <p style={{margin:0}}>Nous ne vendons, ne louons et ne partageons pas vos données avec des tiers.</p>
         </ModalSection>
-        <ModalSection title="3. Hébergement et cookies">
-          <p style={{margin:"0 0 8px"}}>Ce site est hébergé sur Vercel. Des cookies techniques peuvent être utilisés pour assurer le bon fonctionnement du site.</p>
-          <p style={{margin:0}}>Aucun cookie publicitaire n'est utilisé.</p>
+        <ModalSection title="3. Hébergement">
+          <p style={{margin:0}}>Ce site est hébergé sur <strong style={{color:"var(--ink)"}}>Vercel Inc.</strong> (340 Pine Street, San Francisco, CA 94104, USA). Les données transmises via le formulaire de contact transitent par les serveurs de Vercel.</p>
         </ModalSection>
-        <ModalSection title="4. Vos droits (Loi 25 — Québec)">
+        <ModalSection title="4. Analyse d'audience — Cloudflare Web Analytics">
+          <p style={{margin:"0 0 8px"}}>Ce site utilise <strong style={{color:"var(--ink)"}}>Cloudflare Web Analytics</strong> pour mesurer l'audience de façon agrégée (nombre de pages vues, visiteurs uniques, pays d'origine, type d'appareil, pages les plus consultées).</p>
+          <p style={{margin:"0 0 8px"}}>Cloudflare Web Analytics est conçu dans le respect de la vie privée :</p>
+          <ul style={{margin:"0 0 8px", paddingLeft:18}}>
+            <li>Aucun cookie n'est déposé sur votre appareil.</li>
+            <li>Aucune empreinte numérique (fingerprinting) n'est utilisée.</li>
+            <li>Aucun suivi inter-sites n'est effectué.</li>
+            <li>Les données collectées sont anonymes et agrégées — aucune information personnelle n'est associée à votre visite.</li>
+          </ul>
+          <p style={{margin:0}}>Pour en savoir plus : <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer" style={{color:"var(--accent)"}}>politique de confidentialité de Cloudflare</a>.</p>
+        </ModalSection>
+        <ModalSection title="5. Cookies">
+          <p style={{margin:0}}>Ce site n'utilise aucun cookie publicitaire ni cookie de traçage. Aucun bandeau de consentement aux cookies n'est requis.</p>
+        </ModalSection>
+        <ModalSection title="6. Vos droits (Loi 25 — Québec)">
           <p style={{margin:"0 0 10px"}}>Conformément à la Loi sur la protection des renseignements personnels dans le secteur privé (Loi 25), vous avez le droit d'accéder à vos données, de les corriger ou d'en demander la suppression en nous contactant à :</p>
           <p style={{margin:0}}><a href="mailto:info@noviostudio.ca" style={{color:"var(--accent)"}}>info@noviostudio.ca</a></p>
         </ModalSection>
-        <ModalSection title="5. Contact">
+        <ModalSection title="7. Contact">
           <p style={{margin:0}}>Pour toute question : <a href="mailto:info@noviostudio.ca" style={{color:"var(--accent)"}}>info@noviostudio.ca</a></p>
         </ModalSection>
       </LegalModal>
@@ -152,6 +165,12 @@ const Footer = () => {
           <p style={{margin:"0 0 4px"}}><strong style={{color:"var(--ink)"}}>Vercel Inc.</strong></p>
           <p style={{margin:"0 0 4px"}}>340 Pine Street, Suite 701, San Francisco, CA 94104, USA</p>
           <p style={{margin:0}}><a href="https://vercel.com" target="_blank" rel="noopener noreferrer" style={{color:"var(--accent)"}}>vercel.com</a></p>
+        </ModalSection>
+        <ModalSection title="Analyse d'audience">
+          <p style={{margin:"0 0 4px"}}><strong style={{color:"var(--ink)"}}>Cloudflare, Inc.</strong></p>
+          <p style={{margin:"0 0 4px"}}>101 Townsend St, San Francisco, CA 94107, USA</p>
+          <p style={{margin:"0 0 4px"}}>Service utilisé : Cloudflare Web Analytics (sans cookies, sans traçage)</p>
+          <p style={{margin:0}}><a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer" style={{color:"var(--accent)"}}>cloudflare.com/privacypolicy</a></p>
         </ModalSection>
         <ModalSection title="Propriété intellectuelle">
           <p style={{margin:0}}>L'ensemble du contenu de ce site (textes, images, graphismes, logo) est la propriété exclusive de Novio Studio. Toute reproduction sans autorisation écrite préalable est interdite.</p>
