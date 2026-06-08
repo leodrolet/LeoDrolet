@@ -1,0 +1,169 @@
+/* ============================================================
+   Footer.jsx — Pied de page + modales légales + FinalCTA
+   Dépend de : window.useReveal, window.useMagnetic
+   ============================================================ */
+
+const { useReveal, useMagnetic } = window;
+
+// ── CTA final avant le footer ──
+const FinalCTA = () => {
+  const ref = useReveal();
+  const ctaMagnetic = useMagnetic(10);
+  return (
+    <section className="final-cta" id="cta-final">
+      <div className="reveal" ref={ref}>
+        <div className="huge">
+          Prochain contractor dans la galerie — <em>toi.</em>
+        </div>
+        <div className="actions">
+          <a
+            className="btn btn-accent"
+            href="#devis"
+            ref={ctaMagnetic.ref}
+            onMouseMove={ctaMagnetic.onMouseMove}
+            onMouseLeave={ctaMagnetic.onMouseLeave}
+            style={ctaMagnetic.style}
+          >
+            Démarrer mon projet <span className="arrow">&#8594;</span>
+          </a>
+          <a className="btn" href="mailto:leo_drolet@noviostudio.online">leo_drolet@noviostudio.online</a>
+        </div>
+        <div className="small">Premier appel · 15 min · gratuit · on parle chiffres, pas jargon</div>
+      </div>
+    </section>
+  );
+};
+
+// ── Modale générique (confidentialité / mentions) ──
+const LegalModal = ({ open, onClose, title, children }) => {
+  React.useEffect(() => {
+    if (!open) return;
+    document.body.style.overflow = "hidden";
+    const onKey = (e) => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", onKey);
+    return () => { document.body.style.overflow = ""; window.removeEventListener("keydown", onKey); };
+  }, [open, onClose]);
+
+  if (!open) return null;
+  return (
+    <div
+      onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
+      style={{ position:"fixed", inset:0, zIndex:200, background:"rgba(0,0,0,.82)", backdropFilter:"blur(8px)", display:"flex", alignItems:"center", justifyContent:"center", padding:"20px" }}
+    >
+      <div style={{ background:"var(--bg-2)", border:"1px solid var(--line-strong)", borderRadius:16, width:"100%", maxWidth:640, maxHeight:"85vh", display:"flex", flexDirection:"column" }}>
+        <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", padding:"24px 28px", borderBottom:"1px solid var(--line)" }}>
+          <span style={{ fontFamily:"var(--display)", fontSize:22, fontWeight:400, letterSpacing:"-.01em" }}>{title}</span>
+          <button onClick={onClose} style={{ fontFamily:"var(--mono)", fontSize:18, color:"var(--ink-2)", background:"none", border:"none", cursor:"pointer", lineHeight:1 }}>&#10005;</button>
+        </div>
+        <div style={{ overflowY:"auto", padding:"28px", fontSize:14, lineHeight:1.65, color:"var(--ink-2)" }}>
+          {children}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const ModalSection = ({ title, children }) => (
+  <div style={{ marginBottom: 28 }}>
+    <div style={{ fontFamily:"var(--mono)", fontSize:10, letterSpacing:".16em", textTransform:"uppercase", color:"var(--accent)", marginBottom:10 }}>{title}</div>
+    <div>{children}</div>
+  </div>
+);
+
+// ── Footer principal ──
+const Footer = () => {
+  const [modal, setModal] = React.useState(null); // "privacy" | "mentions" | null
+
+  return (
+    <>
+      <footer className="footer">
+        <div>
+          <div className="brand-big">novio<em>.studio</em></div>
+          <div className="mono" style={{ fontSize:10, color:"var(--mute)", marginTop:12, letterSpacing:".14em", textTransform:"uppercase" }}>
+            © 2026 · Gatineau, Québec
+          </div>
+        </div>
+        <div>
+          <h6>Navigation</h6>
+          <ul>
+            <li><a href="#top">Accueil</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#travaux">Travaux</a></li>
+            <li><a href="#devis">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h6>Légal</h6>
+          <ul>
+            <li><a href="mailto:leo_drolet@noviostudio.online">leo_drolet@noviostudio.online</a></li>
+            <li><button onClick={() => setModal("privacy")} style={{ background:"none", border:"none", padding:0, color:"inherit", font:"inherit", cursor:"pointer", textAlign:"left" }}>Politique de confidentialité</button></li>
+            <li><button onClick={() => setModal("mentions")} style={{ background:"none", border:"none", padding:0, color:"inherit", font:"inherit", cursor:"pointer", textAlign:"left" }}>Mentions légales</button></li>
+          </ul>
+        </div>
+        <div>
+          <h6>Contact</h6>
+          <ul>
+            <li><a href="mailto:leo_drolet@noviostudio.online">Email</a></li>
+            <li><a href="tel:+18736554684">1 873 655 4684</a></li>
+          </ul>
+        </div>
+      </footer>
+
+      <div className="footer-bot">
+        <span>© 2026 Novio Studio</span>
+        <span className="mono" style={{ letterSpacing:".14em" }}>Secteurs · Toiture · HVAC · Plomberie · Paysagement · Rénovation · Entrepreneur général · Gatineau · Hull · Aylmer · Ottawa · Outaouais</span>
+        <span>v1.0 · cohorte fondateur</span>
+      </div>
+
+      <LegalModal open={modal === "privacy"} onClose={() => setModal(null)} title="Politique de confidentialité">
+        <p style={{margin:"0 0 20px", fontSize:12, color:"var(--mute)"}}>Dernière mise à jour : juin 2026</p>
+        <p style={{margin:"0 0 24px"}}>Novio Studio (« nous ») s'engage à protéger la vie privée des visiteurs de ce site.</p>
+        <ModalSection title="1. Informations collectées">
+          <p style={{margin:0}}>Nous collectons uniquement les informations que vous nous fournissez volontairement via le formulaire de contact : nom, adresse courriel, et message.</p>
+        </ModalSection>
+        <ModalSection title="2. Utilisation des informations">
+          <p style={{margin:"0 0 8px"}}>Ces informations sont utilisées uniquement pour répondre à vos demandes.</p>
+          <p style={{margin:0}}>Nous ne vendons, ne louons et ne partageons pas vos données avec des tiers.</p>
+        </ModalSection>
+        <ModalSection title="3. Hébergement et cookies">
+          <p style={{margin:"0 0 8px"}}>Ce site est hébergé sur Vercel. Des cookies techniques peuvent être utilisés pour assurer le bon fonctionnement du site.</p>
+          <p style={{margin:0}}>Aucun cookie publicitaire n'est utilisé.</p>
+        </ModalSection>
+        <ModalSection title="4. Vos droits (Loi 25 — Québec)">
+          <p style={{margin:"0 0 10px"}}>Conformément à la Loi sur la protection des renseignements personnels dans le secteur privé (Loi 25), vous avez le droit d'accéder à vos données, de les corriger ou d'en demander la suppression en nous contactant à :</p>
+          <p style={{margin:0}}><a href="mailto:info@noviostudio.ca" style={{color:"var(--accent)"}}>info@noviostudio.ca</a></p>
+        </ModalSection>
+        <ModalSection title="5. Contact">
+          <p style={{margin:0}}>Pour toute question : <a href="mailto:info@noviostudio.ca" style={{color:"var(--accent)"}}>info@noviostudio.ca</a></p>
+        </ModalSection>
+      </LegalModal>
+
+      <LegalModal open={modal === "mentions"} onClose={() => setModal(null)} title="Mentions légales">
+        <ModalSection title="Éditeur du site">
+          <p style={{margin:"0 0 4px"}}><strong style={{color:"var(--ink)"}}>Novio Studio</strong> — travailleur autonome</p>
+          <p style={{margin:"0 0 4px"}}>Représentant : Leo Drolet</p>
+          <p style={{margin:"0 0 4px"}}>Gatineau, Québec, Canada</p>
+          <p style={{margin:"0 0 4px"}}>Email : <a href="mailto:leo_drolet@noviostudio.online" style={{color:"var(--accent)"}}>leo_drolet@noviostudio.online</a></p>
+          <p style={{margin:0}}>Activité : Développement web freelance</p>
+        </ModalSection>
+        <ModalSection title="Hébergeur">
+          <p style={{margin:"0 0 4px"}}><strong style={{color:"var(--ink)"}}>Vercel Inc.</strong></p>
+          <p style={{margin:"0 0 4px"}}>340 Pine Street, Suite 701, San Francisco, CA 94104, USA</p>
+          <p style={{margin:0}}><a href="https://vercel.com" target="_blank" rel="noopener noreferrer" style={{color:"var(--accent)"}}>vercel.com</a></p>
+        </ModalSection>
+        <ModalSection title="Propriété intellectuelle">
+          <p style={{margin:0}}>L'ensemble du contenu de ce site (textes, images, graphismes, logo) est la propriété exclusive de Novio Studio. Toute reproduction sans autorisation écrite préalable est interdite.</p>
+        </ModalSection>
+        <ModalSection title="Responsabilité">
+          <p style={{margin:0}}>Novio Studio s'efforce d'assurer l'exactitude des informations publiées. L'utilisation de ces informations se fait sous la responsabilité exclusive du visiteur.</p>
+        </ModalSection>
+        <ModalSection title="Données personnelles">
+          <p style={{margin:0}}>Le traitement des données est décrit dans notre Politique de confidentialité. Conformément à la Loi 25 du Québec et au RGPD, vous disposez de droits d'accès, rectification, suppression et portabilité.</p>
+        </ModalSection>
+      </LegalModal>
+    </>
+  );
+};
+
+window.FinalCTA = FinalCTA;
+window.Footer = Footer;
