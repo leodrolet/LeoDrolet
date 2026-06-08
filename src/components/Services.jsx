@@ -161,19 +161,6 @@ const Services = () => {
         ))}
       </div>
 
-      {/* Texte "Pas sûr" */}
-      <p style={{
-        textAlign: "center",
-        margin: "28px auto 0",
-        fontSize: "0.85rem",
-        color: "var(--ink-2)",
-        padding: "0 var(--gutter)",
-      }}>
-        Pas sûr de ce dont tu as besoin ?{" "}
-        <a href="#contact" style={{ color: "var(--accent)", textDecoration: "none", borderBottom: "1px solid currentColor", paddingBottom: "1px" }}>
-          Écris-moi et on en parle.
-        </a>
-      </p>
     </section>
   );
 };
