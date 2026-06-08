@@ -31,36 +31,36 @@ const SectionHead = ({ num, kicker, title, right }) => {
 const PLANS = [
   {
     id: "arsenal",
-    tier: "Site Web Clé en Main",
-    price: "1 750 $",
-    priceUnit: "unique",
-    bestFor: "5 pages · paiement unique · livré en 3 semaines.",
+    tier: "L'Arsenal Web Évolutif",
+    price: "500 $",
+    priceUnit: "mois",
+    bestFor: "Site pro · SEO · Support. Tout inclus, sans compromis.",
     featured: true,
     badge: null,
-    optionB: "Besoin de plus ? Le prix est réévalué selon vos demandes précises.",
+    optionB: "ou 4 500 $ comptant — économisez 1 500 $",
     groups: [
       {
         label: "Votre site clé en main",
         items: [
-          { bold: "5 pages incluses", rest: " — accueil, services, à propos, contact + 1 au choix", icon: "layout" },
+          { bold: "Site sur mesure", rest: " — jusqu'à 8 pages, livré en 3 semaines", icon: "layout" },
           { bold: "Mobile responsive", rest: " — parfait sur tous les appareils", icon: "smartphone" },
           { bold: "Formulaires & intégrations", rest: " inclus", icon: "link" },
         ],
       },
       {
-        label: "Votre visibilité",
+        label: "Votre visibilité (chaque mois)",
         items: [
           { bold: "SEO local optimisé", rest: " — trouvé sur Google dans votre région", icon: "search" },
-          { bold: "Domaine + hébergement", rest: " — configurés et mis en ligne", icon: "server" },
-          { bold: "Livraison en < 3 semaines", rest: " — délai respecté", icon: "clock" },
+          { bold: "Rapport mensuel", rest: " de performance", icon: "barchart" },
+          { bold: "Modifications incluses", rest: " chaque mois", icon: "clock" },
         ],
       },
       {
         label: "Votre tranquillité d'esprit",
         items: [
-          { bold: "Le site vous appartient", rest: " dès la livraison", icon: "unlock" },
-          { bold: "Support inclus", rest: " — réponse rapide garantie", icon: "messagecircle" },
-          { bold: "Prix ajusté", rest: " selon vos besoins réels — jamais de surprise", icon: "dollar" },
+          { bold: "Hébergement + domaine", rest: " inclus", icon: "server" },
+          { bold: "Support prioritaire", rest: " — réponse rapide garantie", icon: "messagecircle" },
+          { bold: "Le site vous appartient", rest: " après 12 mois", icon: "unlock" },
         ],
       },
     ],
@@ -69,11 +69,11 @@ const PLANS = [
 
 const PROMISES = [
   { icon: "rocket",        bold: "En ligne",               rest: " en moins de 3 semaines" },
-  { icon: "server",        bold: "Domaine + hébergement",  rest: " configurés et mis en ligne" },
-  { icon: "unlock",        bold: "Le site vous appartient", rest: " dès la livraison" },
-  { icon: "messagecircle", bold: "Support",                rest: " en < 24 h" },
-  { icon: "checkcircle",   bold: "Prix réévalué",          rest: " selon vos besoins précis" },
-  { icon: "dollar",        bold: "Aucun frais caché",      rest: "" },
+  { icon: "server",        bold: "Domaine + hébergement",   rest: " inclus" },
+  { icon: "unlock",        bold: "Le site vous appartient", rest: " après 12 mois" },
+  { icon: "messagecircle", bold: "Support",                 rest: " en < 24 h" },
+  { icon: "checkcircle",   bold: "Option comptant",         rest: " — 4 500 $ · économie de 1 500 $" },
+  { icon: "dollar",        bold: "Aucun frais caché",       rest: "" },
 ];
 
 // ── Sous-composants ──
@@ -155,8 +155,8 @@ const Services = () => (
           L'Arsenal Web<br/>
           <em style={{ fontStyle: "italic", color: "var(--ink-2)" }}>Évolutif.</em>
         </h2>
-        <p className="plans-intro-body">1 750 $ · paiement unique · 5 pages.</p>
-        <p className="plans-intro-sub">Le prix de base couvre un site complet de 5 pages. Des besoins supplémentaires ? On réévalue ensemble selon ce que vous demandez, clairement.</p>
+        <p className="plans-intro-body">500 $/mois · 12 mois · Puis libre.</p>
+        <p className="plans-intro-sub">Ou payez 4 500 $ comptant et économisez 1 500 $. Même service, zéro mensualité.</p>
         <ul className="plans-promises">
           {PROMISES.map((p, i) => <PromiseItem key={i} {...p} />)}
         </ul>
