@@ -29,11 +29,14 @@ const PLANS = [
     bestFor: "Un site professionnel, livré clé en main.",
     featured: false,
     badge: null,
+    subPrice: null,
+    paymentNote: "50 % à la signature · 50 % à la livraison",
     items: [
-      { icon: "layout",     bold: "5 pages",             rest: " (Accueil, Services, À propos, Portfolio, Contact)" },
-      { icon: "smartphone", bold: "Mobile responsive",   rest: " — parfait sur tous les appareils" },
-      { icon: "pencil",     bold: "Design personnalisé", rest: " — pas un template" },
+      { icon: "layout",     bold: "5 pages",               rest: " (Accueil, Services, À propos, Portfolio, Contact)" },
+      { icon: "smartphone", bold: "Mobile responsive",     rest: " — parfait sur tous les appareils" },
+      { icon: "pencil",     bold: "Design personnalisé",   rest: " — pas un template" },
       { icon: "link",       bold: "Formulaire de contact", rest: " inclus" },
+      { icon: "clock",      bold: "Livraison en 2–3 semaines", rest: "" },
     ],
   },
   {
@@ -43,12 +46,15 @@ const PLANS = [
     priceUnit: "mois",
     bestFor: "Votre site en ligne, performant, sans souci.",
     featured: true,
-    badge: "Recommandé",
+    badge: null,
+    subPrice: "Sans engagement — annulable en tout temps",
+    paymentNote: null,
     items: [
-      { icon: "server",        bold: "Hébergement rapide", rest: " + sécurité SSL inclus" },
-      { icon: "barchart",      bold: "Rapport mensuel",    rest: " de performance" },
-      { icon: "clock",         bold: "1h de modifications", rest: " incluse chaque mois" },
-      { icon: "messagecircle", bold: "Support prioritaire", rest: " — réponse rapide garantie" },
+      { icon: "server",        bold: "Hébergement rapide",          rest: " + sécurité SSL inclus" },
+      { icon: "barchart",      bold: "Rapport mensuel",             rest: " de performance" },
+      { icon: "clock",         bold: "1h de modifications",         rest: " incluse chaque mois" },
+      { icon: "messagecircle", bold: "Support prioritaire",         rest: " — réponse rapide garantie" },
+      { icon: "refresh",       bold: "Sauvegardes automatiques",    rest: " hebdomadaires" },
     ],
   },
 ];
@@ -75,11 +81,15 @@ const PlanCard = ({ plan, i }) => (
       <div className="plan-card-header">
         <div className="plan-card-top">
           <span className="plan-tier">{plan.tier}</span>
-          {plan.badge && <span className="plan-badge">{plan.badge}</span>}
         </div>
         <span className="plan-amount">
           {plan.price}<sup className="plan-amount-unit">/{plan.priceUnit}</sup>
         </span>
+        {plan.subPrice && (
+          <p style={{ margin: "4px 0 0", fontSize: "0.78rem", color: "var(--ink-2)", letterSpacing: "0.01em" }}>
+            {plan.subPrice}
+          </p>
+        )}
         <p className="plan-best-for">{plan.bestFor}</p>
       </div>
       <div className="plan-benefits">
@@ -89,12 +99,32 @@ const PlanCard = ({ plan, i }) => (
           </div>
         </div>
       </div>
-      <a href="#contact" className={`btn plan-cta${plan.featured ? " plan-cta--featured" : ""}`}>
+      <a href="https://calendly.com/leo_drolet-noviostudio/30min" target="_blank" rel="noopener noreferrer" className={`btn plan-cta${plan.featured ? " plan-cta--featured" : ""}`}>
         Démarrer mon projet <span className="arrow">&#8594;</span>
       </a>
+      {plan.paymentNote && (
+        <p style={{ margin: "12px 0 0", fontSize: "0.75rem", textAlign: "center", color: "var(--ink-2)", letterSpacing: "0.01em" }}>
+          {plan.paymentNote}
+        </p>
+      )}
     </div>
   </m.div>
 );
+
+const REASSURANCE = [
+  {
+    label: "Satisfaction garantie",
+    svg: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" width="22" height="22"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>),
+  },
+  {
+    label: "Livraison en 2–3 semaines",
+    svg: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" width="22" height="22"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>),
+  },
+  {
+    label: "Basé à Gatineau",
+    svg: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" width="22" height="22"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>),
+  },
+];
 
 // ── Section principale ──
 const Services = () => {
@@ -112,6 +142,38 @@ const Services = () => {
       }}>
         {PLANS.map((plan, i) => <PlanCard key={plan.id} plan={plan} i={i} />)}
       </div>
+
+      {/* Réassurance */}
+      <div style={{
+        display: "flex",
+        justifyContent: "center",
+        flexWrap: "wrap",
+        gap: "32px 48px",
+        margin: "48px auto 0",
+        padding: "0 var(--gutter)",
+        maxWidth: "680px",
+      }}>
+        {REASSURANCE.map(({ label, svg }) => (
+          <div key={label} style={{ display: "flex", alignItems: "center", gap: "10px", color: "var(--ink-2)", fontSize: "0.85rem", letterSpacing: "0.01em" }}>
+            <span style={{ color: "var(--accent)", flexShrink: 0 }}>{svg}</span>
+            {label}
+          </div>
+        ))}
+      </div>
+
+      {/* Texte "Pas sûr" */}
+      <p style={{
+        textAlign: "center",
+        margin: "28px auto 0",
+        fontSize: "0.85rem",
+        color: "var(--ink-2)",
+        padding: "0 var(--gutter)",
+      }}>
+        Pas sûr de ce dont tu as besoin ?{" "}
+        <a href="#contact" style={{ color: "var(--accent)", textDecoration: "none", borderBottom: "1px solid currentColor", paddingBottom: "1px" }}>
+          Écris-moi et on en parle.
+        </a>
+      </p>
     </section>
   );
 };
