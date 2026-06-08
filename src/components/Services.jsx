@@ -54,15 +54,16 @@ const PLANS = [
       { icon: "barchart",      bold: "Rapport mensuel",             rest: " de performance" },
       { icon: "clock",         bold: "1h de modifications",         rest: " incluse chaque mois" },
       { icon: "messagecircle", bold: "Support prioritaire",         rest: " — réponse rapide garantie" },
-      { icon: "refresh",       bold: "Sauvegardes automatiques",    rest: " hebdomadaires" },
+      { icon: "refresh",       bold: "Sauvegardes automatiques",    rest: " quotidiennes" },
+      { icon: "link",          bold: "Nom de domaine non inclus",  rest: " — environ 15 $/an à prévoir", muted: true },
     ],
   },
 ];
 
-const BenefitItem = ({ bold, rest, icon }) => (
-  <div className="benefit-row">
+const BenefitItem = ({ bold, rest, icon, muted }) => (
+  <div className="benefit-row" style={muted ? { opacity: 0.55 } : undefined}>
     <span className="benefit-icon-svg">{BENEFIT_ICONS[icon]}</span>
-    <span className="benefit-text">
+    <span className="benefit-text" style={muted ? { fontSize: "0.82em" } : undefined}>
       <strong className="benefit-bold">{bold}</strong>
       {rest && <span className="benefit-rest">{rest}</span>}
     </span>
