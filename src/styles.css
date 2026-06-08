@@ -1997,7 +1997,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 /* --- Specs --- */
 .specs {
   position: relative;
-  padding: clamp(80px, 12vh, 160px) var(--gutter);
+  padding: clamp(40px, 6vh, 80px) var(--gutter);
   border-bottom: 1px solid var(--line);
 }
 .specs-head {
