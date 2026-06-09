@@ -100,7 +100,7 @@ const PlanCard = ({ plan, i }) => (
           </div>
         </div>
       </div>
-      <a href="https://calendly.com/leo_drolet-noviostudio/30min" target="_blank" rel="noopener noreferrer" className={`btn plan-cta${plan.featured ? " plan-cta--featured" : ""}`}>
+      <a href="https://calendly.com/leo_drolet-noviostudio/conception-site-web" target="_blank" rel="noopener noreferrer" className={`btn plan-cta${plan.featured ? " plan-cta--featured" : ""}`}>
         Démarrer mon projet <span className="arrow">&#8594;</span>
       </a>
       {plan.paymentNote && (
