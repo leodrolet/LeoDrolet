@@ -275,7 +275,7 @@ const SiteWebPage = () => (
   <React.Fragment>
     <PageHeader
       index="01 — Sites web"
-      metaRight="Livré en 2–3 semaines"
+      metaRight="2–3 semaines"
       title={<>Un site qui <em>fait sonner le téléphone.</em></>}
       sub="Sur mesure, rapide, pensé pour les entrepreneurs de l'Outaouais. Ton prochain client te cherche sur Google — fais en sorte qu'il te trouve, toi, pas ton concurrent."
       stats={[
@@ -301,7 +301,7 @@ const AutomationPage = () => (
   <React.Fragment>
     <PageHeader
       index="02 — Automatisation IA"
-      metaRight="250 $/mois · sans installation"
+      metaRight="250 $/mois"
       title={<>Aucun lead ne <em>passe entre les craques.</em></>}
       sub="Un beau site attire les clients. L'automatisation s'assure qu'aucun ne t'échappe. Des outils simples — 250 $/mois, sans frais d'installation — qui répondent, relancent et qualifient à ta place."
     />
@@ -319,7 +319,7 @@ const ContactPage = () => (
   <React.Fragment>
     <PageHeader
       index="03 — Contact"
-      metaRight="Réponse en moins de 24 h"
+      metaRight="Réponse < 24 h"
       title={<>Parlons de <em>ton projet.</em></>}
       sub="Premier appel de 15 minutes, gratuit. On regarde où tu perds des leads aujourd'hui, et ce qu'on peut récupérer. Pas de jargon, pas de pression."
     />
