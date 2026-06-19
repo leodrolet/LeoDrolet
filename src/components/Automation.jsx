@@ -19,7 +19,7 @@ const AUTO_METRICS = [
   { v: "24", u: "/7",   k: "Toujours actif",      d: "Répond aux leads la nuit, la fin de semaine, pendant que tu es sur un chantier." },
   { v: "5",  u: "min",  k: "Délai de réponse",    d: "Un SMS part dans les minutes suivant un appel manqué — pendant que le lead est encore chaud." },
   { v: "80", u: "%",    k: "Soumissions suivies", d: "La majorité des soumissions sans suivi ne reviennent jamais. On les relance automatiquement." },
-  { v: "400", u: "$",   k: "À partir de",         d: "Mise en place par automatisation. Un seul contrat récupéré rembourse l'installation." },
+  { v: "250", u: "$/mois", k: "Par automatisation", d: "Tout inclus — hébergement, maintenance et ajustements. Aucun frais d'installation." },
 ];
 
 const AutoMetric = ({ s, i }) => {
@@ -43,9 +43,9 @@ const AUTOMATIONS = [
     id: "appels",
     tier: "Réponse aux appels manqués",
     icon: "phone",
-    price: "dès 400 $",
-    priceUnit: "installation",
-    subPrice: "+ 75–150 $/mois · maintenance incluse",
+    price: "250 $",
+    priceUnit: "mois",
+    subPrice: "Sans frais d'installation · sans engagement",
     pitch: "« Un appel manqué un vendredi soir, c'est un contrat chez le concurrent. »",
     featured: true,
     items: [
@@ -58,9 +58,9 @@ const AUTOMATIONS = [
     id: "chatbot",
     tier: "Chatbot de qualification",
     icon: "messagecircle",
-    price: "dès 400 $",
-    priceUnit: "installation",
-    subPrice: "+ 75–150 $/mois · maintenance incluse",
+    price: "250 $",
+    priceUnit: "mois",
+    subPrice: "Sans frais d'installation · sans engagement",
     pitch: "« Le site travaille même quand tu es sur un toit. »",
     featured: false,
     items: [
@@ -73,9 +73,9 @@ const AUTOMATIONS = [
     id: "relance",
     tier: "Relance des soumissions",
     icon: "refresh",
-    price: "dès 400 $",
-    priceUnit: "installation",
-    subPrice: "+ 75–150 $/mois · maintenance incluse",
+    price: "250 $",
+    priceUnit: "mois",
+    subPrice: "Sans frais d'installation · sans engagement",
     pitch: "« 80 % des soumissions non suivies ne reviennent jamais. On les relance pour toi. »",
     featured: false,
     items: [
@@ -88,9 +88,9 @@ const AUTOMATIONS = [
     id: "avis",
     tier: "Demande d'avis Google",
     icon: "star",
-    price: "dès 400 $",
-    priceUnit: "installation",
-    subPrice: "+ 75–150 $/mois · maintenance incluse",
+    price: "250 $",
+    priceUnit: "mois",
+    subPrice: "Sans frais d'installation · sans engagement",
     pitch: "« Plus d'avis Google = plus haut sur la carte = plus d'appels. »",
     featured: false,
     items: [
@@ -148,22 +148,25 @@ const AUTO_COMPARE_ROWS = [
 ];
 
 // ── Section principale ──
-const Automation = () => {
+const Automation = ({ lead = true }) => {
   const headRef = useReveal();
   const { CompareSlider } = window;
   return (
     <section className="section" id="automatisation">
-      <div className="section-head reveal" ref={headRef}>
-        <h2 className="section-title">Automatisation IA</h2>
-      </div>
-
-      <p className="specs-sub" style={{ textAlign: "center", margin: "0 auto 8px", maxWidth: "640px", padding: "0 var(--gutter)" }}>
-        Un beau site attire les clients. L'automatisation s'assure qu'aucun ne t'échappe.
-        Des outils simples qui répondent, relancent et qualifient à ta place — pendant que tu travailles.
-      </p>
+      {lead && (
+        <React.Fragment>
+          <div className="section-head reveal" ref={headRef}>
+            <h2 className="section-title">Automatisation IA</h2>
+          </div>
+          <p className="specs-sub" style={{ textAlign: "center", margin: "0 auto 8px", maxWidth: "640px", padding: "0 var(--gutter)" }}>
+            Un beau site attire les clients. L'automatisation s'assure qu'aucun ne t'échappe.
+            Des outils simples qui répondent, relancent et qualifient à ta place — pendant que tu travailles.
+          </p>
+        </React.Fragment>
+      )}
 
       {/* Métriques — format « specs sheet » */}
-      <div className="specs-grid" style={{ marginTop: "40px" }}>
+      <div className="specs-grid" style={{ marginTop: lead ? "40px" : "0" }}>
         {AUTO_METRICS.map((s, i) => <AutoMetric key={i} s={s} i={i} />)}
       </div>
 

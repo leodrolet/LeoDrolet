@@ -1,57 +1,33 @@
 /* ============================================================
-   app.jsx — Novio Studio main app
+   app.jsx — Novio Studio · routeur multi-pages
+   La page à rendre est déterminée par l'attribut data-page sur
+   #root (défini dans chaque fichier HTML). ScrollProgress, Nav
+   et Footer sont communs à toutes les pages.
    ============================================================ */
 
 const {
-  Nav, Hero, MarqueeRow, Services, Automation, Portfolio, About, FAQ,
-  FinalCTA, Footer, useTweaksReactive, TWEAK_DEFAULTS, TweaksUI,
-  ScrollProgress, Manifesto, Specs,
+  ScrollProgress, Nav, Footer,
+  HomePage, SiteWebPage, AutomationPage, ContactPage,
 } = window;
 
+const PAGES = {
+  home: HomePage,
+  "site-web": SiteWebPage,
+  automatisation: AutomationPage,
+  contact: ContactPage,
+};
+
 const App = () => {
-  const [tweaks, setTweak] = useTweaksReactive(TWEAK_DEFAULTS);
-
-  // Hero headline — pass through to Hero
-  // Convert markup: words wrapped in *...* render italic; **...** render accent
-  // Tokenization happens inside Hero.
-
+  const root = document.getElementById("root");
+  const key = (root && root.dataset.page) || "home";
+  const Page = PAGES[key] || HomePage;
   return (
-    <>
+    <React.Fragment>
       <ScrollProgress />
       <Nav />
-      <Hero headline={tweaks.headline} accent={tweaks.accent} shape={tweaks.shape} />
-
-      <Manifesto />
-
-      <MarqueeRow items={[
-        "Plus de contrats",
-        "Toiture · HVAC · Plomberie · Paysagement · Rénovation",
-        "Gatineau · Ottawa · Outaouais",
-        "Dès 999 $ CAD",
-        "Livré en 7–28 jours",
-        "100 / 100 Lighthouse",
-        "Sans agence · sans template",
-      ]} />
-
-      <Specs />
-
-      <MarqueeRow reverse items={[
-        "Cohorte fondateur · 04 places",
-        "04 places · printemps 2026",
-        "Pas d'agence · pas d'intermédiaire",
-        "hello@novio.studio",
-      ]} />
-
-      <Portfolio />
-      <About />
-      <Services />
-      <Automation />
-      <FAQ />
-      <FinalCTA />
+      <Page />
       <Footer />
-
-      <TweaksUI tweaks={tweaks} setTweak={setTweak} />
-    </>
+    </React.Fragment>
   );
 };
 

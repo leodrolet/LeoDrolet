@@ -164,7 +164,7 @@ const Services = () => {
 
       {/* Lien vers l'offre Automatisation IA */}
       <div style={{ textAlign: "center", marginTop: "40px", padding: "0 var(--gutter)" }}>
-        <a href="#automatisation" className="btn" style={{
+        <a href="/automatisation" className="btn" style={{
           display: "inline-flex", alignItems: "center", gap: "8px",
           background: "transparent", border: "1px solid var(--line-strong)", color: "var(--ink)",
           padding: "12px 22px",

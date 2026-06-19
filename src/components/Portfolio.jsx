@@ -102,8 +102,8 @@ const CompareSlider = ({ rows = SLIDER_ROWS, leftHead = "Agence traditionnelle",
   );
 };
 
-// ── Section principale ──
-const Portfolio = () => (
+// ── Galerie « réalisations » : slots fondateur ──
+const FoundersSlots = () => (
   <section className="section" id="travaux">
     <SectionHead
       num="03"
@@ -120,7 +120,7 @@ const Portfolio = () => (
         <m.article
           key={s.n}
           className="slot"
-          onClick={() => { document.getElementById('devis')?.scrollIntoView({ behavior: 'smooth' }); }}
+          onClick={() => { window.location.href = "/contact"; }}
           initial={{ opacity: 0, y: 32 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
@@ -139,21 +139,26 @@ const Portfolio = () => (
         </m.article>
       ))}
     </div>
-    <m.div
-      className="imgcmp-wrap"
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.15 }}
-      transition={{ duration: 0.7, ease: EASE_OUT_EXPO, delay: 0.1 }}
-    >
-      <div className="imgcmp-eyebrow mono">
-        <span className="dash"></span>
-        <span>Novio Studio vs agence traditionnelle</span>
-      </div>
-      <CompareSlider />
-    </m.div>
   </section>
 );
 
-window.Portfolio = Portfolio;
+// ── Comparateur Novio vs agence traditionnelle ──
+const CompareAgency = () => (
+  <m.div
+    className="imgcmp-wrap"
+    initial={{ opacity: 0, y: 24 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, amount: 0.15 }}
+    transition={{ duration: 0.7, ease: EASE_OUT_EXPO, delay: 0.1 }}
+  >
+    <div className="imgcmp-eyebrow mono">
+      <span className="dash"></span>
+      <span>Novio Studio vs agence traditionnelle</span>
+    </div>
+    <CompareSlider />
+  </m.div>
+);
+
+window.FoundersSlots = FoundersSlots;
+window.CompareAgency = CompareAgency;
 window.CompareSlider = CompareSlider;

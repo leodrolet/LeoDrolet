@@ -88,10 +88,10 @@ const Footer = () => {
         <div>
           <h6>Navigation</h6>
           <ul>
-            <li><a href="#top">Accueil</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#travaux">Travaux</a></li>
-            <li><a href="#devis">Contact</a></li>
+            <li><a href="/">Accueil</a></li>
+            <li><a href="/site-web">Sites Web</a></li>
+            <li><a href="/automatisation">Automatisation IA</a></li>
+            <li><a href="/contact">Contact</a></li>
           </ul>
         </div>
         <div>
