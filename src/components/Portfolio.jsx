@@ -35,7 +35,7 @@ const SLIDER_ROWS = [
   { feature: "Rapport de performance", agency: "Non inclus",                     novio: "Inclus chaque mois" },
 ];
 
-const CompareSlider = () => {
+const CompareSlider = ({ rows = SLIDER_ROWS, leftHead = "Agence traditionnelle", rightHead = "Novio Studio" }) => {
   const [pos, setPos] = React.useState(50);
   const [dragging, setDragging] = React.useState(false);
   const ref = React.useRef(null);
@@ -67,8 +67,8 @@ const CompareSlider = () => {
       onTouchEnd={stop}
     >
       <div className="cslider-side cslider-side--agency">
-        <div className="cslider-head">Agence traditionnelle</div>
-        {SLIDER_ROWS.map((row, i) => (
+        <div className="cslider-head">{leftHead}</div>
+        {rows.map((row, i) => (
           <div key={i} className="cslider-row">
             <span className="cslider-feat">{row.feature}</span>
             <span className="cslider-val">{row.agency}</span>
@@ -77,8 +77,8 @@ const CompareSlider = () => {
       </div>
       <div className="cslider-novio-clip" style={{ clipPath: `inset(0 0 0 ${pos}%)` }}>
         <div className="cslider-side cslider-side--novio">
-          <div className="cslider-head">Novio Studio</div>
-          {SLIDER_ROWS.map((row, i) => (
+          <div className="cslider-head">{rightHead}</div>
+          {rows.map((row, i) => (
             <div key={i} className="cslider-row">
               <span className="cslider-feat">{row.feature}</span>
               <span className="cslider-val"><span className="cslider-check">✓</span>{row.novio}</span>
@@ -156,3 +156,4 @@ const Portfolio = () => (
 );
 
 window.Portfolio = Portfolio;
+window.CompareSlider = CompareSlider;

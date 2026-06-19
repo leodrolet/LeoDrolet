@@ -3,7 +3,7 @@
    ============================================================ */
 
 const {
-  Nav, Hero, MarqueeRow, Services, Portfolio, About, FAQ,
+  Nav, Hero, MarqueeRow, Services, Automation, Portfolio, About, FAQ,
   FinalCTA, Footer, useTweaksReactive, TWEAK_DEFAULTS, TweaksUI,
   ScrollProgress, Manifesto, Specs,
 } = window;
@@ -45,6 +45,7 @@ const App = () => {
       <Portfolio />
       <About />
       <Services />
+      <Automation />
       <FAQ />
       <FinalCTA />
       <Footer />

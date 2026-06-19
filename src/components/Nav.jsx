@@ -31,9 +31,10 @@ const Nav = () => {
           novio<span style={{ fontStyle: "italic", color: "var(--ink-2)" }}>.studio</span>
         </a>
         <div className="nav-links">
+          <a href="#devis">Forfaits</a>
           <a href="#travaux">Travaux</a>
           <a href="#studio">Studio</a>
-          <a href="#devis">Forfaits</a>
+          <a href="#automatisation">Automatisation&nbsp;IA</a>
         </div>
         <div className="nav-right">
           <button
@@ -59,8 +60,10 @@ const Nav = () => {
       {menuOpen && (
         <div className="mobile-menu">
           <button className="mobile-menu-close" onClick={close} aria-label="Fermer">&#215;</button>
+          <a href="#devis" onClick={close}>Forfaits</a>
           <a href="#travaux" onClick={close}>Travaux</a>
           <a href="#studio" onClick={close}>Studio</a>
+          <a href="#automatisation" onClick={close}>Automatisation IA</a>
           <a href="#devis" className="mobile-menu-cta" onClick={close}>Démarrer &#8594;</a>
         </div>
       )}

@@ -14,8 +14,9 @@ const FILES = [
   ["Nav",          "src/components/Nav.jsx"],
   ["Hero",         "src/components/Hero.jsx"],
   ["Marquee",      "src/components/Marquee.jsx"],
-  ["Services",     "src/components/Services.jsx"],   // exporte aussi SectionHead
-  ["Portfolio",    "src/components/Portfolio.jsx"],
+  ["Services",     "src/components/Services.jsx"],   // exporte aussi SectionHead, BenefitItem
+  ["Portfolio",    "src/components/Portfolio.jsx"],  // exporte aussi CompareSlider
+  ["Automation",   "src/components/Automation.jsx"], // dépend de CompareSlider + BenefitItem
   ["About",        "src/components/About.jsx"],
   ["FAQ",          "src/components/FAQ.jsx"],
   ["Footer",       "src/components/Footer.jsx"],     // exporte aussi FinalCTA

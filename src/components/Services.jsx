@@ -162,9 +162,21 @@ const Services = () => {
         ))}
       </div>
 
+      {/* Lien vers l'offre Automatisation IA */}
+      <div style={{ textAlign: "center", marginTop: "40px", padding: "0 var(--gutter)" }}>
+        <a href="#automatisation" className="btn" style={{
+          display: "inline-flex", alignItems: "center", gap: "8px",
+          background: "transparent", border: "1px solid var(--line-strong)", color: "var(--ink)",
+          padding: "12px 22px",
+        }}>
+          Et si ton site faisait aussi le suivi&nbsp;? Découvre l'Automatisation&nbsp;IA <span className="arrow">&#8594;</span>
+        </a>
+      </div>
+
     </section>
   );
 };
 
 window.Services = Services;
 window.SectionHead = SectionHead;
+window.BenefitItem = BenefitItem;

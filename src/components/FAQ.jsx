@@ -20,6 +20,14 @@ const FAQS = [
     a: "Oui. C'est exactement pourquoi je reste 30 à 60 jours après le lancement. Je te montre comment mettre à jour ton contenu, ajouter des photos de projets, et répondre aux soumissions. Pas de jargon technique — tu apprends ce dont tu as besoin, rien de plus." },
   { q: "Mon téléphone sonne déjà par bouche-à-oreille, pourquoi aurais-je besoin d'un site ?",
     a: "Parce que ton prochain client te cherche sur Google avant même de t'appeler. S'il ne te trouve pas, il appelle ton concurrent. Un site bien fait capte ces leads que tu ne savais même pas que tu perdais." },
+  { q: "L'automatisation IA, est-ce que ça remplace mon téléphone ou mon monde ?",
+    a: "Non. Ça ne remplace personne — ça fait le travail que personne n'a le temps de faire. Répondre à un appel manqué à 21h, relancer une soumission trois jours plus tard, demander un avis Google après chaque contrat. Toi et ton équipe gardez les vraies conversations; l'automatisation s'occupe de ce qui passerait autrement entre les craques." },
+  { q: "Est-ce que ça marche avec mon système actuel (CRM, calendrier) ?",
+    a: "Oui, dans la majorité des cas. On branche les automatisations sur tes outils existants — Google Agenda, ton CRM, ta boîte courriel, ton numéro de téléphone. Si tu n'as pas de système, on part simple et on monte au besoin. On valide ce que tu utilises dès le premier appel." },
+  { q: "Combien de temps avant que ce soit en place ?",
+    a: "Une automatisation simple (appels manqués, avis Google) est souvent active en quelques jours. Un montage plus complet — chatbot + relances + intégrations — prend généralement une à deux semaines. On commence par celle qui te fait gagner le plus, puis on ajoute le reste." },
+  { q: "Est-ce que je peux juste prendre une automatisation, pas tout le pack ?",
+    a: "Absolument. Chaque automatisation se prend à la carte — dès 400 $ d'installation et 75–150 $/mois. Tu commences avec celle qui règle ton plus gros irritant, et tu en ajoutes d'autres quand tu vois les résultats. Le Pack Croissance (site + 2 automatisations) est seulement là pour ceux qui veulent tout d'un coup, à prix réduit." },
 ];
 
 const FAQ = () => {
