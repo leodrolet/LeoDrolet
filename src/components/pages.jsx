@@ -1,12 +1,10 @@
 /* ============================================================
-   pages.jsx — En-têtes de page, sections accueil/contact, et
-   composition des 4 pages du site vitrine.
+   pages.jsx — En-têtes éditoriaux, sections accueil/contact,
+   process, et composition des 4 pages du site vitrine.
    Chargé après tous les composants de section (dépend d'eux).
-   Exporte : window.PageHeader, OffersOverview, ContactSection,
-             HomePage, SiteWebPage, AutomationPage, ContactPage
    ============================================================ */
 
-const { useReveal, useMagnetic } = window;
+const { useReveal } = window;
 const { motion: m } = window.Motion || {};
 const { BENEFIT_ICONS } = window;
 
@@ -19,41 +17,57 @@ const TEL_DISPLAY = "873 655-4684";
 // Formulaire de contact — endpoint Formspree à remplacer par le vrai ID du formulaire.
 const FORMSPREE = "https://formspree.io/f/REMPLACER";
 
-/* ── En-tête de page réutilisable ───────────────────────── */
-const PageHeader = ({ eyebrow, title, sub }) => {
+/* ── En-tête de page éditorial (bande méta + grand titre + stats) ── */
+const PageHeader = ({ index, metaRight, title, sub, stats }) => {
   const ref = useReveal();
   return (
-    <header className="section">
-      <div className="section-head reveal" ref={ref} style={{ display: "grid", gap: "20px", maxWidth: "900px" }}>
-        {eyebrow && (
-          <div className="mono specs-eyebrow"><span className="dash"></span><span>{eyebrow}</span></div>
+    <header className="page-head">
+      <div className="reveal" ref={ref}>
+        <div className="page-head__meta">
+          <span>{index}</span>
+          {metaRight && <span className="accent">{metaRight}</span>}
+        </div>
+        <h1 className="page-head__title">{title}</h1>
+        {sub && <p className="page-head__sub">{sub}</p>}
+        {stats && (
+          <div className="page-head__stats">
+            {stats.map((s, i) => (
+              <div className="page-stat" key={i}>
+                <span className="page-stat__v">{s.v}<sup>{s.u}</sup></span>
+                <span className="page-stat__k">{s.k}</span>
+              </div>
+            ))}
+          </div>
         )}
-        <h1 className="section-title">{title}</h1>
-        {sub && <p className="specs-sub" style={{ maxWidth: "60ch", fontSize: "16px" }}>{sub}</p>}
       </div>
     </header>
   );
 };
 
-/* ── Accueil : les deux offres ──────────────────────────── */
+/* ── En-tête de section aligné à gauche ── */
+const SecHead = ({ eyebrow, title }) => {
+  const ref = useReveal();
+  return (
+    <div className="sec-head reveal" ref={ref}>
+      <div className="sec-head__eyebrow"><span className="dash"></span><span>{eyebrow}</span></div>
+      <h2 className="sec-head__t">{title}</h2>
+    </div>
+  );
+};
+
+/* ── Accueil : les deux offres ── */
 const OFFERS = [
   {
-    href: "/site-web",
-    title: "Sites Web",
-    price: "dès 1 500 $",
+    href: "/site-web", title: "Sites Web", price: "dès 1 500 $",
     desc: "Un site sur mesure, rapide, qui transforme les recherches Google en appels et en soumissions.",
     points: ["5 pages sur mesure", "Livré en 2–3 semaines", "Hébergement 250 $/mois"],
-    cta: "Voir les forfaits",
-    featured: false,
+    cta: "Voir les forfaits", featured: false,
   },
   {
-    href: "/automatisation",
-    title: "Automatisation IA",
-    price: "250 $/mois",
+    href: "/automatisation", title: "Automatisation IA", price: "250 $/mois",
     desc: "Des automatisations qui répondent, relancent et qualifient tes leads — pendant que tu travailles.",
     points: ["Réponse aux appels manqués", "Relance des soumissions", "Avis Google automatiques"],
-    cta: "Voir les automatisations",
-    featured: true,
+    cta: "Voir les automatisations", featured: true,
   },
 ];
 
@@ -110,76 +124,121 @@ const OffersOverview = () => {
   );
 };
 
-/* ── Contact : canaux + formulaire ──────────────────────── */
-const CONTACT_CHANNELS = [
-  {
-    icon: "calendar", label: "Prendre un appel", value: "15 min · gratuit",
-    href: CALENDLY, external: true,
-  },
-  {
-    icon: "messagecircle", label: "Écrire un courriel", value: EMAIL,
-    href: `mailto:${EMAIL}`, external: false,
-  },
-  {
-    icon: "phone", label: "Appeler", value: TEL_DISPLAY,
-    href: `tel:${TEL}`, external: false,
-  },
+/* ── Process / timeline (site-web) ── */
+const PROCESS = [
+  { n: "01", t: "Appel découverte",       d: "On parle de ton métier, tes clients, tes objectifs. 15 minutes, gratuit.", dur: "Jour 0" },
+  { n: "02", t: "Design sur mesure",      d: "Je conçois une maquette qui te ressemble. Tu valides, on ajuste ensemble.", dur: "Semaine 1" },
+  { n: "03", t: "Construction",           d: "Je code chaque page à la main — rapide, soignée, et à toi pour toujours.", dur: "Semaine 2" },
+  { n: "04", t: "Lancement + autonomie",  d: "Mise en ligne, formation, et je reste 30 à 60 jours pour que tu sois autonome.", dur: "Semaine 3" },
+];
+
+const PStep = ({ s, i }) => {
+  const ref = useReveal();
+  return (
+    <div className="pstep reveal" ref={ref} style={{ transitionDelay: `${i * 90}ms` }}>
+      <div className="pstep__node">{s.n}</div>
+      <div className="pstep__body">
+        <h3 className="pstep__t">{s.t}</h3>
+        <p className="pstep__d">{s.d}</p>
+        <span className="pstep__dur">{s.dur}</span>
+      </div>
+    </div>
+  );
+};
+
+const Process = () => (
+  <section className="process">
+    <SecHead eyebrow="Comment ça se passe" title={<>De l'idée au site, en <em>quatre étapes.</em></>} />
+    <div className="process__grid">
+      {PROCESS.map((s, i) => <PStep key={s.n} s={s} i={i} />)}
+    </div>
+  </section>
+);
+
+/* ── Contact : 2 colonnes (aside + carte formulaire) ── */
+const NEXT_STEPS = [
+  { n: "01", t: "On jase 15 minutes", d: "Tu m'expliques ton métier et où tu perds des leads. Gratuit, sans pression." },
+  { n: "02", t: "Je reviens avec un plan", d: "Estimation claire, échéancier et recommandations — en moins de 24 h." },
+  { n: "03", t: "On démarre", d: "Tu valides, on lance. Tu parles à la personne qui fait le travail — pas un vendeur." },
+];
+
+const CHANNELS = [
+  { icon: "calendar", label: "Réserver un appel", value: "15 min · gratuit", href: CALENDLY, external: true },
+  { icon: "messagecircle", label: "Écrire un courriel", value: EMAIL, href: `mailto:${EMAIL}`, external: false },
+  { icon: "phone", label: "Appeler", value: TEL_DISPLAY, href: `tel:${TEL}`, external: false },
 ];
 
 const ContactSection = () => {
-  const ref = useReveal();
+  const asideRef = useReveal();
+  const formRef = useReveal();
   return (
-    <section className="section" id="contact">
-      <div style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-        gap: "24px",
-        padding: "0 var(--gutter)",
-        marginBottom: "48px",
-      }}>
-        {CONTACT_CHANNELS.map((c) => (
-          <a
-            key={c.label}
-            href={c.href}
-            {...(c.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-            className="plan-card"
-            style={{ textDecoration: "none", color: "inherit", gap: "10px" }}
-          >
-            <span className="benefit-icon-svg" style={{ color: "var(--accent)", width: "26px", height: "26px" }}>{BENEFIT_ICONS[c.icon]}</span>
-            <span className="plan-tier" style={{ marginTop: "8px" }}>{c.label}</span>
-            <span style={{ color: "var(--ink-2)", fontSize: "0.95rem", wordBreak: "break-word" }}>{c.value}</span>
-          </a>
-        ))}
-      </div>
+    <section className="contact">
+      <div className="contact__grid">
+        <div className="contact__aside reveal" ref={asideRef}>
+          <div className="contact__eyebrow"><span className="dash"></span><span>La suite</span></div>
+          <h2 className="contact__t">Ce qui se passe <em>ensuite.</em></h2>
 
-      <div className="reveal" ref={ref} style={{ maxWidth: "640px", margin: "0 auto", padding: "0 var(--gutter)" }}>
-        <p className="specs-sub" style={{ textAlign: "center", margin: "0 0 24px" }}>
-          Ou laisse-moi un mot — je réponds en moins de 24&nbsp;h, sans jargon, on parle chiffres.
-        </p>
-        <form action={FORMSPREE} method="POST" style={{ display: "grid", gap: "20px" }}>
-          <div className="field">
-            <label className="field-label" htmlFor="cf-name">Nom <span className="req">*</span></label>
-            <input id="cf-name" type="text" name="name" autoComplete="name" required />
+          <ol className="next-steps">
+            {NEXT_STEPS.map((s) => (
+              <li className="next-step" key={s.n}>
+                <span className="next-step__n">{s.n}</span>
+                <div>
+                  <h3 className="next-step__t">{s.t}</h3>
+                  <p className="next-step__d">{s.d}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+
+          <div className="channels">
+            {CHANNELS.map((c) => (
+              <a key={c.label} href={c.href}
+                 {...(c.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                 className="channel">
+                <span className="channel__icon">{BENEFIT_ICONS[c.icon]}</span>
+                <span className="channel__txt">
+                  <span className="channel__label">{c.label}</span>
+                  <span className="channel__val">{c.value}</span>
+                </span>
+                <span className="channel__arr">&#8594;</span>
+              </a>
+            ))}
           </div>
-          <div className="field">
-            <label className="field-label" htmlFor="cf-email">Courriel <span className="req">*</span></label>
-            <input id="cf-email" type="email" name="email" autoComplete="email" required />
-          </div>
-          <div className="field">
-            <label className="field-label" htmlFor="cf-msg">Ton projet</label>
-            <textarea id="cf-msg" name="message" rows="4" placeholder="Ex. : couvreur à Gatineau, je veux plus de soumissions…"></textarea>
-            <span className="field-help">Téléphone, secteur, échéancier — tout ce qui aide.</span>
-          </div>
-          <button type="submit" className="btn btn-accent" style={{ justifyContent: "center" }}>
-            Envoyer <span className="arrow">&#8594;</span>
-          </button>
-        </form>
+        </div>
+
+        <div className="contact-card reveal" ref={formRef}>
+          <div className="contact-card__eyebrow">Demande d'estimation</div>
+          <h2 className="contact-card__t">Laisse-moi un mot.</h2>
+          <form action={FORMSPREE} method="POST">
+            <div className="field">
+              <label className="field-label" htmlFor="cf-name">Nom <span className="req">*</span></label>
+              <input id="cf-name" type="text" name="name" autoComplete="name" required />
+            </div>
+            <div className="field">
+              <label className="field-label" htmlFor="cf-email">Courriel <span className="req">*</span></label>
+              <input id="cf-email" type="email" name="email" autoComplete="email" required />
+            </div>
+            <div className="field">
+              <label className="field-label" htmlFor="cf-msg">Ton projet</label>
+              <textarea id="cf-msg" name="message" rows="4" placeholder="Ex. : couvreur à Gatineau, je veux plus de soumissions…"></textarea>
+              <span className="field-help">Téléphone, secteur, échéancier — tout ce qui aide.</span>
+            </div>
+            <label className="contact-consent">
+              <input type="checkbox" name="consent" required />
+              <span>J'accepte d'être contacté par Novio Studio au sujet de ma demande.</span>
+            </label>
+            <button type="submit" className="btn btn-accent" style={{ justifyContent: "center" }}>
+              Envoyer ma demande <span className="arrow">&#8594;</span>
+            </button>
+            <span className="field-help" style={{ textAlign: "center" }}>Réponse en moins de 24 h · sans engagement</span>
+          </form>
+        </div>
       </div>
     </section>
   );
 };
 
-/* ── Composition des pages ──────────────────────────────── */
+/* ── Composition des pages ── */
 const {
   Hero, Manifesto, Specs, MarqueeRow, FoundersSlots, About, FinalCTA,
   Services, CompareAgency, Automation, FAQ, FAQ_WEB, FAQ_IA,
@@ -215,35 +274,53 @@ const HomePage = () => (
 const SiteWebPage = () => (
   <React.Fragment>
     <PageHeader
-      eyebrow="Offre · Sites web"
-      title={<>Un site qui <em style={{ fontStyle: "italic", color: "var(--ink-2)" }}>fait sonner le téléphone.</em></>}
+      index="01 — Sites web"
+      metaRight="Livré en 2–3 semaines"
+      title={<>Un site qui <em>fait sonner le téléphone.</em></>}
       sub="Sur mesure, rapide, pensé pour les entrepreneurs de l'Outaouais. Ton prochain client te cherche sur Google — fais en sorte qu'il te trouve, toi, pas ton concurrent."
+      stats={[
+        { v: "2–3", u: "sem", k: "Livraison" },
+        { v: "100", u: "/100", k: "Lighthouse" },
+        { v: "0.9", u: "s", k: "Chargement" },
+        { v: "1 500", u: "$", k: "À partir de" },
+      ]}
     />
+    <Process />
     <Services />
     <CompareAgency />
     <FAQ items={FAQ_WEB} title="Questions fréquentes — sites web." />
-    <FinalCTA />
+    <FinalCTA
+      headline={<>Ton prochain client te cherche sur Google. <em>Sois là.</em></>}
+      ctaLabel="Démarrer mon projet"
+      ctaHref="/contact"
+    />
   </React.Fragment>
 );
 
 const AutomationPage = () => (
   <React.Fragment>
     <PageHeader
-      eyebrow="Offre · Automatisation IA"
-      title={<>Aucun lead ne <em style={{ fontStyle: "italic", color: "var(--ink-2)" }}>passe entre les craques.</em></>}
+      index="02 — Automatisation IA"
+      metaRight="250 $/mois · sans installation"
+      title={<>Aucun lead ne <em>passe entre les craques.</em></>}
       sub="Un beau site attire les clients. L'automatisation s'assure qu'aucun ne t'échappe. Des outils simples — 250 $/mois, sans frais d'installation — qui répondent, relancent et qualifient à ta place."
     />
     <Automation lead={false} />
     <FAQ items={FAQ_IA} title="Questions fréquentes — automatisation." />
-    <FinalCTA />
+    <FinalCTA
+      headline={<>Arrête de perdre des leads pendant que <em>tu travailles.</em></>}
+      ctaLabel="Automatiser mon entreprise"
+      ctaHref="/contact"
+    />
   </React.Fragment>
 );
 
 const ContactPage = () => (
   <React.Fragment>
     <PageHeader
-      eyebrow="Parlons-en"
-      title="Contact"
+      index="03 — Contact"
+      metaRight="Réponse en moins de 24 h"
+      title={<>Parlons de <em>ton projet.</em></>}
       sub="Premier appel de 15 minutes, gratuit. On regarde où tu perds des leads aujourd'hui, et ce qu'on peut récupérer. Pas de jargon, pas de pression."
     />
     <ContactSection />
@@ -251,6 +328,6 @@ const ContactPage = () => (
 );
 
 Object.assign(window, {
-  PageHeader, OffersOverview, ContactSection,
+  PageHeader, SecHead, OffersOverview, Process, ContactSection,
   HomePage, SiteWebPage, AutomationPage, ContactPage,
 });

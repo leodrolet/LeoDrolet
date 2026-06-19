@@ -1,20 +1,20 @@
 /* ============================================================
    Automation.jsx — Section « Automatisation IA »
-   Offre complémentaire au site web : automatisations qui font
-   gagner du temps et des contrats aux entrepreneurs.
-   Dépend de : window.useReveal, window.BENEFIT_ICONS,
-               window.BenefitItem, window.CompareSlider, window.Motion
+   Présentation éditoriale : métriques (specs) + capability tiles
+   + pack groupé + ledger « sans / avec ».
+   Dépend de : window.useReveal, window.BENEFIT_ICONS, window.Motion
    ============================================================ */
 
 const { useReveal } = window;
 const { motion: m } = window.Motion || {};
-const { BENEFIT_ICONS, BenefitItem } = window;
+const { BENEFIT_ICONS } = window;
 
 const EASE_OUT_EXPO = [0.16, 1, 0.3, 1];
 
 const CALENDLY = "https://calendly.com/leo_drolet-noviostudio/conception-site-web";
+const CONTACT = "/contact";
 
-// ── Métriques (même format « specs sheet » que la section Specs) ──
+// ── Métriques (format « specs sheet ») ──
 const AUTO_METRICS = [
   { v: "24", u: "/7",   k: "Toujours actif",      d: "Répond aux leads la nuit, la fin de semaine, pendant que tu es sur un chantier." },
   { v: "5",  u: "min",  k: "Délai de réponse",    d: "Un SMS part dans les minutes suivant un appel manqué — pendant que le lead est encore chaud." },
@@ -37,120 +37,146 @@ const AutoMetric = ({ s, i }) => {
   );
 };
 
-// ── Données : 4 automatisations (même format que les forfaits) ──
+// ── Les 4 automatisations (capability tiles) ──
 const AUTOMATIONS = [
   {
-    id: "appels",
-    tier: "Réponse aux appels manqués",
-    icon: "phone",
-    price: "250 $",
-    priceUnit: "mois",
-    subPrice: "Sans frais d'installation · sans engagement",
+    id: "appels", n: "01", tier: "Réponse aux appels manqués", icon: "phone", featured: true,
     pitch: "« Un appel manqué un vendredi soir, c'est un contrat chez le concurrent. »",
-    featured: true,
     items: [
-      { icon: "phone",         bold: "SMS automatique",      rest: " dès qu'un appel est manqué" },
-      { icon: "checkcircle",   bold: "Qualifie le lead",     rest: " et garde la conversation vivante" },
-      { icon: "calendar",      bold: "Propose un rendez-vous", rest: " sans que tu lèves le petit doigt" },
+      { bold: "SMS automatique", rest: " dès qu'un appel est manqué" },
+      { bold: "Qualifie le lead", rest: " et garde la conversation vivante" },
+      { bold: "Propose un rendez-vous", rest: " sans que tu lèves le petit doigt" },
     ],
   },
   {
-    id: "chatbot",
-    tier: "Chatbot de qualification",
-    icon: "messagecircle",
-    price: "250 $",
-    priceUnit: "mois",
-    subPrice: "Sans frais d'installation · sans engagement",
+    id: "chatbot", n: "02", tier: "Chatbot de qualification", icon: "messagecircle", featured: false,
     pitch: "« Le site travaille même quand tu es sur un toit. »",
-    featured: false,
     items: [
-      { icon: "messagecircle", bold: "Répond aux questions fréquentes", rest: " — prix, délais, secteur desservi" },
-      { icon: "checkcircle",   bold: "Qualifie le lead",                rest: " avant de te le transférer" },
-      { icon: "clock",         bold: "Disponible 24/7",                 rest: " — jamais de question sans réponse" },
+      { bold: "Répond aux questions fréquentes", rest: " — prix, délais, secteur desservi" },
+      { bold: "Qualifie le lead", rest: " avant de te le transférer" },
+      { bold: "Disponible 24/7", rest: " — jamais de question sans réponse" },
     ],
   },
   {
-    id: "relance",
-    tier: "Relance des soumissions",
-    icon: "refresh",
-    price: "250 $",
-    priceUnit: "mois",
-    subPrice: "Sans frais d'installation · sans engagement",
+    id: "relance", n: "03", tier: "Relance des soumissions", icon: "refresh", featured: false,
     pitch: "« 80 % des soumissions non suivies ne reviennent jamais. On les relance pour toi. »",
-    featured: false,
     items: [
-      { icon: "refresh",  bold: "Relance les leads",       rest: " qui n'ont pas répondu après quelques jours" },
-      { icon: "zap",      bold: "Séquence SMS / email",    rest: " automatique, sans intervention" },
-      { icon: "checkcircle", bold: "S'arrête seule",       rest: " dès que le client répond" },
+      { bold: "Relance les leads", rest: " qui n'ont pas répondu après quelques jours" },
+      { bold: "Séquence SMS / email", rest: " automatique, sans intervention" },
+      { bold: "S'arrête seule", rest: " dès que le client répond" },
     ],
   },
   {
-    id: "avis",
-    tier: "Demande d'avis Google",
-    icon: "star",
-    price: "250 $",
-    priceUnit: "mois",
-    subPrice: "Sans frais d'installation · sans engagement",
+    id: "avis", n: "04", tier: "Demande d'avis Google", icon: "star", featured: false,
     pitch: "« Plus d'avis Google = plus haut sur la carte = plus d'appels. »",
-    featured: false,
     items: [
-      { icon: "star",     bold: "Demande automatique",     rest: " envoyée après chaque contrat terminé" },
-      { icon: "link",     bold: "Lien direct",             rest: " vers ta fiche Google — un clic pour le client" },
-      { icon: "barchart", bold: "Meilleur classement",     rest: " local au fil des avis qui s'accumulent" },
+      { bold: "Demande automatique", rest: " envoyée après chaque contrat terminé" },
+      { bold: "Lien direct", rest: " vers ta fiche Google — un clic pour le client" },
+      { bold: "Meilleur classement", rest: " local au fil des avis qui s'accumulent" },
     ],
   },
 ];
 
-const AutoCard = ({ a, i }) => (
-  <m.div
-    initial={{ opacity: 0, y: 40, scale: 0.97 }}
-    whileInView={{ opacity: 1, y: 0, scale: 1 }}
-    viewport={{ once: true, amount: 0.08 }}
-    transition={{ duration: 0.75, ease: EASE_OUT_EXPO, delay: 0.15 + i * 0.12 }}
-    style={{ height: "100%" }}
+const CapTile = ({ a, i }) => (
+  <m.article
+    className={`cap${a.featured ? " cap--featured" : ""}`}
+    initial={{ opacity: 0, y: 40 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, amount: 0.1 }}
+    transition={{ duration: 0.7, ease: EASE_OUT_EXPO, delay: 0.05 + (i % 2) * 0.1 }}
   >
-    <div className={`plan-card${a.featured ? " plan-card--featured" : ""}`}>
-      <div className="plan-card-header">
-        <div className="plan-card-top">
-          <span className="plan-tier">
-            <span className="benefit-icon-svg" style={{ color: "var(--accent)", marginRight: "8px", verticalAlign: "-3px" }}>{BENEFIT_ICONS[a.icon]}</span>
-            {a.tier}
-          </span>
-        </div>
-        <span className="plan-amount">
-          {a.price}<sup className="plan-amount-unit">/{a.priceUnit}</sup>
-        </span>
-        <p style={{ margin: "4px 0 0", fontSize: "0.78rem", color: "var(--ink-2)", letterSpacing: "0.01em" }}>
-          {a.subPrice}
-        </p>
-        <p className="plan-best-for">{a.pitch}</p>
-      </div>
-      <div className="plan-benefits">
-        <div className="benefit-group">
-          <div className="benefit-group-items">
-            {a.items.map((item, j) => <BenefitItem key={j} {...item} />)}
-          </div>
-        </div>
-      </div>
-      <a href={CALENDLY} target="_blank" rel="noopener noreferrer" className={`btn plan-cta${a.featured ? " plan-cta--featured" : ""}`}>
-        Automatiser ça <span className="arrow">&#8594;</span>
-      </a>
-    </div>
-  </m.div>
+    <span className="cap__idx" aria-hidden="true">{a.n}</span>
+    <div className="cap__icon">{BENEFIT_ICONS[a.icon]}</div>
+    <h3 className="cap__t">{a.tier}</h3>
+    <p className="cap__pitch">{a.pitch}</p>
+    <ul className="cap__list">
+      {a.items.map((it, j) => (
+        <li key={j}>{BENEFIT_ICONS.check}<span><b>{it.bold}</b>{it.rest}</span></li>
+      ))}
+    </ul>
+    <div className="cap__price">À partir de <b>250&nbsp;$/mois</b> · sans installation</div>
+  </m.article>
 );
 
-// ── Comparateur « Sans automatisation » vs « Avec Novio » ──
-const AUTO_COMPARE_ROWS = [
-  { feature: "Appels manqués",        agency: "Perdus — le lead appelle le concurrent", novio: "Récupérés automatiquement par SMS" },
-  { feature: "Suivi des soumissions", agency: "Manuel, souvent oublié",                 novio: "Automatique et systématique" },
-  { feature: "Avis Google",           agency: "Rares, au hasard",                       novio: "Générés après chaque contrat" },
-  { feature: "Temps de gestion",      agency: "Des heures chaque semaine",              novio: "Quelques minutes de supervision" },
+// ── Ledger « sans / avec » ──
+const LEDGER_ROWS = [
+  { feature: "Appels manqués",        bad: "Perdus — le lead appelle le concurrent", good: "Récupérés automatiquement par SMS" },
+  { feature: "Suivi des soumissions", bad: "Manuel, souvent oublié",                 good: "Automatique et systématique" },
+  { feature: "Avis Google",           bad: "Rares, au hasard",                       good: "Générés après chaque contrat" },
+  { feature: "Temps de gestion",      bad: "Des heures chaque semaine",              good: "Quelques minutes de supervision" },
 ];
+
+const Ledger = () => {
+  const ref = useReveal();
+  return (
+    <section className="ledger">
+      <div className="sec-head reveal" ref={ref}>
+        <div className="sec-head__eyebrow"><span className="dash"></span><span>Le calcul</span></div>
+        <h2 className="sec-head__t">Ce que ça change, <em>concrètement.</em></h2>
+      </div>
+      <m.div
+        className="ledger__grid"
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.15 }}
+        transition={{ duration: 0.7, ease: EASE_OUT_EXPO }}
+      >
+        <div className="ledger__col ledger__col--bad">
+          <div className="ledger__head"><span>Sans automatisation</span><span>✕</span></div>
+          {LEDGER_ROWS.map((r, i) => (
+            <div key={i} className="ledger__row">
+              <span className="ledger__mk">✕</span>
+              <span><span className="ledger__feat">{r.feature}</span><span className="ledger__val">{r.bad}</span></span>
+            </div>
+          ))}
+        </div>
+        <div className="ledger__col ledger__col--good">
+          <div className="ledger__head"><span>Avec Novio</span><span>✓</span></div>
+          {LEDGER_ROWS.map((r, i) => (
+            <div key={i} className="ledger__row">
+              <span className="ledger__mk">✓</span>
+              <span><span className="ledger__feat">{r.feature}</span><span className="ledger__val">{r.good}</span></span>
+            </div>
+          ))}
+        </div>
+      </m.div>
+    </section>
+  );
+};
+
+// ── Pack Croissance (offre groupée chiffrée) ──
+const PackOffer = () => (
+  <m.section
+    className="pack"
+    initial={{ opacity: 0, y: 28 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, amount: 0.2 }}
+    transition={{ duration: 0.7, ease: EASE_OUT_EXPO }}
+  >
+    <div>
+      <div className="pack__eyebrow">Offre groupée</div>
+      <h2 className="pack__t">Pack Croissance</h2>
+      <p className="pack__d">
+        Ton site web qui attire + deux automatisations qui convertissent. La machine complète pour
+        remplir ton agenda — un seul interlocuteur, un seul forfait, sans engagement.
+      </p>
+      <div className="pack__price">
+        <span className="pack__old">1 500 $ + 500 $/mois</span>
+        <span className="pack__new">1 500 $ + 400 $/mois</span>
+        <span className="pack__save">Économise 1 200 $/an</span>
+      </div>
+    </div>
+    <div className="pack__cta">
+      <a href={CONTACT} className="btn btn-accent">Composer mon pack <span className="arrow">&#8594;</span></a>
+      <span className="pack__note">Site + 2 automatisations au choix</span>
+    </div>
+  </m.section>
+);
 
 // ── Section principale ──
 const Automation = ({ lead = true }) => {
   const headRef = useReveal();
-  const { CompareSlider } = window;
+  const tilesRef = useReveal();
   return (
     <section className="section" id="automatisation">
       {lead && (
@@ -165,51 +191,28 @@ const Automation = ({ lead = true }) => {
         </React.Fragment>
       )}
 
-      {/* Métriques — format « specs sheet » */}
+      {/* Métriques */}
       <div className="specs-grid" style={{ marginTop: lead ? "40px" : "0" }}>
         {AUTO_METRICS.map((s, i) => <AutoMetric key={i} s={s} i={i} />)}
       </div>
 
-      {/* 4 automatisations */}
-      <div style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-        gap: "24px",
-        padding: "0 var(--gutter)",
-        marginTop: "48px",
-      }}>
-        {AUTOMATIONS.map((a, i) => <AutoCard key={a.id} a={a} i={i} />)}
+      {/* Capability tiles */}
+      <div className="sec-head reveal" ref={tilesRef} style={{ marginTop: "clamp(56px,9vh,112px)" }}>
+        <div className="sec-head__eyebrow"><span className="dash"></span><span>Les automatisations</span></div>
+        <h2 className="sec-head__t">Quatre outils qui <em>travaillent pour toi.</em></h2>
+      </div>
+      <div className="cap-grid">
+        {AUTOMATIONS.map((a, i) => <CapTile key={a.id} a={a} i={i} />)}
+      </div>
+      <div className="cap-cta">
+        <a href={CONTACT} className="btn btn-accent">Automatiser mon entreprise <span className="arrow">&#8594;</span></a>
       </div>
 
-      {/* Pack Croissance */}
-      <m.div
-        className="founders-banner"
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.6, ease: EASE_OUT_EXPO }}
-        style={{ marginTop: "32px" }}
-      >
-        <div className="big">Pack Croissance — site web + 2 automatisations.</div>
-        <div>Ton site qui attire, deux automatisations qui convertissent — à prix réduit. La machine complète pour remplir ton agenda, sans engagement.</div>
-      </m.div>
+      {/* Ledger sans / avec */}
+      <Ledger />
 
-      {/* Comparateur */}
-      <m.div
-        className="imgcmp-wrap"
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.15 }}
-        transition={{ duration: 0.7, ease: EASE_OUT_EXPO, delay: 0.1 }}
-      >
-        <div className="imgcmp-eyebrow mono">
-          <span className="dash"></span>
-          <span>Sans automatisation vs avec Novio</span>
-        </div>
-        {CompareSlider && (
-          <CompareSlider rows={AUTO_COMPARE_ROWS} leftHead="Sans automatisation" rightHead="Avec Novio" />
-        )}
-      </m.div>
+      {/* Pack groupé */}
+      <PackOffer />
     </section>
   );
 };

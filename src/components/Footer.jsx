@@ -5,28 +5,30 @@
 
 const { useReveal, useMagnetic } = window;
 
-// ── CTA final avant le footer ──
-const FinalCTA = () => {
+// ── CTA final avant le footer (personnalisable par page) ──
+const FinalCTA = ({
+  headline = (<>Prochain contractor dans la galerie — <em>toi.</em></>),
+  ctaLabel = "Démarrer mon projet",
+  ctaHref = "https://calendly.com/leo_drolet-noviostudio/conception-site-web",
+} = {}) => {
   const ref = useReveal();
   const ctaMagnetic = useMagnetic(10);
+  const external = !ctaHref.startsWith("/");
   return (
     <section className="final-cta" id="cta-final">
       <div className="reveal" ref={ref}>
-        <div className="huge">
-          Prochain contractor dans la galerie — <em>toi.</em>
-        </div>
+        <div className="huge">{headline}</div>
         <div className="actions">
           <a
             className="btn btn-accent"
-            href="https://calendly.com/leo_drolet-noviostudio/conception-site-web"
-            target="_blank"
-            rel="noopener noreferrer"
+            href={ctaHref}
+            {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
             ref={ctaMagnetic.ref}
             onMouseMove={ctaMagnetic.onMouseMove}
             onMouseLeave={ctaMagnetic.onMouseLeave}
             style={ctaMagnetic.style}
           >
-            Démarrer mon projet <span className="arrow">&#8594;</span>
+            {ctaLabel} <span className="arrow">&#8594;</span>
           </a>
           <a className="btn" href="mailto:leo_drolet@noviostudio.online">leo_drolet@noviostudio.online</a>
         </div>
