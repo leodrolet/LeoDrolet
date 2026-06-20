@@ -60,7 +60,7 @@ const OFFERS = [
   {
     href: "/site-web", title: "Sites Web", price: "dès 1 500 $",
     desc: "Un site sur mesure, rapide, qui transforme les recherches Google en appels et en soumissions.",
-    points: ["5 pages sur mesure", "Livré en 2–3 semaines", "Hébergement 250 $/mois"],
+    points: ["5 pages sur mesure", "Livré en 2–3 semaines", "Hébergement 119 $/mois"],
     cta: "Voir les forfaits", featured: false,
   },
   {

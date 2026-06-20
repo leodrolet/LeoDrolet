@@ -29,10 +29,9 @@ const SLOTS = [
 const SLIDER_ROWS = [
   { feature: "Site web complet",       agency: "5 000 $ – 15 000 $",            novio: "1 500 $ · 5 pages · livré en 2–3 semaines" },
   { feature: "Propriété du site",      agency: "Dépend du contrat",              novio: "Vous en êtes propriétaire dès la livraison" },
-  { feature: "Hébergement & SSL",      agency: "Facturé en supplément",          novio: "250 $/mois · tout inclus · sans engagement" },
-  { feature: "Modifications",          agency: "100 $ – 200 $/heure",            novio: "1h/mois incluse dans la maintenance" },
-  { feature: "Support",                agency: "Délais variables · non garanti", novio: "Réponse garantie en moins de 24h" },
-  { feature: "Rapport de performance", agency: "Non inclus",                     novio: "Inclus chaque mois" },
+  { feature: "Hébergement & SSL",      agency: "Facturé en supplément",          novio: "119 $/mois · tout inclus · sans engagement" },
+  { feature: "Modifications",          agency: "100 $ – 200 $/heure",            novio: "30 min/mois incluses dans la maintenance" },
+  { feature: "Support",                agency: "Délais variables · non garanti", novio: "Support par courriel inclus" },
 ];
 
 const CompareSlider = ({ rows = SLIDER_ROWS, leftHead = "Agence traditionnelle", rightHead = "Novio Studio" }) => {

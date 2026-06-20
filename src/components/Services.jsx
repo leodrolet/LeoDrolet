@@ -42,7 +42,7 @@ const PLANS = [
   {
     id: "maintenance",
     tier: "Hébergement & Maintenance",
-    price: "250 $",
+    price: "119 $",
     priceUnit: "mois",
     bestFor: "Votre site en ligne, performant, sans souci.",
     featured: false,
@@ -51,10 +51,9 @@ const PLANS = [
     paymentNote: null,
     items: [
       { icon: "server",        bold: "Hébergement rapide",          rest: " + sécurité SSL inclus" },
-      { icon: "barchart",      bold: "Rapport mensuel",             rest: " de performance" },
-      { icon: "clock",         bold: "1h de modifications",         rest: " incluse chaque mois" },
-      { icon: "messagecircle", bold: "Support prioritaire",         rest: " — réponse rapide garantie" },
       { icon: "refresh",       bold: "Sauvegardes automatiques",    rest: " quotidiennes" },
+      { icon: "clock",         bold: "30 min de modifications",     rest: " incluses chaque mois" },
+      { icon: "messagecircle", bold: "Support par courriel",        rest: "" },
       { icon: "link",          bold: "Nom de domaine non inclus",  rest: " — environ 15 $/an à prévoir", muted: true },
     ],
   },

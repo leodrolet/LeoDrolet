@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d90ceb1b-7a57-4f53-bb54-fe7386eec621" name="Changes" comment="ménage">
-      <change beforePath="$PROJECT_DIR$/_v_automatisation.html" beforeDir="false" afterPath="$PROJECT_DIR$/_v_automatisation.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/pages.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pages.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,14 +62,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1779201719557</updated>
-    </task>
-    <task id="LOCAL-00128" summary="feat: orange color scheme + fix process timeline line">
-      <option name="closed" value="true" />
-      <created>1780276425586</created>
-      <option name="number" value="00128" />
-      <option name="presentableId" value="LOCAL-00128" />
-      <option name="project" value="LOCAL" />
-      <updated>1780276425586</updated>
     </task>
     <task id="LOCAL-00129" summary="feat: orange color scheme + fix process timeline line">
       <option name="closed" value="true" />
@@ -456,7 +447,15 @@
       <option name="project" value="LOCAL" />
       <updated>1781912709084</updated>
     </task>
-    <option name="localTasksCounter" value="177" />
+    <task id="LOCAL-00177" summary="ménage">
+      <option name="closed" value="true" />
+      <created>1781912878640</created>
+      <option name="number" value="00177" />
+      <option name="presentableId" value="LOCAL-00177" />
+      <option name="project" value="LOCAL" />
+      <updated>1781912878640</updated>
+    </task>
+    <option name="localTasksCounter" value="178" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
