@@ -6,7 +6,7 @@ const { execSync } = require("child_process");
 const fs = require("fs");
 
 // Version d'assets — bumper à chaque build pour casser le cache navigateur (Vercel).
-const ASSET_V = "44";
+const ASSET_V = "45";
 
 // Ordre de chargement — les composants dépendent de effects (useReveal, etc.)
 // pages dépend de TOUS les composants de section → chargé juste avant app.
@@ -52,35 +52,35 @@ execSync("npx cleancss -o dist/styles.min.css src/styles.css", { stdio: "inherit
 const TEMPLATE = fs.readFileSync("src/page.template.html", "utf8");
 const PAGES = [
   {
-    file: "index.html", page: "home", canonical: "https://novio.studio/",
+    file: "index.html", page: "home", canonical: "https://noviostudio.online/",
     title: "Novio Studio — Sites web & automatisation IA pour entrepreneurs | Gatineau · Ottawa · Outaouais",
     desc: "Studio web à Gatineau pour couvreurs, plombiers, techniciens HVAC, paysagistes et rénovateurs. Des sites qui génèrent des appels et des automatisations IA qui ne laissent passer aucun lead. Dès 1 500 $.",
     ogTitle: "Novio Studio — Sites web & automatisation IA | Gatineau Ottawa",
     ogDesc: "Des sites qui font sonner le téléphone et des automatisations IA qui captent chaque lead. Studio web à Gatineau, dès 1 500 $.",
   },
   {
-    file: "site-web.html", page: "site-web", canonical: "https://novio.studio/site-web",
+    file: "site-web.html", page: "site-web", canonical: "https://noviostudio.online/site-web",
     title: "Sites web sur mesure pour entrepreneurs — Novio Studio | Gatineau Ottawa",
-    desc: "Un site rapide, sur mesure, livré en 2 à 3 semaines. Forfait dès 1 500 $ + hébergement 250 $/mois, sans engagement. Pour les PME de l'Outaouais qui veulent plus d'appels et de soumissions.",
+    desc: "Un site rapide, sur mesure, livré en 2 à 3 semaines. Forfait dès 1 500 $ + hébergement 119 $/mois, sans engagement. Pour les PME de l'Outaouais qui veulent plus d'appels et de soumissions.",
     ogTitle: "Sites web qui font sonner le téléphone — Novio Studio",
     ogDesc: "Site sur mesure livré en 2–3 semaines, dès 1 500 $. Pensé pour les entrepreneurs de l'Outaouais.",
   },
   {
-    file: "automatisation.html", page: "automatisation", canonical: "https://novio.studio/automatisation",
+    file: "automatisation.html", page: "automatisation", canonical: "https://noviostudio.online/automatisation",
     title: "Automatisation IA pour entrepreneurs — Novio Studio | 250 $/mois",
     desc: "Réponse aux appels manqués, chatbot de qualification, relance des soumissions, avis Google automatiques. 250 $/mois par automatisation, sans frais d'installation. Aucun lead ne passe entre les craques.",
     ogTitle: "Automatisation IA pour contractors — Novio Studio",
     ogDesc: "Appels manqués, relances, avis Google : des automatisations à 250 $/mois sans installation qui captent chaque lead.",
   },
   {
-    file: "tarifs.html", page: "tarifs", canonical: "https://novio.studio/tarifs",
+    file: "tarifs.html", page: "tarifs", canonical: "https://noviostudio.online/tarifs",
     title: "Tarifs — Sites web & automatisation IA | Novio Studio Gatineau",
     desc: "Des prix clairs, sans surprise. Site web dès 1 500 $, hébergement 119 $/mois sans engagement, automatisations IA 250 $/mois sans installation. Pack Croissance pour tout combiner.",
     ogTitle: "Tarifs — Novio Studio",
     ogDesc: "Site dès 1 500 $, hébergement 119 $/mois, automatisations 250 $/mois. Prix clairs, sans engagement, sans surprise.",
   },
   {
-    file: "contact.html", page: "contact", canonical: "https://novio.studio/contact",
+    file: "contact.html", page: "contact", canonical: "https://noviostudio.online/contact",
     title: "Contact — Novio Studio | Gatineau · Ottawa · Outaouais",
     desc: "Parle directement avec Léo. Premier appel de 15 minutes, gratuit. Calendly, courriel ou téléphone — réponse en moins de 24 heures, sans jargon.",
     ogTitle: "Contact — Novio Studio",

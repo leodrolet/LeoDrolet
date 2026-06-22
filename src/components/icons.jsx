@@ -1,5 +1,5 @@
 /* ============================================================
-   icons.jsx — SVG icons partagés (forfaits + promesses)
+   icons.jsx, SVG icons partagés (forfaits + promesses)
    ============================================================ */
 
 const BENEFIT_ICONS = {

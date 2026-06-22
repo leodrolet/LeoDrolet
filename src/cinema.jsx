@@ -1,14 +1,15 @@
 /* ============================================================
-   cinema.jsx — Awwwards-grade scroll moments
-     · ScrollProgress  — accent hairline, top of viewport
-     · Manifesto       — pinned word-by-word reveal (legacy, non rendu)
-     · WhyNovio        — grille de différenciateurs « Pourquoi Novio »
-     · Specs           — big editorial numbers
+   cinema.jsx, Awwwards-grade scroll moments
+     · ScrollProgress , accent hairline, top of viewport
+     · Manifesto      , pinned word-by-word reveal (legacy, non rendu)
+     · WhyNovio       , grille de différenciateurs « Pourquoi Novio »
+     · Specs          , big editorial numbers
    ============================================================ */
 
 const { useReveal, BENEFIT_ICONS } = window;
 const { motion: m } = window.Motion || {};
 const EASE_OUT_EXPO = [0.16, 1, 0.3, 1];
+const CALENDLY = "https://calendly.com/leo_drolet-noviostudio/conception-site-web";
 
 /* ---------- ScrollProgress ---------- */
 const ScrollProgress = () => {
@@ -140,7 +141,7 @@ const Manifesto = () => {
                 <span className="mproof-k">Dès la livraison</span>
               </div>
             </div>
-            <a className="btn btn-accent" href="/contact">Démarrer mon projet &#8594;</a>
+            <a className="btn btn-accent" href={CALENDLY} target="_blank" rel="noopener noreferrer">Démarrer mon projet &#8594;</a>
           </div>
         </div>
       </div>
@@ -152,7 +153,7 @@ const Manifesto = () => {
 const SPECS = [
   {
     v: "100", u: "/100", k: "Lighthouse",
-    d: "Performance, accessibilité, SEO — 100/100 visé à chaque livraison. Un site lent coûte des clients.",
+    d: "Performance, accessibilité, SEO, 100/100 visé à chaque livraison. Un site lent coûte des clients.",
   },
   {
     v: "0.9", u: "s", k: "Chargement",
@@ -211,7 +212,7 @@ const WHY_REASONS = [
     icon: "layout",
     strike: "Pas un template",
     title: "Sur mesure",
-    desc: "Conçu pour votre métier et votre coin de l'Outaouais — pas un thème recyclé que trois concurrents utilisent déjà.",
+    desc: "Conçu pour votre métier et votre coin de l'Outaouais, pas un thème recyclé que trois concurrents utilisent déjà.",
   },
   {
     icon: "barchart",
@@ -278,7 +279,7 @@ const WhyNovio = () => {
         viewport={{ once: true, amount: 0.5 }}
         transition={{ duration: 0.55, delay: 0.15, ease: EASE_OUT_EXPO }}
       >
-        <a className="btn btn-accent" href="/contact">Démarrer mon projet &#8594;</a>
+        <a className="btn btn-accent" href={CALENDLY} target="_blank" rel="noopener noreferrer">Démarrer mon projet &#8594;</a>
         <span className="mono why-cta-note">Cohorte fondateur · 04 places</span>
       </m.div>
     </section>

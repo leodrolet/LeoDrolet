@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://novio.studio/sitemap.xml
+Sitemap: https://noviostudio.online/sitemap.xml

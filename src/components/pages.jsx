@@ -1,5 +1,5 @@
 /* ============================================================
-   pages.jsx — En-têtes éditoriaux, sections accueil/contact,
+   pages.jsx, En-têtes éditoriaux, sections accueil/contact,
    process, et composition des 4 pages du site vitrine.
    Chargé après tous les composants de section (dépend d'eux).
    ============================================================ */
@@ -14,8 +14,6 @@ const CALENDLY = "https://calendly.com/leo_drolet-noviostudio/conception-site-we
 const EMAIL = "leo_drolet@noviostudio.online";
 const TEL = "+18736554684";
 const TEL_DISPLAY = "873 655-4684";
-// Formulaire de contact — endpoint Formspree à remplacer par le vrai ID du formulaire.
-const FORMSPREE = "https://formspree.io/f/REMPLACER";
 
 /* ── En-tête de page éditorial (bande méta + grand titre + stats) ── */
 const PageHeader = ({ index, metaRight, title, sub, stats }) => {
@@ -65,7 +63,7 @@ const OFFERS = [
   },
   {
     href: "/automatisation", title: "Automatisation IA", price: "250 $/mois",
-    desc: "Des automatisations qui répondent, relancent et qualifient tes leads — pendant que tu travailles.",
+    desc: "Des automatisations qui répondent, relancent et qualifient tes leads, pendant que tu travailles.",
     points: ["Réponse aux appels manqués", "Relance des soumissions", "Avis Google automatiques"],
     cta: "Voir les automatisations", featured: true,
   },
@@ -128,7 +126,7 @@ const OffersOverview = () => {
 const PROCESS = [
   { n: "01", t: "Appel découverte",       d: "On parle de ton métier, tes clients, tes objectifs. 15 minutes, gratuit.", dur: "Jour 0" },
   { n: "02", t: "Design sur mesure",      d: "Je conçois une maquette qui te ressemble. Tu valides, on ajuste ensemble.", dur: "Semaine 1" },
-  { n: "03", t: "Construction",           d: "Je code chaque page à la main — rapide, soignée, et à toi pour toujours.", dur: "Semaine 2" },
+  { n: "03", t: "Construction",           d: "Je code chaque page à la main, rapide, soignée, et à toi pour toujours.", dur: "Semaine 2" },
   { n: "04", t: "Lancement + autonomie",  d: "Mise en ligne, formation, et je reste 30 à 60 jours pour que tu sois autonome.", dur: "Semaine 3" },
 ];
 
@@ -158,8 +156,8 @@ const Process = () => (
 /* ── Contact : 2 colonnes (aside + carte formulaire) ── */
 const NEXT_STEPS = [
   { n: "01", t: "On jase 15 minutes", d: "Tu m'expliques ton métier et où tu perds des leads. Gratuit, sans pression." },
-  { n: "02", t: "Je reviens avec un plan", d: "Estimation claire, échéancier et recommandations — en moins de 24 h." },
-  { n: "03", t: "On démarre", d: "Tu valides, on lance. Tu parles à la personne qui fait le travail — pas un vendeur." },
+  { n: "02", t: "Je reviens avec un plan", d: "Estimation claire, échéancier et recommandations, en moins de 24 h." },
+  { n: "03", t: "On démarre", d: "Tu valides, on lance. Tu parles à la personne qui fait le travail, pas un vendeur." },
 ];
 
 const CHANNELS = [
@@ -205,31 +203,21 @@ const ContactSection = () => {
           </div>
         </div>
 
-        <div className="contact-card reveal" ref={formRef}>
-          <h2 className="contact-card__t">Laisse-moi un mot.</h2>
-          <form action={FORMSPREE} method="POST">
-            <div className="field">
-              <label className="field-label" htmlFor="cf-name">Nom <span className="req">*</span></label>
-              <input id="cf-name" type="text" name="name" autoComplete="name" required />
-            </div>
-            <div className="field">
-              <label className="field-label" htmlFor="cf-email">Courriel <span className="req">*</span></label>
-              <input id="cf-email" type="email" name="email" autoComplete="email" required />
-            </div>
-            <div className="field">
-              <label className="field-label" htmlFor="cf-msg">Ton projet</label>
-              <textarea id="cf-msg" name="message" rows="4" placeholder="Ex. : couvreur à Gatineau, je veux plus de soumissions…"></textarea>
-              <span className="field-help">Téléphone, secteur, échéancier — tout ce qui aide.</span>
-            </div>
-            <label className="contact-consent">
-              <input type="checkbox" name="consent" required />
-              <span>J'accepte d'être contacté par Novio Studio au sujet de ma demande.</span>
-            </label>
-            <button type="submit" className="btn btn-accent" style={{ justifyContent: "center" }}>
-              Envoyer ma demande <span className="arrow">&#8594;</span>
-            </button>
-            <span className="field-help" style={{ textAlign: "center" }}>Réponse en moins de 24 h · sans engagement</span>
-          </form>
+        <div className="contact-card contact-book reveal" ref={formRef}>
+          <span className="contact-book__icon">{BENEFIT_ICONS.calendar}</span>
+          <h2 className="contact-card__t">Réserve ton appel.</h2>
+          <p className="contact-book__lead">
+            Choisis un créneau qui te convient. 15 minutes, gratuit, sans engagement. On regarde
+            ensemble où tu perds des leads aujourd'hui et ce qu'on peut récupérer.
+          </p>
+          <a href={CALENDLY} target="_blank" rel="noopener noreferrer"
+             className="btn btn-accent" style={{ justifyContent: "center" }}>
+            Démarrer mon projet <span className="arrow">&#8594;</span>
+          </a>
+          <span className="field-help" style={{ textAlign: "center" }}>Réponse en moins de 24 h · sans engagement</span>
+          <p className="contact-book__alt">
+            Tu préfères écrire ? <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+          </p>
         </div>
       </div>
     </section>
@@ -257,12 +245,6 @@ const HomePage = () => (
     ]} />
     <Specs />
     <OffersOverview />
-    <MarqueeRow reverse items={[
-      "Cohorte fondateur · 04 places",
-      "04 places · printemps 2026",
-      "Pas d'agence · pas d'intermédiaire",
-      "hello@novio.studio",
-    ]} />
     <FoundersSlots />
     <About />
     <FinalCTA />
@@ -285,11 +267,11 @@ const SiteWebPage = () => (
     />
     <Process />
     <Services />
-    <FAQ items={FAQ_WEB} title="Questions fréquentes — sites web." />
+    <FAQ items={FAQ_WEB} title="Questions fréquentes." />
     <FinalCTA
       headline={<>Ton prochain client te cherche sur Google. <em>Sois là.</em></>}
       ctaLabel="Démarrer mon projet"
-      ctaHref="/contact"
+      ctaHref={CALENDLY}
     />
   </React.Fragment>
 );
@@ -303,11 +285,11 @@ const AutomationPage = () => (
       sub="Un beau site attire les clients, l'automatisation s'assure qu'aucun ne t'échappe. Des outils simples à 250 $/mois, sans frais d'installation, qui répondent, relancent et qualifient à ta place."
     />
     <Automation lead={false} />
-    <FAQ items={FAQ_IA} title="Questions fréquentes — automatisation." />
+    <FAQ items={FAQ_IA} title="Questions fréquentes." />
     <FinalCTA
       headline={<>Arrête de perdre des leads pendant que <em>tu travailles.</em></>}
-      ctaLabel="Automatiser mon entreprise"
-      ctaHref="/contact"
+      ctaLabel="Démarrer mon projet"
+      ctaHref={CALENDLY}
     />
   </React.Fragment>
 );
@@ -332,7 +314,7 @@ const PricingPage = () => (
     <FinalCTA
       headline={<>Un prix, un échéancier, un interlocuteur. <em>On commence ?</em></>}
       ctaLabel="Démarrer mon projet"
-      ctaHref="/contact"
+      ctaHref={CALENDLY}
     />
   </React.Fragment>
 );

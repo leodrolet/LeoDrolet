@@ -1,5 +1,5 @@
 /* ============================================================
-   Hero.jsx — Section hero avec effet dithering canvas
+   Hero.jsx, Section hero avec effet dithering canvas
    Dépend de : window.useMagnetic
    ============================================================ */
 

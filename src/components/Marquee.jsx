@@ -1,5 +1,5 @@
 /* ============================================================
-   Marquee.jsx — Bande défilante (ticker)
+   Marquee.jsx, Bande défilante (ticker)
    ============================================================ */
 
 const MarqueeRow = ({ items, reverse = false }) => (

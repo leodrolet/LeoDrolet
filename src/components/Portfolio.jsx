@@ -1,5 +1,5 @@
 /* ============================================================
-   Portfolio.jsx — Slots fondateur + comparateur agence/novio
+   Portfolio.jsx, Slots fondateur + comparateur agence/novio
    Dépend de : window.useReveal, window.SectionHead
    ============================================================ */
 
@@ -19,10 +19,10 @@ const RevealItem = ({ as: Tag = "div", className = "", style = {}, delay = 0, ch
 
 // ── Données : 4 slots disponibles ──
 const SLOTS = [
-  { n: "01", status: "Disponible", title: "Couvreur ou entreprise de toiture",      sub: "— secteur Gatineau / Hull / Aylmer" },
-  { n: "02", status: "Disponible", title: "Plombier ou technicien HVAC",             sub: "— services résidentiels Outaouais" },
-  { n: "03", status: "Disponible", title: "Paysagiste ou entrepreneur paysagement",  sub: "— Gatineau · Ottawa · Cantley" },
-  { n: "04", status: "Disponible", title: "Entrepreneur général ou rénovateur",      sub: "— cuisine · salle de bain · sous-sol" },
+  { n: "01", status: "Disponible", title: "Couvreur ou entreprise de toiture",      sub: "secteur Gatineau / Hull / Aylmer" },
+  { n: "02", status: "Disponible", title: "Plombier ou technicien HVAC",             sub: "services résidentiels Outaouais" },
+  { n: "03", status: "Disponible", title: "Paysagiste ou entrepreneur paysagement",  sub: "Gatineau · Ottawa · Cantley" },
+  { n: "04", status: "Disponible", title: "Entrepreneur général ou rénovateur",      sub: "cuisine · salle de bain · sous-sol" },
 ];
 
 // ── Comparateur agence vs Novio ──
@@ -75,7 +75,7 @@ const ScoreCard = ({ rows = COMPARE_ROWS, leftHead = "Agence traditionnelle", ri
         {rows.map((row, i) => <Cell key={i} row={row} side="novio" delay={0.12 + i * 0.06} />)}
         <div className="cscore-foot">
           <span className="cscore-foot-price">1 500 $ <em>puis 119 $/mois</em></span>
-          <a className="btn btn-accent cscore-cta" href="/contact">Réserver ma place &#8594;</a>
+          <a className="btn btn-accent cscore-cta" href="https://calendly.com/leo_drolet-noviostudio/conception-site-web" target="_blank" rel="noopener noreferrer">Démarrer mon projet &#8594;</a>
         </div>
       </div>
     </div>

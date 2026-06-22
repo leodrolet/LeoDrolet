@@ -1,5 +1,5 @@
 /* ============================================================
-   Footer.jsx — Pied de page + modales légales + FinalCTA
+   Footer.jsx, Pied de page + modales légales + FinalCTA
    Dépend de : window.useReveal, window.useMagnetic
    ============================================================ */
 
@@ -7,7 +7,7 @@ const { useReveal, useMagnetic } = window;
 
 // ── CTA final avant le footer (personnalisable par page) ──
 const FinalCTA = ({
-  headline = (<>Prochain contractor dans la galerie — <em>toi.</em></>),
+  headline = (<>Prochain contractor dans la galerie, <em>toi.</em></>),
   ctaLabel = "Démarrer mon projet",
   ctaHref = "https://calendly.com/leo_drolet-noviostudio/conception-site-web",
 } = {}) => {
@@ -93,6 +93,7 @@ const Footer = () => {
             <li><a href="/">Accueil</a></li>
             <li><a href="/site-web">Sites Web</a></li>
             <li><a href="/automatisation">Automatisation IA</a></li>
+            <li><a href="/tarifs">Tarifs</a></li>
             <li><a href="/contact">Contact</a></li>
           </ul>
         </div>
@@ -116,14 +117,14 @@ const Footer = () => {
       <div className="footer-bot">
         <span>© 2026 Novio Studio</span>
         <span className="mono" style={{ letterSpacing:".14em" }}>Secteurs · Toiture · HVAC · Plomberie · Paysagement · Rénovation · Entrepreneur général · Gatineau · Hull · Aylmer · Ottawa · Outaouais</span>
-        <span>v1.0 · cohorte fondateur</span>
+        <span className="mono" style={{ letterSpacing:".14em" }}>Cohorte fondateur · printemps 2026</span>
       </div>
 
       <LegalModal open={modal === "privacy"} onClose={() => setModal(null)} title="Politique de confidentialité">
         <p style={{margin:"0 0 20px", fontSize:12, color:"var(--mute)"}}>Dernière mise à jour : 8 juin 2026</p>
         <p style={{margin:"0 0 24px"}}>Novio Studio (« nous ») s'engage à protéger la vie privée des visiteurs de ce site.</p>
         <ModalSection title="1. Informations collectées">
-          <p style={{margin:0}}>Nous collectons uniquement les informations que vous nous fournissez volontairement via le formulaire de contact : nom, adresse courriel, et message.</p>
+          <p style={{margin:0}}>Nous collectons uniquement les informations que vous nous fournissez volontairement lorsque vous nous écrivez par courriel ou réservez un appel : nom, adresse courriel, et message.</p>
         </ModalSection>
         <ModalSection title="2. Utilisation des informations">
           <p style={{margin:"0 0 8px"}}>Ces informations sont utilisées uniquement pour répondre à vos demandes.</p>
@@ -132,32 +133,32 @@ const Footer = () => {
         <ModalSection title="3. Hébergement">
           <p style={{margin:0}}>Ce site est hébergé sur <strong style={{color:"var(--ink)"}}>Vercel Inc.</strong> (340 Pine Street, San Francisco, CA 94104, USA). Les données transmises via le formulaire de contact transitent par les serveurs de Vercel.</p>
         </ModalSection>
-        <ModalSection title="4. Analyse d'audience — Cloudflare Web Analytics">
+        <ModalSection title="4. Analyse d'audience, Cloudflare Web Analytics">
           <p style={{margin:"0 0 8px"}}>Ce site utilise <strong style={{color:"var(--ink)"}}>Cloudflare Web Analytics</strong> pour mesurer l'audience de façon agrégée (nombre de pages vues, visiteurs uniques, pays d'origine, type d'appareil, pages les plus consultées).</p>
           <p style={{margin:"0 0 8px"}}>Cloudflare Web Analytics est conçu dans le respect de la vie privée :</p>
           <ul style={{margin:"0 0 8px", paddingLeft:18}}>
             <li>Aucun cookie n'est déposé sur votre appareil.</li>
             <li>Aucune empreinte numérique (fingerprinting) n'est utilisée.</li>
             <li>Aucun suivi inter-sites n'est effectué.</li>
-            <li>Les données collectées sont anonymes et agrégées — aucune information personnelle n'est associée à votre visite.</li>
+            <li>Les données collectées sont anonymes et agrégées, aucune information personnelle n'est associée à votre visite.</li>
           </ul>
           <p style={{margin:0}}>Pour en savoir plus : <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer" style={{color:"var(--accent)"}}>politique de confidentialité de Cloudflare</a>.</p>
         </ModalSection>
         <ModalSection title="5. Cookies">
           <p style={{margin:0}}>Ce site n'utilise aucun cookie publicitaire ni cookie de traçage. Aucun bandeau de consentement aux cookies n'est requis.</p>
         </ModalSection>
-        <ModalSection title="6. Vos droits (Loi 25 — Québec)">
+        <ModalSection title="6. Vos droits (Loi 25, Québec)">
           <p style={{margin:"0 0 10px"}}>Conformément à la Loi sur la protection des renseignements personnels dans le secteur privé (Loi 25), vous avez le droit d'accéder à vos données, de les corriger ou d'en demander la suppression en nous contactant à :</p>
-          <p style={{margin:0}}><a href="mailto:info@noviostudio.ca" style={{color:"var(--accent)"}}>info@noviostudio.ca</a></p>
+          <p style={{margin:0}}><a href="mailto:leo_drolet@noviostudio.online" style={{color:"var(--accent)"}}>leo_drolet@noviostudio.online</a></p>
         </ModalSection>
         <ModalSection title="7. Contact">
-          <p style={{margin:0}}>Pour toute question : <a href="mailto:info@noviostudio.ca" style={{color:"var(--accent)"}}>info@noviostudio.ca</a></p>
+          <p style={{margin:0}}>Pour toute question : <a href="mailto:leo_drolet@noviostudio.online" style={{color:"var(--accent)"}}>leo_drolet@noviostudio.online</a></p>
         </ModalSection>
       </LegalModal>
 
       <LegalModal open={modal === "mentions"} onClose={() => setModal(null)} title="Mentions légales">
         <ModalSection title="Éditeur du site">
-          <p style={{margin:"0 0 4px"}}><strong style={{color:"var(--ink)"}}>Novio Studio</strong> — travailleur autonome</p>
+          <p style={{margin:"0 0 4px"}}><strong style={{color:"var(--ink)"}}>Novio Studio</strong>, travailleur autonome</p>
           <p style={{margin:"0 0 4px"}}>Représentant : Leo Drolet</p>
           <p style={{margin:"0 0 4px"}}>Gatineau, Québec, Canada</p>
           <p style={{margin:"0 0 4px"}}>Email : <a href="mailto:leo_drolet@noviostudio.online" style={{color:"var(--accent)"}}>leo_drolet@noviostudio.online</a></p>

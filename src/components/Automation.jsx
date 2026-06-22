@@ -1,5 +1,5 @@
 /* ============================================================
-   Automation.jsx — Section « Automatisation IA »
+   Automation.jsx, Section « Automatisation IA »
    Présentation éditoriale : métriques (specs) + capability tiles
    + pack groupé + ledger « sans / avec ».
    Dépend de : window.useReveal, window.BENEFIT_ICONS, window.Motion
@@ -12,14 +12,15 @@ const { BENEFIT_ICONS } = window;
 const EASE_OUT_EXPO = [0.16, 1, 0.3, 1];
 
 const CALENDLY = "https://calendly.com/leo_drolet-noviostudio/conception-site-web";
-const CONTACT = "/contact";
+const CONTACT = CALENDLY;
+const EXT = { target: "_blank", rel: "noopener noreferrer" };
 
 // ── Métriques (format « specs sheet ») ──
 const AUTO_METRICS = [
   { v: "24", u: "/7",   k: "Toujours actif",      d: "Répond aux leads la nuit, la fin de semaine, pendant que tu es sur un chantier." },
-  { v: "5",  u: "min",  k: "Délai de réponse",    d: "Un SMS part dans les minutes suivant un appel manqué — pendant que le lead est encore chaud." },
+  { v: "5",  u: "min",  k: "Délai de réponse",    d: "Un SMS part dans les minutes suivant un appel manqué, pendant que le lead est encore chaud." },
   { v: "80", u: "%",    k: "Soumissions suivies", d: "La majorité des soumissions sans suivi ne reviennent jamais. On les relance automatiquement." },
-  { v: "250", u: "$/mois", k: "Par automatisation", d: "Tout inclus — hébergement, maintenance et ajustements. Aucun frais d'installation." },
+  { v: "250", u: "$/mois", k: "Par automatisation", d: "Tout inclus, hébergement, maintenance et ajustements. Aucun frais d'installation." },
 ];
 
 const AutoMetric = ({ s, i }) => {
@@ -52,9 +53,9 @@ const AUTOMATIONS = [
     id: "chatbot", n: "02", tier: "Chatbot de qualification", icon: "messagecircle", featured: false,
     pitch: "« Le site travaille même quand tu es sur un toit. »",
     items: [
-      { bold: "Répond aux questions fréquentes", rest: " — prix, délais, secteur desservi" },
+      { bold: "Répond aux questions fréquentes", rest: ", prix, délais, secteur desservi" },
       { bold: "Qualifie le lead", rest: " avant de te le transférer" },
-      { bold: "Disponible 24/7", rest: " — jamais de question sans réponse" },
+      { bold: "Disponible 24/7", rest: ", jamais de question sans réponse" },
     ],
   },
   {
@@ -71,7 +72,7 @@ const AUTOMATIONS = [
     pitch: "« Plus d'avis Google = plus haut sur la carte = plus d'appels. »",
     items: [
       { bold: "Demande automatique", rest: " envoyée après chaque contrat terminé" },
-      { bold: "Lien direct", rest: " vers ta fiche Google — un clic pour le client" },
+      { bold: "Lien direct", rest: " vers ta fiche Google, un clic pour le client" },
       { bold: "Meilleur classement", rest: " local au fil des avis qui s'accumulent" },
     ],
   },
@@ -99,7 +100,7 @@ const CapTile = ({ a, i }) => (
 
 // ── Ledger « sans / avec » ──
 const LEDGER_ROWS = [
-  { feature: "Appels manqués",        bad: "Perdus — le lead appelle le concurrent", good: "Récupérés automatiquement par SMS" },
+  { feature: "Appels manqués",        bad: "Perdus, le lead appelle le concurrent", good: "Récupérés automatiquement par SMS" },
   { feature: "Suivi des soumissions", bad: "Manuel, souvent oublié",                 good: "Automatique et systématique" },
   { feature: "Avis Google",           bad: "Rares, au hasard",                       good: "Générés après chaque contrat" },
   { feature: "Temps de gestion",      bad: "Des heures chaque semaine",              good: "Quelques minutes de supervision" },
@@ -155,7 +156,7 @@ const PackOffer = () => (
       <h2 className="pack__t">Pack Croissance</h2>
       <p className="pack__d">
         Ton site web qui attire + deux automatisations qui convertissent. La machine complète pour
-        remplir ton agenda — un seul interlocuteur, un seul forfait, sans engagement.
+        remplir ton agenda, un seul interlocuteur, un seul forfait, sans engagement.
       </p>
       <div className="pack__price">
         <span className="pack__old">1 500 $ + 500 $/mois</span>
@@ -164,7 +165,7 @@ const PackOffer = () => (
       </div>
     </div>
     <div className="pack__cta">
-      <a href={CONTACT} className="btn btn-accent">Composer mon pack <span className="arrow">&#8594;</span></a>
+      <a href={CONTACT} {...EXT} className="btn btn-accent">Démarrer mon projet <span className="arrow">&#8594;</span></a>
       <span className="pack__note">Site + 2 automatisations au choix</span>
     </div>
   </m.section>
@@ -183,7 +184,7 @@ const Automation = ({ lead = true }) => {
           </div>
           <p className="specs-sub" style={{ textAlign: "center", margin: "0 auto 8px", maxWidth: "640px", padding: "0 var(--gutter)" }}>
             Un beau site attire les clients. L'automatisation s'assure qu'aucun ne t'échappe.
-            Des outils simples qui répondent, relancent et qualifient à ta place — pendant que tu travailles.
+            Des outils simples qui répondent, relancent et qualifient à ta place, pendant que tu travailles.
           </p>
         </React.Fragment>
       )}
@@ -202,7 +203,7 @@ const Automation = ({ lead = true }) => {
         {AUTOMATIONS.map((a, i) => <CapTile key={a.id} a={a} i={i} />)}
       </div>
       <div className="cap-cta">
-        <a href={CONTACT} className="btn btn-accent">Automatiser mon entreprise <span className="arrow">&#8594;</span></a>
+        <a href={CONTACT} {...EXT} className="btn btn-accent">Démarrer mon projet <span className="arrow">&#8594;</span></a>
       </div>
 
       {/* Ledger sans / avec */}

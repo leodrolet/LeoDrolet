@@ -1,5 +1,5 @@
 /* ============================================================
-   Services.jsx — Section forfaits / plans tarifaires
+   Services.jsx, Section forfaits / plans tarifaires
    Dépend de : window.BENEFIT_ICONS, window.useReveal
    ============================================================ */
 
@@ -33,8 +33,8 @@ const PLANS = [
     paymentNote: null,
     items: [
       { icon: "layout",     bold: "5 pages",               rest: " (Accueil, Services, À propos, Portfolio, Contact)" },
-      { icon: "smartphone", bold: "Mobile responsive",     rest: " — parfait sur tous les appareils" },
-      { icon: "pencil",     bold: "Design personnalisé",   rest: " — pas un template" },
+      { icon: "smartphone", bold: "Mobile responsive",     rest: ", parfait sur tous les appareils" },
+      { icon: "pencil",     bold: "Design personnalisé",   rest: ", pas un template" },
       { icon: "link",       bold: "Formulaire de contact", rest: " inclus" },
       { icon: "clock",      bold: "Livraison en 2–3 semaines", rest: "" },
     ],
@@ -47,14 +47,14 @@ const PLANS = [
     bestFor: "Votre site en ligne, performant, sans souci.",
     featured: false,
     badge: null,
-    subPrice: "Sans engagement — annulable en tout temps",
+    subPrice: "Sans engagement, annulable en tout temps",
     paymentNote: null,
     items: [
       { icon: "server",        bold: "Hébergement rapide",          rest: " + sécurité SSL inclus" },
       { icon: "refresh",       bold: "Sauvegardes automatiques",    rest: " quotidiennes" },
       { icon: "clock",         bold: "30 min de modifications",     rest: " incluses chaque mois" },
       { icon: "messagecircle", bold: "Support par courriel",        rest: "" },
-      { icon: "link",          bold: "Nom de domaine non inclus",  rest: " — environ 15 $/an à prévoir", muted: true },
+      { icon: "link",          bold: "Nom de domaine non inclus",  rest: ", environ 15 $/an à prévoir", muted: true },
     ],
   },
 ];

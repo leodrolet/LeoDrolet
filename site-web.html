@@ -4,24 +4,24 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Sites web sur mesure pour entrepreneurs — Novio Studio | Gatineau Ottawa</title>
-<meta name="description" content="Un site rapide, sur mesure, livré en 2 à 3 semaines. Forfait dès 1 500 $ + hébergement 250 $/mois, sans engagement. Pour les PME de l'Outaouais qui veulent plus d'appels et de soumissions." />
+<meta name="description" content="Un site rapide, sur mesure, livré en 2 à 3 semaines. Forfait dès 1 500 $ + hébergement 119 $/mois, sans engagement. Pour les PME de l'Outaouais qui veulent plus d'appels et de soumissions." />
 
 <!-- Canonical -->
-<link rel="canonical" href="https://novio.studio/site-web" />
+<link rel="canonical" href="https://noviostudio.online/site-web" />
 
 <!-- Open Graph -->
 <meta property="og:type"        content="website" />
-<meta property="og:url"         content="https://novio.studio/site-web" />
+<meta property="og:url"         content="https://noviostudio.online/site-web" />
 <meta property="og:title"       content="Sites web qui font sonner le téléphone — Novio Studio" />
 <meta property="og:description" content="Site sur mesure livré en 2–3 semaines, dès 1 500 $. Pensé pour les entrepreneurs de l'Outaouais." />
-<meta property="og:image"       content="https://novio.studio/og-image.jpg" />
+<meta property="og:image"       content="https://noviostudio.online/og-image.jpg" />
 <meta property="og:locale"      content="fr_CA" />
 
 <!-- Twitter Card -->
 <meta name="twitter:card"        content="summary_large_image" />
 <meta name="twitter:title"       content="Sites web qui font sonner le téléphone — Novio Studio" />
 <meta name="twitter:description" content="Site sur mesure livré en 2–3 semaines, dès 1 500 $. Pensé pour les entrepreneurs de l'Outaouais." />
-<meta name="twitter:image"       content="https://novio.studio/og-image.jpg" />
+<meta name="twitter:image"       content="https://noviostudio.online/og-image.jpg" />
 
 <!-- Favicons -->
 <link rel="icon"             href="/favicon.ico" sizes="any" />
@@ -34,7 +34,7 @@
   "@type": "LocalBusiness",
   "name": "Novio Studio",
   "description": "Studio web à Gatineau. Sites qui convertissent et automatisations IA pour les PME locales. Livraison en 7 à 28 jours.",
-  "url": "https://novio.studio",
+  "url": "https://noviostudio.online",
   "telephone": "+18736554684",
   "email": "leo_drolet@noviostudio.online",
   "address": {
@@ -70,9 +70,9 @@ main#root{min-height:100dvh}
 <!-- Preload full stylesheet (non-blocking download starts immediately) -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="preload" href="dist/styles.min.css?v=44" as="style" />
-<link rel="stylesheet" href="dist/styles.min.css?v=44" media="print" onload="this.media='all'" />
-<noscript><link rel="stylesheet" href="dist/styles.min.css?v=44" /></noscript>
+<link rel="preload" href="dist/styles.min.css?v=45" as="style" />
+<link rel="stylesheet" href="dist/styles.min.css?v=45" media="print" onload="this.media='all'" />
+<noscript><link rel="stylesheet" href="dist/styles.min.css?v=45" /></noscript>
 
 <!-- All fonts non-blocking — fallback fonts show on first paint -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'" />
@@ -84,7 +84,37 @@ main#root{min-height:100dvh}
 <canvas class="grain" id="grain-canvas"></canvas>
 
 <!-- React mount — data-page sélectionne la page rendue par app.jsx -->
-<main id="root" data-page="site-web"></main>
+<main id="root" data-page="site-web">
+  <!-- Contenu de repli (no-JS / robots) : remplacé par React au chargement -->
+  <noscript>
+    <div style="max-width:760px;margin:0 auto;padding:48px 24px;font-family:Georgia,serif">
+      <h1>Novio Studio, sites web &amp; automatisation IA à Gatineau</h1>
+      <p>Studio web à Gatineau (Ottawa, Outaouais) pour couvreurs, plombiers, techniciens HVAC,
+        paysagistes, rénovateurs et entrepreneurs généraux. Des sites qui génèrent des appels et
+        des soumissions, plus des automatisations IA qui ne laissent passer aucun lead.</p>
+      <h2>Nos produits</h2>
+      <ul>
+        <li><strong>Sites web sur mesure</strong> : dès 1 500 $, livrés en 2 à 3 semaines. Hébergement et maintenance 119 $/mois, sans engagement.</li>
+        <li><strong>Automatisation IA</strong> : 250 $/mois par automatisation, sans frais d'installation (réponse aux appels manqués, chatbot de qualification, relance des soumissions, avis Google automatiques).</li>
+        <li><strong>Pack Croissance</strong> : site + 2 automatisations, 1 500 $ + 400 $/mois.</li>
+      </ul>
+      <h2>Pages</h2>
+      <ul>
+        <li><a href="/">Accueil</a></li>
+        <li><a href="/site-web">Sites Web</a></li>
+        <li><a href="/automatisation">Automatisation IA</a></li>
+        <li><a href="/tarifs">Tarifs</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+      <h2>Contact</h2>
+      <p>
+        Réserver un appel : <a href="https://calendly.com/leo_drolet-noviostudio/conception-site-web">Calendly (15 min, gratuit)</a><br />
+        Courriel : <a href="mailto:leo_drolet@noviostudio.online">leo_drolet@noviostudio.online</a><br />
+        Téléphone : <a href="tel:+18736554684">873 655-4684</a>
+      </p>
+    </div>
+  </noscript>
+</main>
 
 <!-- React 18 production builds (self-hosted, defer = download in parallel with HTML) -->
 <script defer src="vendor/react.min.js"></script>
@@ -96,6 +126,6 @@ main#root{min-height:100dvh}
 <script defer src="vendor/grain.js"></script>
 
 <!-- App bundle (pre-compiled + minified, defer = execute after React) -->
-<script defer src="dist/bundle.min.js?v=44"></script>
+<script defer src="dist/bundle.min.js?v=45"></script>
 </body>
 </html>

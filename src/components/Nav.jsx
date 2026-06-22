@@ -1,5 +1,5 @@
 /* ============================================================
-   Nav.jsx — Barre de navigation multi-pages (desktop + mobile)
+   Nav.jsx, Barre de navigation multi-pages (desktop + mobile)
    Liens réels vers les pages du site. État actif selon l'URL.
    Dépend de : window.useMagnetic
    ============================================================ */
@@ -20,7 +20,7 @@ const currentPath = () => {
 };
 
 const Nav = () => {
-  // Barre opaque dès qu'on a dépassé le hero — ou d'emblée sur les pages sans hero.
+  // Barre opaque dès qu'on a dépassé le hero, ou d'emblée sur les pages sans hero.
   const [scrolled, setScrolled] = React.useState(false);
   React.useEffect(() => {
     const hero = document.getElementById("top");
@@ -64,7 +64,9 @@ const Nav = () => {
           </button>
           <a
             className="btn nav-cta"
-            href="/contact"
+            href="https://calendly.com/leo_drolet-noviostudio/conception-site-web"
+            target="_blank"
+            rel="noopener noreferrer"
             ref={navCtaMagnetic.ref}
             onMouseMove={navCtaMagnetic.onMouseMove}
             onMouseLeave={navCtaMagnetic.onMouseLeave}
@@ -83,7 +85,7 @@ const Nav = () => {
               {l.label}
             </a>
           ))}
-          <a href="/contact" className="mobile-menu-cta" onClick={close}>Démarrer &#8594;</a>
+          <a href="https://calendly.com/leo_drolet-noviostudio/conception-site-web" target="_blank" rel="noopener noreferrer" className="mobile-menu-cta" onClick={close}>Démarrer &#8594;</a>
         </div>
       )}
     </React.Fragment>
