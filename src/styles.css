@@ -2030,14 +2030,60 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+.manifesto-end {
+  position: relative;
+  justify-self: stretch;
+  min-height: clamp(78px, 13vh, 124px);
+}
 .manifesto-foot {
+  position: absolute;
+  right: 0;
+  bottom: 0;
   display: inline-flex;
   gap: 10px;
   font-size: 10px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--mute);
-  justify-self: end;
+  transition: opacity 0.35s ease;
+}
+.manifesto-proof {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(12px, 2vh, 20px);
+  align-items: flex-start;
+  justify-content: flex-end;
+  transition: opacity 0.45s ease, transform 0.45s ease;
+}
+.mproof-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(22px, 4vw, 60px);
+}
+.mproof-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.mproof-num {
+  font-family: var(--display);
+  font-size: clamp(26px, 3vw, 36px);
+  line-height: 1;
+  color: var(--ink);
+}
+.mproof-num span {
+  font-size: 0.5em;
+  color: var(--mute);
+  margin-left: 2px;
+}
+.mproof-k {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mute);
 }
 
 /* --- Specs --- */

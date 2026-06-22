@@ -73,6 +73,8 @@ const Manifesto = () => {
   }, []);
 
   const N = MANIFESTO_LINES.length;
+  // Une fois les lignes révélées (~t > 0.84), l'« atterrissage » prend le relais.
+  const land = Math.max(0, Math.min(1, (t - 0.84) / 0.16));
 
   return (
     <section className="manifesto" ref={sectionRef} aria-label="Manifesto">
@@ -107,10 +109,36 @@ const Manifesto = () => {
           })}
         </div>
 
-        <div className="manifesto-foot mono">
-          <span>{String(Math.round(t * 100)).padStart(3, "0")}</span>
-          <span>·</span>
-          <span>défiler</span>
+        <div className="manifesto-end">
+          <div className="manifesto-foot mono" style={{ opacity: 1 - land }}>
+            <span>{String(Math.round(t * 100)).padStart(3, "0")}</span>
+            <span>·</span>
+            <span>défiler</span>
+          </div>
+          <div
+            className="manifesto-proof"
+            aria-hidden={land < 0.5}
+            style={{
+              opacity: land,
+              transform: `translate3d(0, ${((1 - land) * 22).toFixed(2)}px, 0)`,
+              pointerEvents: land > 0.5 ? "auto" : "none",
+            }}>
+            <div className="mproof-stats">
+              <div className="mproof-stat">
+                <span className="mproof-num">100<span>/100</span></span>
+                <span className="mproof-k">Lighthouse</span>
+              </div>
+              <div className="mproof-stat">
+                <span className="mproof-num">2–3<span> sem</span></span>
+                <span className="mproof-k">Livraison</span>
+              </div>
+              <div className="mproof-stat">
+                <span className="mproof-num">À vous</span>
+                <span className="mproof-k">Dès la livraison</span>
+              </div>
+            </div>
+            <a className="btn btn-accent" href="/contact">Démarrer mon projet &#8594;</a>
+          </div>
         </div>
       </div>
     </section>
