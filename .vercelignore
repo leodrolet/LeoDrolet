@@ -1,0 +1,9 @@
+# Outils de dev / éditeur — ne jamais servir sur le site public
+.claude
+.idea
+.gstack
+.notebook
+.git
+.DS_Store
+CLAUDE.md
+node_modules

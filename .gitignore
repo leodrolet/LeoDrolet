@@ -4,3 +4,5 @@ styles.min.css
 .gstack/
 .DS_Store
 .idea/
+.claude/
+.notebook/
