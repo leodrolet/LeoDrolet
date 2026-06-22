@@ -240,14 +240,14 @@ const ContactSection = () => {
 
 /* ── Composition des pages ── */
 const {
-  Hero, Manifesto, Specs, MarqueeRow, FoundersSlots, About, FinalCTA,
+  Hero, Manifesto, WhyNovio, Specs, MarqueeRow, FoundersSlots, About, FinalCTA,
   Services, CompareAgency, Automation, FAQ, FAQ_WEB, FAQ_IA,
 } = window;
 
 const HomePage = () => (
   <React.Fragment>
     <Hero />
-    <Manifesto />
+    <WhyNovio />
     <MarqueeRow items={[
       "Plus de contrats",
       "Toiture · HVAC · Plomberie · Paysagement · Rénovation",

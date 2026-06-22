@@ -6,7 +6,7 @@ const { execSync } = require("child_process");
 const fs = require("fs");
 
 // Version d'assets — bumper à chaque build pour casser le cache navigateur (Vercel).
-const ASSET_V = "42";
+const ASSET_V = "43";
 
 // Ordre de chargement — les composants dépendent de effects (useReveal, etc.)
 // pages dépend de TOUS les composants de section → chargé juste avant app.
@@ -20,11 +20,11 @@ const FILES = [
   ["Marquee",      "src/components/Marquee.jsx"],
   ["Services",     "src/components/Services.jsx"],   // exporte aussi SectionHead, BenefitItem
   ["Portfolio",    "src/components/Portfolio.jsx"],  // exporte FoundersSlots, CompareAgency, ScoreCard
-  ["Automation",   "src/components/Automation.jsx"], // dépend de CompareSlider + BenefitItem
+  ["Automation",   "src/components/Automation.jsx"], // dépend de BenefitItem
   ["About",        "src/components/About.jsx"],
   ["FAQ",          "src/components/FAQ.jsx"],         // exporte FAQ, FAQ_WEB, FAQ_IA
   ["Footer",       "src/components/Footer.jsx"],      // exporte aussi FinalCTA
-  ["cinema",       "src/cinema.jsx"],                 // ScrollProgress, Manifesto, Specs
+  ["cinema",       "src/cinema.jsx"],                 // ScrollProgress, Manifesto (legacy), WhyNovio, Specs
   ["pages",        "src/components/pages.jsx"],        // en-têtes + composition des pages
   ["app",          "src/app.jsx"],                     // routeur (data-page)
 ];

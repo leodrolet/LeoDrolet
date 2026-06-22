@@ -1,11 +1,14 @@
 /* ============================================================
    cinema.jsx — Awwwards-grade scroll moments
      · ScrollProgress  — accent hairline, top of viewport
-     · Manifesto       — pinned word-by-word reveal
+     · Manifesto       — pinned word-by-word reveal (legacy, non rendu)
+     · WhyNovio        — grille de différenciateurs « Pourquoi Novio »
      · Specs           — big editorial numbers
    ============================================================ */
 
-const { useReveal } = window;
+const { useReveal, BENEFIT_ICONS } = window;
+const { motion: m } = window.Motion || {};
+const EASE_OUT_EXPO = [0.16, 1, 0.3, 1];
 
 /* ---------- ScrollProgress ---------- */
 const ScrollProgress = () => {
@@ -206,4 +209,84 @@ const Specs = () => {
   );
 };
 
-Object.assign(window, { ScrollProgress, Manifesto, Specs });
+/* ---------- WhyNovio (différenciateurs) ---------- */
+const WHY_REASONS = [
+  {
+    icon: "layout",
+    strike: "Pas un template",
+    title: "Sur mesure",
+    desc: "Conçu pour votre métier et votre coin de l'Outaouais — pas un thème recyclé que trois concurrents utilisent déjà.",
+  },
+  {
+    icon: "barchart",
+    strike: "Pas une dépense",
+    title: "Un investissement",
+    desc: "Pensé pour convertir : le client qui cherche un couvreur à Gatineau vous trouve, vous appelle et demande une soumission.",
+  },
+  {
+    icon: "unlock",
+    strike: "Pas un intermédiaire",
+    title: "Vous êtes propriétaire",
+    desc: "Le site est à vous dès la livraison. Pas de location, pas de dépendance, personne entre vous et vos clients.",
+  },
+];
+
+const WhyCard = ({ reason, i }) => (
+  <m.div
+    className="why-card"
+    initial={{ opacity: 0, y: 32 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, amount: 0.2 }}
+    transition={{ duration: 0.6, delay: i * 0.12, ease: EASE_OUT_EXPO }}
+    whileHover={{ y: -4, transition: { duration: 0.25, ease: "easeOut" } }}
+  >
+    <span className="why-card-ico">{BENEFIT_ICONS[reason.icon]}</span>
+    <div className="why-card-body">
+      <span className="why-card-strike">{reason.strike}</span>
+      <h3 className="why-card-title">{reason.title}</h3>
+      <p className="why-card-desc">{reason.desc}</p>
+    </div>
+    <m.span
+      className="why-card-axis"
+      initial={{ scaleX: 0 }}
+      whileInView={{ scaleX: 1 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.7, delay: 0.3 + i * 0.12, ease: [0.7, 0.1, 0.2, 1] }}
+    />
+  </m.div>
+);
+
+const WhyNovio = () => {
+  const headRef = useReveal();
+  return (
+    <section className="why" id="pourquoi" aria-label="Pourquoi Novio">
+      <div className="why-head reveal" ref={headRef}>
+        <div className="mono why-eyebrow">
+          <span className="dash"></span>
+          <span>Pourquoi Novio</span>
+        </div>
+        <h2 className="why-title">
+          Un site qui <em>génère des soumissions</em> et des appels.
+        </h2>
+        <p className="why-sub">
+          Trois choses qui nous séparent d'une agence, d'un template ou d'un freelance de passage.
+        </p>
+      </div>
+      <div className="why-grid">
+        {WHY_REASONS.map((r, i) => <WhyCard key={i} reason={r} i={i} />)}
+      </div>
+      <m.div
+        className="why-cta"
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.5 }}
+        transition={{ duration: 0.55, delay: 0.15, ease: EASE_OUT_EXPO }}
+      >
+        <a className="btn btn-accent" href="/contact">Démarrer mon projet &#8594;</a>
+        <span className="mono why-cta-note">Cohorte fondateur · 04 places</span>
+      </m.div>
+    </section>
+  );
+};
+
+Object.assign(window, { ScrollProgress, Manifesto, WhyNovio, Specs });
