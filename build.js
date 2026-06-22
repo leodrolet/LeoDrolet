@@ -6,7 +6,7 @@ const { execSync } = require("child_process");
 const fs = require("fs");
 
 // Version d'assets — bumper à chaque build pour casser le cache navigateur (Vercel).
-const ASSET_V = "48";
+const ASSET_V = "51";
 
 // Ordre de chargement — les composants dépendent de effects (useReveal, etc.)
 // pages dépend de TOUS les composants de section → chargé juste avant app.

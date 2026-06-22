@@ -1242,6 +1242,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .field-help { font-family: var(--mono); font-size: 10px; color: var(--mute); }
 
 /* ---- Formulaire de projet (page Contact) ---- */
+.field-hint { font-family: var(--mono); font-size: 9px; letter-spacing: 0.06em; text-transform: none; color: var(--mute); }
 .form-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
 .form-error {
@@ -2862,3 +2863,36 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .nv-ring { animation: nv-ring 1.1s ease-in-out infinite; }
 @keyframes nv-sms-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 .nv-sms-in { animation: nv-sms-in 0.4s ease forwards; }
+
+/* ============================================================
+   Passe de polissage visuel — profondeur, lumière, survols
+   ============================================================ */
+
+/* Bouton accent : léger dégradé + ombre douce au repos (profondeur) */
+.btn-accent {
+  background: linear-gradient(180deg, #ff6e44 0%, #ff5b2e 62%);
+  box-shadow: 0 8px 26px -12px rgba(255,91,46,0.55), inset 0 1px 0 rgba(255,255,255,0.16);
+}
+.btn-accent:not(:active):hover { box-shadow: 0 10px 28px -16px rgba(0,0,0,0.55); }
+
+/* Lueur ambiante chaude derrière les grands moments éditoriaux */
+.final-cta, .why { position: relative; }
+.final-cta::before, .why::before {
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: radial-gradient(ellipse 56% 46% at 50% 40%, rgba(255,91,46,0.06), transparent 72%);
+}
+.final-cta > *, .why > * { position: relative; z-index: 1; }
+
+/* Élévation chaude et douce au survol des cartes (ombre + bordure, sans transform pour éviter les conflits Framer) */
+.why-card, .spec, .cap, .nv-auto-card, .plan-card {
+  transition: border-color .25s ease, transform .35s cubic-bezier(.23,1,.32,1), box-shadow .35s ease;
+}
+.why-card:hover, .spec:hover, .cap:hover, .nv-auto-card:hover, .plan-card:hover {
+  border-color: rgba(255,91,46,0.26);
+  box-shadow: 0 26px 64px -34px rgba(255,91,46,0.20);
+}
+
+/* Sélection de texte à l'accent + anneaux de focus visibles (accessibilité + finition) */
+::selection { background: rgba(255,91,46,0.85); color: #0a0a0a; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.field input:focus-visible, .field textarea:focus-visible { outline: none; }

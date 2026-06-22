@@ -2,3 +2,5 @@ node_modules/
 dist/
 styles.min.css
 .gstack/
+.DS_Store
+.idea/

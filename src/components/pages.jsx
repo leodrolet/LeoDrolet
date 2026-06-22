@@ -170,15 +170,18 @@ const INTERESTS = ["Site web", "Automatisation IA", "Pack Croissance", "Pas sûr
 // ── Formulaire de projet (AJAX → Formspree, états idle/submitting/success/error) ──
 const ProjectForm = () => {
   const [status, setStatus] = React.useState("idle");
-  const [interest, setInterest] = React.useState("Site web");
+  const [interests, setInterests] = React.useState(["Site web"]);
   const [error, setError] = React.useState("");
+
+  const toggleInterest = (it) =>
+    setInterests((cur) => (cur.includes(it) ? cur.filter((x) => x !== it) : [...cur, it]));
 
   const onSubmit = async (e) => {
     e.preventDefault();
     if (status === "submitting") return;
     const form = e.currentTarget;
     const data = new FormData(form);
-    data.set("interet", interest);
+    data.set("interet", interests.join(", "));
     setStatus("submitting");
     setError("");
     try {
@@ -228,19 +231,22 @@ const ProjectForm = () => {
       <h2 className="contact-card__t">Parle-moi de ton projet.</h2>
       <form onSubmit={onSubmit}>
         <div className="field">
-          <span className="field-label">Ce qui t'intéresse</span>
-          <div className="field-options" role="group" aria-label="Ce qui t'intéresse">
-            {INTERESTS.map((it) => (
-              <button
-                type="button"
-                key={it}
-                className={interest === it ? "active" : ""}
-                aria-pressed={interest === it}
-                onClick={() => setInterest(it)}
-              >
-                {it}
-              </button>
-            ))}
+          <span className="field-label">Ce qui t'intéresse <span className="field-hint">plusieurs choix possibles</span></span>
+          <div className="field-options" role="group" aria-label="Ce qui t'intéresse, plusieurs choix possibles">
+            {INTERESTS.map((it) => {
+              const on = interests.includes(it);
+              return (
+                <button
+                  type="button"
+                  key={it}
+                  className={on ? "active" : ""}
+                  aria-pressed={on}
+                  onClick={() => toggleInterest(it)}
+                >
+                  {it}
+                </button>
+              );
+            })}
           </div>
         </div>
 
