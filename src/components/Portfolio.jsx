@@ -75,7 +75,7 @@ const ScoreCard = ({ rows = COMPARE_ROWS, leftHead = "Agence traditionnelle", ri
         {rows.map((row, i) => <Cell key={i} row={row} side="novio" delay={0.12 + i * 0.06} />)}
         <div className="cscore-foot">
           <span className="cscore-foot-price">1 500 $ <em>puis 119 $/mois</em></span>
-          <a className="btn btn-accent cscore-cta" href="https://calendly.com/leo_drolet-noviostudio/conception-site-web" target="_blank" rel="noopener noreferrer">Démarrer mon projet &#8594;</a>
+          <a className="btn btn-accent cscore-cta" href="/contact">Démarrer mon projet &#8594;</a>
         </div>
       </div>
     </div>

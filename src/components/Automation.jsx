@@ -11,9 +11,7 @@ const { BENEFIT_ICONS } = window;
 
 const EASE_OUT_EXPO = [0.16, 1, 0.3, 1];
 
-const CALENDLY = "https://calendly.com/leo_drolet-noviostudio/conception-site-web";
-const CONTACT = CALENDLY;
-const EXT = { target: "_blank", rel: "noopener noreferrer" };
+const CONTACT = "/contact";
 
 // ── Métriques (format « specs sheet ») ──
 const AUTO_METRICS = [
@@ -165,7 +163,7 @@ const PackOffer = () => (
       </div>
     </div>
     <div className="pack__cta">
-      <a href={CONTACT} {...EXT} className="btn btn-accent">Démarrer mon projet <span className="arrow">&#8594;</span></a>
+      <a href={CONTACT} className="btn btn-accent">Démarrer mon projet <span className="arrow">&#8594;</span></a>
       <span className="pack__note">Site + 2 automatisations au choix</span>
     </div>
   </m.section>
@@ -203,7 +201,7 @@ const Automation = ({ lead = true }) => {
         {AUTOMATIONS.map((a, i) => <CapTile key={a.id} a={a} i={i} />)}
       </div>
       <div className="cap-cta">
-        <a href={CONTACT} {...EXT} className="btn btn-accent">Démarrer mon projet <span className="arrow">&#8594;</span></a>
+        <a href={CONTACT} className="btn btn-accent">Démarrer mon projet <span className="arrow">&#8594;</span></a>
       </div>
 
       {/* Ledger sans / avec */}

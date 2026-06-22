@@ -10,7 +10,7 @@ const { BENEFIT_ICONS } = window;
 
 const EASE_OUT_EXPO = [0.16, 1, 0.3, 1];
 
-const CALENDLY = "https://calendly.com/leo_drolet-noviostudio/conception-site-web";
+const FORMSPREE = "https://formspree.io/f/mdaronva";
 const EMAIL = "leo_drolet@noviostudio.online";
 const TEL = "+18736554684";
 const TEL_DISPLAY = "873 655-4684";
@@ -161,10 +161,129 @@ const NEXT_STEPS = [
 ];
 
 const CHANNELS = [
-  { icon: "calendar", label: "Réserver un appel", value: "15 min · gratuit", href: CALENDLY, external: true },
-  { icon: "messagecircle", label: "Écrire un courriel", value: EMAIL, href: `mailto:${EMAIL}`, external: false },
-  { icon: "phone", label: "Appeler", value: TEL_DISPLAY, href: `tel:${TEL}`, external: false },
+  { icon: "messagecircle", label: "Écrire un courriel", value: EMAIL, href: `mailto:${EMAIL}` },
+  { icon: "phone", label: "Appeler", value: TEL_DISPLAY, href: `tel:${TEL}` },
 ];
+
+const INTERESTS = ["Site web", "Automatisation IA", "Pack Croissance", "Pas sûr encore"];
+
+// ── Formulaire de projet (AJAX → Formspree, états idle/submitting/success/error) ──
+const ProjectForm = () => {
+  const [status, setStatus] = React.useState("idle");
+  const [interest, setInterest] = React.useState("Site web");
+  const [error, setError] = React.useState("");
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    if (status === "submitting") return;
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    data.set("interet", interest);
+    setStatus("submitting");
+    setError("");
+    try {
+      const res = await fetch(FORMSPREE, {
+        method: "POST",
+        body: data,
+        headers: { Accept: "application/json" },
+      });
+      if (res.ok) {
+        setStatus("success");
+        form.reset();
+      } else {
+        const j = await res.json().catch(() => null);
+        setError((j && j.errors && j.errors.map((x) => x.message).join(" ")) ||
+          "Une erreur est survenue. Réessaie, ou écris-moi directement par courriel.");
+        setStatus("error");
+      }
+    } catch (_) {
+      setError("Connexion impossible. Réessaie, ou écris-moi à " + EMAIL + ".");
+      setStatus("error");
+    }
+  };
+
+  if (status === "success") {
+    return (
+      <m.div
+        className="contact-card form-card form-success"
+        initial={{ opacity: 0, scale: 0.96 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5, ease: EASE_OUT_EXPO }}
+      >
+        <span className="form-success__check" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+        </span>
+        <h2 className="contact-card__t">Demande envoyée.</h2>
+        <p className="form-success__lead">
+          Merci. Je te reviens en moins de 24 h avec un plan clair. D'ici là, tu peux m'écrire à
+          {" "}<a href={`mailto:${EMAIL}`}>{EMAIL}</a>.
+        </p>
+        <a href="/" className="btn">Retour à l'accueil <span className="arrow">&#8594;</span></a>
+      </m.div>
+    );
+  }
+
+  return (
+    <div className="contact-card form-card">
+      <h2 className="contact-card__t">Parle-moi de ton projet.</h2>
+      <form onSubmit={onSubmit}>
+        <div className="field">
+          <span className="field-label">Ce qui t'intéresse</span>
+          <div className="field-options" role="group" aria-label="Ce qui t'intéresse">
+            {INTERESTS.map((it) => (
+              <button
+                type="button"
+                key={it}
+                className={interest === it ? "active" : ""}
+                aria-pressed={interest === it}
+                onClick={() => setInterest(it)}
+              >
+                {it}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* anti-spam (honeypot Formspree) */}
+        <input type="text" name="_gotcha" tabIndex="-1" autoComplete="off" aria-hidden="true" className="form-hp" />
+        <input type="hidden" name="_subject" value="Nouvelle demande, site Novio Studio" />
+
+        <div className="form-row">
+          <div className="field">
+            <label className="field-label" htmlFor="cf-name">Nom <span className="req">*</span></label>
+            <input id="cf-name" type="text" name="name" autoComplete="name" required />
+          </div>
+          <div className="field">
+            <label className="field-label" htmlFor="cf-phone">Téléphone</label>
+            <input id="cf-phone" type="tel" name="phone" autoComplete="tel" />
+          </div>
+        </div>
+        <div className="field">
+          <label className="field-label" htmlFor="cf-email">Courriel <span className="req">*</span></label>
+          <input id="cf-email" type="email" name="email" autoComplete="email" required />
+        </div>
+        <div className="field">
+          <label className="field-label" htmlFor="cf-msg">Ton projet</label>
+          <textarea id="cf-msg" name="message" rows="4" placeholder="Ex. : couvreur à Gatineau, je veux plus de soumissions sur Google."></textarea>
+          <span className="field-help">Métier, secteur, échéancier : tout ce qui aide.</span>
+        </div>
+        <label className="contact-consent">
+          <input type="checkbox" name="consent" required />
+          <span>J'accepte d'être contacté par Novio Studio au sujet de ma demande.</span>
+        </label>
+
+        {status === "error" && <p className="form-error" role="alert">{error}</p>}
+
+        <button type="submit" className="btn btn-accent form-submit" disabled={status === "submitting"} style={{ justifyContent: "center" }}>
+          {status === "submitting"
+            ? (<><span className="form-spinner" aria-hidden="true"></span> Envoi…</>)
+            : (<>Envoyer ma demande <span className="arrow">&#8594;</span></>)}
+        </button>
+        <span className="field-help" style={{ textAlign: "center" }}>Réponse en moins de 24 h · sans engagement</span>
+      </form>
+    </div>
+  );
+};
 
 const ContactSection = () => {
   const asideRef = useReveal();
@@ -189,9 +308,7 @@ const ContactSection = () => {
 
           <div className="channels">
             {CHANNELS.map((c) => (
-              <a key={c.label} href={c.href}
-                 {...(c.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                 className="channel">
+              <a key={c.label} href={c.href} className="channel">
                 <span className="channel__icon">{BENEFIT_ICONS[c.icon]}</span>
                 <span className="channel__txt">
                   <span className="channel__label">{c.label}</span>
@@ -203,21 +320,8 @@ const ContactSection = () => {
           </div>
         </div>
 
-        <div className="contact-card contact-book reveal" ref={formRef}>
-          <span className="contact-book__icon">{BENEFIT_ICONS.calendar}</span>
-          <h2 className="contact-card__t">Réserve ton appel.</h2>
-          <p className="contact-book__lead">
-            Choisis un créneau qui te convient. 15 minutes, gratuit, sans engagement. On regarde
-            ensemble où tu perds des leads aujourd'hui et ce qu'on peut récupérer.
-          </p>
-          <a href={CALENDLY} target="_blank" rel="noopener noreferrer"
-             className="btn btn-accent" style={{ justifyContent: "center" }}>
-            Démarrer mon projet <span className="arrow">&#8594;</span>
-          </a>
-          <span className="field-help" style={{ textAlign: "center" }}>Réponse en moins de 24 h · sans engagement</span>
-          <p className="contact-book__alt">
-            Tu préfères écrire ? <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
-          </p>
+        <div className="reveal" ref={formRef}>
+          <ProjectForm />
         </div>
       </div>
     </section>
@@ -227,7 +331,7 @@ const ContactSection = () => {
 /* ── Composition des pages ── */
 const {
   Hero, Manifesto, WhyNovio, Specs, MarqueeRow, FoundersSlots, About, FinalCTA,
-  Services, CompareAgency, Automation, Pricing, FAQ, FAQ_WEB, FAQ_IA,
+  Services, CompareAgency, Automation, AutoIA, Pricing, FAQ, FAQ_WEB, FAQ_IA,
 } = window;
 
 const HomePage = () => (
@@ -271,28 +375,12 @@ const SiteWebPage = () => (
     <FinalCTA
       headline={<>Ton prochain client te cherche sur Google. <em>Sois là.</em></>}
       ctaLabel="Démarrer mon projet"
-      ctaHref={CALENDLY}
+      ctaHref="/contact"
     />
   </React.Fragment>
 );
 
-const AutomationPage = () => (
-  <React.Fragment>
-    <PageHeader
-      index="Automatisation IA"
-      metaRight="250 $/mois"
-      title={<>Aucun lead ne <em>passe entre les craques.</em></>}
-      sub="Un beau site attire les clients, l'automatisation s'assure qu'aucun ne t'échappe. Des outils simples à 250 $/mois, sans frais d'installation, qui répondent, relancent et qualifient à ta place."
-    />
-    <Automation lead={false} />
-    <FAQ items={FAQ_IA} title="Questions fréquentes." />
-    <FinalCTA
-      headline={<>Arrête de perdre des leads pendant que <em>tu travailles.</em></>}
-      ctaLabel="Démarrer mon projet"
-      ctaHref={CALENDLY}
-    />
-  </React.Fragment>
-);
+const AutomationPage = () => <AutoIA />;
 
 const PricingPage = () => (
   <React.Fragment>
@@ -314,7 +402,7 @@ const PricingPage = () => (
     <FinalCTA
       headline={<>Un prix, un échéancier, un interlocuteur. <em>On commence ?</em></>}
       ctaLabel="Démarrer mon projet"
-      ctaHref={CALENDLY}
+      ctaHref="/contact"
     />
   </React.Fragment>
 );

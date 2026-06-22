@@ -9,7 +9,7 @@
 const { useReveal, BENEFIT_ICONS } = window;
 const { motion: m } = window.Motion || {};
 const EASE_OUT_EXPO = [0.16, 1, 0.3, 1];
-const CALENDLY = "https://calendly.com/leo_drolet-noviostudio/conception-site-web";
+const CONTACT = "/contact";
 
 /* ---------- ScrollProgress ---------- */
 const ScrollProgress = () => {
@@ -141,7 +141,7 @@ const Manifesto = () => {
                 <span className="mproof-k">Dès la livraison</span>
               </div>
             </div>
-            <a className="btn btn-accent" href={CALENDLY} target="_blank" rel="noopener noreferrer">Démarrer mon projet &#8594;</a>
+            <a className="btn btn-accent" href={CONTACT}>Démarrer mon projet &#8594;</a>
           </div>
         </div>
       </div>
@@ -279,7 +279,7 @@ const WhyNovio = () => {
         viewport={{ once: true, amount: 0.5 }}
         transition={{ duration: 0.55, delay: 0.15, ease: EASE_OUT_EXPO }}
       >
-        <a className="btn btn-accent" href={CALENDLY} target="_blank" rel="noopener noreferrer">Démarrer mon projet &#8594;</a>
+        <a className="btn btn-accent" href={CONTACT}>Démarrer mon projet &#8594;</a>
         <span className="mono why-cta-note">Cohorte fondateur · 04 places</span>
       </m.div>
     </section>

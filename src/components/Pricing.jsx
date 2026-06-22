@@ -10,7 +10,7 @@ const { motion: m } = window.Motion || {};
 const { BENEFIT_ICONS } = window;
 
 const EASE_OUT_EXPO = [0.16, 1, 0.3, 1];
-const CONTACT = "https://calendly.com/leo_drolet-noviostudio/conception-site-web";
+const CONTACT = "/contact";
 
 // ── Trois lignes de prix (site unique · hébergement mensuel · IA mensuel) ──
 const PRICE_PLANS = [
@@ -74,7 +74,7 @@ const PriceCard = ({ p, i }) => (
           ))}
         </div>
       </div>
-      <a href={CONTACT} target="_blank" rel="noopener noreferrer" className={`btn plan-cta${p.featured ? " plan-cta--featured" : ""}`}>
+      <a href={CONTACT} className={`btn plan-cta${p.featured ? " plan-cta--featured" : ""}`}>
         Démarrer mon projet <span className="arrow">&#8594;</span>
       </a>
     </div>
@@ -103,7 +103,7 @@ const PricingPack = () => (
       </div>
     </div>
     <div className="pack__cta">
-      <a href={CONTACT} target="_blank" rel="noopener noreferrer" className="btn btn-accent">Démarrer mon projet <span className="arrow">&#8594;</span></a>
+      <a href={CONTACT} className="btn btn-accent">Démarrer mon projet <span className="arrow">&#8594;</span></a>
       <span className="pack__note">Site + 2 automatisations au choix</span>
     </div>
   </m.section>

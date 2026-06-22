@@ -9,7 +9,7 @@ const { useReveal, useMagnetic } = window;
 const FinalCTA = ({
   headline = (<>Prochain contractor dans la galerie, <em>toi.</em></>),
   ctaLabel = "Démarrer mon projet",
-  ctaHref = "https://calendly.com/leo_drolet-noviostudio/conception-site-web",
+  ctaHref = "/contact",
 } = {}) => {
   const ref = useReveal();
   const ctaMagnetic = useMagnetic(10);
@@ -124,7 +124,7 @@ const Footer = () => {
         <p style={{margin:"0 0 20px", fontSize:12, color:"var(--mute)"}}>Dernière mise à jour : 8 juin 2026</p>
         <p style={{margin:"0 0 24px"}}>Novio Studio (« nous ») s'engage à protéger la vie privée des visiteurs de ce site.</p>
         <ModalSection title="1. Informations collectées">
-          <p style={{margin:0}}>Nous collectons uniquement les informations que vous nous fournissez volontairement lorsque vous nous écrivez par courriel ou réservez un appel : nom, adresse courriel, et message.</p>
+          <p style={{margin:0}}>Nous collectons uniquement les informations que vous nous fournissez volontairement via le formulaire de contact (ou par courriel) : nom, courriel, téléphone et message. Le formulaire est traité par Formspree.</p>
         </ModalSection>
         <ModalSection title="2. Utilisation des informations">
           <p style={{margin:"0 0 8px"}}>Ces informations sont utilisées uniquement pour répondre à vos demandes.</p>

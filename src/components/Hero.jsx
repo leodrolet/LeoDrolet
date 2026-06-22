@@ -114,9 +114,7 @@ const Hero = ({ headline }) => {
           <div className="hero-ctas">
             <a
               className="btn btn-accent"
-              href="https://calendly.com/leo_drolet-noviostudio/conception-site-web"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/contact"
               ref={ctaMagnetic.ref}
               onMouseMove={ctaMagnetic.onMouseMove}
               onMouseLeave={ctaMagnetic.onMouseLeave}

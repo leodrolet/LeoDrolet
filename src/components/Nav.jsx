@@ -64,9 +64,7 @@ const Nav = () => {
           </button>
           <a
             className="btn nav-cta"
-            href="https://calendly.com/leo_drolet-noviostudio/conception-site-web"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/contact"
             ref={navCtaMagnetic.ref}
             onMouseMove={navCtaMagnetic.onMouseMove}
             onMouseLeave={navCtaMagnetic.onMouseLeave}
@@ -85,7 +83,7 @@ const Nav = () => {
               {l.label}
             </a>
           ))}
-          <a href="https://calendly.com/leo_drolet-noviostudio/conception-site-web" target="_blank" rel="noopener noreferrer" className="mobile-menu-cta" onClick={close}>Démarrer &#8594;</a>
+          <a href="/contact" className="mobile-menu-cta" onClick={close}>Démarrer &#8594;</a>
         </div>
       )}
     </React.Fragment>
