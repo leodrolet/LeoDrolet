@@ -6,7 +6,7 @@ const { execSync } = require("child_process");
 const fs = require("fs");
 
 // Version d'assets — bumper à chaque build pour casser le cache navigateur (Vercel).
-const ASSET_V = "43";
+const ASSET_V = "44";
 
 // Ordre de chargement — les composants dépendent de effects (useReveal, etc.)
 // pages dépend de TOUS les composants de section → chargé juste avant app.
@@ -20,6 +20,7 @@ const FILES = [
   ["Marquee",      "src/components/Marquee.jsx"],
   ["Services",     "src/components/Services.jsx"],   // exporte aussi SectionHead, BenefitItem
   ["Portfolio",    "src/components/Portfolio.jsx"],  // exporte FoundersSlots, CompareAgency, ScoreCard
+  ["Pricing",      "src/components/Pricing.jsx"],     // page Tarifs (forfaits + pack)
   ["Automation",   "src/components/Automation.jsx"], // dépend de BenefitItem
   ["About",        "src/components/About.jsx"],
   ["FAQ",          "src/components/FAQ.jsx"],         // exporte FAQ, FAQ_WEB, FAQ_IA
@@ -70,6 +71,13 @@ const PAGES = [
     desc: "Réponse aux appels manqués, chatbot de qualification, relance des soumissions, avis Google automatiques. 250 $/mois par automatisation, sans frais d'installation. Aucun lead ne passe entre les craques.",
     ogTitle: "Automatisation IA pour contractors — Novio Studio",
     ogDesc: "Appels manqués, relances, avis Google : des automatisations à 250 $/mois sans installation qui captent chaque lead.",
+  },
+  {
+    file: "tarifs.html", page: "tarifs", canonical: "https://novio.studio/tarifs",
+    title: "Tarifs — Sites web & automatisation IA | Novio Studio Gatineau",
+    desc: "Des prix clairs, sans surprise. Site web dès 1 500 $, hébergement 119 $/mois sans engagement, automatisations IA 250 $/mois sans installation. Pack Croissance pour tout combiner.",
+    ogTitle: "Tarifs — Novio Studio",
+    ogDesc: "Site dès 1 500 $, hébergement 119 $/mois, automatisations 250 $/mois. Prix clairs, sans engagement, sans surprise.",
   },
   {
     file: "contact.html", page: "contact", canonical: "https://novio.studio/contact",

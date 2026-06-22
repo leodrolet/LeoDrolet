@@ -79,7 +79,7 @@ const Hero = ({ headline }) => {
   React.useEffect(() => { speedRef.current = hovered ? 0.6 : 0.2; }, [hovered]);
   const ctaMagnetic = useMagnetic(10);
   const segments = React.useMemo(() =>
-    parseHeadline(headline || "Sites web qui *ramènent des clients* — pour les **PME de Gatineau.**"),
+    parseHeadline(headline || "Sites web qui *ramènent des clients,* pour les **PME de Gatineau.**"),
   [headline]);
 
   const onCardMouseMove = React.useCallback((e) => {
@@ -125,10 +125,6 @@ const Hero = ({ headline }) => {
               Démarrer mon projet <span className="arrow">&#8594;</span>
             </a>
           </div>
-        </div>
-        <div className="scroll-hint">
-          <span className="bar"></span>
-          Faire défiler
         </div>
       </div>
     </section>

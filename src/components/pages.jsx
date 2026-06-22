@@ -175,7 +175,6 @@ const ContactSection = () => {
     <section className="contact">
       <div className="contact__grid">
         <div className="contact__aside reveal" ref={asideRef}>
-          <div className="contact__eyebrow"><span className="dash"></span><span>La suite</span></div>
           <h2 className="contact__t">Ce qui se passe <em>ensuite.</em></h2>
 
           <ol className="next-steps">
@@ -207,7 +206,6 @@ const ContactSection = () => {
         </div>
 
         <div className="contact-card reveal" ref={formRef}>
-          <div className="contact-card__eyebrow">Demande d'estimation</div>
           <h2 className="contact-card__t">Laisse-moi un mot.</h2>
           <form action={FORMSPREE} method="POST">
             <div className="field">
@@ -241,7 +239,7 @@ const ContactSection = () => {
 /* ── Composition des pages ── */
 const {
   Hero, Manifesto, WhyNovio, Specs, MarqueeRow, FoundersSlots, About, FinalCTA,
-  Services, CompareAgency, Automation, FAQ, FAQ_WEB, FAQ_IA,
+  Services, CompareAgency, Automation, Pricing, FAQ, FAQ_WEB, FAQ_IA,
 } = window;
 
 const HomePage = () => (
@@ -274,10 +272,10 @@ const HomePage = () => (
 const SiteWebPage = () => (
   <React.Fragment>
     <PageHeader
-      index="01 — Sites web"
+      index="Sites web"
       metaRight="2–3 semaines"
       title={<>Un site qui <em>fait sonner le téléphone.</em></>}
-      sub="Sur mesure, rapide, pensé pour les entrepreneurs de l'Outaouais. Ton prochain client te cherche sur Google — fais en sorte qu'il te trouve, toi, pas ton concurrent."
+      sub="Sur mesure, rapide, pensé pour les entrepreneurs de l'Outaouais. Ton prochain client te cherche sur Google, fais en sorte qu'il te trouve, toi, pas ton concurrent."
       stats={[
         { v: "2–3", u: "sem", k: "Livraison" },
         { v: "100", u: "/100", k: "Lighthouse" },
@@ -287,7 +285,6 @@ const SiteWebPage = () => (
     />
     <Process />
     <Services />
-    <CompareAgency />
     <FAQ items={FAQ_WEB} title="Questions fréquentes — sites web." />
     <FinalCTA
       headline={<>Ton prochain client te cherche sur Google. <em>Sois là.</em></>}
@@ -300,10 +297,10 @@ const SiteWebPage = () => (
 const AutomationPage = () => (
   <React.Fragment>
     <PageHeader
-      index="02 — Automatisation IA"
+      index="Automatisation IA"
       metaRight="250 $/mois"
       title={<>Aucun lead ne <em>passe entre les craques.</em></>}
-      sub="Un beau site attire les clients. L'automatisation s'assure qu'aucun ne t'échappe. Des outils simples — 250 $/mois, sans frais d'installation — qui répondent, relancent et qualifient à ta place."
+      sub="Un beau site attire les clients, l'automatisation s'assure qu'aucun ne t'échappe. Des outils simples à 250 $/mois, sans frais d'installation, qui répondent, relancent et qualifient à ta place."
     />
     <Automation lead={false} />
     <FAQ items={FAQ_IA} title="Questions fréquentes — automatisation." />
@@ -315,10 +312,35 @@ const AutomationPage = () => (
   </React.Fragment>
 );
 
+const PricingPage = () => (
+  <React.Fragment>
+    <PageHeader
+      index="Tarifs"
+      metaRight="Sans engagement"
+      title={<>Des prix clairs. <em>Aucune surprise.</em></>}
+      sub="Un forfait unique pour le site, un mensuel sans engagement pour l'hébergement, des automatisations à la carte. Tu sais exactement ce que tu paies, avant de commencer."
+      stats={[
+        { v: "1 500", u: "$", k: "Site web" },
+        { v: "119", u: "$/mois", k: "Hébergement" },
+        { v: "250", u: "$/mois", k: "Par automatisation" },
+        { v: "0", u: "$", k: "Installation" },
+      ]}
+    />
+    <Pricing />
+    <CompareAgency />
+    <FAQ items={FAQ_WEB} title="Questions fréquentes." />
+    <FinalCTA
+      headline={<>Un prix, un échéancier, un interlocuteur. <em>On commence ?</em></>}
+      ctaLabel="Démarrer mon projet"
+      ctaHref="/contact"
+    />
+  </React.Fragment>
+);
+
 const ContactPage = () => (
   <React.Fragment>
     <PageHeader
-      index="03 — Contact"
+      index="Contact"
       metaRight="Réponse < 24 h"
       title={<>Parlons de <em>ton projet.</em></>}
       sub="Premier appel de 15 minutes, gratuit. On regarde où tu perds des leads aujourd'hui, et ce qu'on peut récupérer. Pas de jargon, pas de pression."
@@ -329,5 +351,5 @@ const ContactPage = () => (
 
 Object.assign(window, {
   PageHeader, SecHead, OffersOverview, Process, ContactSection,
-  HomePage, SiteWebPage, AutomationPage, ContactPage,
+  HomePage, SiteWebPage, AutomationPage, PricingPage, ContactPage,
 });

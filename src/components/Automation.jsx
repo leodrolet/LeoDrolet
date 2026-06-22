@@ -85,7 +85,6 @@ const CapTile = ({ a, i }) => (
     viewport={{ once: true, amount: 0.1 }}
     transition={{ duration: 0.7, ease: EASE_OUT_EXPO, delay: 0.05 + (i % 2) * 0.1 }}
   >
-    <span className="cap__idx" aria-hidden="true">{a.n}</span>
     <div className="cap__icon">{BENEFIT_ICONS[a.icon]}</div>
     <h3 className="cap__t">{a.tier}</h3>
     <p className="cap__pitch">{a.pitch}</p>
@@ -111,7 +110,6 @@ const Ledger = () => {
   return (
     <section className="ledger">
       <div className="sec-head reveal" ref={ref}>
-        <div className="sec-head__eyebrow"><span className="dash"></span><span>Le calcul</span></div>
         <h2 className="sec-head__t">Ce que ça change, <em>concrètement.</em></h2>
       </div>
       <m.div
@@ -154,7 +152,6 @@ const PackOffer = () => (
     transition={{ duration: 0.7, ease: EASE_OUT_EXPO }}
   >
     <div>
-      <div className="pack__eyebrow">Offre groupée</div>
       <h2 className="pack__t">Pack Croissance</h2>
       <p className="pack__d">
         Ton site web qui attire + deux automatisations qui convertissent. La machine complète pour

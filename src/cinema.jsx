@@ -159,12 +159,12 @@ const SPECS = [
     d: "Vos visiteurs n'attendent pas. Un site rapide = plus de conversions, moins de rebonds, mieux classé.",
   },
   {
-    v: "300", u: "$/mois", k: "Prix de départ",
-    d: "Plan Essentiel tout inclus — domaine, hébergement, maintenance. Un contrat de plus rembourse 6 mois de site.",
+    v: "119", u: "$/mois", k: "Hébergement",
+    d: "Hébergement, SSL, sauvegardes et 30 min de modifications par mois. Sans engagement, annulable en tout temps.",
   },
   {
-    v: "07", u: "j", k: "Livraison minimum",
-    d: "Du brief au live en 7 jours. Pendant ce temps, ton concurrent prend tes leads sur Google.",
+    v: "2–3", u: "sem", k: "Livraison",
+    d: "Du brief au lancement en deux à trois semaines. Pendant ce temps, ton concurrent prend tes leads sur Google.",
   },
 ];
 
@@ -191,15 +191,11 @@ const Specs = () => {
   return (
     <section className="specs" id="specs">
       <div className="specs-head reveal" ref={headRef}>
-        <div className="mono specs-eyebrow">
-          <span className="dash"></span>
-          <span>Specs · v1.0</span>
-        </div>
         <h2 className="specs-title">
           Par les <em>chiffres.</em>
         </h2>
         <p className="specs-sub">
-          Quatre métriques, mesurées sur chaque livrable. Ce ne sont pas des promesses — ce sont des conditions de réception.
+          Quatre métriques, mesurées sur chaque livrable. Ce ne sont pas des promesses, ce sont des conditions de réception.
         </p>
       </div>
       <div className="specs-grid">
