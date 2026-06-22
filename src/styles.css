@@ -946,109 +946,152 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   flex-shrink: 0;
 }
 
-/* ── Compare Slider (content) ── */
-.cslider {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  border-radius: 10px;
+/* ── Compare Scorecard (Novio vs agence) ── */
+.cscore {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto repeat(5, 1fr) auto;
+  gap: clamp(12px, 1.6vw, 20px);
+  align-items: stretch;
+}
+.cscore-card {
+  display: grid;
+  grid-row: 1 / -1;
+  grid-template-rows: subgrid;
   border: 1px solid var(--line-strong);
-  cursor: ew-resize;
-  user-select: none;
-  touch-action: pan-y;
-}
-.cslider--drag { cursor: ew-resize; }
-
-/* Both sides share the same layout so rows align */
-.cslider-side {
-  display: flex;
-  flex-direction: column;
-}
-.cslider-side--agency {
+  border-radius: 14px;
+  overflow: hidden;
   background: var(--bg-2);
 }
-.cslider-side--novio {
+.cscore-card--agency { opacity: 0.92; }
+.cscore-card--novio {
   background: var(--bg-3);
-  border-left: 2px solid var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent), 0 18px 50px -20px rgba(255, 91, 46, 0.45);
+  position: relative;
 }
-.cslider-novio-clip {
-  position: absolute;
-  inset: 0;
-}
-.cslider-novio-clip .cslider-side--novio {
-  height: 100%;
-}
-.cslider-head {
+
+/* Head */
+.cscore-head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   padding: 16px 24px;
   font-family: var(--mono);
   font-size: 10px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  border-bottom: 1px solid var(--line-strong);
+  border-bottom: 1px solid var(--line);
   text-align: center;
 }
-.cslider-side--agency .cslider-head { color: var(--mute); }
-.cslider-side--novio  .cslider-head { color: var(--accent); }
-.cslider-row {
-  padding: 18px 24px;
-  border-bottom: 1px solid var(--line);
+.cscore-card--agency .cscore-head { color: var(--mute); }
+.cscore-card--novio  .cscore-head { color: var(--accent); border-bottom-color: var(--line-strong); }
+.cscore-badge {
+  font-size: 8px;
+  letter-spacing: 0.1em;
+  padding: 3px 7px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+/* Cells */
+.cscore-cell {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 6px;
+  gap: 7px;
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--line);
   text-align: center;
+  align-items: center;
+  justify-content: center;
 }
-.cslider-row:last-child { border-bottom: none; }
-.cslider-feat {
+.cscore-feat {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
   font-family: var(--mono);
   font-size: 9px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--mute);
 }
-.cslider-val {
+.cscore-ico {
+  display: inline-flex;
+  width: 13px;
+  height: 13px;
+  color: var(--ink-2);
+}
+.cscore-ico svg { width: 100%; height: 100%; }
+.cscore-val {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 7px;
   font-size: 14px;
   line-height: 1.4;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 7px;
 }
-.cslider-side--agency .cslider-val { color: var(--ink-2); font-style: italic; }
-.cslider-side--novio  .cslider-val { color: var(--ink); font-style: normal; }
-.cslider-check {
-  color: var(--accent);
+.cscore-val--agency { color: var(--ink-2); font-style: italic; }
+.cscore-card--novio .cscore-val { color: var(--ink); }
+.cscore-mark {
+  flex-shrink: 0;
   font-size: 12px;
-  flex-shrink: 0;
+  font-style: normal;
 }
-.cslider-track {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: rgba(255,255,255,0.7);
-  transform: translateX(-50%);
+.cscore-mark--yes { color: var(--accent); }
+.cscore-mark--no  { color: var(--mute); }
+
+/* Foot */
+.cscore-foot {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  z-index: 2;
+  gap: 12px;
+  padding: 22px 24px 24px;
+  text-align: center;
 }
-.cslider-knob {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  background: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #1a1a1a;
-  flex-shrink: 0;
-  box-shadow: 0 2px 14px rgba(0,0,0,0.4);
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
+.cscore-card--agency .cscore-foot { justify-content: center; }
+.cscore-foot-note {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mute);
 }
-.cslider--drag .cslider-knob {
-  transform: scale(1.12);
-  box-shadow: 0 4px 22px rgba(0,0,0,0.55);
+.cscore-foot-price {
+  font-family: var(--display);
+  font-size: clamp(24px, 3vw, 30px);
+  line-height: 1;
+  color: var(--ink);
+}
+.cscore-foot-price em {
+  display: block;
+  margin-top: 6px;
+  font-family: var(--mono);
+  font-style: normal;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+.cscore-cta { width: 100%; max-width: 260px; }
+
+/* Mobile : Novio d'abord, colonnes empilées */
+@media (max-width: 640px) {
+  .cscore {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+  }
+  .cscore-card {
+    grid-row: auto;
+    grid-template-rows: none;
+  }
+  .cscore-card--novio { order: -1; }
+  .cscore-card--agency { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cscore-cell { transition: none; }
 }
 
 /* ============================================================

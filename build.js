@@ -6,7 +6,7 @@ const { execSync } = require("child_process");
 const fs = require("fs");
 
 // Version d'assets — bumper à chaque build pour casser le cache navigateur (Vercel).
-const ASSET_V = "40";
+const ASSET_V = "41";
 
 // Ordre de chargement — les composants dépendent de effects (useReveal, etc.)
 // pages dépend de TOUS les composants de section → chargé juste avant app.
@@ -19,7 +19,7 @@ const FILES = [
   ["Hero",         "src/components/Hero.jsx"],
   ["Marquee",      "src/components/Marquee.jsx"],
   ["Services",     "src/components/Services.jsx"],   // exporte aussi SectionHead, BenefitItem
-  ["Portfolio",    "src/components/Portfolio.jsx"],  // exporte FoundersSlots, CompareAgency, CompareSlider
+  ["Portfolio",    "src/components/Portfolio.jsx"],  // exporte FoundersSlots, CompareAgency, ScoreCard
   ["Automation",   "src/components/Automation.jsx"], // dépend de CompareSlider + BenefitItem
   ["About",        "src/components/About.jsx"],
   ["FAQ",          "src/components/FAQ.jsx"],         // exporte FAQ, FAQ_WEB, FAQ_IA

@@ -3,7 +3,7 @@
    Dépend de : window.useReveal, window.SectionHead
    ============================================================ */
 
-const { useReveal, SectionHead } = window;
+const { useReveal, SectionHead, BENEFIT_ICONS } = window;
 const { motion: m } = window.Motion || {};
 
 const EASE_OUT_EXPO = [0.16, 1, 0.3, 1];
@@ -26,75 +26,56 @@ const SLOTS = [
 ];
 
 // ── Comparateur agence vs Novio ──
-const SLIDER_ROWS = [
-  { feature: "Site web complet",       agency: "5 000 $ – 15 000 $",            novio: "1 500 $ · 5 pages · livré en 2–3 semaines" },
-  { feature: "Propriété du site",      agency: "Dépend du contrat",              novio: "Vous en êtes propriétaire dès la livraison" },
-  { feature: "Hébergement & SSL",      agency: "Facturé en supplément",          novio: "119 $/mois · tout inclus · sans engagement" },
-  { feature: "Modifications",          agency: "100 $ – 200 $/heure",            novio: "30 min/mois incluses dans la maintenance" },
-  { feature: "Support",                agency: "Délais variables · non garanti", novio: "Support par courriel inclus" },
+const COMPARE_ROWS = [
+  { icon: "dollar",        feature: "Site web complet",  agency: "5 000 $ – 15 000 $",            novio: "1 500 $ · 5 pages · livré en 2–3 semaines" },
+  { icon: "unlock",        feature: "Propriété du site", agency: "Dépend du contrat",              novio: "À vous dès la livraison" },
+  { icon: "server",        feature: "Hébergement & SSL", agency: "Facturé en supplément",          novio: "119 $/mois · tout inclus · sans engagement" },
+  { icon: "pencil",        feature: "Modifications",     agency: "100 $ – 200 $/heure",            novio: "30 min/mois incluses dans la maintenance" },
+  { icon: "messagecircle", feature: "Support",           agency: "Délais variables · non garanti", novio: "Support par courriel inclus" },
 ];
 
-const CompareSlider = ({ rows = SLIDER_ROWS, leftHead = "Agence traditionnelle", rightHead = "Novio Studio" }) => {
-  const [pos, setPos] = React.useState(50);
-  const [dragging, setDragging] = React.useState(false);
-  const ref = React.useRef(null);
-
-  const move = React.useCallback((clientX) => {
-    if (!dragging || !ref.current) return;
-    const r = ref.current.getBoundingClientRect();
-    setPos(Math.max(4, Math.min(96, ((clientX - r.left) / r.width) * 100)));
-  }, [dragging]);
-
-  const stop = React.useCallback(() => setDragging(false), []);
-
-  React.useEffect(() => {
-    window.addEventListener('mouseup', stop);
-    window.addEventListener('touchend', stop);
-    return () => {
-      window.removeEventListener('mouseup', stop);
-      window.removeEventListener('touchend', stop);
-    };
-  }, [stop]);
+// Scorecard : deux colonnes alignées (subgrid), colonne Novio surélevée.
+const ScoreCard = ({ rows = COMPARE_ROWS, leftHead = "Agence traditionnelle", rightHead = "Novio Studio" }) => {
+  const Cell = ({ row, side, delay }) => (
+    <m.div
+      className="cscore-cell"
+      initial={{ opacity: 0, y: 14 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.35 }}
+      transition={{ duration: 0.5, delay, ease: EASE_OUT_EXPO }}
+    >
+      <span className="cscore-feat">
+        <span className="cscore-ico">{BENEFIT_ICONS[row.icon]}</span>{row.feature}
+      </span>
+      {side === "novio" ? (
+        <span className="cscore-val">
+          <span className="cscore-mark cscore-mark--yes">✓</span>{row.novio}
+        </span>
+      ) : (
+        <span className="cscore-val cscore-val--agency">
+          <span className="cscore-mark cscore-mark--no">✕</span>{row.agency}
+        </span>
+      )}
+    </m.div>
+  );
 
   return (
-    <div
-      ref={ref}
-      className={`cslider${dragging ? ' cslider--drag' : ''}`}
-      onMouseMove={(e) => move(e.clientX)}
-      onMouseLeave={stop}
-      onTouchMove={(e) => { e.preventDefault(); move(e.touches[0].clientX); }}
-      onTouchEnd={stop}
-    >
-      <div className="cslider-side cslider-side--agency">
-        <div className="cslider-head">{leftHead}</div>
-        {rows.map((row, i) => (
-          <div key={i} className="cslider-row">
-            <span className="cslider-feat">{row.feature}</span>
-            <span className="cslider-val">{row.agency}</span>
-          </div>
-        ))}
-      </div>
-      <div className="cslider-novio-clip" style={{ clipPath: `inset(0 0 0 ${pos}%)` }}>
-        <div className="cslider-side cslider-side--novio">
-          <div className="cslider-head">{rightHead}</div>
-          {rows.map((row, i) => (
-            <div key={i} className="cslider-row">
-              <span className="cslider-feat">{row.feature}</span>
-              <span className="cslider-val"><span className="cslider-check">✓</span>{row.novio}</span>
-            </div>
-          ))}
+    <div className="cscore" role="table" aria-label="Comparatif agence traditionnelle vs Novio Studio">
+      <div className="cscore-card cscore-card--agency">
+        <div className="cscore-head" role="columnheader">{leftHead}</div>
+        {rows.map((row, i) => <Cell key={i} row={row} side="agency" delay={i * 0.06} />)}
+        <div className="cscore-foot">
+          <span className="cscore-foot-note">Coûts variables · facturés à l'heure</span>
         </div>
       </div>
-      <div
-        className="cslider-track"
-        style={{ left: `${pos}%` }}
-        onMouseDown={() => setDragging(true)}
-        onTouchStart={() => setDragging(true)}
-      >
-        <div className="cslider-knob">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M9 18L3 12L9 6"/><path d="M15 18L21 12L15 6"/>
-          </svg>
+      <div className="cscore-card cscore-card--novio">
+        <div className="cscore-head" role="columnheader">
+          {rightHead}<span className="cscore-badge">Recommandé</span>
+        </div>
+        {rows.map((row, i) => <Cell key={i} row={row} side="novio" delay={0.12 + i * 0.06} />)}
+        <div className="cscore-foot">
+          <span className="cscore-foot-price">1 500 $ <em>puis 250 $/mois</em></span>
+          <a className="btn btn-accent cscore-cta" href="/contact">Réserver ma place &#8594;</a>
         </div>
       </div>
     </div>
@@ -154,10 +135,10 @@ const CompareAgency = () => (
       <span className="dash"></span>
       <span>Novio Studio vs agence traditionnelle</span>
     </div>
-    <CompareSlider />
+    <ScoreCard />
   </m.div>
 );
 
 window.FoundersSlots = FoundersSlots;
 window.CompareAgency = CompareAgency;
-window.CompareSlider = CompareSlider;
+window.ScoreCard = ScoreCard;
