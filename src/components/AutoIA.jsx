@@ -1,12 +1,12 @@
 /* ============================================================
-   AutoIA.jsx — Page « Automatisation IA » (refonte 6 sections)
-     1. Hero + simulation « appel manqué »
-     2. Les 4 automatisations (accordéon avec démos)
+   AutoIA.jsx — Page « Automatisation IA » (Novio AI)
+     1. Hero Novio AI : employé IA 24h/24 + démo de conversation animée
+     2. Fonctionnalités (8 cartes) + stats animées + CTA
      3. Scénario « vendredi soir » (timeline 2 colonnes)
      4. Pack Croissance (carte + calcul d'économies)
      5. FAQ (réutilise window.FAQ)
      6. CTA final (réutilise window.FinalCTA)
-   CTA principal → /contact (formulaire). Pas d'em-dash, icônes SVG.
+   CTA principal → /contact. Pas d'em-dash, icônes SVG.
    Dépend de : window.useReveal, window.BENEFIT_ICONS, window.Motion,
    window.FAQ, window.FinalCTA.
    ============================================================ */
@@ -18,53 +18,50 @@ const { BENEFIT_ICONS } = window;
 const EASE = [0.16, 1, 0.3, 1];
 const CONTACT = "/contact";
 
-/* ---------- Bulles ---------- */
-const Sms = ({ dir = "out", children }) => (
-  <div className={dir === "out" ? "nv-sms-bubble-out" : "nv-sms-bubble-in"}>{children}</div>
-);
-const Chat = ({ who = "bot", children }) => (
-  <div className={who === "bot" ? "nv-chat-bot" : "nv-chat-user"}>{children}</div>
-);
+/* ---------- Section 1 : Hero Novio AI + démo de conversation ---------- */
+const DEMO_CHECKS = ["Rendez-vous créé", "Client ajouté", "Courriel de confirmation envoyé"];
 
-/* ---------- Section 1 : Hero + simulation ---------- */
-const HERO_METRICS = [
-  { v: "24/7", k: "Actif" },
-  { v: "~5", u: "min", k: "Réponse" },
-  { v: "4", k: "Automatisations" },
-  { v: "250", u: "$/mois", k: "Par automatisation" },
-];
-
-const MissedCallSim = () => {
-  const [phase, setPhase] = React.useState(0);
+/* Étapes : 0 vide · 1 message client · 2 Novio AI écrit · 3 réponse ·
+   4-6 confirmations successives, puis la boucle recommence. */
+const NovioDemo = () => {
+  const [step, setStep] = React.useState(0);
   React.useEffect(() => {
     const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) { setPhase(2); return; }
-    const id = setInterval(() => setPhase((p) => (p + 1) % 3), 2000);
-    return () => clearInterval(id);
+    if (reduce) { setStep(6); return; }
+    const DELAYS = [900, 1200, 1400, 1600, 900, 900, 3400];
+    let i = 0, id;
+    const tick = () => {
+      i = (i + 1) % 7;
+      setStep(i);
+      id = setTimeout(tick, DELAYS[i]);
+    };
+    id = setTimeout(tick, DELAYS[0]);
+    return () => clearTimeout(id);
   }, []);
   return (
-    <div className="nv-sim">
-      <div className="nv-sim__label mono">Simulation en temps réel</div>
-      <div className="nv-sim__stage">
-        {phase === 0 && (
-          <div className="nv-sim__row">
-            <span className="nv-sim__ico nv-ring">{BENEFIT_ICONS.phone}</span>
-            <span className="nv-sim__txt">Appel entrant · 22:14</span>
+    <div className="nvai-chat" aria-hidden="true">
+      <div className="nvai-chat__head">
+        <span className="nvai-chat__dot"></span>
+        <span className="nvai-chat__name">Novio AI</span>
+        <span className="nvai-chat__status mono">En ligne 24h/24</span>
+      </div>
+      <div className="nvai-chat__body">
+        {step >= 1 && <div className="nv-chat-user nvai-pop">Bonjour, êtes-vous ouverts demain ?</div>}
+        {step === 2 && (
+          <div className="nvai-typing nvai-pop"><span></span><span></span><span></span></div>
+        )}
+        {step >= 3 && (
+          <div className="nv-chat-bot nvai-pop">
+            Bonjour 👋<br />
+            Oui, nous sommes ouverts de 8 h à 17 h.<br />
+            Souhaitez-vous prendre rendez-vous ?
           </div>
         )}
-        {phase === 1 && (
-          <div className="nv-sim__row">
-            <span className="nv-sim__ico nv-sim__ico--miss">{BENEFIT_ICONS.phone}</span>
-            <span className="nv-sim__txt">Appel manqué · SMS envoyé en 47 sec…</span>
-          </div>
-        )}
-        {phase === 2 && (
-          <div className="nv-sim__sms nv-sms-in">
-            <div className="nv-sms-bubble-out">
-              Allô ! On a manqué votre appel 📞 C'est pour quel type de travaux et dans quelle région ?
-            </div>
-          </div>
-        )}
+        <div className="nvai-checks">
+          {DEMO_CHECKS.map((c, i) => step >= 4 + i && (
+            <div className="nvai-check nvai-pop" key={c}>{BENEFIT_ICONS.checkcircle}<span>{c}</span></div>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -73,140 +70,130 @@ const MissedCallSim = () => {
 const AutoHero = () => {
   const ref = useReveal();
   return (
-    <header className="nv-hero reveal" ref={ref}>
-      <span className="nv-badge mono">~80 % des soumissions sans suivi ne reviennent jamais</span>
-      <h1 className="nv-hero__t">
-        Ton téléphone ne peut pas répondre à 22h.<br />
-        <em>Le nôtre, oui.</em>
-      </h1>
-      <p className="nv-hero__sub">
-        4 automatisations IA qui capturent les leads pendant que tu travailles, dors, ou profites de ton weekend.
-      </p>
-      <div className="nv-metrics">
-        {HERO_METRICS.map((mtr, i) => (
-          <div className="nv-metric" key={i}>
-            <span className="nv-metric__v">{mtr.v}{mtr.u && <sup>{mtr.u}</sup>}</span>
-            <span className="nv-metric__k mono">{mtr.k}</span>
-          </div>
-        ))}
+    <header className="nvai-hero reveal" ref={ref}>
+      <div className="nvai-hero__copy">
+        <span className="nv-badge mono">Novio AI · Votre employé IA, disponible 24h/24</span>
+        <h1 className="nvai-hero__t">
+          Votre prochain employé <em>ne demande pas de salaire.</em>
+        </h1>
+        <p className="nvai-hero__sub">
+          Novio AI répond à vos clients, prend des rendez-vous, génère des soumissions et automatise
+          les tâches répétitives afin que vous puissiez vous concentrer sur votre entreprise.
+        </p>
+        <div className="nvai-cta">
+          <a href={CONTACT} className="btn btn-accent">Réserver une démonstration <span className="arrow">&#8594;</span></a>
+          <a href="#fonctionnalites" className="btn nv-btn-ghost">Découvrir Novio AI</a>
+        </div>
       </div>
-      <MissedCallSim />
+      <NovioDemo />
     </header>
   );
 };
 
-/* ---------- Section 2 : Les 4 automatisations (accordéon) ---------- */
-const AutoCard = ({ n, icon, tint, title, benefit, open, onToggle, children }) => (
-  <div className={`nv-auto-card${open ? " is-open" : ""}`} style={open ? { borderColor: "rgba(255,91,46,.5)" } : undefined}>
-    <button className="nv-auto-card__head" onClick={onToggle} aria-expanded={open}>
-      <span className="nv-auto-card__ico" style={{ background: tint.bg, borderColor: tint.bd, color: tint.fg }}>
-        {BENEFIT_ICONS[icon]}
-      </span>
-      <span className="nv-auto-card__main">
-        <span className="nv-auto-card__num mono">AUTOMATISATION {n}</span>
-        <span className="nv-auto-card__t">{title}</span>
-        <span className="nv-auto-card__benefit">{benefit}</span>
-      </span>
-      <span className="nv-auto-card__price mono">250 $/mois</span>
-      <span className={`nv-chev${open ? " is-open" : ""}`} aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9" /></svg>
-      </span>
-    </button>
-    <div className={`nv-demo-zone${open ? " is-open" : ""}`}>
-      <div className="nv-demo-inner">
-        {children}
-        <a href={CONTACT} className="btn btn-accent nv-demo-cta">Ajouter cette automatisation <span className="arrow">&#8594;</span></a>
-      </div>
-    </div>
-  </div>
+/* ---------- Section 2 : Fonctionnalités + stats ---------- */
+const FEATURES = [
+  { icon: "mail", t: "Réponses automatiques aux courriels",
+    d: "Chaque courriel reçoit une réponse claire, dans votre ton, en quelques secondes." },
+  { icon: "messagecircle", t: "Chat IA sur votre site web",
+    d: "Un assistant qui accueille vos visiteurs et répond à leurs questions, jour et nuit." },
+  { icon: "calendar", t: "Prise de rendez-vous",
+    d: "Novio AI propose un créneau et l'ajoute directement à votre calendrier." },
+  { icon: "filetext", t: "Génération de soumissions",
+    d: "Une demande entre, une soumission propre sort, prête à envoyer." },
+  { icon: "share2", t: "Réponses Facebook et Instagram",
+    d: "Vos messages sociaux traités au même endroit, sans délai." },
+  { icon: "database", t: "Base de connaissances sur mesure",
+    d: "Vos prix, vos services, vos délais : Novio AI est entraîné sur votre entreprise." },
+  { icon: "layout", t: "Tableau de bord des conversations",
+    d: "Toutes les conversations au même endroit, avec le contexte complet." },
+  { icon: "barchart", t: "Statistiques et rapports",
+    d: "Voyez ce que Novio AI a répondu, converti et automatisé chaque semaine." },
+];
+
+const FeatureCard = ({ f, i }) => (
+  <m.article
+    className="nvai-card"
+    initial={{ opacity: 0, y: 32 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, amount: 0.15 }}
+    transition={{ duration: 0.6, ease: EASE, delay: 0.05 + (i % 4) * 0.07 }}
+  >
+    <div className="nvai-card__ico">{BENEFIT_ICONS[f.icon]}</div>
+    <h3 className="nvai-card__t">{f.t}</h3>
+    <p className="nvai-card__d">{f.d}</p>
+  </m.article>
 );
 
-const TINTS = {
-  orange: { bg: "rgba(255,91,46,.1)",  bd: "rgba(255,91,46,.25)",  fg: "#ff5b2e" },
-  green:  { bg: "rgba(34,197,94,.08)", bd: "rgba(34,197,94,.2)",   fg: "#22c55e" },
-  purple: { bg: "rgba(99,91,255,.1)",  bd: "rgba(99,91,255,.22)",  fg: "#8b85ff" },
-  amber:  { bg: "rgba(245,158,11,.1)", bd: "rgba(245,158,11,.22)", fg: "#f59e0b" },
+/* Compteur animé au scroll (start → end, easing cubic out) */
+const useCountUp = (start, end, dur = 1300) => {
+  const ref = React.useRef(null);
+  const [val, setVal] = React.useState(start);
+  React.useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce || !("IntersectionObserver" in window)) { setVal(end); return; }
+    let raf;
+    const obs = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) return;
+      obs.disconnect();
+      const t0 = performance.now();
+      const frame = (t) => {
+        const p = Math.min((t - t0) / dur, 1);
+        setVal(Math.round(start + (end - start) * (1 - Math.pow(1 - p, 3))));
+        if (p < 1) raf = requestAnimationFrame(frame);
+      };
+      raf = requestAnimationFrame(frame);
+    }, { threshold: 0.4 });
+    obs.observe(el);
+    return () => { obs.disconnect(); cancelAnimationFrame(raf); };
+  }, [start, end, dur]);
+  return [ref, val];
 };
 
-const Automations = () => {
-  const [open, setOpen] = React.useState(0);
-  const ref = useReveal();
-  const toggle = (i) => setOpen((cur) => (cur === i ? -1 : i));
+const STATS = [
+  { from: 0, to: 10, pre: "<", u: "s", t: "Réponse instantanée",
+    d: "Vos clients obtiennent une réponse en quelques secondes." },
+  { from: 0, to: 24, u: "h/24", t: "Disponible 24h/24",
+    d: "Même lorsque votre entreprise est fermée." },
+  { from: 12, to: 0, u: "occasion manquée", t: "Plus de prospects convertis",
+    d: "Ne manquez plus une demande de soumission ou un rendez-vous." },
+];
+
+const StatCard = ({ s, i }) => {
+  const [ref, val] = useCountUp(s.from, s.to);
   return (
-    <section className="nv-section">
+    <m.div
+      className="nvai-stat"
+      ref={ref}
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 0.6, ease: EASE, delay: i * 0.1 }}
+    >
+      <div className="nvai-stat__v">{s.pre}{val}<span className="nvai-stat__u">{s.u}</span></div>
+      <div className="nvai-stat__t">{s.t}</div>
+      <p className="nvai-stat__d">{s.d}</p>
+    </m.div>
+  );
+};
+
+const Features = () => {
+  const ref = useReveal();
+  return (
+    <section className="nv-section" id="fonctionnalites">
       <div className="sec-head reveal" ref={ref}>
-        <h2 className="sec-head__t">Quatre outils qui <em>travaillent pour toi.</em></h2>
+        <div className="sec-head__eyebrow"><span className="dash"></span><span>Ce que Novio AI fait pour vous</span></div>
+        <h2 className="sec-head__t">Un seul employé. <em>Huit tâches de moins.</em></h2>
       </div>
-      <div className="nv-auto-list">
-        <AutoCard n="01" icon="phone" tint={TINTS.orange} open={open === 0} onToggle={() => toggle(0)}
-          title="Réponse aux appels manqués"
-          benefit="SMS automatique en moins de 5 min. Le lead est capturé avant qu'il rappelle le concurrent.">
-          <div className="nv-demo__label mono">Ce que reçoit le client · vendredi 21h47</div>
-          <div className="nv-thread">
-            <Sms dir="out">Allô ! On a manqué votre appel 📞 C'est pour quel type de travaux et dans quelle région ?</Sms>
-            <Sms dir="in">Toiture résidentielle, Gatineau</Sms>
-            <Sms dir="out">Super ! Budget approximatif et surface du toit ? On vous envoie une soumission demain matin.</Sms>
-            <div className="nv-thread__note mono">Lead qualifié transmis au propriétaire à 21:52</div>
-          </div>
-          <div className="nv-compare">
-            <div className="nv-compare__cell nv-bad">Lead perdu, rappelé le concurrent</div>
-            <span className="nv-compare__arr">&#8594;</span>
-            <div className="nv-compare__cell nv-good">Lead qualifié, rendez-vous posé</div>
-          </div>
-        </AutoCard>
-
-        <AutoCard n="02" icon="messagecircle" tint={TINTS.green} open={open === 1} onToggle={() => toggle(1)}
-          title="Chatbot de qualification"
-          benefit="Répond aux questions, qualifie le lead, disponible 24/7. Ton meilleur vendeur ne prend jamais de vacances.">
-          <div className="nv-demo__label mono">Conversation en direct sur le site web · 3h22 du matin</div>
-          <div className="nv-chat">
-            <Chat who="bot">Bonjour ! 👋 Je suis l'assistant de votre entreprise. Quel type de travaux vous intéresse ?</Chat>
-            <Chat who="user">HVAC, remplacement fournaise</Chat>
-            <Chat who="bot">Parfait. Quelle est la superficie de votre maison approximativement ?</Chat>
-            <Chat who="user">~1800 pi²</Chat>
-            <Chat who="bot">Super ! On dessert votre secteur. Souhaitez-vous recevoir une soumission ? Laissez votre courriel ou réservez directement 📅</Chat>
-            <div className="nv-thread__note mono">Lead chaud transmis · notification envoyée au proprio</div>
-          </div>
-        </AutoCard>
-
-        <AutoCard n="03" icon="refresh" tint={TINTS.purple} open={open === 2} onToggle={() => toggle(2)}
-          title="Relance des soumissions"
-          benefit="Séquence SMS/email automatique sur les devis sans réponse. S'arrête dès que le client répond.">
-          <div className="nv-demo__label mono">Séquence automatique post-soumission</div>
-          <ol className="nv-relance">
-            <li><span className="nv-relance__b nv-relance__b--on">J+0</span><span>Soumission envoyée, aucune réponse</span></li>
-            <li><span className="nv-relance__b">J+2</span><span>SMS : « Avez-vous eu la chance de regarder notre soumission ? Des questions ? »</span></li>
-            <li><span className="nv-relance__b">J+5</span><span>Email : soumission ajustée + témoignage d'un client similaire</span></li>
-            <li><span className="nv-relance__b">J+10</span><span>SMS final : « On garde votre dossier actif encore 48h. »</span></li>
-          </ol>
-          <div className="nv-success-box">Le client répond à J+3, la séquence s'annule automatiquement.</div>
-        </AutoCard>
-
-        <AutoCard n="04" icon="star" tint={TINTS.amber} open={open === 3} onToggle={() => toggle(3)}
-          title="Demande d'avis Google"
-          benefit="Chaque contrat terminé déclenche une demande automatique. Plus d'avis, meilleur classement local.">
-          <div className="nv-demo__label mono">Impact sur le classement Google local</div>
-          <div className="nv-google">
-            <div className="nv-google__col">
-              <div className="nv-google__when mono">Avant Novio</div>
-              <div className="nv-stars">★★★<span className="nv-stars--off">★★</span></div>
-              <div className="nv-google__score">3,2 · 7 avis</div>
-              <div className="nv-progress"><span style={{ width: "30%", background: "rgba(255,91,46,.5)" }}></span></div>
-              <div className="nv-google__rank">Classement local bas</div>
-            </div>
-            <div className="nv-google__col nv-google__col--good">
-              <div className="nv-google__when mono">Après 3 mois</div>
-              <div className="nv-stars">★★★★★</div>
-              <div className="nv-google__score nv-good-txt">4,8 · 34 avis</div>
-              <div className="nv-progress"><span style={{ width: "85%", background: "#22c55e" }}></span></div>
-              <div className="nv-google__rank nv-good-txt">Top 3 local Google Maps</div>
-            </div>
-          </div>
-          <div className="nv-demo__label mono">Message automatique · 2h après la fin du contrat</div>
-          <div className="nv-thread">
-            <Sms dir="out">Merci pour votre confiance ! Si vous êtes satisfait, un avis Google nous aide énormément 🙏 → [lien direct]</Sms>
-          </div>
-        </AutoCard>
+      <div className="nvai-grid">
+        {FEATURES.map((f, i) => <FeatureCard key={f.t} f={f} i={i} />)}
+      </div>
+      <div className="nvai-stats">
+        {STATS.map((s, i) => <StatCard key={s.t} s={s} i={i} />)}
+      </div>
+      <div className="cap-cta">
+        <a href={CONTACT} className="btn btn-accent">Réserver une démonstration <span className="arrow">&#8594;</span></a>
       </div>
     </section>
   );
@@ -322,13 +309,13 @@ const AutoIA = () => {
   return (
     <div className="nv-auto">
       <AutoHero />
-      <Automations />
+      <Features />
       <FridayScenario />
       <PackGrowth />
       <FAQ items={AUTO_FAQ} title="Questions fréquentes." />
       <FinalCTA
         headline={<>Arrête de perdre des leads <em>la nuit.</em></>}
-        ctaLabel="Démarrer mon projet"
+        ctaLabel="Réserver une démonstration"
         ctaHref={CONTACT}
       />
     </div>
