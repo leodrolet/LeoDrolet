@@ -334,6 +334,80 @@ const ContactSection = () => {
   );
 };
 
+/* ── Hero Sites web (même gabarit que le hero Novio AI) ── */
+const SITE_CHECKS = ["Trouvé en 1re page Google", "Chargé en 0,9 seconde", "Nouvel appel reçu"];
+
+/* Étapes : 0 vide · 1 recherche Google · 2 chargement · 3 le site apparaît ·
+   4-6 confirmations successives, puis la boucle recommence. */
+const SiteDemo = () => {
+  const [step, setStep] = React.useState(0);
+  React.useEffect(() => {
+    const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) { setStep(6); return; }
+    const DELAYS = [900, 1200, 1200, 1600, 900, 900, 3400];
+    let i = 0, id;
+    const tick = () => {
+      i = (i + 1) % 7;
+      setStep(i);
+      id = setTimeout(tick, DELAYS[i]);
+    };
+    id = setTimeout(tick, DELAYS[0]);
+    return () => clearTimeout(id);
+  }, []);
+  return (
+    <div className="nvai-chat" aria-hidden="true">
+      <div className="nvai-chat__head">
+        <span className="nvw-dots"><span></span><span></span><span></span></span>
+        <span className="nvw-url mono">tonentreprise.ca</span>
+        <span className="nvai-chat__status mono">100/100 Lighthouse</span>
+      </div>
+      <div className="nvai-chat__body">
+        {step >= 1 && (
+          <div className="nv-chat-user nvai-pop nvw-search">
+            {BENEFIT_ICONS.search}<span>couvreur gatineau</span>
+          </div>
+        )}
+        {step === 2 && (
+          <div className="nvai-typing nvai-pop"><span></span><span></span><span></span></div>
+        )}
+        {step >= 3 && (
+          <div className="nvw-site nvai-pop">
+            <div className="nvw-site__name">Toitures Tremblay</div>
+            <div className="nvw-site__desc">Toiture résidentielle à Gatineau · Soumission gratuite en 24 h</div>
+            <div className="nvw-site__cta">Appelez-nous <span className="arrow">&#8594;</span></div>
+          </div>
+        )}
+        <div className="nvai-checks">
+          {SITE_CHECKS.map((c, i) => step >= 4 + i && (
+            <div className="nvai-check nvai-pop" key={c}>{BENEFIT_ICONS.checkcircle}<span>{c}</span></div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const SiteWebHero = () => {
+  const ref = useReveal();
+  return (
+    <header className="nvai-hero reveal" ref={ref}>
+      <div className="nvai-hero__copy">
+        <span className="nv-badge mono">Sites web · Dès 1 500 $ · Livré en 2–3 semaines</span>
+        <h1 className="nvai-hero__t">Un site qui <em>fait sonner le téléphone.</em></h1>
+        <p className="nvai-hero__sub">
+          Sur mesure, rapide, pensé pour les entrepreneurs de l'Outaouais. Ton prochain client te
+          cherche sur Google, fais en sorte qu'il te trouve, toi, pas ton concurrent.
+        </p>
+        <div className="nvai-cta">
+          <a href="/contact" className="btn btn-accent">Démarrer mon projet <span className="arrow">&#8594;</span></a>
+          <a href="#devis" className="btn nv-btn-ghost">Voir les forfaits</a>
+        </div>
+      </div>
+      <SiteDemo />
+    </header>
+  );
+};
+
 /* ── Composition des pages ── */
 const {
   Hero, Manifesto, WhyNovio, Specs, MarqueeRow, FoundersSlots, About, FinalCTA,
@@ -363,18 +437,7 @@ const HomePage = () => (
 
 const SiteWebPage = () => (
   <React.Fragment>
-    <PageHeader
-      index="Sites web"
-      metaRight="2–3 semaines"
-      title={<>Un site qui <em>fait sonner le téléphone.</em></>}
-      sub="Sur mesure, rapide, pensé pour les entrepreneurs de l'Outaouais. Ton prochain client te cherche sur Google, fais en sorte qu'il te trouve, toi, pas ton concurrent."
-      stats={[
-        { v: "2–3", u: "sem", k: "Livraison" },
-        { v: "100", u: "/100", k: "Lighthouse" },
-        { v: "0.9", u: "s", k: "Chargement" },
-        { v: "1 500", u: "$", k: "À partir de" },
-      ]}
-    />
+    <SiteWebHero />
     <Process />
     <Services />
     <CompareAgency />
