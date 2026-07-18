@@ -26,7 +26,7 @@ const PRICE_PLANS = [
     ],
   },
   {
-    tier: "Hébergement & maintenance", price: "119 $", unit: "mois",
+    tier: "Hébergement & maintenance", price: "59 $", unit: "mois",
     best: "Ton site en ligne, sans souci.", sub: "Sans engagement, annulable en tout temps", featured: false,
     items: [
       { icon: "server",        t: "Hébergement rapide + SSL" },

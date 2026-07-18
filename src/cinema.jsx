@@ -160,7 +160,7 @@ const SPECS = [
     d: "Vos visiteurs n'attendent pas. Un site rapide = plus de conversions, moins de rebonds, mieux classé.",
   },
   {
-    v: "119", u: "$/mois", k: "Hébergement",
+    v: "59", u: "$/mois", k: "Hébergement",
     d: "Hébergement, SSL, sauvegardes et 30 min de modifications par mois. Sans engagement, annulable en tout temps.",
   },
   {

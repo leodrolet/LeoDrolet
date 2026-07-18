@@ -58,7 +58,7 @@ const OFFERS = [
   {
     href: "/site-web", title: "Sites Web", price: "dès 1 500 $",
     desc: "Un site sur mesure, rapide, qui transforme les recherches Google en appels et en soumissions.",
-    points: ["5 pages sur mesure", "Livré en 2–3 semaines", "Hébergement 119 $/mois"],
+    points: ["5 pages sur mesure", "Livré en 2–3 semaines", "Hébergement 59 $/mois"],
     cta: "Voir les forfaits", featured: false,
   },
   {
@@ -377,6 +377,7 @@ const SiteWebPage = () => (
     />
     <Process />
     <Services />
+    <CompareAgency />
     <FAQ items={FAQ_WEB} title="Questions fréquentes." />
     <FinalCTA
       headline={<>Ton prochain client te cherche sur Google. <em>Sois là.</em></>}
@@ -397,7 +398,7 @@ const PricingPage = () => (
       sub="Un forfait unique pour le site, un mensuel sans engagement pour l'hébergement, des automatisations à la carte. Tu sais exactement ce que tu paies, avant de commencer."
       stats={[
         { v: "1 500", u: "$", k: "Site web" },
-        { v: "119", u: "$/mois", k: "Hébergement" },
+        { v: "59", u: "$/mois", k: "Hébergement" },
         { v: "250", u: "$/mois", k: "Par automatisation" },
         { v: "0", u: "$", k: "Installation" },
       ]}

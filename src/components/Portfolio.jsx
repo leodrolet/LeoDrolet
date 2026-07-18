@@ -29,7 +29,7 @@ const SLOTS = [
 const COMPARE_ROWS = [
   { icon: "dollar",        feature: "Site web complet",  agency: "5 000 $ – 15 000 $",            novio: "1 500 $ · 5 pages · livré en 2–3 semaines" },
   { icon: "unlock",        feature: "Propriété du site", agency: "Dépend du contrat",              novio: "À vous dès la livraison" },
-  { icon: "server",        feature: "Hébergement & SSL", agency: "Facturé en supplément",          novio: "119 $/mois · tout inclus · sans engagement" },
+  { icon: "server",        feature: "Hébergement & SSL", agency: "Facturé en supplément",          novio: "59 $/mois · tout inclus · sans engagement" },
   { icon: "pencil",        feature: "Modifications",     agency: "100 $ – 200 $/heure",            novio: "30 min/mois incluses dans la maintenance" },
   { icon: "messagecircle", feature: "Support",           agency: "Délais variables · non garanti", novio: "Support par courriel inclus" },
 ];
@@ -74,7 +74,7 @@ const ScoreCard = ({ rows = COMPARE_ROWS, leftHead = "Agence traditionnelle", ri
         </div>
         {rows.map((row, i) => <Cell key={i} row={row} side="novio" delay={0.12 + i * 0.06} />)}
         <div className="cscore-foot">
-          <span className="cscore-foot-price">1 500 $ <em>puis 119 $/mois</em></span>
+          <span className="cscore-foot-price">1 500 $ <em>puis 59 $/mois</em></span>
           <a className="btn btn-accent cscore-cta" href="/contact">Démarrer mon projet &#8594;</a>
         </div>
       </div>
