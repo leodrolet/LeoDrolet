@@ -72,7 +72,6 @@ const AutoHero = () => {
   return (
     <header className="nvai-hero reveal" ref={ref}>
       <div className="nvai-hero__copy">
-        <span className="nv-badge mono">Novio AI · Votre employé IA, disponible 24h/24</span>
         <h1 className="nvai-hero__t">
           Votre prochain employé <em>ne demande pas de salaire.</em>
         </h1>
@@ -253,7 +252,6 @@ const PackGrowth = () => (
       initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.7, ease: EASE }}>
       <div className="nv-pack__left">
-        <span className="nv-badge mono">Offre groupée, la plus populaire</span>
         <h2 className="nv-pack__t">Pack Croissance</h2>
         <p className="nv-pack__d">
           Site web sur mesure + 2 automatisations IA au choix. Un seul interlocuteur, un seul forfait.

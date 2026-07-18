@@ -2720,7 +2720,6 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .nv-section { padding: clamp(48px, 8vh, 110px) var(--gutter); border-bottom: 1px solid var(--line); }
 
 /* --- Hero Novio AI (2 colonnes : copy + démo de conversation) --- */
-.nv-badge { display: inline-block; font-size: 11px; letter-spacing: 0.1em; color: var(--accent); padding: 7px 14px; border-radius: 999px; border: 1px solid rgba(255,91,46,0.3); background: rgba(255,91,46,0.06); }
 .nvai-hero { position: relative; display: grid; grid-template-columns: 1.05fr 0.95fr; align-items: center; gap: clamp(32px, 5vw, 72px); padding: clamp(56px, 10vh, 130px) var(--gutter) clamp(48px, 8vh, 100px); border-bottom: 1px solid var(--line); }
 .nvai-hero::before { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(ellipse 46% 52% at 72% 42%, rgba(255,91,46,0.07), transparent 70%); }
 .nvai-hero > * { position: relative; z-index: 1; }

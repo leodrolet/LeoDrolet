@@ -392,7 +392,6 @@ const SiteWebHero = () => {
   return (
     <header className="nvai-hero reveal" ref={ref}>
       <div className="nvai-hero__copy">
-        <span className="nv-badge mono">Sites web · Dès 1 500 $ · Livré en 2–3 semaines</span>
         <h1 className="nvai-hero__t">Un site qui <em>fait sonner le téléphone.</em></h1>
         <p className="nvai-hero__sub">
           Sur mesure, rapide, pensé pour les entrepreneurs de l'Outaouais. Ton prochain client te

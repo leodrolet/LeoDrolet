@@ -31,7 +31,6 @@ const PRICE_PLANS = [
     items: [
       { icon: "server",        t: "Hébergement rapide + SSL" },
       { icon: "refresh",       t: "Sauvegardes quotidiennes" },
-      { icon: "clock",         t: "30 min de modifications par mois" },
       { icon: "messagecircle", t: "Support par courriel" },
     ],
   },

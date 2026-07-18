@@ -161,7 +161,7 @@ const SPECS = [
   },
   {
     v: "59", u: "$/mois", k: "Hébergement",
-    d: "Hébergement, SSL, sauvegardes et 30 min de modifications par mois. Sans engagement, annulable en tout temps.",
+    d: "Hébergement rapide, SSL et sauvegardes quotidiennes inclus. Sans engagement, annulable en tout temps.",
   },
   {
     v: "2–3", u: "sem", k: "Livraison",

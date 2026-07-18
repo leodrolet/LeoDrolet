@@ -54,7 +54,6 @@ const PLANS = [
     items: [
       { icon: "server",        bold: "Hébergement rapide",          rest: " + sécurité SSL inclus" },
       { icon: "refresh",       bold: "Sauvegardes automatiques",    rest: " quotidiennes" },
-      { icon: "clock",         bold: "30 min de modifications",     rest: " incluses chaque mois" },
       { icon: "messagecircle", bold: "Support par courriel",        rest: "" },
       { icon: "link",          bold: "Nom de domaine non inclus",  rest: ", environ 15 $/an à prévoir", muted: true },
     ],
