@@ -407,10 +407,47 @@ const SiteWebHero = () => {
   );
 };
 
+/* ── Témoignages (structure seulement — placeholders, vrai contenu au Jour 3) ──
+   NE PAS inventer d'avis : remplacer chaque champ par du contenu client réel. */
+const TESTIMONIALS = [
+  { quote: "[Témoignage client — à remplir]", name: "[Nom du client]", role: "[Métier · Ville]" },
+  { quote: "[Témoignage client — à remplir]", name: "[Nom du client]", role: "[Métier · Ville]" },
+  { quote: "[Témoignage client — à remplir]", name: "[Nom du client]", role: "[Métier · Ville]" },
+];
+
+const TestimonialCard = ({ t, i }) => {
+  const ref = useReveal();
+  return (
+    <figure className="tmon-card reveal" ref={ref} style={{ transitionDelay: `${i * 90}ms` }}>
+      <span className="tmon-badge mono">À remplir</span>
+      <span className="tmon-mark" aria-hidden="true">&#8220;</span>
+      <blockquote className="tmon-quote">{t.quote}</blockquote>
+      <figcaption className="tmon-cite">
+        <span className="tmon-name">{t.name}</span>
+        <span className="tmon-role">{t.role}</span>
+      </figcaption>
+    </figure>
+  );
+};
+
+const Testimonials = () => {
+  const ref = useReveal();
+  return (
+    <section className="section testimonials" id="temoignages" aria-labelledby="temoignages-title">
+      <div className="section-head reveal" ref={ref}>
+        <h2 className="section-title" id="temoignages-title">Ce qu'en disent les entrepreneurs.</h2>
+      </div>
+      <div className="tmon-grid">
+        {TESTIMONIALS.map((t, i) => <TestimonialCard key={i} t={t} i={i} />)}
+      </div>
+    </section>
+  );
+};
+
 /* ── Composition des pages ── */
 const {
-  Hero, Manifesto, WhyNovio, Specs, MarqueeRow, FoundersSlots, About, FinalCTA,
-  Services, CompareAgency, Automation, AutoIA, Pricing, FAQ, FAQ_WEB, FAQ_IA,
+  Hero, WhyNovio, Specs, MarqueeRow, FoundersSlots, About, FinalCTA,
+  Services, CompareAgency, AutoIA, Pricing, FAQ, FAQ_WEB,
 } = window;
 
 const HomePage = () => (
@@ -430,6 +467,7 @@ const HomePage = () => (
     <OffersOverview />
     <FoundersSlots />
     <About />
+    <Testimonials />
     <FinalCTA />
   </React.Fragment>
 );

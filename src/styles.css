@@ -1986,7 +1986,6 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   .estimator { grid-template-columns: 1fr; gap: 36px; }
   .estimator-quote { position: relative; top: 0; }
   .footer { grid-template-columns: 1fr 1fr; }
-  .manifesto-pin { padding: 0 var(--gutter); }
   .plans-layout { grid-template-columns: 1fr; }
   .pricing-why,
   .pricing-clause { grid-template-columns: 1fr; gap: 16px; }
@@ -2019,11 +2018,10 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   .slot h4 { font-size: clamp(24px, 7vw, 40px); }
   .final-cta .actions { flex-direction: column; align-items: center; }
   .service-card h3 { font-size: clamp(32px, 9vw, 64px); }
-  .manifesto-line { font-size: clamp(32px, 9.5vw, 168px); }
 }
 
 /* ============================================================
-   Cinema — ScrollProgress, Manifesto, Specs
+   Cinema — ScrollProgress, Specs
    ============================================================ */
 
 /* --- ScrollProgress (top hairline) --- */
@@ -2042,121 +2040,6 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   transform: scaleX(0);
   will-change: transform;
   box-shadow: 0 0 12px var(--accent);
-}
-
-/* --- Manifesto (pinned) --- */
-.manifesto {
-  position: relative;
-  height: 320vh;
-  background: var(--bg);
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-}
-.manifesto + .marquee {
-  margin-top: clamp(60px, 10vh, 120px);
-}
-.manifesto-pin {
-  position: sticky;
-  top: 0;
-  height: 100dvh;
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  align-content: center;
-  padding: 14vh var(--gutter) 6vh;
-  overflow: hidden;
-}
-.manifesto-eyebrow {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--mute);
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-}
-.manifesto-eyebrow .dash {
-  display: inline-block;
-  width: 36px; height: 1px;
-  background: var(--accent);
-}
-.manifesto-lines {
-  display: grid;
-  align-content: center;
-  gap: clamp(6px, 1.2vh, 14px);
-  margin-top: clamp(20px, 4vh, 56px);
-}
-.manifesto-line {
-  font-family: var(--display);
-  font-size: clamp(44px, 9.5vw, 168px);
-  line-height: 1.0;
-  letter-spacing: -0.03em;
-  font-weight: 400;
-  will-change: opacity, transform, filter;
-}
-.manifesto-line .mn-pre { color: var(--ink-2); }
-.manifesto-line .mn-key {
-  font-style: italic;
-  color: var(--ink);
-  background: linear-gradient(180deg, var(--ink) 60%, var(--accent) 60%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-.manifesto-end {
-  position: relative;
-  justify-self: stretch;
-  min-height: clamp(78px, 13vh, 124px);
-}
-.manifesto-foot {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  display: inline-flex;
-  gap: 10px;
-  font-size: 10px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--mute);
-  transition: opacity 0.35s ease;
-}
-.manifesto-proof {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  gap: clamp(12px, 2vh, 20px);
-  align-items: flex-start;
-  justify-content: flex-end;
-  transition: opacity 0.45s ease, transform 0.45s ease;
-}
-.mproof-stats {
-  display: flex;
-  flex-wrap: wrap;
-  gap: clamp(22px, 4vw, 60px);
-}
-.mproof-stat {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-.mproof-num {
-  font-family: var(--display);
-  font-size: clamp(26px, 3vw, 36px);
-  line-height: 1;
-  color: var(--ink);
-}
-.mproof-num span {
-  font-size: 0.5em;
-  color: var(--mute);
-  margin-left: 2px;
-}
-.mproof-k {
-  font-family: var(--mono);
-  font-size: 9px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--mute);
 }
 
 /* --- Why Novio (différenciateurs) --- */
@@ -2875,3 +2758,77 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 ::selection { background: rgba(255,91,46,0.85); color: #0a0a0a; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 .field input:focus-visible, .field textarea:focus-visible { outline: none; }
+
+/* ============================================================
+   Témoignages (structure — placeholders, contenu réel au Jour 3)
+   ============================================================ */
+.testimonials .section-title { text-align: center; }
+.tmon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  padding: 0 var(--gutter);
+  margin-top: clamp(32px, 5vh, 56px);
+}
+.tmon-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 34px 30px;
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+}
+.tmon-card::after {
+  content: "";
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 2px;
+  background: var(--accent);
+  opacity: 0.55;
+}
+.tmon-badge {
+  position: absolute;
+  top: 14px; right: 14px;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid rgba(255, 91, 46, 0.28);
+  background: rgba(255, 91, 46, 0.07);
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+.tmon-mark {
+  font-family: var(--display);
+  font-size: 60px;
+  line-height: 0.4;
+  height: 26px;
+  color: var(--accent);
+}
+.tmon-quote {
+  flex: 1;
+  margin: 0;
+  font-family: var(--display);
+  font-style: italic;
+  font-size: clamp(18px, 1.4vw, 22px);
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.tmon-cite {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding-top: 4px;
+  border-top: 1px solid var(--line);
+}
+.tmon-name { font-size: 14px; font-weight: 600; color: var(--ink); }
+.tmon-role {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--ink-2);
+}

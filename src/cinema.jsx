@@ -1,7 +1,6 @@
 /* ============================================================
    cinema.jsx, Awwwards-grade scroll moments
      · ScrollProgress , accent hairline, top of viewport
-     · Manifesto      , pinned word-by-word reveal (legacy, non rendu)
      · WhyNovio       , grille de différenciateurs « Pourquoi Novio »
      · Specs          , big editorial numbers
    ============================================================ */
@@ -38,114 +37,6 @@ const ScrollProgress = () => {
     <div className="scroll-progress" aria-hidden="true">
       <div ref={ref}></div>
     </div>
-  );
-};
-
-/* ---------- Manifesto ---------- */
-const MANIFESTO_LINES = [
-  ["Pas un", "template"],
-  ["Pas une", "dépense"],
-  ["Pas un", "intermédiaire"],
-  ["Un site qui", "génère des soumissions et des appels."],
-];
-
-const Manifesto = () => {
-  const sectionRef = React.useRef(null);
-  const [t, setT] = React.useState(0);
-
-  React.useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-    let raf = 0;
-    const tick = () => {
-      const rect = el.getBoundingClientRect();
-      const vh = window.innerHeight;
-      const total = Math.max(1, el.offsetHeight - vh);
-      const p = Math.max(0, Math.min(1, -rect.top / total));
-      setT(p);
-      raf = 0;
-    };
-    const onScroll = () => { if (!raf) raf = requestAnimationFrame(tick); };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-      if (raf) cancelAnimationFrame(raf);
-    };
-  }, []);
-
-  const N = MANIFESTO_LINES.length;
-  // Une fois les lignes révélées (~t > 0.84), l'« atterrissage » prend le relais.
-  const land = Math.max(0, Math.min(1, (t - 0.84) / 0.16));
-
-  return (
-    <section className="manifesto" ref={sectionRef} aria-label="Manifesto">
-      <div className="manifesto-pin">
-        <div className="manifesto-eyebrow mono">
-          <span className="dash"></span>
-          <span>Pourquoi Novio</span>
-        </div>
-
-        <div className="manifesto-lines">
-          {MANIFESTO_LINES.map((line, i) => {
-            // Each line gets a slice of the scroll, with overlap.
-            const from = i / (N + 0.4);
-            const to = (i + 0.55) / (N + 0.4);
-            const local = Math.max(0, Math.min(1, (t - from) / Math.max(0.0001, to - from)));
-            const opacity = local;
-            const ty = (1 - local) * 36;
-            const blur = (1 - local) * 6;
-            return (
-              <div
-                key={i}
-                className="manifesto-line"
-                style={{
-                  opacity,
-                  transform: `translate3d(0, ${ty.toFixed(2)}px, 0)`,
-                  filter: `blur(${blur.toFixed(2)}px)`,
-                }}>
-                <span className="mn-pre">{line[0]}</span>{" "}
-                <em className="mn-key">{line[1]}.</em>
-              </div>
-            );
-          })}
-        </div>
-
-        <div className="manifesto-end">
-          <div className="manifesto-foot mono" style={{ opacity: 1 - land }}>
-            <span>{String(Math.round(t * 100)).padStart(3, "0")}</span>
-            <span>·</span>
-            <span>défiler</span>
-          </div>
-          <div
-            className="manifesto-proof"
-            aria-hidden={land < 0.5}
-            style={{
-              opacity: land,
-              transform: `translate3d(0, ${((1 - land) * 22).toFixed(2)}px, 0)`,
-              pointerEvents: land > 0.5 ? "auto" : "none",
-            }}>
-            <div className="mproof-stats">
-              <div className="mproof-stat">
-                <span className="mproof-num">100<span>/100</span></span>
-                <span className="mproof-k">Lighthouse</span>
-              </div>
-              <div className="mproof-stat">
-                <span className="mproof-num">2–3<span> sem</span></span>
-                <span className="mproof-k">Livraison</span>
-              </div>
-              <div className="mproof-stat">
-                <span className="mproof-num">À vous</span>
-                <span className="mproof-k">Dès la livraison</span>
-              </div>
-            </div>
-            <a className="btn btn-accent" href={CONTACT}>Démarrer mon projet &#8594;</a>
-          </div>
-        </div>
-      </div>
-    </section>
   );
 };
 
@@ -286,4 +177,4 @@ const WhyNovio = () => {
   );
 };
 
-Object.assign(window, { ScrollProgress, Manifesto, WhyNovio, Specs });
+Object.assign(window, { ScrollProgress, WhyNovio, Specs });

@@ -6,7 +6,7 @@ const { execSync } = require("child_process");
 const fs = require("fs");
 
 // Version d'assets — bumper à chaque build pour casser le cache navigateur (Vercel).
-const ASSET_V = "55";
+const ASSET_V = "56";
 
 // Ordre de chargement — les composants dépendent de effects (useReveal, etc.)
 // pages dépend de TOUS les composants de section → chargé juste avant app.
@@ -21,11 +21,10 @@ const FILES = [
   ["Services",     "src/components/Services.jsx"],   // exporte aussi SectionHead, BenefitItem
   ["Portfolio",    "src/components/Portfolio.jsx"],  // exporte FoundersSlots, CompareAgency, ScoreCard
   ["Pricing",      "src/components/Pricing.jsx"],     // page Tarifs (forfaits + pack)
-  ["Automation",   "src/components/Automation.jsx"], // dépend de BenefitItem
   ["About",        "src/components/About.jsx"],
-  ["FAQ",          "src/components/FAQ.jsx"],         // exporte FAQ, FAQ_WEB, FAQ_IA
+  ["FAQ",          "src/components/FAQ.jsx"],         // exporte FAQ, FAQ_WEB
   ["Footer",       "src/components/Footer.jsx"],      // exporte aussi FinalCTA
-  ["cinema",       "src/cinema.jsx"],                 // ScrollProgress, Manifesto (legacy), WhyNovio, Specs
+  ["cinema",       "src/cinema.jsx"],                 // ScrollProgress, WhyNovio, Specs
   ["AutoIA",       "src/components/AutoIA.jsx"],       // page Automatisation IA (refonte 6 sections)
   ["pages",        "src/components/pages.jsx"],        // en-têtes + composition des pages
   ["app",          "src/app.jsx"],                     // routeur (data-page)
@@ -62,7 +61,7 @@ const PAGES = [
   {
     file: "site-web.html", page: "site-web", canonical: "https://noviostudio.online/site-web",
     title: "Sites web sur mesure pour entrepreneurs — Novio Studio | Gatineau Ottawa",
-    desc: "Un site rapide, sur mesure, livré en 2 à 3 semaines. Forfait dès 1 500 $ + hébergement 119 $/mois, sans engagement. Pour les PME de l'Outaouais qui veulent plus d'appels et de soumissions.",
+    desc: "Un site rapide, sur mesure, livré en 2 à 3 semaines. Forfait dès 1 500 $ + hébergement 59 $/mois, sans engagement. Pour les PME de l'Outaouais qui veulent plus d'appels et de soumissions.",
     ogTitle: "Sites web qui font sonner le téléphone — Novio Studio",
     ogDesc: "Site sur mesure livré en 2–3 semaines, dès 1 500 $. Pensé pour les entrepreneurs de l'Outaouais.",
   },
@@ -76,9 +75,9 @@ const PAGES = [
   {
     file: "tarifs.html", page: "tarifs", canonical: "https://noviostudio.online/tarifs",
     title: "Tarifs — Sites web & automatisation IA | Novio Studio Gatineau",
-    desc: "Des prix clairs, sans surprise. Site web dès 1 500 $, hébergement 119 $/mois sans engagement, automatisations IA 250 $/mois sans installation. Pack Croissance pour tout combiner.",
+    desc: "Des prix clairs, sans surprise. Site web dès 1 500 $, hébergement 59 $/mois sans engagement, automatisations IA 250 $/mois sans installation. Pack Croissance pour tout combiner.",
     ogTitle: "Tarifs — Novio Studio",
-    ogDesc: "Site dès 1 500 $, hébergement 119 $/mois, automatisations 250 $/mois. Prix clairs, sans engagement, sans surprise.",
+    ogDesc: "Site dès 1 500 $, hébergement 59 $/mois, automatisations 250 $/mois. Prix clairs, sans engagement, sans surprise.",
   },
   {
     file: "contact.html", page: "contact", canonical: "https://noviostudio.online/contact",
