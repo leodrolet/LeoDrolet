@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="fr" data-theme="dark" data-display="instrument" data-density="regular">
+<html lang="fr-CA">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Sites web professionnels pour entrepreneurs — Novio Studio | Gatineau Ottawa</title>
-<meta name="description" content="Un site rapide et professionnel, hébergé et entretenu pour toi. Forfaits Croissance 129 $/mois et Premium 199 $/mois. Pour les PME de l'Outaouais qui veulent plus d'appels et de soumissions." />
+<meta name="description" content="Des sites clairs, rapides et pensés pour Google, conçus, hébergés et entretenus pour les entreprises de l'Outaouais. Forfaits Croissance 129 $/mois et Premium 199 $/mois." />
 <meta name="author" content="Novio Studio" />
-<meta name="theme-color" content="#0a0a0a" />
+<meta name="theme-color" content="#0B0B0D" />
+<meta name="color-scheme" content="dark" />
 
 <!-- SEO local (Gatineau · Outaouais) -->
 <meta name="geo.region" content="CA-QC" />
@@ -19,7 +20,7 @@
 <meta property="og:type"         content="website" />
 <meta property="og:site_name"    content="Novio Studio" />
 <meta property="og:url"          content="https://noviostudio.online/site-web" />
-<meta property="og:title"        content="Sites web qui font sonner le téléphone — Novio Studio" />
+<meta property="og:title"        content="Des sites conçus pour attirer des clients — Novio Studio" />
 <meta property="og:description"  content="Un site professionnel tout inclus, dès 129 $/mois. Pensé pour les entrepreneurs de l'Outaouais." />
 <meta property="og:image"        content="https://noviostudio.online/og-image.jpg" />
 <meta property="og:image:width"  content="1200" />
@@ -29,7 +30,7 @@
 
 <!-- Twitter Card -->
 <meta name="twitter:card"        content="summary_large_image" />
-<meta name="twitter:title"       content="Sites web qui font sonner le téléphone — Novio Studio" />
+<meta name="twitter:title"       content="Des sites conçus pour attirer des clients — Novio Studio" />
 <meta name="twitter:description" content="Un site professionnel tout inclus, dès 129 $/mois. Pensé pour les entrepreneurs de l'Outaouais." />
 <meta name="twitter:image"       content="https://noviostudio.online/og-image.jpg" />
 <meta name="twitter:image:alt"   content="Novio Studio — sites web par abonnement à Gatineau" />
@@ -86,48 +87,32 @@
 }
 </script>
 
-<!-- Critical CSS inline — prevents FOUC before stylesheet loads -->
+<!-- Base critique : couleurs avant le chargement de la feuille de style (évite le flash blanc) -->
 <style>
-:root{--display:"Instrument Serif","Fraunces",Georgia,serif;--sans:"Geist","Inter Tight",system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,monospace;--bg:#0a0a0a;--bg-2:#131313;--bg-3:#1a1a1a;--ink:#efece4;--ink-2:#b9b6ad;--mute:#7e7e77;--line:rgba(239,236,228,.10);--line-strong:rgba(239,236,228,.22);--accent:#ff5b2e;--accent-ink:#0a0a0a;--grain-opacity:.045;--anim-speed:1;--gutter:clamp(20px,4vw,64px)}
-:root[data-theme="light"]{--bg:#f0ece2;--bg-2:#e5dfd1;--bg-3:#d8d1c0;--ink:#0a0a0a;--ink-2:#2a2a2a;--accent-ink:#f0ece2}
-:root[data-display="grotesque"]{--display:"Bricolage Grotesque","Space Grotesk",sans-serif}
-:root[data-display="serif-classic"]{--display:"Cormorant Garamond","EB Garamond",serif}
-:root[data-display="display-modern"]{--display:"Fraunces",Georgia,serif}
-:root[data-display="instrument"]{--display:"Instrument Serif",Georgia,serif}
-*{box-sizing:border-box}
-html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);min-height:100dvh}
-body{font-family:var(--sans)}
-main#root{min-height:100dvh}
-.grain{position:fixed;inset:0;z-index:9999;pointer-events:none;mix-blend-mode:overlay;opacity:var(--grain-opacity)}
-.feat-included-list{list-style:none;display:flex;flex-wrap:wrap;gap:6px;padding:0;margin:0}
-.feat-included-item{display:inline-flex;align-items:center;gap:5px;padding:6px 12px;border-radius:4px;border:1px solid rgba(255,91,46,.25);background:rgba(255,91,46,.07);color:#ff5b2e;font-size:11px;letter-spacing:.05em;cursor:default;user-select:none;pointer-events:none;list-style:none}
+:root{--bg:#0B0B0D;--ink:#F5F5F5}
+html,body{margin:0;background:var(--bg);color:var(--ink)}
 </style>
 
-<!-- Preload full stylesheet (non-blocking download starts immediately) -->
+<!-- Police : Geist (une seule famille). Feuille de style du site chargée normalement
+     (petite, et compatible avec la CSP stricte : aucun gestionnaire inline). -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="preload" href="dist/styles.min.css?v=58" as="style" />
-<link rel="stylesheet" href="dist/styles.min.css?v=58" media="print" onload="this.media='all'" />
-<noscript><link rel="stylesheet" href="dist/styles.min.css?v=58" /></noscript>
-
-<!-- All fonts non-blocking — fallback fonts show on first paint -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;1,9..144,400&display=optional" media="print" onload="this.media='all'" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap" />
+<link rel="stylesheet" href="dist/styles.min.css?v=59" />
 </head>
 <body>
 
-<!-- Grain overlay (drawn by JS) -->
-<canvas class="grain" id="grain-canvas"></canvas>
+<a class="skip-link" href="#contenu">Aller au contenu</a>
 
 <!-- React mount — data-page sélectionne la page rendue par app.jsx -->
-<main id="root" data-page="site-web">
+<div id="root" data-page="site-web">
   <!-- Contenu de repli (no-JS / robots) : remplacé par React au chargement -->
   <noscript>
-    <div style="max-width:760px;margin:0 auto;padding:48px 24px;font-family:Georgia,serif">
+    <div style="max-width:760px;margin:0 auto;padding:48px 24px;font-family:system-ui,sans-serif;line-height:1.6">
       <h1>Novio Studio, sites web par abonnement à Gatineau</h1>
       <p>Studio web à Gatineau (Ottawa, Outaouais) pour couvreurs, plombiers, techniciens HVAC,
         paysagistes, rénovateurs et entrepreneurs généraux. Un site Web professionnel sans
-        investissement initial important : conçu pour ton entreprise, hébergé, entretenu et
+        investissement initial important : conçu pour votre entreprise, hébergé, entretenu et
         optimisé grâce à un abonnement mensuel simple et transparent.</p>
       <h2>Nos forfaits</h2>
       <ul>
@@ -150,18 +135,11 @@ main#root{min-height:100dvh}
       </p>
     </div>
   </noscript>
-</main>
+</div>
 
-<!-- React 18 production builds (self-hosted, defer = download in parallel with HTML) -->
+<!-- React 18 (auto-hébergé) + bundle de l'application -->
 <script defer src="vendor/react.min.js"></script>
 <script defer src="vendor/react-dom.min.js"></script>
-<!-- Framer Motion UMD (self-hosted, exposes window.Motion) -->
-<script defer src="vendor/framer-motion.min.js"></script>
-
-<!-- Grain canvas (externalized — allows CSP without unsafe-inline) -->
-<script defer src="vendor/grain.js"></script>
-
-<!-- App bundle (pre-compiled + minified, defer = execute after React) -->
-<script defer src="dist/bundle.min.js?v=58"></script>
+<script defer src="dist/bundle.min.js?v=59"></script>
 </body>
 </html>

@@ -1,19 +1,14 @@
 /* ============================================================
-   Services.jsx, En-tête de section partagé (Portfolio, About, FAQ).
-   Les forfaits vivent désormais dans Pricing.jsx (window.Pricing).
-   Dépend de : window.useReveal
+   Services.jsx, En-tête de section partagé.
+   Titre + texte d'introduction optionnel, aligné à gauche.
    ============================================================ */
 
-const { useReveal } = window;
-
-// ── En-tête de section centré ──
-const SectionHead = ({ title }) => {
-  const ref = useReveal();
-  return (
-    <div className="section-head reveal" ref={ref}>
-      <h2 className="section-title">{title}</h2>
-    </div>
-  );
-};
+const SectionHead = ({ id, title, lead, children }) => (
+  <div className="shead">
+    <h2 className="shead__title" id={id}>{title}</h2>
+    {lead && <p className="shead__lead">{lead}</p>}
+    {children}
+  </div>
+);
 
 window.SectionHead = SectionHead;

@@ -1,130 +1,117 @@
 /* ============================================================
-   pages.jsx, En-têtes éditoriaux, sections accueil/contact,
-   process, et composition des 4 pages du site vitrine.
+   pages.jsx, En-têtes de pages, étapes, contact, témoignages,
+   et composition des 4 pages du site.
    Chargé après tous les composants de section (dépend d'eux).
    ============================================================ */
 
-const { useReveal } = window;
-const { motion: m } = window.Motion || {};
-const { BENEFIT_ICONS } = window;
-
-const EASE_OUT_EXPO = [0.16, 1, 0.3, 1];
+const { BENEFIT_ICONS, ArrowIcon, SectionHead } = window;
 
 const FORMSPREE = "https://formspree.io/f/mdaronva";
 const EMAIL = "leo_drolet@noviostudio.online";
 const TEL = "+18736554684";
 const TEL_DISPLAY = "873 655-4684";
 
-/* ── En-tête de page éditorial (bande méta + grand titre + stats) ── */
-const PageHeader = ({ index, metaRight, title, sub, stats }) => {
-  const ref = useReveal();
-  return (
-    <header className="page-head">
-      <div className="reveal" ref={ref}>
-        <div className="page-head__meta">
-          <span>{index}</span>
-          {metaRight && <span className="accent">{metaRight}</span>}
-        </div>
-        <h1 className="page-head__title">{title}</h1>
-        {sub && <p className="page-head__sub">{sub}</p>}
-        {stats && (
-          <div className="page-head__stats">
-            {stats.map((s, i) => (
-              <div className="page-stat" key={i}>
-                <span className="page-stat__v">{s.v}<sup>{s.u}</sup></span>
-                <span className="page-stat__k">{s.k}</span>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-    </header>
-  );
-};
-
-/* ── En-tête de section aligné à gauche ── */
-const SecHead = ({ eyebrow, title }) => {
-  const ref = useReveal();
-  return (
-    <div className="sec-head reveal" ref={ref}>
-      <div className="sec-head__eyebrow"><span className="dash"></span><span>{eyebrow}</span></div>
-      <h2 className="sec-head__t">{title}</h2>
+/* ── En-tête de page (pages internes) ── */
+const PageHeader = ({ title, sub, actions }) => (
+  <header className="page-head">
+    <div className="container">
+      <h1 className="page-head__title">{title}</h1>
+      {sub && <p className="page-head__sub">{sub}</p>}
+      {actions && <div className="page-head__actions">{actions}</div>}
     </div>
-  );
-};
+  </header>
+);
 
-/* ── Process / timeline (site-web) ── */
+/* ── Étapes de démarrage ── */
 const PROCESS = [
-  { n: "01", t: "Appel découverte",       d: "On parle de ton métier, tes clients, tes objectifs. 15 minutes, gratuit.", dur: "Jour 0" },
-  { n: "02", t: "Design à ton image",     d: "Je conçois une maquette à tes couleurs, qui te ressemble. Tu valides, on ajuste ensemble.", dur: "Semaine 1" },
-  { n: "03", t: "Construction",           d: "Je code chaque page à la main : rapide, soignée et optimisée pour Google.", dur: "Semaine 2" },
-  { n: "04", t: "Lancement + suivi",      d: "Mise en ligne, puis je m'occupe de l'hébergement, de la maintenance et de tes modifications, chaque mois.", dur: "Semaine 3" },
+  { t: "Appel découverte", d: "15 minutes, gratuit. Vous me parlez de votre entreprise, de vos clients et de vos objectifs." },
+  { t: "Conception",       d: "Je conçois une maquette à votre image. Vous la validez, on ajuste ensemble." },
+  { t: "Mise en ligne",    d: "Je construis le site, l'optimise pour Google et le mets en ligne, en général 2 à 3 semaines après le premier appel." },
+  { t: "Chaque mois",      d: "Hébergement, maintenance, sécurité et vos modifications : votre site reste à jour, sans effort de votre part." },
 ];
 
-const PStep = ({ s, i }) => {
-  const ref = useReveal();
-  return (
-    <div className="pstep reveal" ref={ref} style={{ transitionDelay: `${i * 90}ms` }}>
-      <div className="pstep__node">{s.n}</div>
-      <div className="pstep__body">
-        <h3 className="pstep__t">{s.t}</h3>
-        <p className="pstep__d">{s.d}</p>
-        <span className="pstep__dur">{s.dur}</span>
-      </div>
-    </div>
-  );
-};
-
 const Process = () => (
-  <section className="process">
-    <SecHead eyebrow="Comment ça se passe" title={<>De l'idée au site, en <em>quatre étapes.</em></>} />
-    <div className="process__grid">
-      {PROCESS.map((s, i) => <PStep key={s.n} s={s} i={i} />)}
+  <section className="section" aria-labelledby="etapes-title">
+    <div className="container">
+      <SectionHead id="etapes-title" title="Votre site en ligne, en quatre étapes." />
+      <ol className="steps">
+        {PROCESS.map((s, i) => (
+          <li className="step" key={s.t}>
+            <span className="step__n" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+            <h3 className="step__t">{s.t}</h3>
+            <p className="step__d">{s.d}</p>
+          </li>
+        ))}
+      </ol>
     </div>
   </section>
 );
 
-/* ── Contact : 2 colonnes (aside + carte formulaire) ── */
+/* ── Ce que comprend chaque site (/site-web) ── */
+const SITE_FEATURES = [
+  { icon: "pencil",     t: "À votre image",        d: "Un site conçu pour votre métier et vos couleurs. Avec Premium, un design entièrement personnalisé." },
+  { icon: "smartphone", t: "Adapté au mobile",     d: "Une lecture claire sur téléphone, tablette et ordinateur." },
+  { icon: "search",     t: "Pensé pour Google",    d: "Optimisation SEO incluse : de base avec Croissance, avancée avec Premium." },
+  { icon: "mail",       t: "Formulaire de contact", d: "Vos clients vous écrivent directement depuis votre site." },
+  { icon: "barchart",   t: "Statistiques",         d: "Suivez la fréquentation de votre site et les pages consultées." },
+  { icon: "shield",     t: "Hébergé et sécurisé",  d: "Hébergement, sécurité et sauvegardes gérés pour vous." },
+];
+
+const SiteFeatures = () => (
+  <section className="section" aria-labelledby="inclus-title">
+    <div className="container">
+      <SectionHead id="inclus-title" title="Ce que comprend chaque site." />
+      <ul className="features">
+        {SITE_FEATURES.map((f) => (
+          <li className="feature" key={f.t}>
+            <span className="feature__ico" aria-hidden="true">{BENEFIT_ICONS[f.icon]}</span>
+            <h3 className="feature__t">{f.t}</h3>
+            <p className="feature__d">{f.d}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+);
+
+/* ── Contact ── */
 const NEXT_STEPS = [
-  { n: "01", t: "On jase 15 minutes", d: "Tu m'expliques ton métier et où tu perds des leads. Gratuit, sans pression." },
-  { n: "02", t: "Je reviens avec un plan", d: "Estimation claire, échéancier et recommandations, en moins de 24 h." },
-  { n: "03", t: "On démarre", d: "Tu valides, on lance. Tu parles à la personne qui fait le travail, pas un vendeur." },
+  { t: "Un appel de 15 minutes", d: "Gratuit et sans engagement. Vous me parlez de votre entreprise et de vos objectifs." },
+  { t: "Une proposition claire", d: "Le forfait adapté, ce qu'il comprend et un échéancier, en moins de 24 h." },
+  { t: "La conception démarre",  d: "Vous validez, je commence. Vous parlez toujours à la personne qui fait le travail." },
 ];
 
-const CHANNELS = [
-  { icon: "messagecircle", label: "Écrire un courriel", value: EMAIL, href: `mailto:${EMAIL}` },
-  { icon: "phone", label: "Appeler", value: TEL_DISPLAY, href: `tel:${TEL}` },
+// Choix du forfait (radio). La valeur est envoyée dans le champ « interet ».
+const PLAN_OPTIONS = [
+  { slug: "croissance", label: "Croissance", hint: "129 $/mois" },
+  { slug: "premium",    label: "Premium",    hint: "199 $/mois" },
+  { slug: "indecis",    label: "Je ne sais pas encore", hint: "On en discute" },
 ];
+const PLAN_VALUE = { croissance: "Forfait Croissance", premium: "Forfait Premium", indecis: "Pas sûr encore" };
 
-const INTERESTS = ["Forfait Croissance", "Forfait Premium", "Pas sûr encore"];
-
-// Présélection depuis les boutons « Choisir … » des forfaits : /contact?forfait=croissance|premium
-const PLAN_INTEREST = { croissance: "Forfait Croissance", premium: "Forfait Premium" };
-const initialInterests = () => {
+// Présélection depuis les boutons « Choisir … » : /contact?forfait=croissance|premium
+const initialPlan = () => {
   try {
     const slug = (new URLSearchParams(window.location.search).get("forfait") || "").toLowerCase();
-    return PLAN_INTEREST[slug] ? [PLAN_INTEREST[slug]] : [];
-  } catch (_) { return []; }
+    return PLAN_VALUE[slug] ? slug : "";
+  } catch (_) { return ""; }
 };
 
-// ── Formulaire de projet (AJAX → Formspree, états idle/submitting/success/error) ──
+// ── Formulaire (AJAX → Formspree, états idle/submitting/success/error) ──
 const ProjectForm = () => {
   const [status, setStatus] = React.useState("idle");
-  const [interests, setInterests] = React.useState(initialInterests);
+  const [plan, setPlan] = React.useState(initialPlan);
   const [error, setError] = React.useState("");
-
-  const toggleInterest = (it) =>
-    setInterests((cur) => (cur.includes(it) ? cur.filter((x) => x !== it) : [...cur, it]));
 
   const onSubmit = async (e) => {
     e.preventDefault();
     if (status === "submitting") return;
     const form = e.currentTarget;
     const data = new FormData(form);
-    data.set("interet", interests.join(", ") || "Non précisé");
-    const plans = interests.filter((x) => x.startsWith("Forfait"));
-    data.set("_subject", plans.length
-      ? `Nouvelle demande (${plans.join(" + ")}), site Novio Studio`
+    data.delete("forfait");
+    data.set("interet", plan ? PLAN_VALUE[plan] : "Non précisé");
+    data.set("_subject", plan === "croissance" || plan === "premium"
+      ? `Nouvelle demande (${PLAN_VALUE[plan]}), site Novio Studio`
       : "Nouvelle demande, site Novio Studio");
     setStatus("submitting");
     setError("");
@@ -140,59 +127,55 @@ const ProjectForm = () => {
       } else {
         const j = await res.json().catch(() => null);
         setError((j && j.errors && j.errors.map((x) => x.message).join(" ")) ||
-          "Une erreur est survenue. Réessaie, ou écris-moi directement par courriel.");
+          "Une erreur est survenue. Réessayez, ou écrivez-moi directement par courriel.");
         setStatus("error");
       }
     } catch (_) {
-      setError("Connexion impossible. Réessaie, ou écris-moi à " + EMAIL + ".");
+      setError("Connexion impossible. Réessayez, ou écrivez-moi à " + EMAIL + ".");
       setStatus("error");
     }
   };
 
   if (status === "success") {
     return (
-      <m.div
-        className="contact-card form-card form-success"
-        initial={{ opacity: 0, scale: 0.96 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5, ease: EASE_OUT_EXPO }}
-      >
+      <div className="form-card form-success" role="status">
         <span className="form-success__check" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
         </span>
-        <h2 className="contact-card__t">Demande envoyée.</h2>
+        <h2 className="form-card__title">Demande envoyée.</h2>
         <p className="form-success__lead">
-          Merci. Je te reviens en moins de 24 h avec un plan clair. D'ici là, tu peux m'écrire à
-          {" "}<a href={`mailto:${EMAIL}`}>{EMAIL}</a>.
+          Merci. Je vous réponds en moins de 24 h. D'ici là, vous pouvez m'écrire à{" "}
+          <a className="link" href={`mailto:${EMAIL}`}>{EMAIL}</a>.
         </p>
-        <a href="/" className="btn">Retour à l'accueil <span className="arrow">&#8594;</span></a>
-      </m.div>
+        <a href="/" className="btn btn--secondary">Retour à l'accueil</a>
+      </div>
     );
   }
 
   return (
-    <div className="contact-card form-card">
-      <h2 className="contact-card__t">Parle-moi de ton projet.</h2>
+    <div className="form-card">
+      <h2 className="form-card__title">Demander une soumission</h2>
       <form onSubmit={onSubmit}>
-        <div className="field">
-          <span className="field-label">Ce qui t'intéresse <span className="field-hint">plusieurs choix possibles</span></span>
-          <div className="field-options" role="group" aria-label="Ce qui t'intéresse, plusieurs choix possibles">
-            {INTERESTS.map((it) => {
-              const on = interests.includes(it);
-              return (
-                <button
-                  type="button"
-                  key={it}
-                  className={on ? "active" : ""}
-                  aria-pressed={on}
-                  onClick={() => toggleInterest(it)}
-                >
-                  {it}
-                </button>
-              );
-            })}
+        <fieldset className="field">
+          <legend className="field__label">Forfait souhaité</legend>
+          <div className="plan-choice">
+            {PLAN_OPTIONS.map((o) => (
+              <label key={o.slug} className="plan-choice__opt">
+                <input
+                  type="radio"
+                  name="forfait"
+                  value={o.slug}
+                  checked={plan === o.slug}
+                  onChange={() => setPlan(o.slug)}
+                />
+                <span className="plan-choice__box">
+                  <span className="plan-choice__label">{o.label}</span>
+                  <span className="plan-choice__hint">{o.hint}</span>
+                </span>
+              </label>
+            ))}
           </div>
-        </div>
+        </fieldset>
 
         {/* anti-spam (honeypot Formspree) */}
         <input type="text" name="_gotcha" tabIndex="-1" autoComplete="off" aria-hidden="true" className="form-hp" />
@@ -200,194 +183,113 @@ const ProjectForm = () => {
 
         <div className="form-row">
           <div className="field">
-            <label className="field-label" htmlFor="cf-name">Nom <span className="req">*</span></label>
-            <input id="cf-name" type="text" name="name" autoComplete="name" required />
+            <label className="field__label" htmlFor="cf-name">Nom <span className="field__req" aria-hidden="true">*</span></label>
+            <input className="input" id="cf-name" type="text" name="name" autoComplete="name" required />
           </div>
           <div className="field">
-            <label className="field-label" htmlFor="cf-phone">Téléphone</label>
-            <input id="cf-phone" type="tel" name="phone" autoComplete="tel" />
+            <label className="field__label" htmlFor="cf-phone">Téléphone <span className="field__opt">facultatif</span></label>
+            <input className="input" id="cf-phone" type="tel" name="phone" autoComplete="tel" />
           </div>
         </div>
         <div className="field">
-          <label className="field-label" htmlFor="cf-email">Courriel <span className="req">*</span></label>
-          <input id="cf-email" type="email" name="email" autoComplete="email" required />
+          <label className="field__label" htmlFor="cf-email">Courriel <span className="field__req" aria-hidden="true">*</span></label>
+          <input className="input" id="cf-email" type="email" name="email" autoComplete="email" required />
         </div>
         <div className="field">
-          <label className="field-label" htmlFor="cf-msg">Ton projet</label>
-          <textarea id="cf-msg" name="message" rows="4" placeholder="Ex. : couvreur à Gatineau, je veux plus de soumissions sur Google."></textarea>
-          <span className="field-help">Métier, secteur, échéancier : tout ce qui aide.</span>
+          <label className="field__label" htmlFor="cf-msg">Votre entreprise et votre projet</label>
+          <textarea className="input" id="cf-msg" name="message" rows="4" placeholder="Ex. : couvreur à Gatineau, je souhaite recevoir plus de demandes de soumission."></textarea>
         </div>
-        <label className="contact-consent">
+        <label className="consent">
           <input type="checkbox" name="consent" required />
           <span>J'accepte d'être contacté par Novio Studio au sujet de ma demande.</span>
         </label>
 
         {status === "error" && <p className="form-error" role="alert">{error}</p>}
 
-        <button type="submit" className="btn btn-accent form-submit" disabled={status === "submitting"} style={{ justifyContent: "center" }}>
+        <button type="submit" className="btn btn--primary btn--lg btn--block" disabled={status === "submitting"}>
           {status === "submitting"
-            ? (<><span className="form-spinner" aria-hidden="true"></span> Envoi…</>)
-            : (<>Envoyer ma demande <span className="arrow">&#8594;</span></>)}
+            ? (<><span className="spinner" aria-hidden="true"></span> Envoi en cours…</>)
+            : (<>Envoyer ma demande <ArrowIcon /></>)}
         </button>
-        <span className="field-help" style={{ textAlign: "center" }}>Réponse en moins de 24 h · sans engagement</span>
+        <p className="form-card__note">Réponse en moins de 24 h. Les champs marqués d'un * sont obligatoires.</p>
       </form>
     </div>
   );
 };
 
 const ContactSection = () => {
-  const asideRef = useReveal();
-  const formRef = useReveal();
   React.useEffect(() => {
     if (window.location.hash !== "#formulaire") return;
     const el = document.getElementById("formulaire");
     if (el) requestAnimationFrame(() => el.scrollIntoView({ block: "start" }));
   }, []);
   return (
-    <section className="contact">
-      <div className="contact__grid">
-        <div className="contact__aside reveal" ref={asideRef}>
-          <h2 className="contact__t">Ce qui se passe <em>ensuite.</em></h2>
-
-          <ol className="next-steps">
-            {NEXT_STEPS.map((s) => (
-              <li className="next-step" key={s.n}>
-                <span className="next-step__n">{s.n}</span>
+    <section className="section section--tight" aria-label="Formulaire de contact">
+      <div className="container contact">
+        <div className="contact__form" id="formulaire">
+          <ProjectForm />
+        </div>
+        <aside className="contact__aside" aria-labelledby="ensuite-title">
+          <h2 className="contact__h" id="ensuite-title">Ce qui se passe ensuite</h2>
+          <ol className="next">
+            {NEXT_STEPS.map((s, i) => (
+              <li className="next__item" key={s.t}>
+                <span className="next__n" aria-hidden="true">{i + 1}</span>
                 <div>
-                  <h3 className="next-step__t">{s.t}</h3>
-                  <p className="next-step__d">{s.d}</p>
+                  <h3 className="next__t">{s.t}</h3>
+                  <p className="next__d">{s.d}</p>
                 </div>
               </li>
             ))}
           </ol>
-
-          <div className="channels">
-            {CHANNELS.map((c) => (
-              <a key={c.label} href={c.href} className="channel">
-                <span className="channel__icon">{BENEFIT_ICONS[c.icon]}</span>
-                <span className="channel__txt">
-                  <span className="channel__label">{c.label}</span>
-                  <span className="channel__val">{c.value}</span>
-                </span>
-                <span className="channel__arr">&#8594;</span>
+          <h2 className="contact__h">Ou directement</h2>
+          <ul className="channels">
+            <li>
+              <a className="channel" href={`mailto:${EMAIL}`}>
+                <span className="channel__ico" aria-hidden="true">{BENEFIT_ICONS.mail}</span>
+                <span className="channel__txt"><span className="channel__label">Courriel</span><span className="channel__val">{EMAIL}</span></span>
               </a>
-            ))}
-          </div>
-        </div>
-
-        <div className="reveal contact__form" id="formulaire" ref={formRef}>
-          <ProjectForm />
-        </div>
+            </li>
+            <li>
+              <a className="channel" href={`tel:${TEL}`}>
+                <span className="channel__ico" aria-hidden="true">{BENEFIT_ICONS.phone}</span>
+                <span className="channel__txt"><span className="channel__label">Téléphone</span><span className="channel__val">{TEL_DISPLAY}</span></span>
+              </a>
+            </li>
+          </ul>
+        </aside>
       </div>
     </section>
   );
 };
 
-/* ── Hero Sites web (2 colonnes : copy + démo navigateur) ── */
-const SITE_CHECKS = ["Trouvé en 1re page Google", "Chargé en 0,9 seconde", "Nouvel appel reçu"];
-
-/* Étapes : 0 vide · 1 recherche Google · 2 chargement · 3 le site apparaît ·
-   4-6 confirmations successives, puis la boucle recommence. */
-const SiteDemo = () => {
-  const [step, setStep] = React.useState(0);
-  React.useEffect(() => {
-    const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) { setStep(6); return; }
-    const DELAYS = [900, 1200, 1200, 1600, 900, 900, 3400];
-    let i = 0, id;
-    const tick = () => {
-      i = (i + 1) % 7;
-      setStep(i);
-      id = setTimeout(tick, DELAYS[i]);
-    };
-    id = setTimeout(tick, DELAYS[0]);
-    return () => clearTimeout(id);
-  }, []);
-  return (
-    <div className="nvai-chat" aria-hidden="true">
-      <div className="nvai-chat__head">
-        <span className="nvw-dots"><span></span><span></span><span></span></span>
-        <span className="nvw-url mono">tonentreprise.ca</span>
-        <span className="nvai-chat__status mono">100/100 Lighthouse</span>
-      </div>
-      <div className="nvai-chat__body">
-        {step >= 1 && (
-          <div className="nv-chat-user nvai-pop nvw-search">
-            {BENEFIT_ICONS.search}<span>couvreur gatineau</span>
-          </div>
-        )}
-        {step === 2 && (
-          <div className="nvai-typing nvai-pop"><span></span><span></span><span></span></div>
-        )}
-        {step >= 3 && (
-          <div className="nvw-site nvai-pop">
-            <div className="nvw-site__name">Toitures Tremblay</div>
-            <div className="nvw-site__desc">Toiture résidentielle à Gatineau · Soumission gratuite en 24 h</div>
-            <div className="nvw-site__cta">Appelez-nous <span className="arrow">&#8594;</span></div>
-          </div>
-        )}
-        <div className="nvai-checks">
-          {SITE_CHECKS.map((c, i) => step >= 4 + i && (
-            <div className="nvai-check nvai-pop" key={c}>{BENEFIT_ICONS.checkcircle}<span>{c}</span></div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const SiteWebHero = () => {
-  const ref = useReveal();
-  return (
-    <header className="nvai-hero reveal" ref={ref}>
-      <div className="nvai-hero__copy">
-        <h1 className="nvai-hero__t">Un site qui <em>fait sonner le téléphone.</em></h1>
-        <p className="nvai-hero__sub">
-          Professionnel, rapide, pensé pour les entrepreneurs de l'Outaouais. Ton prochain client te
-          cherche sur Google, fais en sorte qu'il te trouve, toi, pas ton concurrent.
-        </p>
-        <div className="nvai-cta">
-          <a href="/contact" className="btn btn-accent">Démarrer mon projet <span className="arrow">&#8594;</span></a>
-          <a href="#forfaits" className="btn nv-btn-ghost">Voir les forfaits</a>
-        </div>
-      </div>
-      <SiteDemo />
-    </header>
-  );
-};
-
-/* ── Témoignages (structure seulement — placeholders, vrai contenu au Jour 3) ──
-   NE PAS inventer d'avis : remplacer chaque champ par du contenu client réel. */
+/* ── Témoignages ──
+   NE JAMAIS inventer d'avis. La section ne s'affiche que lorsqu'au moins un
+   vrai témoignage est saisi (les entrées entre crochets sont ignorées). */
 const TESTIMONIALS = [
   { quote: "[Témoignage client — à remplir]", name: "[Nom du client]", role: "[Métier · Ville]" },
   { quote: "[Témoignage client — à remplir]", name: "[Nom du client]", role: "[Métier · Ville]" },
   { quote: "[Témoignage client — à remplir]", name: "[Nom du client]", role: "[Métier · Ville]" },
 ];
 
-const TestimonialCard = ({ t, i }) => {
-  const ref = useReveal();
-  return (
-    <figure className="tmon-card reveal" ref={ref} style={{ transitionDelay: `${i * 90}ms` }}>
-      <span className="tmon-badge mono">À remplir</span>
-      <span className="tmon-mark" aria-hidden="true">&#8220;</span>
-      <blockquote className="tmon-quote">{t.quote}</blockquote>
-      <figcaption className="tmon-cite">
-        <span className="tmon-name">{t.name}</span>
-        <span className="tmon-role">{t.role}</span>
-      </figcaption>
-    </figure>
-  );
-};
-
 const Testimonials = () => {
-  const ref = useReveal();
+  const real = TESTIMONIALS.filter((t) => t.quote && !t.quote.trim().startsWith("["));
+  if (!real.length) return null;
   return (
-    <section className="section testimonials" id="temoignages" aria-labelledby="temoignages-title">
-      <div className="section-head reveal" ref={ref}>
-        <h2 className="section-title" id="temoignages-title">Ce qu'en disent les entrepreneurs.</h2>
-      </div>
-      <div className="tmon-grid">
-        {TESTIMONIALS.map((t, i) => <TestimonialCard key={i} t={t} i={i} />)}
+    <section className="section" id="temoignages" aria-labelledby="temoignages-title">
+      <div className="container">
+        <SectionHead id="temoignages-title" title="Ce qu'en disent nos clients." />
+        <div className="quotes">
+          {real.map((t, i) => (
+            <figure className="quote" key={i}>
+              <blockquote className="quote__text"><p>{t.quote}</p></blockquote>
+              <figcaption className="quote__cite">
+                <span className="quote__name">{t.name}</span>
+                <span className="quote__role">{t.role}</span>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -395,79 +297,68 @@ const Testimonials = () => {
 
 /* ── Composition des pages ── */
 const {
-  Hero, WhyNovio, Specs, MarqueeRow, FoundersSlots, About, FinalCTA,
-  CompareAgency, Pricing, FAQ, FAQ_WEB, FAQ_ABO,
+  Hero, Pricing, SubscriptionModel, Realisations, CompareAgency, About,
+  FAQ, FAQ_WEB, FAQ_ABO, FinalCTA,
 } = window;
 
 const HomePage = () => (
   <React.Fragment>
     <Hero />
-    <WhyNovio />
-    <MarqueeRow items={[
-      "Plus de contrats",
-      "Toiture · HVAC · Plomberie · Paysagement · Rénovation",
-      "Gatineau · Ottawa · Outaouais",
-      "Dès 129 $/mois, tout inclus",
-      "Livré en 7–28 jours",
-      "100 / 100 Lighthouse",
-      "Sans agence · sans jargon",
-    ]} />
-    <Specs />
+    <SubscriptionModel />
     <Pricing />
-    <FoundersSlots />
+    <Process />
+    <Realisations />
     <About />
     <Testimonials />
+    <FAQ items={FAQ_ABO} />
     <FinalCTA />
   </React.Fragment>
 );
 
 const SiteWebPage = () => (
   <React.Fragment>
-    <SiteWebHero />
+    <PageHeader
+      title="Des sites conçus pour attirer des clients."
+      sub="Clairs, rapides et pensés pour Google. Conçus, hébergés et entretenus par Novio Studio, pour les entreprises de l'Outaouais."
+      actions={<>
+        <a className="btn btn--primary btn--lg" href="/contact">Demander une soumission <ArrowIcon /></a>
+        <a className="btn btn--secondary btn--lg" href="#forfaits">Voir les forfaits</a>
+      </>}
+    />
+    <SiteFeatures />
     <Process />
     <Pricing />
     <CompareAgency />
-    <FAQ items={FAQ_WEB} title="Questions fréquentes." />
-    <FinalCTA
-      headline={<>Ton prochain client te cherche sur Google. <em>Sois là.</em></>}
-      ctaLabel="Démarrer mon projet"
-      ctaHref="/contact"
-    />
+    <FAQ items={FAQ_WEB} />
+    <FinalCTA />
   </React.Fragment>
 );
 
 const PricingPage = () => (
   <React.Fragment>
     <PageHeader
-      index="Tarifs"
-      metaRight="Abonnement mensuel"
-      title={<>Un site pro. <em>Un prix mensuel.</em></>}
-      sub="Deux forfaits tout inclus : création, hébergement, maintenance et modifications, plus 200 $ de frais de départ, une seule fois. Tu sais exactement ce que tu paies, avant de commencer."
+      title="Des tarifs simples et transparents."
+      sub="Deux forfaits mensuels tout inclus, après des frais de départ uniques de 200 $. Vous savez exactement ce que vous payez, avant de commencer."
     />
-    <Pricing title={<>Choisis ton <em>forfait.</em></>} />
+    <Pricing showHead={false} />
+    <SubscriptionModel />
     <CompareAgency />
-    <FAQ items={FAQ_ABO} title="Questions fréquentes." />
-    <FinalCTA
-      headline={<>Un prix clair, un interlocuteur. <em>On commence ?</em></>}
-      ctaLabel="Démarrer mon projet"
-      ctaHref="/contact"
-    />
+    <FAQ items={FAQ_ABO} />
+    <FinalCTA />
   </React.Fragment>
 );
 
 const ContactPage = () => (
   <React.Fragment>
     <PageHeader
-      index="Contact"
-      metaRight="Réponse < 24 h"
-      title={<>Parlons de <em>ton projet.</em></>}
-      sub="Premier appel de 15 minutes, gratuit. On regarde où tu perds des leads aujourd'hui, et ce qu'on peut récupérer. Pas de jargon, pas de pression."
+      title="Parlons de votre projet."
+      sub="Décrivez votre entreprise et ce que vous attendez de votre site. Je vous réponds en moins de 24 h."
     />
     <ContactSection />
   </React.Fragment>
 );
 
 Object.assign(window, {
-  PageHeader, SecHead, Process, ContactSection,
+  PageHeader, Process, SiteFeatures, ContactSection, Testimonials,
   HomePage, SiteWebPage, PricingPage, ContactPage,
 });

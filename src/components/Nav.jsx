@@ -1,13 +1,12 @@
 /* ============================================================
-   Nav.jsx, Barre de navigation multi-pages (desktop + mobile)
-   Liens réels vers les pages du site. État actif selon l'URL.
-   Dépend de : window.useMagnetic
+   Nav.jsx, En-tête du site (desktop + menu mobile).
+   Liens réels vers les pages ; état actif selon l'URL.
+   Dépend de : window.ArrowIcon
    ============================================================ */
 
-const { useMagnetic } = window;
+const { ArrowIcon } = window;
 
 const NAV_LINKS = [
-  { href: "/", label: "Accueil" },
   { href: "/site-web", label: "Sites Web" },
   { href: "/tarifs", label: "Tarifs" },
   { href: "/contact", label: "Contact" },
@@ -15,78 +14,87 @@ const NAV_LINKS = [
 
 const currentPath = () => {
   const p = (window.location.pathname || "/").replace(/\.html$/, "").replace(/\/+$/, "");
-  return p === "" ? "/" : p;
+  return p === "" || p === "/index" ? "/" : p;
 };
 
-const Nav = () => {
-  // Barre opaque dès qu'on a dépassé le hero, ou d'emblée sur les pages sans hero.
-  const [scrolled, setScrolled] = React.useState(false);
-  React.useEffect(() => {
-    const hero = document.getElementById("top");
-    if (!hero) { setScrolled(true); return; }
-    const obs = new IntersectionObserver(
-      ([e]) => setScrolled(!e.isIntersecting),
-      { threshold: 0 }
-    );
-    obs.observe(hero);
-    return () => obs.disconnect();
-  }, []);
+const Brand = () => (
+  <a href="/" className="brand" aria-label="Novio Studio, accueil">
+    <span className="brand__dot" aria-hidden="true"></span>
+    novio<span className="brand__suffix">.studio</span>
+  </a>
+);
 
-  const [menuOpen, setMenuOpen] = React.useState(false);
-  const close = () => setMenuOpen(false);
-  const navCtaMagnetic = useMagnetic(8);
+const Nav = () => {
+  const [open, setOpen] = React.useState(false);
+  const toggleRef = React.useRef(null);
   const here = currentPath();
 
+  React.useEffect(() => {
+    document.body.classList.toggle("menu-open", open);
+    if (!open) return;
+    const onKey = (e) => {
+      if (e.key === "Escape") { setOpen(false); toggleRef.current && toggleRef.current.focus(); }
+    };
+    const onResize = () => { if (window.innerWidth > 860) setOpen(false); };
+    window.addEventListener("keydown", onKey);
+    window.addEventListener("resize", onResize);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      window.removeEventListener("resize", onResize);
+    };
+  }, [open]);
+
+  // Le menu mobile est rendu hors de <header> : le backdrop-filter de l'en-tête
+  // créerait sinon un bloc conteneur pour position: fixed.
   return (
     <React.Fragment>
-      <nav className={`nav ${scrolled ? "scrolled" : ""}`} style={{ opacity: "1" }}>
-        <a href="/" className="brand">
-          <span className="dot"></span>
-          novio<span style={{ fontStyle: "italic", color: "var(--ink-2)" }}>.studio</span>
+    <header className="site-header">
+      <div className="container site-header__inner">
+        <Brand />
+        <nav className="site-nav" aria-label="Navigation principale">
+          <ul>
+            {NAV_LINKS.map((l) => (
+              <li key={l.href}>
+                <a href={l.href} aria-current={here === l.href ? "page" : undefined}>{l.label}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <a className="btn btn--primary btn--sm site-header__cta" href="/contact">
+          Demander une soumission
         </a>
-        <div className="nav-links">
-          {NAV_LINKS.map((l) => (
-            <a key={l.href} href={l.href} aria-current={here === l.href ? "page" : undefined}
-               style={here === l.href ? { color: "var(--ink)" } : undefined}>
-              {l.label}
-            </a>
-          ))}
-        </div>
-        <div className="nav-right">
-          <button
-            className={`nav-burger${menuOpen ? " open" : ""}`}
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Menu"
-            aria-expanded={menuOpen}
-          >
-            <span></span><span></span><span></span>
-          </button>
-          <a
-            className="btn nav-cta"
-            href="/contact"
-            ref={navCtaMagnetic.ref}
-            onMouseMove={navCtaMagnetic.onMouseMove}
-            onMouseLeave={navCtaMagnetic.onMouseLeave}
-            style={{ padding: "10px 16px", ...navCtaMagnetic.style }}
-          >
-            Démarrer <span className="arrow">&#8594;</span>
-          </a>
-        </div>
-      </nav>
-      {menuOpen && (
-        <div className="mobile-menu">
-          <button className="mobile-menu-close" onClick={close} aria-label="Fermer">&#215;</button>
-          {NAV_LINKS.map((l) => (
-            <a key={l.href} href={l.href} onClick={close}
-               aria-current={here === l.href ? "page" : undefined}>
-              {l.label}
-            </a>
-          ))}
-          <a href="/contact" className="mobile-menu-cta" onClick={close}>Démarrer &#8594;</a>
-        </div>
-      )}
+        <button
+          ref={toggleRef}
+          type="button"
+          className="menu-toggle"
+          aria-expanded={open}
+          aria-controls="menu-mobile"
+          aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
+          onClick={() => setOpen(!open)}
+        >
+          <span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+      <div id="menu-mobile" className="mobile-menu" hidden={!open}>
+        <nav aria-label="Navigation mobile">
+          <ul>
+            <li><a href="/" aria-current={here === "/" ? "page" : undefined}>Accueil</a></li>
+            {NAV_LINKS.map((l) => (
+              <li key={l.href}>
+                <a href={l.href} aria-current={here === l.href ? "page" : undefined}>{l.label}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <a className="btn btn--primary btn--lg btn--block" href="/contact">
+          Demander une soumission <ArrowIcon />
+        </a>
+      </div>
     </React.Fragment>
   );
 };
 
 window.Nav = Nav;
+window.Brand = Brand;

@@ -1,5 +1,5 @@
 /* ============================================================
-   icons.jsx, SVG icons partagés (forfaits + promesses)
+   icons.jsx, icônes SVG partagées (trait 2px, style Lucide) + flèche des boutons
    ============================================================ */
 
 const BENEFIT_ICONS = {
@@ -34,4 +34,12 @@ const BENEFIT_ICONS = {
   database:      (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></svg>),
 };
 
+// Flèche des boutons (décorative : le libellé du bouton porte le sens)
+const ArrowIcon = () => (
+  <svg className="btn__arrow" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+    <path d="M3 8h10M9 4l4 4-4 4" />
+  </svg>
+);
+
 window.BENEFIT_ICONS = BENEFIT_ICONS;
+window.ArrowIcon = ArrowIcon;

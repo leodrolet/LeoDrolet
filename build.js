@@ -6,27 +6,24 @@ const { execSync } = require("child_process");
 const fs = require("fs");
 
 // Version d'assets — bumper à chaque build pour casser le cache navigateur (Vercel).
-const ASSET_V = "58";
+const ASSET_V = "59";
 
-// Ordre de chargement — les composants dépendent de effects (useReveal, etc.)
+// Ordre de chargement — un composant ne peut lire window.X que si X est chargé avant.
 // pages dépend de TOUS les composants de section → chargé juste avant app.
 // Format : [clé-dans-bundle, chemin-source-jsx]
 const FILES = [
-  ["effects",      "src/effects.jsx"],
   // Composants (src/components/) — Babel les compile dans dist/ directement
-  ["icons",        "src/components/icons.jsx"],
-  ["Nav",          "src/components/Nav.jsx"],
-  ["Hero",         "src/components/Hero.jsx"],
-  ["Marquee",      "src/components/Marquee.jsx"],
-  ["Services",     "src/components/Services.jsx"],   // exporte SectionHead
-  ["Portfolio",    "src/components/Portfolio.jsx"],  // exporte FoundersSlots, CompareAgency, ScoreCard
-  ["Pricing",      "src/components/Pricing.jsx"],     // forfaits Croissance / Premium (exporte PLANS)
+  ["icons",        "src/components/icons.jsx"],       // BENEFIT_ICONS, ArrowIcon
+  ["Services",     "src/components/Services.jsx"],    // SectionHead (en-tête de section partagé)
+  ["Nav",          "src/components/Nav.jsx"],         // Nav, Brand
+  ["Hero",         "src/components/Hero.jsx"],        // Hero + maquette ordinateur/mobile
+  ["Pricing",      "src/components/Pricing.jsx"],     // Pricing (tableau), SubscriptionModel, PLANS
+  ["Portfolio",    "src/components/Portfolio.jsx"],   // Realisations, CompareAgency
   ["About",        "src/components/About.jsx"],
-  ["FAQ",          "src/components/FAQ.jsx"],         // exporte FAQ, FAQ_WEB, FAQ_ABO
-  ["Footer",       "src/components/Footer.jsx"],      // exporte aussi FinalCTA
-  ["cinema",       "src/cinema.jsx"],                 // ScrollProgress, WhyNovio, Specs
-  ["pages",        "src/components/pages.jsx"],        // en-têtes + composition des pages
-  ["app",          "src/app.jsx"],                     // routeur (data-page)
+  ["FAQ",          "src/components/FAQ.jsx"],         // FAQ, FAQ_WEB, FAQ_ABO
+  ["Footer",       "src/components/Footer.jsx"],      // FinalCTA, Footer
+  ["pages",        "src/components/pages.jsx"],       // en-têtes + composition des pages
+  ["app",          "src/app.jsx"],                    // routeur (data-page)
 ];
 
 const srcPaths = FILES.map(([, src]) => src).join(" ");
@@ -55,13 +52,13 @@ const PAGES = [
     title: "Novio Studio — Sites web par abonnement pour entrepreneurs | Gatineau · Ottawa · Outaouais",
     desc: "Studio web à Gatineau pour couvreurs, plombiers, techniciens HVAC, paysagistes et rénovateurs. Un site professionnel hébergé, entretenu et optimisé, dès 129 $/mois, sans investissement initial important.",
     ogTitle: "Novio Studio — Sites web par abonnement | Gatineau Ottawa",
-    ogDesc: "Un site qui fait sonner le téléphone, hébergé, entretenu et optimisé pour toi. Studio web à Gatineau, dès 129 $/mois.",
+    ogDesc: "Novio Studio conçoit, héberge et entretient le site de votre entreprise. Gatineau et Outaouais, dès 129 $/mois.",
   },
   {
     file: "site-web.html", page: "site-web", canonical: "https://noviostudio.online/site-web",
     title: "Sites web professionnels pour entrepreneurs — Novio Studio | Gatineau Ottawa",
-    desc: "Un site rapide et professionnel, hébergé et entretenu pour toi. Forfaits Croissance 129 $/mois et Premium 199 $/mois. Pour les PME de l'Outaouais qui veulent plus d'appels et de soumissions.",
-    ogTitle: "Sites web qui font sonner le téléphone — Novio Studio",
+    desc: "Des sites clairs, rapides et pensés pour Google, conçus, hébergés et entretenus pour les entreprises de l'Outaouais. Forfaits Croissance 129 $/mois et Premium 199 $/mois.",
+    ogTitle: "Des sites conçus pour attirer des clients — Novio Studio",
     ogDesc: "Un site professionnel tout inclus, dès 129 $/mois. Pensé pour les entrepreneurs de l'Outaouais.",
   },
   {
@@ -74,9 +71,9 @@ const PAGES = [
   {
     file: "contact.html", page: "contact", canonical: "https://noviostudio.online/contact",
     title: "Contact — Novio Studio | Gatineau · Ottawa · Outaouais",
-    desc: "Parle directement avec Léo. Décris ton projet en 2 minutes via le formulaire, ou écris/appelle directement. Réponse en moins de 24 heures, sans jargon.",
+    desc: "Demandez une soumission à Novio Studio : décrivez votre entreprise via le formulaire, ou écrivez et appelez directement. Réponse en moins de 24 heures.",
     ogTitle: "Contact — Novio Studio",
-    ogDesc: "Premier appel de 15 minutes, gratuit. On parle chiffres, pas jargon. Réponse en moins de 24 h.",
+    ogDesc: "Premier appel de 15 minutes, gratuit et sans engagement. Réponse en moins de 24 h.",
   },
 ];
 

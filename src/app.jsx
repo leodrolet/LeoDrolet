@@ -1,14 +1,11 @@
 /* ============================================================
    app.jsx — Novio Studio · routeur multi-pages
    La page à rendre est déterminée par l'attribut data-page sur
-   #root (défini dans chaque fichier HTML). ScrollProgress, Nav
-   et Footer sont communs à toutes les pages.
+   #root (défini dans chaque fichier HTML). Nav et Footer sont
+   communs à toutes les pages.
    ============================================================ */
 
-const {
-  ScrollProgress, Nav, Footer,
-  HomePage, SiteWebPage, PricingPage, ContactPage,
-} = window;
+const { Nav, Footer, HomePage, SiteWebPage, PricingPage, ContactPage } = window;
 
 const PAGES = {
   home: HomePage,
@@ -23,9 +20,10 @@ const App = () => {
   const Page = PAGES[key] || HomePage;
   return (
     <React.Fragment>
-      <ScrollProgress />
       <Nav />
-      <Page />
+      <main id="contenu" tabIndex="-1">
+        <Page />
+      </main>
       <Footer />
     </React.Fragment>
   );

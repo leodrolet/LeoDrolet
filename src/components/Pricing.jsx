@@ -1,171 +1,190 @@
 /* ============================================================
-   Pricing.jsx, Forfaits par abonnement mensuel (Croissance · Premium).
-   Section réutilisée sur l'accueil, /site-web et /tarifs.
-   Les CTA mènent au formulaire de contact existant avec le forfait
-   présélectionné (/contact?forfait=…#formulaire, lu par ProjectForm).
-   Dépend de : window.useReveal, window.BENEFIT_ICONS, window.Motion
+   Pricing.jsx, Forfaits par abonnement (Croissance · Premium).
+     · Pricing           : tableau comparatif (accueil, /site-web, /tarifs)
+     · SubscriptionModel : fonctionnement de l'abonnement en 3 points
+   Les boutons « Choisir … » mènent au formulaire de contact existant
+   avec le forfait présélectionné : /contact?forfait=<slug>#formulaire
+   Dépend de : window.SectionHead
    ============================================================ */
 
-const { useReveal } = window;
-const { motion: m, useReducedMotion } = window.Motion || {};
-const { BENEFIT_ICONS } = window;
-
-const EASE_OUT_EXPO = [0.16, 1, 0.3, 1];
+const { SectionHead } = window;
 
 // Frais de départ uniques (identiques pour les deux forfaits)
 const SETUP_FEE = 200;
 
-// Phrase de présentation du modèle d'abonnement (texte fourni par Novio Studio).
+// Présentation du modèle d'abonnement (texte fourni par Novio Studio)
 const SUBSCRIPTION_PITCH =
   "Un site Web professionnel sans investissement initial important. Profitez d'un site conçu pour " +
   "votre entreprise, hébergé, entretenu et optimisé grâce à un abonnement mensuel simple et transparent.";
 
-/* ── Données des forfaits ──
-   keys  : les 3 dimensions qui différencient les forfaits (alignées d'une carte à l'autre).
-   items : le reste de ce qui est inclus.
-   `slug` sert au lien de contact (?forfait=slug) et à la présélection du formulaire. */
 const PLANS = [
   {
     slug: "croissance",
     name: "Croissance",
     price: 129,
-    pitch: "Pour les entreprises en croissance qui souhaitent avoir une présence Web professionnelle et efficace.",
-    featured: true,
+    pitch: "Pour les entreprises en croissance qui souhaitent une présence Web professionnelle et efficace.",
     cta: "Choisir Croissance",
-    keys: [
-      { k: "Site Web",      v: "5 à 10 pages" },
-      { k: "Modifications", v: "1 h / mois" },
-      { k: "SEO",           v: "De base" },
-    ],
-    listLabel: "Aussi inclus",
-    items: [
-      { icon: "server",        t: "Hébergement Web" },
-      { icon: "globe",         t: "Gestion du nom de domaine" },
-      { icon: "shield",        t: "Sécurité et sauvegardes" },
-      { icon: "refresh",       t: "Maintenance et mises à jour" },
-      { icon: "mail",          t: "Formulaire de contact fonctionnel" },
-      { icon: "barchart",      t: "Statistiques de fréquentation du site" },
-      { icon: "messagecircle", t: "Support technique" },
-    ],
+    recommended: true,
   },
   {
     slug: "premium",
     name: "Premium",
     price: 199,
-    pitch: "Pour les entreprises qui souhaitent une présence Web entièrement personnalisée et des fonctionnalités plus avancées.",
-    featured: false,
+    pitch: "Pour les entreprises qui souhaitent une présence Web entièrement personnalisée et des fonctionnalités avancées.",
     cta: "Choisir Premium",
-    keys: [
-      { k: "Site Web",      v: "Entièrement personnalisé", up: true },
-      { k: "Modifications", v: "Jusqu'à 2 h / mois",       up: true },
-      { k: "SEO",           v: "Avancé",                   up: true },
+    recommended: false,
+  },
+];
+
+// Valeurs par forfait, dans l'ordre de PLANS. true = inclus, false = non inclus.
+const ROW_GROUPS = [
+  {
+    title: "Ce qui distingue les forfaits",
+    rows: [
+      { label: "Site Web",                                values: ["5 à 10 pages", "Entièrement personnalisé"] },
+      { label: "Modifications de contenu ou de design",   values: ["1 h par mois", "Jusqu'à 2 h par mois"] },
+      { label: "Optimisation SEO",                        values: ["De base", "Avancée"] },
+      { label: "Support",                                 values: ["Technique", "Prioritaire"] },
+      { label: "Intégrations avec des services externes", values: [false, true] },
+      { label: "Automatisations personnalisées",          values: [false, true] },
     ],
-    listLabel: "Tout Croissance, plus",
-    items: [
-      { icon: "checkcircle", t: "Tout ce qui est compris dans le forfait Croissance", base: true },
-      { icon: "plug",        t: "Intégrations avec des services externes" },
-      { icon: "workflow",    t: "Automatisations personnalisées" },
-      { icon: "headset",     t: "Support prioritaire" },
+  },
+  {
+    title: "Inclus dans les deux forfaits",
+    rows: [
+      { label: "Hébergement Web",                   values: [true, true] },
+      { label: "Gestion du nom de domaine",         values: [true, true] },
+      { label: "Sécurité et sauvegardes",           values: [true, true] },
+      { label: "Maintenance et mises à jour",       values: [true, true] },
+      { label: "Formulaire de contact fonctionnel", values: [true, true] },
+      { label: "Statistiques de fréquentation",     values: [true, true] },
     ],
   },
 ];
 
-const ASSURANCES = [
-  { icon: "dollar",   t: `Prix mensuel fixe · ${SETUP_FEE} $ de frais de départ` },
-  { icon: "clock",    t: "Réponse en moins de 24 h" },
-  { icon: "mappin",   t: "Basé à Gatineau, un seul interlocuteur" },
-];
-
 const contactHref = (slug) => `/contact?forfait=${slug}#formulaire`;
 
-const PlanCard = ({ p, i, reduce }) => {
-  const titleId = `forfait-${p.slug}`;
-  return (
-    <m.article
-      className={`plan-card tier${p.featured ? " tier--featured" : ""}`}
-      aria-labelledby={titleId}
-      initial={reduce ? false : { opacity: 0, y: 32 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.15 }}
-      transition={{ duration: 0.75, ease: EASE_OUT_EXPO, delay: 0.1 + i * 0.12 }}
-    >
-      {p.featured && <span className="tier__badge">Recommandé</span>}
+const Check = () => (
+  <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+    <path d="M3.5 8.5l3 3 6-7" />
+  </svg>
+);
 
-      <header className="tier__head">
-        <h3 className="tier__name" id={titleId}>Forfait {p.name}</h3>
-        <p className="tier__pitch">{p.pitch}</p>
-        <p className="tier__price">
-          <span className="tier__amount">{p.price}&nbsp;$</span>
-          <span className="tier__unit">/mois</span>
-        </p>
-        <p className="tier__setup">+ {SETUP_FEE}&nbsp;$ de frais de départ, une seule fois</p>
-      </header>
-
-      <dl className="tier__keys">
-        {p.keys.map((x) => (
-          <div className="tier__key" key={x.k}>
-            <dt>{x.k}</dt>
-            <dd className={x.up ? "is-up" : undefined}>{x.v}</dd>
-          </div>
-        ))}
-      </dl>
-
-      <a
-        href={contactHref(p.slug)}
-        className={`btn tier__cta${p.featured ? " btn-accent" : ""}`}
-      >
-        {p.cta} <span className="arrow" aria-hidden="true">&#8594;</span>
-      </a>
-
-      <div className="tier__body">
-        <span className="tier__label">{p.listLabel}</span>
-        <ul className="tier__list">
-          {p.items.map((it) => (
-            <li key={it.t} className={it.base ? "is-base" : undefined}>
-              <span className="tier__ico" aria-hidden="true">{BENEFIT_ICONS[it.icon]}</span>
-              <span>{it.t}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </m.article>
-  );
+const Cell = ({ v }) => {
+  if (v === true) return <span className="pt-yes"><Check /><span className="sr-only">Inclus</span></span>;
+  if (v === false) return <span className="pt-no"><span aria-hidden="true">—</span><span className="sr-only">Non inclus</span></span>;
+  return <span className="pt-val">{v}</span>;
 };
+
+const PlanHead = ({ p }) => (
+  <th scope="col" className={`pt-plan${p.recommended ? " is-rec" : ""}`}>
+    <span className={`pt-plan__rec${p.recommended ? "" : " is-empty"}`} aria-hidden={!p.recommended}>
+      {p.recommended ? "Recommandé" : " "}
+    </span>
+    <span className="pt-plan__name">{p.name}</span>
+    <span className="pt-plan__price">
+      <span className="pt-plan__amount">{p.price}&nbsp;$</span>
+      <span className="pt-plan__per">/mois</span>
+    </span>
+    <a className={`btn btn--block pt-plan__cta ${p.recommended ? "btn--primary" : "btn--secondary"}`} href={contactHref(p.slug)}>
+      {p.cta}
+    </a>
+    <span className="pt-plan__pitch">{p.pitch}</span>
+  </th>
+);
 
 const Pricing = ({
   id = "forfaits",
-  eyebrow = "Forfaits · abonnement mensuel",
-  title = (<>Deux forfaits. <em>Tout inclus.</em></>),
-}) => {
-  const ref = useReveal();
-  const reduce = useReducedMotion ? useReducedMotion() : false;
-  return (
-    <section className="section tiers-section" id={id} aria-labelledby={`${id}-title`}>
-      <div className="tiers-layout">
-        <div className="tiers-intro reveal" ref={ref}>
-          <div className="sec-head">
-            <div className="sec-head__eyebrow"><span className="dash"></span><span>{eyebrow}</span></div>
-            <h2 className="sec-head__t" id={`${id}-title`}>{title}</h2>
-          </div>
-          <p className="tiers-pitch">{SUBSCRIPTION_PITCH}</p>
-          <ul className="tiers-assure">
-            {ASSURANCES.map((a) => (
-              <li key={a.t}>
-                <span className="tier__ico" aria-hidden="true">{BENEFIT_ICONS[a.icon]}</span>
-                {a.t}
-              </li>
-            ))}
-          </ul>
-        </div>
+  title = "Deux forfaits, tout inclus.",
+  lead = SUBSCRIPTION_PITCH,
+  showHead = true,
+}) => (
+  <section className="section" id={id} aria-labelledby={`${id}-title`}>
+    <div className="container">
+      {showHead
+        ? <SectionHead id={`${id}-title`} title={title} lead={lead} />
+        : <h2 className="sr-only" id={`${id}-title`}>{title}</h2>}
 
-        <div className="tiers">
-          {PLANS.map((p, i) => <PlanCard key={p.slug} p={p} i={i} reduce={reduce} />)}
-        </div>
+      <div className="pt-wrap">
+        <table className="pt">
+          <caption className="sr-only">Comparaison des forfaits Croissance et Premium</caption>
+          <thead>
+            <tr>
+              <td className="pt-corner">
+                <span className="pt-corner__t">Prix mensuel fixe</span>
+                <span className="pt-corner__d">Plus {SETUP_FEE}&nbsp;$ de frais de départ, une seule fois, pour les deux forfaits.</span>
+              </td>
+              {PLANS.map((p) => <PlanHead key={p.slug} p={p} />)}
+            </tr>
+          </thead>
+          {ROW_GROUPS.map((g) => (
+            <tbody key={g.title}>
+              <tr className="pt-group">
+                <th scope="rowgroup">{g.title}</th>
+                {PLANS.map((p) => <td key={p.slug} className={p.recommended ? "is-rec" : undefined}></td>)}
+              </tr>
+              {g.rows.map((r) => (
+                <tr key={r.label}>
+                  <th scope="row" className="pt-label">{r.label}</th>
+                  {r.values.map((v, i) => (
+                    <td key={i} className={PLANS[i].recommended ? "is-rec" : undefined}><Cell v={v} /></td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          ))}
+        </table>
       </div>
-    </section>
-  );
-};
 
-window.Pricing = Pricing;
-window.PLANS = PLANS;
-window.SETUP_FEE = SETUP_FEE;
+      {/* Mobile : les boutons sont regroupés sous le tableau, pleine largeur */}
+      <div className="pt-mobile">
+        <p className="pt-mobile__note">Plus {SETUP_FEE}&nbsp;$ de frais de départ, une seule fois, pour les deux forfaits.</p>
+        {PLANS.map((p) => (
+          <a key={p.slug} className={`btn btn--lg btn--block ${p.recommended ? "btn--primary" : "btn--secondary"}`} href={contactHref(p.slug)}>
+            {p.cta}, {p.price}&nbsp;$/mois
+          </a>
+        ))}
+      </div>
+
+      <p className="pt-foot">
+        Une question sur l'abonnement ? <a className="link" href="#faq">Consultez la FAQ</a> ou{" "}
+        <a className="link" href="/contact">écrivez-moi</a>.
+      </p>
+    </div>
+  </section>
+);
+
+/* ── Fonctionnement de l'abonnement ── */
+const MODEL_POINTS = [
+  {
+    t: `${SETUP_FEE} $ pour démarrer`,
+    d: "Des frais de départ uniques, puis un prix fixe chaque mois. Pas de facture de plusieurs milliers de dollars pour lancer votre site.",
+  },
+  {
+    t: "La technique est prise en charge",
+    d: "Hébergement, nom de domaine, sécurité, sauvegardes et mises à jour : je m'en occupe, vous vous concentrez sur vos clients.",
+  },
+  {
+    t: "Un site qui reste à jour",
+    d: "Des heures de modifications sont incluses chaque mois : 1 h avec Croissance, jusqu'à 2 h avec Premium.",
+  },
+];
+
+const SubscriptionModel = ({ title = "Comment fonctionne l'abonnement." }) => (
+  <section className="section" aria-labelledby="abonnement-title">
+    <div className="container">
+      <SectionHead id="abonnement-title" title={title} />
+      <ol className="points">
+        {MODEL_POINTS.map((pt, i) => (
+          <li className="point" key={pt.t}>
+            <span className="point__n" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+            <h3 className="point__t">{pt.t}</h3>
+            <p className="point__d">{pt.d}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+);
+
+Object.assign(window, { Pricing, SubscriptionModel, PLANS, SETUP_FEE });

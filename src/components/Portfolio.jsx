@@ -1,144 +1,83 @@
 /* ============================================================
-   Portfolio.jsx, Slots fondateur + comparateur agence/novio
-   Dépend de : window.useReveal, window.SectionHead
+   Portfolio.jsx
+     · Realisations  : état réel du portfolio (aucun projet client publié
+                       pour l'instant) + 4 places fondateur, une par secteur
+     · CompareAgency : tableau Novio Studio vs agence traditionnelle
+   Règle : ne jamais présenter de projet, client ou résultat fictif.
+   Dépend de : window.SectionHead, window.ArrowIcon
    ============================================================ */
 
-const { useReveal, SectionHead, BENEFIT_ICONS } = window;
-const { motion: m } = window.Motion || {};
+const { SectionHead, ArrowIcon } = window;
 
-const EASE_OUT_EXPO = [0.16, 1, 0.3, 1];
-
-const RevealItem = ({ as: Tag = "div", className = "", style = {}, delay = 0, children, onClick }) => {
-  const ref = useReveal();
-  return (
-    <Tag ref={ref} className={`reveal ${className}`} style={{ transitionDelay: `${delay}ms`, ...style }} onClick={onClick}>
-      {children}
-    </Tag>
-  );
-};
-
-// ── Données : 4 slots disponibles ──
+// Places fondateur (une par secteur). Remplacer par de vrais projets au fil des livraisons.
 const SLOTS = [
-  { n: "01", status: "Disponible", title: "Couvreur ou entreprise de toiture",      sub: "secteur Gatineau / Hull / Aylmer" },
-  { n: "02", status: "Disponible", title: "Plombier ou technicien HVAC",             sub: "services résidentiels Outaouais" },
-  { n: "03", status: "Disponible", title: "Paysagiste ou entrepreneur paysagement",  sub: "Gatineau · Ottawa · Cantley" },
-  { n: "04", status: "Disponible", title: "Entrepreneur général ou rénovateur",      sub: "cuisine · salle de bain · sous-sol" },
+  { n: "01", title: "Couvreur ou entreprise de toiture",     sub: "Gatineau, Hull, Aylmer" },
+  { n: "02", title: "Plombier ou technicien en CVC",         sub: "Services résidentiels en Outaouais" },
+  { n: "03", title: "Paysagiste ou entrepreneur paysagiste", sub: "Gatineau, Ottawa, Cantley" },
+  { n: "04", title: "Entrepreneur général ou rénovateur",    sub: "Cuisines, salles de bain, sous-sols" },
 ];
 
-// ── Comparateur agence vs Novio ──
-const COMPARE_ROWS = [
-  { icon: "dollar",        feature: "Coût de départ",           agency: "5 000 $ – 15 000 $ à l'avance",   novio: "200 $ de frais de départ, une seule fois" },
-  { icon: "server",        feature: "Hébergement & sécurité",   agency: "Facturés en supplément",          novio: "Inclus dans l'abonnement" },
-  { icon: "refresh",       feature: "Maintenance & mises à jour", agency: "Facturées à la demande",        novio: "Incluses, chaque mois" },
-  { icon: "pencil",        feature: "Modifications",            agency: "100 $ – 200 $/heure",             novio: "1 à 2 h incluses chaque mois" },
-  { icon: "messagecircle", feature: "Support",                  agency: "Délais variables · non garanti",  novio: "Support technique inclus" },
-];
-
-// Scorecard : deux colonnes alignées (subgrid), colonne Novio surélevée.
-const ScoreCard = ({ rows = COMPARE_ROWS, leftHead = "Agence traditionnelle", rightHead = "Novio Studio" }) => {
-  const Cell = ({ row, side, delay }) => (
-    <m.div
-      className="cscore-cell"
-      initial={{ opacity: 0, y: 14 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.35 }}
-      transition={{ duration: 0.5, delay, ease: EASE_OUT_EXPO }}
-    >
-      <span className="cscore-feat">
-        <span className="cscore-ico">{BENEFIT_ICONS[row.icon]}</span>{row.feature}
-      </span>
-      {side === "novio" ? (
-        <span className="cscore-val">
-          <span className="cscore-mark cscore-mark--yes">✓</span>{row.novio}
-        </span>
-      ) : (
-        <span className="cscore-val cscore-val--agency">
-          <span className="cscore-mark cscore-mark--no">✕</span>{row.agency}
-        </span>
-      )}
-    </m.div>
-  );
-
-  return (
-    <div className="cscore" role="table" aria-label="Comparatif agence traditionnelle vs Novio Studio">
-      <div className="cscore-card cscore-card--agency">
-        <div className="cscore-head" role="columnheader">{leftHead}</div>
-        {rows.map((row, i) => <Cell key={i} row={row} side="agency" delay={i * 0.06} />)}
-        <div className="cscore-foot">
-          <span className="cscore-foot-note">Coûts variables · facturés à l'heure</span>
-        </div>
-      </div>
-      <div className="cscore-card cscore-card--novio">
-        <div className="cscore-head" role="columnheader">
-          {rightHead}<span className="cscore-badge">Recommandé</span>
-        </div>
-        {rows.map((row, i) => <Cell key={i} row={row} side="novio" delay={0.12 + i * 0.06} />)}
-        <div className="cscore-foot">
-          <span className="cscore-foot-price">Dès 129 $ <em>/mois, tout inclus</em></span>
-          <a className="btn btn-accent cscore-cta" href="/contact">Démarrer mon projet &#8594;</a>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-// ── Galerie « réalisations » : slots fondateur ──
-const FoundersSlots = () => (
-  <section className="section" id="travaux">
-    <SectionHead
-      num="03"
-      kicker="Travaux"
-      title={<>4 PME vont <em style={{ fontStyle: "italic", color: "var(--ink-2)" }}>dominer leur secteur.</em></>}
-      right="Cohorte fondateur · 04 places"
-    />
-    <RevealItem className="founders-banner">
-      <div className="big">4 places fondateur disponibles.</div>
-      <div>Votre concurrent n'est pas encore dans notre galerie. Soyez le premier.</div>
-    </RevealItem>
-    <div className="portfolio">
-      {SLOTS.map((s, i) => (
-        <m.article
-          key={s.n}
-          className="slot"
-          onClick={() => { window.location.href = "/contact"; }}
-          initial={{ opacity: 0, y: 32 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.6, delay: i * 0.09, ease: [0.22, 1, 0.36, 1] }}
-          whileHover={{ y: -8, scale: 1.015, transition: { duration: 0.28, ease: "easeOut" } }}
-          style={{ cursor: "pointer" }}
-        >
-          <div className="slot-top">
-            <span className="slot-num">SLOT {s.n} / 04</span>
-            <span className="status">{s.status}</span>
-          </div>
-          <h4>{s.title}<br /><em>{s.sub}</em></h4>
-          <div className="slot-bottom">
-            <span style={{ color: "var(--mute)" }}>&#8627; réclamer cette place</span>
-          </div>
-        </m.article>
-      ))}
+const Realisations = () => (
+  <section className="section" id="realisations" aria-labelledby="realisations-title">
+    <div className="container">
+      <SectionHead
+        id="realisations-title"
+        title="Réalisations."
+        lead="Le portfolio est en construction. Les quatre premières entreprises accompagnées y seront présentées, une par secteur. Ces places sont encore ouvertes."
+      />
+      <ul className="slots">
+        {SLOTS.map((s) => (
+          <li key={s.n}>
+            <a className="slot" href="/contact">
+              <span className="slot__n" aria-hidden="true">{s.n}</span>
+              <span className="slot__body">
+                <span className="slot__t">{s.title}</span>
+                <span className="slot__s">{s.sub}</span>
+              </span>
+              <span className="slot__status">Place disponible</span>
+              <span className="slot__go" aria-hidden="true"><ArrowIcon /></span>
+            </a>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 );
 
-// ── Comparateur Novio vs agence traditionnelle ──
+// ── Comparatif (formulations générales, sans chiffres de marché non vérifiés) ──
+const COMPARE_ROWS = [
+  { feature: "Coût de départ",            agency: "Plusieurs milliers de dollars à l'avance", novio: "200 $ de frais de départ, une seule fois" },
+  { feature: "Hébergement et sécurité",   agency: "Souvent facturés en supplément",           novio: "Inclus dans l'abonnement" },
+  { feature: "Maintenance et mises à jour", agency: "Facturées à la demande",                 novio: "Incluses, chaque mois" },
+  { feature: "Modifications",             agency: "Facturées à l'heure",                      novio: "1 à 2 h incluses chaque mois" },
+  { feature: "Interlocuteur",             agency: "Un chargé de compte",                       novio: "La personne qui conçoit votre site" },
+];
+
 const CompareAgency = () => (
-  <m.div
-    className="imgcmp-wrap"
-    initial={{ opacity: 0, y: 24 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, amount: 0.15 }}
-    transition={{ duration: 0.7, ease: EASE_OUT_EXPO, delay: 0.1 }}
-  >
-    <div className="imgcmp-eyebrow mono">
-      <span className="dash"></span>
-      <span>Novio Studio vs agence traditionnelle</span>
+  <section className="section" aria-labelledby="comparatif-title">
+    <div className="container">
+      <SectionHead id="comparatif-title" title="Novio Studio ou une agence traditionnelle ?" />
+      <table className="cmp">
+        <caption className="sr-only">Comparaison entre Novio Studio et une agence traditionnelle</caption>
+        <thead>
+          <tr>
+            <td></td>
+            <th scope="col">Agence traditionnelle</th>
+            <th scope="col" className="cmp__novio">Novio Studio</th>
+          </tr>
+        </thead>
+        <tbody>
+          {COMPARE_ROWS.map((r) => (
+            <tr key={r.feature}>
+              <th scope="row">{r.feature}</th>
+              <td data-label="Agence traditionnelle">{r.agency}</td>
+              <td data-label="Novio Studio" className="cmp__novio">{r.novio}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
-    <ScoreCard />
-  </m.div>
+  </section>
 );
 
-window.FoundersSlots = FoundersSlots;
-window.CompareAgency = CompareAgency;
-window.ScoreCard = ScoreCard;
+Object.assign(window, { Realisations, CompareAgency });
