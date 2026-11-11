@@ -51,8 +51,8 @@ const SPECS = [
     d: "Vos visiteurs n'attendent pas. Un site rapide = plus de conversions, moins de rebonds, mieux classé.",
   },
   {
-    v: "59", u: "$/mois", k: "Hébergement",
-    d: "Hébergement rapide, SSL et sauvegardes quotidiennes inclus. Sans engagement, annulable en tout temps.",
+    v: "129", u: "$/mois", k: "Tout inclus",
+    d: "Création, hébergement, sécurité, maintenance et modifications mensuelles : un seul abonnement, simple et transparent.",
   },
   {
     v: "2–3", u: "sem", k: "Livraison",
@@ -112,10 +112,10 @@ const WHY_REASONS = [
     desc: "Pensé pour convertir : le client qui cherche un couvreur à Gatineau vous trouve, vous appelle et demande une soumission.",
   },
   {
-    icon: "unlock",
+    icon: "messagecircle",
     strike: "Pas un intermédiaire",
-    title: "Vous êtes propriétaire",
-    desc: "Le site est à vous dès la livraison. Pas de location, pas de dépendance, personne entre vous et vos clients.",
+    title: "Un seul interlocuteur",
+    desc: "Vous parlez directement à la personne qui conçoit, construit et entretient votre site. Personne entre vous et vos clients.",
   },
 ];
 

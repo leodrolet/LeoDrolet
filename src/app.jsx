@@ -7,13 +7,12 @@
 
 const {
   ScrollProgress, Nav, Footer,
-  HomePage, SiteWebPage, AutomationPage, PricingPage, ContactPage,
+  HomePage, SiteWebPage, PricingPage, ContactPage,
 } = window;
 
 const PAGES = {
   home: HomePage,
   "site-web": SiteWebPage,
-  automatisation: AutomationPage,
   tarifs: PricingPage,
   contact: ContactPage,
 };

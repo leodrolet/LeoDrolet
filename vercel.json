@@ -29,6 +29,7 @@
     }
   ],
   "routes": [
+    { "src": "^/automatisation(?:\\.html)?/?$", "status": 301, "headers": { "Location": "/tarifs" } },
     { "handle": "filesystem" },
     { "src": "/(.*)", "dest": "/404.html", "status": 404 }
   ]

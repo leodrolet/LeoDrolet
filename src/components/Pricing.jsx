@@ -1,126 +1,166 @@
 /* ============================================================
-   Pricing.jsx, Page Tarifs : hub de prix (site + hébergement +
-   automatisations) + pack groupé. Comparateur ajouté au niveau
-   de la page (window.CompareAgency).
+   Pricing.jsx, Forfaits par abonnement mensuel (Croissance · Premium).
+   Section réutilisée sur l'accueil, /site-web et /tarifs.
+   Les CTA mènent au formulaire de contact existant avec le forfait
+   présélectionné (/contact?forfait=…#formulaire, lu par ProjectForm).
    Dépend de : window.useReveal, window.BENEFIT_ICONS, window.Motion
    ============================================================ */
 
 const { useReveal } = window;
-const { motion: m } = window.Motion || {};
+const { motion: m, useReducedMotion } = window.Motion || {};
 const { BENEFIT_ICONS } = window;
 
 const EASE_OUT_EXPO = [0.16, 1, 0.3, 1];
-const CONTACT = "/contact";
 
-// ── Trois lignes de prix (site unique · hébergement mensuel · IA mensuel) ──
-const PRICE_PLANS = [
+// Phrase de présentation du modèle d'abonnement (texte fourni par Novio Studio).
+const SUBSCRIPTION_PITCH =
+  "Un site Web professionnel sans investissement initial important. Profitez d'un site conçu pour " +
+  "votre entreprise, hébergé, entretenu et optimisé grâce à un abonnement mensuel simple et transparent.";
+
+/* ── Données des forfaits ──
+   keys  : les 3 dimensions qui différencient les forfaits (alignées d'une carte à l'autre).
+   items : le reste de ce qui est inclus.
+   `slug` sert au lien de contact (?forfait=slug) et à la présélection du formulaire. */
+const PLANS = [
   {
-    tier: "Site Web", price: "1 500 $", unit: "unique",
-    best: "Un site sur mesure, livré clé en main.", sub: null, featured: false,
+    slug: "croissance",
+    name: "Croissance",
+    price: 129,
+    pitch: "Pour les entreprises en croissance qui souhaitent avoir une présence Web professionnelle et efficace.",
+    featured: true,
+    cta: "Choisir Croissance",
+    keys: [
+      { k: "Site Web",      v: "5 à 10 pages" },
+      { k: "Modifications", v: "1 h / mois" },
+      { k: "SEO",           v: "De base" },
+    ],
+    listLabel: "Aussi inclus",
     items: [
-      { icon: "layout",     t: "5 pages sur mesure" },
-      { icon: "smartphone", t: "Mobile responsive, rapide partout" },
-      { icon: "pencil",     t: "Design personnalisé, pas un template" },
-      { icon: "link",       t: "Formulaire de contact inclus" },
-      { icon: "clock",      t: "Livré en 2–3 semaines" },
+      { icon: "server",        t: "Hébergement Web" },
+      { icon: "globe",         t: "Gestion du nom de domaine" },
+      { icon: "shield",        t: "Sécurité et sauvegardes" },
+      { icon: "refresh",       t: "Maintenance et mises à jour" },
+      { icon: "mail",          t: "Formulaire de contact fonctionnel" },
+      { icon: "barchart",      t: "Statistiques de fréquentation du site" },
+      { icon: "messagecircle", t: "Support technique" },
     ],
   },
   {
-    tier: "Hébergement & maintenance", price: "59 $", unit: "mois",
-    best: "Ton site en ligne, sans souci.", sub: "Sans engagement, annulable en tout temps", featured: false,
-    items: [
-      { icon: "server",        t: "Hébergement rapide + SSL" },
-      { icon: "refresh",       t: "Sauvegardes quotidiennes" },
-      { icon: "messagecircle", t: "Support par courriel" },
+    slug: "premium",
+    name: "Premium",
+    price: 199,
+    pitch: "Pour les entreprises qui souhaitent une présence Web entièrement personnalisée et des fonctionnalités plus avancées.",
+    featured: false,
+    cta: "Choisir Premium",
+    keys: [
+      { k: "Site Web",      v: "Entièrement personnalisé", up: true },
+      { k: "Modifications", v: "Jusqu'à 2 h / mois",       up: true },
+      { k: "SEO",           v: "Avancé",                   up: true },
     ],
-  },
-  {
-    tier: "Automatisation IA", price: "250 $", unit: "mois",
-    best: "Par automatisation. Aucun lead ne t'échappe.", sub: "Sans frais d'installation", featured: true,
+    listLabel: "Tout Croissance, plus",
     items: [
-      { icon: "phone",         t: "Réponse aux appels manqués" },
-      { icon: "messagecircle", t: "Chatbot de qualification 24/7" },
-      { icon: "refresh",       t: "Relance des soumissions" },
-      { icon: "star",          t: "Avis Google automatiques" },
+      { icon: "checkcircle", t: "Tout ce qui est compris dans le forfait Croissance", base: true },
+      { icon: "plug",        t: "Intégrations avec des services externes" },
+      { icon: "workflow",    t: "Automatisations personnalisées" },
+      { icon: "headset",     t: "Support prioritaire" },
     ],
   },
 ];
 
-const PriceCard = ({ p, i }) => (
-  <m.div
-    initial={{ opacity: 0, y: 40, scale: 0.97 }}
-    whileInView={{ opacity: 1, y: 0, scale: 1 }}
-    viewport={{ once: true, amount: 0.1 }}
-    transition={{ duration: 0.7, ease: EASE_OUT_EXPO, delay: 0.12 + i * 0.12 }}
-    whileHover={{ y: -6, transition: { duration: 0.25, ease: "easeOut" } }}
-    style={{ height: "100%" }}
-  >
-    <div className={`plan-card${p.featured ? " plan-card--featured" : ""}`}>
-      {p.featured && <span className="plan-badge">Le plus demandé</span>}
-      <div className="plan-card-header">
-        <div className="plan-card-top"><span className="plan-tier">{p.tier}</span></div>
-        <span className="plan-amount">{p.price}<sup className="plan-amount-unit">/{p.unit}</sup></span>
-        {p.sub && <p className="plan-sub-note">{p.sub}</p>}
-        <p className="plan-best-for">{p.best}</p>
-      </div>
-      <div className="plan-benefits">
-        <div className="benefit-group-items">
-          {p.items.map((it, j) => (
-            <div key={j} className="benefit-row">
-              <span className="benefit-icon-svg">{BENEFIT_ICONS[it.icon]}</span>
-              <span className="benefit-text"><strong className="benefit-bold">{it.t}</strong></span>
-            </div>
+const ASSURANCES = [
+  { icon: "dollar",   t: "Prix mensuel fixe et transparent" },
+  { icon: "clock",    t: "Réponse en moins de 24 h" },
+  { icon: "mappin",   t: "Basé à Gatineau, un seul interlocuteur" },
+];
+
+const contactHref = (slug) => `/contact?forfait=${slug}#formulaire`;
+
+const PlanCard = ({ p, i, reduce }) => {
+  const titleId = `forfait-${p.slug}`;
+  return (
+    <m.article
+      className={`plan-card tier${p.featured ? " tier--featured" : ""}`}
+      aria-labelledby={titleId}
+      initial={reduce ? false : { opacity: 0, y: 32 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 0.75, ease: EASE_OUT_EXPO, delay: 0.1 + i * 0.12 }}
+    >
+      {p.featured && <span className="tier__badge">Recommandé</span>}
+
+      <header className="tier__head">
+        <h3 className="tier__name" id={titleId}>Forfait {p.name}</h3>
+        <p className="tier__pitch">{p.pitch}</p>
+        <p className="tier__price">
+          <span className="tier__amount">{p.price}&nbsp;$</span>
+          <span className="tier__unit">/mois</span>
+        </p>
+      </header>
+
+      <dl className="tier__keys">
+        {p.keys.map((x) => (
+          <div className="tier__key" key={x.k}>
+            <dt>{x.k}</dt>
+            <dd className={x.up ? "is-up" : undefined}>{x.v}</dd>
+          </div>
+        ))}
+      </dl>
+
+      <a
+        href={contactHref(p.slug)}
+        className={`btn tier__cta${p.featured ? " btn-accent" : ""}`}
+      >
+        {p.cta} <span className="arrow" aria-hidden="true">&#8594;</span>
+      </a>
+
+      <div className="tier__body">
+        <span className="tier__label">{p.listLabel}</span>
+        <ul className="tier__list">
+          {p.items.map((it) => (
+            <li key={it.t} className={it.base ? "is-base" : undefined}>
+              <span className="tier__ico" aria-hidden="true">{BENEFIT_ICONS[it.icon]}</span>
+              <span>{it.t}</span>
+            </li>
           ))}
+        </ul>
+      </div>
+    </m.article>
+  );
+};
+
+const Pricing = ({
+  id = "forfaits",
+  eyebrow = "Forfaits · abonnement mensuel",
+  title = (<>Deux forfaits. <em>Tout inclus.</em></>),
+}) => {
+  const ref = useReveal();
+  const reduce = useReducedMotion ? useReducedMotion() : false;
+  return (
+    <section className="section tiers-section" id={id} aria-labelledby={`${id}-title`}>
+      <div className="tiers-layout">
+        <div className="tiers-intro reveal" ref={ref}>
+          <div className="sec-head">
+            <div className="sec-head__eyebrow"><span className="dash"></span><span>{eyebrow}</span></div>
+            <h2 className="sec-head__t" id={`${id}-title`}>{title}</h2>
+          </div>
+          <p className="tiers-pitch">{SUBSCRIPTION_PITCH}</p>
+          <ul className="tiers-assure">
+            {ASSURANCES.map((a) => (
+              <li key={a.t}>
+                <span className="tier__ico" aria-hidden="true">{BENEFIT_ICONS[a.icon]}</span>
+                {a.t}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="tiers">
+          {PLANS.map((p, i) => <PlanCard key={p.slug} p={p} i={i} reduce={reduce} />)}
         </div>
       </div>
-      <a href={CONTACT} className={`btn plan-cta${p.featured ? " plan-cta--featured" : ""}`}>
-        Démarrer mon projet <span className="arrow">&#8594;</span>
-      </a>
-    </div>
-  </m.div>
-);
-
-// ── Pack groupé (bande pleine largeur) ──
-const PricingPack = () => (
-  <m.section
-    className="pack"
-    initial={{ opacity: 0, y: 28 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, amount: 0.2 }}
-    transition={{ duration: 0.7, ease: EASE_OUT_EXPO }}
-  >
-    <div>
-      <h2 className="pack__t">Pack Croissance</h2>
-      <p className="pack__d">
-        Ton site qui attire plus deux automatisations qui convertissent. La machine complète pour
-        remplir ton agenda, un seul interlocuteur, un seul forfait, sans engagement.
-      </p>
-      <div className="pack__price">
-        <span className="pack__old">1 500 $ + 500 $/mois</span>
-        <span className="pack__new">1 500 $ + 400 $/mois</span>
-        <span className="pack__save">Économise 1 200 $/an</span>
-      </div>
-    </div>
-    <div className="pack__cta">
-      <a href={CONTACT} className="btn btn-accent">Démarrer mon projet <span className="arrow">&#8594;</span></a>
-      <span className="pack__note">Site + 2 automatisations au choix</span>
-    </div>
-  </m.section>
-);
-
-const Pricing = () => {
-  const ref = useReveal();
-  return (
-    <section className="section pricing" id="tarifs">
-      <div className="sec-head reveal" ref={ref}>
-        <h2 className="sec-head__t">Trois briques, <em>aucune surprise.</em></h2>
-      </div>
-      <div className="pricing-grid">
-        {PRICE_PLANS.map((p, i) => <PriceCard key={p.tier} p={p} i={i} />)}
-      </div>
-      <PricingPack />
     </section>
   );
 };
 
 window.Pricing = Pricing;
+window.PLANS = PLANS;

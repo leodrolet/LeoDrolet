@@ -6,7 +6,7 @@ const { execSync } = require("child_process");
 const fs = require("fs");
 
 // Version d'assets — bumper à chaque build pour casser le cache navigateur (Vercel).
-const ASSET_V = "56";
+const ASSET_V = "57";
 
 // Ordre de chargement — les composants dépendent de effects (useReveal, etc.)
 // pages dépend de TOUS les composants de section → chargé juste avant app.
@@ -18,14 +18,13 @@ const FILES = [
   ["Nav",          "src/components/Nav.jsx"],
   ["Hero",         "src/components/Hero.jsx"],
   ["Marquee",      "src/components/Marquee.jsx"],
-  ["Services",     "src/components/Services.jsx"],   // exporte aussi SectionHead, BenefitItem
+  ["Services",     "src/components/Services.jsx"],   // exporte SectionHead
   ["Portfolio",    "src/components/Portfolio.jsx"],  // exporte FoundersSlots, CompareAgency, ScoreCard
-  ["Pricing",      "src/components/Pricing.jsx"],     // page Tarifs (forfaits + pack)
+  ["Pricing",      "src/components/Pricing.jsx"],     // forfaits Croissance / Premium (exporte PLANS)
   ["About",        "src/components/About.jsx"],
-  ["FAQ",          "src/components/FAQ.jsx"],         // exporte FAQ, FAQ_WEB
+  ["FAQ",          "src/components/FAQ.jsx"],         // exporte FAQ, FAQ_WEB, FAQ_ABO
   ["Footer",       "src/components/Footer.jsx"],      // exporte aussi FinalCTA
   ["cinema",       "src/cinema.jsx"],                 // ScrollProgress, WhyNovio, Specs
-  ["AutoIA",       "src/components/AutoIA.jsx"],       // page Automatisation IA (refonte 6 sections)
   ["pages",        "src/components/pages.jsx"],        // en-têtes + composition des pages
   ["app",          "src/app.jsx"],                     // routeur (data-page)
 ];
@@ -53,31 +52,24 @@ const TEMPLATE = fs.readFileSync("src/page.template.html", "utf8");
 const PAGES = [
   {
     file: "index.html", page: "home", canonical: "https://noviostudio.online/",
-    title: "Novio Studio — Sites web & automatisation IA pour entrepreneurs | Gatineau · Ottawa · Outaouais",
-    desc: "Studio web à Gatineau pour couvreurs, plombiers, techniciens HVAC, paysagistes et rénovateurs. Des sites qui génèrent des appels et des automatisations IA qui ne laissent passer aucun lead. Dès 1 500 $.",
-    ogTitle: "Novio Studio — Sites web & automatisation IA | Gatineau Ottawa",
-    ogDesc: "Des sites qui font sonner le téléphone et des automatisations IA qui captent chaque lead. Studio web à Gatineau, dès 1 500 $.",
+    title: "Novio Studio — Sites web par abonnement pour entrepreneurs | Gatineau · Ottawa · Outaouais",
+    desc: "Studio web à Gatineau pour couvreurs, plombiers, techniciens HVAC, paysagistes et rénovateurs. Un site professionnel hébergé, entretenu et optimisé, dès 129 $/mois, sans investissement initial important.",
+    ogTitle: "Novio Studio — Sites web par abonnement | Gatineau Ottawa",
+    ogDesc: "Un site qui fait sonner le téléphone, hébergé, entretenu et optimisé pour toi. Studio web à Gatineau, dès 129 $/mois.",
   },
   {
     file: "site-web.html", page: "site-web", canonical: "https://noviostudio.online/site-web",
     title: "Sites web sur mesure pour entrepreneurs — Novio Studio | Gatineau Ottawa",
-    desc: "Un site rapide, sur mesure, livré en 2 à 3 semaines. Forfait dès 1 500 $ + hébergement 59 $/mois, sans engagement. Pour les PME de l'Outaouais qui veulent plus d'appels et de soumissions.",
+    desc: "Un site rapide et professionnel, hébergé et entretenu pour toi. Forfaits Croissance 129 $/mois et Premium 199 $/mois. Pour les PME de l'Outaouais qui veulent plus d'appels et de soumissions.",
     ogTitle: "Sites web qui font sonner le téléphone — Novio Studio",
-    ogDesc: "Site sur mesure livré en 2–3 semaines, dès 1 500 $. Pensé pour les entrepreneurs de l'Outaouais.",
-  },
-  {
-    file: "automatisation.html", page: "automatisation", canonical: "https://noviostudio.online/automatisation",
-    title: "Automatisation IA pour entrepreneurs — Novio Studio | 250 $/mois",
-    desc: "Réponse aux appels manqués, chatbot de qualification, relance des soumissions, avis Google automatiques. 250 $/mois par automatisation, sans frais d'installation. Aucun lead ne passe entre les craques.",
-    ogTitle: "Automatisation IA pour contractors — Novio Studio",
-    ogDesc: "Appels manqués, relances, avis Google : des automatisations à 250 $/mois sans installation qui captent chaque lead.",
+    ogDesc: "Un site professionnel tout inclus, dès 129 $/mois. Pensé pour les entrepreneurs de l'Outaouais.",
   },
   {
     file: "tarifs.html", page: "tarifs", canonical: "https://noviostudio.online/tarifs",
-    title: "Tarifs — Sites web & automatisation IA | Novio Studio Gatineau",
-    desc: "Des prix clairs, sans surprise. Site web dès 1 500 $, hébergement 59 $/mois sans engagement, automatisations IA 250 $/mois sans installation. Pack Croissance pour tout combiner.",
+    title: "Tarifs — Sites web par abonnement dès 129 $/mois | Novio Studio Gatineau",
+    desc: "Deux forfaits tout inclus : Croissance à 129 $/mois et Premium à 199 $/mois. Création du site, hébergement, sécurité, maintenance, SEO et modifications mensuelles inclus.",
     ogTitle: "Tarifs — Novio Studio",
-    ogDesc: "Site dès 1 500 $, hébergement 59 $/mois, automatisations 250 $/mois. Prix clairs, sans engagement, sans surprise.",
+    ogDesc: "Croissance 129 $/mois · Premium 199 $/mois. Un site professionnel hébergé, entretenu et optimisé, sans investissement initial important.",
   },
   {
     file: "contact.html", page: "contact", canonical: "https://noviostudio.online/contact",

@@ -9,7 +9,6 @@ const { useMagnetic } = window;
 const NAV_LINKS = [
   { href: "/", label: "Accueil" },
   { href: "/site-web", label: "Sites Web" },
-  { href: "/automatisation", label: "Automatisation IA" },
   { href: "/tarifs", label: "Tarifs" },
   { href: "/contact", label: "Contact" },
 ];

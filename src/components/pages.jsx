@@ -53,81 +53,12 @@ const SecHead = ({ eyebrow, title }) => {
   );
 };
 
-/* ── Accueil : les deux offres ── */
-const OFFERS = [
-  {
-    href: "/site-web", title: "Sites Web", price: "dès 1 500 $",
-    desc: "Un site sur mesure, rapide, qui transforme les recherches Google en appels et en soumissions.",
-    points: ["5 pages sur mesure", "Livré en 2–3 semaines", "Hébergement 59 $/mois"],
-    cta: "Voir les forfaits", featured: false,
-  },
-  {
-    href: "/automatisation", title: "Automatisation IA", price: "250 $/mois",
-    desc: "Des automatisations qui répondent, relancent et qualifient tes leads, pendant que tu travailles.",
-    points: ["Réponse aux appels manqués", "Relance des soumissions", "Avis Google automatiques"],
-    cta: "Voir les automatisations", featured: true,
-  },
-];
-
-const OfferCard = ({ o, i }) => (
-  <m.a
-    href={o.href}
-    className={`plan-card${o.featured ? " plan-card--featured" : ""}`}
-    style={{ textDecoration: "none", color: "inherit", height: "100%" }}
-    initial={{ opacity: 0, y: 40, scale: 0.97 }}
-    whileInView={{ opacity: 1, y: 0, scale: 1 }}
-    viewport={{ once: true, amount: 0.1 }}
-    transition={{ duration: 0.7, ease: EASE_OUT_EXPO, delay: 0.15 + i * 0.12 }}
-    whileHover={{ y: -6, transition: { duration: 0.25, ease: "easeOut" } }}
-  >
-    <div className="plan-card-header">
-      <div className="plan-card-top"><span className="plan-tier">{o.title}</span></div>
-      <span className="plan-amount">{o.price}</span>
-      <p className="plan-best-for">{o.desc}</p>
-    </div>
-    <div className="plan-benefits">
-      <div className="benefit-group">
-        <div className="benefit-group-items">
-          {o.points.map((p, j) => (
-            <div key={j} className="benefit-row">
-              <span className="benefit-icon-svg">{BENEFIT_ICONS.check}</span>
-              <span className="benefit-text"><strong className="benefit-bold">{p}</strong></span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-    <span className={`btn plan-cta${o.featured ? " plan-cta--featured" : ""}`}>
-      {o.cta} <span className="arrow">&#8594;</span>
-    </span>
-  </m.a>
-);
-
-const OffersOverview = () => {
-  const ref = useReveal();
-  return (
-    <section className="section" id="offres">
-      <div className="section-head reveal" ref={ref}>
-        <h2 className="section-title">Deux façons de remplir ton agenda.</h2>
-      </div>
-      <div style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-        gap: "24px",
-        padding: "0 var(--gutter)",
-      }}>
-        {OFFERS.map((o, i) => <OfferCard key={o.href} o={o} i={i} />)}
-      </div>
-    </section>
-  );
-};
-
 /* ── Process / timeline (site-web) ── */
 const PROCESS = [
   { n: "01", t: "Appel découverte",       d: "On parle de ton métier, tes clients, tes objectifs. 15 minutes, gratuit.", dur: "Jour 0" },
   { n: "02", t: "Design sur mesure",      d: "Je conçois une maquette qui te ressemble. Tu valides, on ajuste ensemble.", dur: "Semaine 1" },
-  { n: "03", t: "Construction",           d: "Je code chaque page à la main, rapide, soignée, et à toi pour toujours.", dur: "Semaine 2" },
-  { n: "04", t: "Lancement + autonomie",  d: "Mise en ligne, formation, et je reste 30 à 60 jours pour que tu sois autonome.", dur: "Semaine 3" },
+  { n: "03", t: "Construction",           d: "Je code chaque page à la main : rapide, soignée et optimisée pour Google.", dur: "Semaine 2" },
+  { n: "04", t: "Lancement + suivi",      d: "Mise en ligne, puis je m'occupe de l'hébergement, de la maintenance et de tes modifications, chaque mois.", dur: "Semaine 3" },
 ];
 
 const PStep = ({ s, i }) => {
@@ -165,12 +96,21 @@ const CHANNELS = [
   { icon: "phone", label: "Appeler", value: TEL_DISPLAY, href: `tel:${TEL}` },
 ];
 
-const INTERESTS = ["Site web", "Automatisation IA", "Pack Croissance", "Pas sûr encore"];
+const INTERESTS = ["Forfait Croissance", "Forfait Premium", "Pas sûr encore"];
+
+// Présélection depuis les boutons « Choisir … » des forfaits : /contact?forfait=croissance|premium
+const PLAN_INTEREST = { croissance: "Forfait Croissance", premium: "Forfait Premium" };
+const initialInterests = () => {
+  try {
+    const slug = (new URLSearchParams(window.location.search).get("forfait") || "").toLowerCase();
+    return PLAN_INTEREST[slug] ? [PLAN_INTEREST[slug]] : [];
+  } catch (_) { return []; }
+};
 
 // ── Formulaire de projet (AJAX → Formspree, états idle/submitting/success/error) ──
 const ProjectForm = () => {
   const [status, setStatus] = React.useState("idle");
-  const [interests, setInterests] = React.useState(["Site web"]);
+  const [interests, setInterests] = React.useState(initialInterests);
   const [error, setError] = React.useState("");
 
   const toggleInterest = (it) =>
@@ -181,7 +121,11 @@ const ProjectForm = () => {
     if (status === "submitting") return;
     const form = e.currentTarget;
     const data = new FormData(form);
-    data.set("interet", interests.join(", "));
+    data.set("interet", interests.join(", ") || "Non précisé");
+    const plans = interests.filter((x) => x.startsWith("Forfait"));
+    data.set("_subject", plans.length
+      ? `Nouvelle demande (${plans.join(" + ")}), site Novio Studio`
+      : "Nouvelle demande, site Novio Studio");
     setStatus("submitting");
     setError("");
     try {
@@ -294,6 +238,11 @@ const ProjectForm = () => {
 const ContactSection = () => {
   const asideRef = useReveal();
   const formRef = useReveal();
+  React.useEffect(() => {
+    if (window.location.hash !== "#formulaire") return;
+    const el = document.getElementById("formulaire");
+    if (el) requestAnimationFrame(() => el.scrollIntoView({ block: "start" }));
+  }, []);
   return (
     <section className="contact">
       <div className="contact__grid">
@@ -326,7 +275,7 @@ const ContactSection = () => {
           </div>
         </div>
 
-        <div className="reveal" ref={formRef}>
+        <div className="reveal contact__form" id="formulaire" ref={formRef}>
           <ProjectForm />
         </div>
       </div>
@@ -334,7 +283,7 @@ const ContactSection = () => {
   );
 };
 
-/* ── Hero Sites web (même gabarit que le hero Novio AI) ── */
+/* ── Hero Sites web (2 colonnes : copy + démo navigateur) ── */
 const SITE_CHECKS = ["Trouvé en 1re page Google", "Chargé en 0,9 seconde", "Nouvel appel reçu"];
 
 /* Étapes : 0 vide · 1 recherche Google · 2 chargement · 3 le site apparaît ·
@@ -399,7 +348,7 @@ const SiteWebHero = () => {
         </p>
         <div className="nvai-cta">
           <a href="/contact" className="btn btn-accent">Démarrer mon projet <span className="arrow">&#8594;</span></a>
-          <a href="#devis" className="btn nv-btn-ghost">Voir les forfaits</a>
+          <a href="#forfaits" className="btn nv-btn-ghost">Voir les forfaits</a>
         </div>
       </div>
       <SiteDemo />
@@ -447,7 +396,7 @@ const Testimonials = () => {
 /* ── Composition des pages ── */
 const {
   Hero, WhyNovio, Specs, MarqueeRow, FoundersSlots, About, FinalCTA,
-  Services, CompareAgency, AutoIA, Pricing, FAQ, FAQ_WEB,
+  CompareAgency, Pricing, FAQ, FAQ_WEB, FAQ_ABO,
 } = window;
 
 const HomePage = () => (
@@ -458,13 +407,13 @@ const HomePage = () => (
       "Plus de contrats",
       "Toiture · HVAC · Plomberie · Paysagement · Rénovation",
       "Gatineau · Ottawa · Outaouais",
-      "Dès 1 500 $ CAD",
+      "Dès 129 $/mois, tout inclus",
       "Livré en 7–28 jours",
       "100 / 100 Lighthouse",
       "Sans agence · sans template",
     ]} />
     <Specs />
-    <OffersOverview />
+    <Pricing />
     <FoundersSlots />
     <About />
     <Testimonials />
@@ -476,7 +425,7 @@ const SiteWebPage = () => (
   <React.Fragment>
     <SiteWebHero />
     <Process />
-    <Services />
+    <Pricing />
     <CompareAgency />
     <FAQ items={FAQ_WEB} title="Questions fréquentes." />
     <FinalCTA
@@ -487,27 +436,19 @@ const SiteWebPage = () => (
   </React.Fragment>
 );
 
-const AutomationPage = () => <AutoIA />;
-
 const PricingPage = () => (
   <React.Fragment>
     <PageHeader
       index="Tarifs"
-      metaRight="Sans engagement"
-      title={<>Des prix clairs. <em>Aucune surprise.</em></>}
-      sub="Un forfait unique pour le site, un mensuel sans engagement pour l'hébergement, des automatisations à la carte. Tu sais exactement ce que tu paies, avant de commencer."
-      stats={[
-        { v: "1 500", u: "$", k: "Site web" },
-        { v: "59", u: "$/mois", k: "Hébergement" },
-        { v: "250", u: "$/mois", k: "Par automatisation" },
-        { v: "0", u: "$", k: "Installation" },
-      ]}
+      metaRight="Abonnement mensuel"
+      title={<>Un site pro. <em>Un prix mensuel.</em></>}
+      sub="Deux forfaits tout inclus : création, hébergement, maintenance et modifications. Tu sais exactement ce que tu paies, avant de commencer."
     />
-    <Pricing />
+    <Pricing title={<>Choisis ton <em>forfait.</em></>} />
     <CompareAgency />
-    <FAQ items={FAQ_WEB} title="Questions fréquentes." />
+    <FAQ items={FAQ_ABO} title="Questions fréquentes." />
     <FinalCTA
-      headline={<>Un prix, un échéancier, un interlocuteur. <em>On commence ?</em></>}
+      headline={<>Un prix clair, un interlocuteur. <em>On commence ?</em></>}
       ctaLabel="Démarrer mon projet"
       ctaHref="/contact"
     />
@@ -527,6 +468,6 @@ const ContactPage = () => (
 );
 
 Object.assign(window, {
-  PageHeader, SecHead, OffersOverview, Process, ContactSection,
-  HomePage, SiteWebPage, AutomationPage, PricingPage, ContactPage,
+  PageHeader, SecHead, Process, ContactSection,
+  HomePage, SiteWebPage, PricingPage, ContactPage,
 });

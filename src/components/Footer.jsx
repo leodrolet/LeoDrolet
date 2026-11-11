@@ -92,7 +92,6 @@ const Footer = () => {
           <ul>
             <li><a href="/">Accueil</a></li>
             <li><a href="/site-web">Sites Web</a></li>
-            <li><a href="/automatisation">Automatisation IA</a></li>
             <li><a href="/tarifs">Tarifs</a></li>
             <li><a href="/contact">Contact</a></li>
           </ul>
