@@ -29,7 +29,7 @@ const SUBSCRIPTION_TERMS = {
 // ── Questions sur l'abonnement mensuel (page Tarifs) ──
 const FAQ_ABO = [
   { q: "Que comprend l'abonnement mensuel ?",
-    a: "La création de ton site, son hébergement, la gestion du nom de domaine, la sécurité et les sauvegardes, la maintenance et les mises à jour, l'optimisation SEO, un formulaire de contact fonctionnel, les statistiques de fréquentation et le support technique. Des heures de modifications sont aussi incluses chaque mois : 1 h avec Croissance, jusqu'à 2 h avec Premium." },
+    a: "La création de ton site, son hébergement, la gestion du nom de domaine, la sécurité et les sauvegardes, la maintenance et les mises à jour, l'optimisation SEO, un formulaire de contact fonctionnel, les statistiques de fréquentation et le support technique. Des heures de modifications sont aussi incluses chaque mois : 1 h avec Croissance, jusqu'à 2 h avec Premium. Pour démarrer, des frais de départ uniques de 200 $ s'ajoutent au premier mois." },
   { q: "Puis-je demander des modifications à mon site ?",
     a: "Oui. Chaque mois, ton forfait inclut des heures de modifications de contenu ou de design : 1 h avec Croissance, jusqu'à 2 h avec Premium. Tu m'envoies ce que tu veux changer (textes, photos, sections…), je m'en occupe." },
   { q: "Que se passe-t-il si je dépasse mes heures de modifications mensuelles ?",
@@ -45,9 +45,9 @@ const FAQ_ABO = [
 // ── Questions liées aux sites web (page Sites Web) ──
 const FAQ_WEB = [
   { q: "C'est quoi la différence avec WordPress ou Wix ?",
-    a: "Vitesse et contrôle. WordPress/Wix alourdissent les sites avec des dizaines d'extensions qui ralentissent les chargements. Je construis chaque page sur mesure, résultat : un site qui s'ouvre en moins d'une seconde, et qui te ressemble vraiment." },
+    a: "Vitesse et contrôle. WordPress/Wix alourdissent les sites avec des dizaines d'extensions qui ralentissent les chargements. Je construis des sites légers, sans extensions inutiles, résultat : un site qui s'ouvre en moins d'une seconde, et qui te ressemble. Avec Premium, le design est entièrement personnalisé, de A à Z." },
   { q: "Qu'est-ce qui est inclus dans mon forfait ?",
-    a: "Tout ce qu'il faut pour que ton site travaille pour toi : création, hébergement, gestion du nom de domaine, sécurité, sauvegardes, maintenance et des heures de modifications chaque mois. Croissance à 129 $/mois, Premium à 199 $/mois. Le détail complet est sur la page Tarifs." },
+    a: "Tout ce qu'il faut pour que ton site travaille pour toi : création, hébergement, gestion du nom de domaine, sécurité, sauvegardes, maintenance et des heures de modifications chaque mois. Croissance à 129 $/mois, Premium à 199 $/mois, plus 200 $ de frais de départ, une seule fois. Le détail complet est sur la page Tarifs." },
   { q: "Et si j'ai déjà un logo ou une identité visuelle ?",
     a: "Parfait, je travaille avec. Si tu n'en as pas, on peut en créer une minimaliste ensemble dans le cadre du projet, ou je te recommande un graphiste de la région." },
   { q: "Travailles-tu à distance ou en personne ?",

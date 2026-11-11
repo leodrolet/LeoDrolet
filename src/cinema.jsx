@@ -52,7 +52,7 @@ const SPECS = [
   },
   {
     v: "129", u: "$/mois", k: "Tout inclus",
-    d: "Création, hébergement, sécurité, maintenance et modifications mensuelles : un seul abonnement, simple et transparent.",
+    d: "Création, hébergement, sécurité, maintenance et modifications mensuelles : un seul abonnement, après 200 $ de frais de départ.",
   },
   {
     v: "2–3", u: "sem", k: "Livraison",
@@ -101,9 +101,9 @@ const Specs = () => {
 const WHY_REASONS = [
   {
     icon: "layout",
-    strike: "Pas un template",
-    title: "Sur mesure",
-    desc: "Conçu pour votre métier et votre coin de l'Outaouais, pas un thème recyclé que trois concurrents utilisent déjà.",
+    strike: "Pas un site générique",
+    title: "À votre image",
+    desc: "Pensé pour votre métier et votre coin de l'Outaouais, à vos couleurs. Et avec Premium, un design entièrement personnalisé, de A à Z.",
   },
   {
     icon: "barchart",
@@ -157,7 +157,7 @@ const WhyNovio = () => {
           Un site qui <em>génère des soumissions</em> et des appels.
         </h2>
         <p className="why-sub">
-          Trois choses qui nous séparent d'une agence, d'un template ou d'un freelance de passage.
+          Trois choses qui nous séparent d'une agence, d'un site générique ou d'un freelance de passage.
         </p>
       </div>
       <div className="why-grid">

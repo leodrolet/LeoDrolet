@@ -56,7 +56,7 @@ const SecHead = ({ eyebrow, title }) => {
 /* ── Process / timeline (site-web) ── */
 const PROCESS = [
   { n: "01", t: "Appel découverte",       d: "On parle de ton métier, tes clients, tes objectifs. 15 minutes, gratuit.", dur: "Jour 0" },
-  { n: "02", t: "Design sur mesure",      d: "Je conçois une maquette qui te ressemble. Tu valides, on ajuste ensemble.", dur: "Semaine 1" },
+  { n: "02", t: "Design à ton image",     d: "Je conçois une maquette à tes couleurs, qui te ressemble. Tu valides, on ajuste ensemble.", dur: "Semaine 1" },
   { n: "03", t: "Construction",           d: "Je code chaque page à la main : rapide, soignée et optimisée pour Google.", dur: "Semaine 2" },
   { n: "04", t: "Lancement + suivi",      d: "Mise en ligne, puis je m'occupe de l'hébergement, de la maintenance et de tes modifications, chaque mois.", dur: "Semaine 3" },
 ];
@@ -343,7 +343,7 @@ const SiteWebHero = () => {
       <div className="nvai-hero__copy">
         <h1 className="nvai-hero__t">Un site qui <em>fait sonner le téléphone.</em></h1>
         <p className="nvai-hero__sub">
-          Sur mesure, rapide, pensé pour les entrepreneurs de l'Outaouais. Ton prochain client te
+          Professionnel, rapide, pensé pour les entrepreneurs de l'Outaouais. Ton prochain client te
           cherche sur Google, fais en sorte qu'il te trouve, toi, pas ton concurrent.
         </p>
         <div className="nvai-cta">
@@ -410,7 +410,7 @@ const HomePage = () => (
       "Dès 129 $/mois, tout inclus",
       "Livré en 7–28 jours",
       "100 / 100 Lighthouse",
-      "Sans agence · sans template",
+      "Sans agence · sans jargon",
     ]} />
     <Specs />
     <Pricing />
@@ -442,7 +442,7 @@ const PricingPage = () => (
       index="Tarifs"
       metaRight="Abonnement mensuel"
       title={<>Un site pro. <em>Un prix mensuel.</em></>}
-      sub="Deux forfaits tout inclus : création, hébergement, maintenance et modifications. Tu sais exactement ce que tu paies, avant de commencer."
+      sub="Deux forfaits tout inclus : création, hébergement, maintenance et modifications, plus 200 $ de frais de départ, une seule fois. Tu sais exactement ce que tu paies, avant de commencer."
     />
     <Pricing title={<>Choisis ton <em>forfait.</em></>} />
     <CompareAgency />

@@ -6,7 +6,7 @@
 const { useReveal, SectionHead } = window;
 
 const TAGS = [
-  "Sites sur mesure", "Animations fluides", "Chargement ultra-rapide",
+  "Sites à votre image", "Animations fluides", "Chargement ultra-rapide",
   "Design interactif", "Référencement local", "Gestion de contenu simple",
   "Identité visuelle", "Performance mesurée",
 ];
@@ -34,7 +34,7 @@ const About = () => {
             Bonjour. Je suis <em>Léo</em>. J'ai monté ce studio à Gatineau pour une raison simple : les contractors de l'Outaouais méritent des sites à la hauteur de leur travail, un plombier, couvreur ou paysagiste avec un bon site reçoit des soumissions pendant qu'il travaille, pas seulement par bouche-à-oreille.
           </p>
           <p>
-            Pas un template <em>recyclé.</em> Pas une agence à 50K. Du sur-mesure, livré en quelques semaines, par la personne qui te répond au téléphone.
+            Pas un site <em>générique.</em> Pas une agence à 50K. Un site pensé pour ton entreprise, livré en quelques semaines, par la personne qui te répond au téléphone.
           </p>
           <div className="small">
             Je conçois. Je construis. Je livre. Et je reste 30 à 60 jours après la mise en ligne pour que tu sois autonome. Tu parles directement avec la personne qui fait le travail, pas un compte d'agence.

@@ -27,7 +27,7 @@ const SLOTS = [
 
 // ── Comparateur agence vs Novio ──
 const COMPARE_ROWS = [
-  { icon: "dollar",        feature: "Coût de départ",           agency: "5 000 $ – 15 000 $ à l'avance",   novio: "Sans investissement initial important" },
+  { icon: "dollar",        feature: "Coût de départ",           agency: "5 000 $ – 15 000 $ à l'avance",   novio: "200 $ de frais de départ, une seule fois" },
   { icon: "server",        feature: "Hébergement & sécurité",   agency: "Facturés en supplément",          novio: "Inclus dans l'abonnement" },
   { icon: "refresh",       feature: "Maintenance & mises à jour", agency: "Facturées à la demande",        novio: "Incluses, chaque mois" },
   { icon: "pencil",        feature: "Modifications",            agency: "100 $ – 200 $/heure",             novio: "1 à 2 h incluses chaque mois" },

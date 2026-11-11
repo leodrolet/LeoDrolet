@@ -12,6 +12,9 @@ const { BENEFIT_ICONS } = window;
 
 const EASE_OUT_EXPO = [0.16, 1, 0.3, 1];
 
+// Frais de départ uniques (identiques pour les deux forfaits)
+const SETUP_FEE = 200;
+
 // Phrase de présentation du modèle d'abonnement (texte fourni par Novio Studio).
 const SUBSCRIPTION_PITCH =
   "Un site Web professionnel sans investissement initial important. Profitez d'un site conçu pour " +
@@ -68,7 +71,7 @@ const PLANS = [
 ];
 
 const ASSURANCES = [
-  { icon: "dollar",   t: "Prix mensuel fixe et transparent" },
+  { icon: "dollar",   t: `Prix mensuel fixe · ${SETUP_FEE} $ de frais de départ` },
   { icon: "clock",    t: "Réponse en moins de 24 h" },
   { icon: "mappin",   t: "Basé à Gatineau, un seul interlocuteur" },
 ];
@@ -95,6 +98,7 @@ const PlanCard = ({ p, i, reduce }) => {
           <span className="tier__amount">{p.price}&nbsp;$</span>
           <span className="tier__unit">/mois</span>
         </p>
+        <p className="tier__setup">+ {SETUP_FEE}&nbsp;$ de frais de départ, une seule fois</p>
       </header>
 
       <dl className="tier__keys">
@@ -164,3 +168,4 @@ const Pricing = ({
 
 window.Pricing = Pricing;
 window.PLANS = PLANS;
+window.SETUP_FEE = SETUP_FEE;

@@ -6,7 +6,7 @@ const { execSync } = require("child_process");
 const fs = require("fs");
 
 // Version d'assets — bumper à chaque build pour casser le cache navigateur (Vercel).
-const ASSET_V = "57";
+const ASSET_V = "58";
 
 // Ordre de chargement — les composants dépendent de effects (useReveal, etc.)
 // pages dépend de TOUS les composants de section → chargé juste avant app.
@@ -59,7 +59,7 @@ const PAGES = [
   },
   {
     file: "site-web.html", page: "site-web", canonical: "https://noviostudio.online/site-web",
-    title: "Sites web sur mesure pour entrepreneurs — Novio Studio | Gatineau Ottawa",
+    title: "Sites web professionnels pour entrepreneurs — Novio Studio | Gatineau Ottawa",
     desc: "Un site rapide et professionnel, hébergé et entretenu pour toi. Forfaits Croissance 129 $/mois et Premium 199 $/mois. Pour les PME de l'Outaouais qui veulent plus d'appels et de soumissions.",
     ogTitle: "Sites web qui font sonner le téléphone — Novio Studio",
     ogDesc: "Un site professionnel tout inclus, dès 129 $/mois. Pensé pour les entrepreneurs de l'Outaouais.",
@@ -67,7 +67,7 @@ const PAGES = [
   {
     file: "tarifs.html", page: "tarifs", canonical: "https://noviostudio.online/tarifs",
     title: "Tarifs — Sites web par abonnement dès 129 $/mois | Novio Studio Gatineau",
-    desc: "Deux forfaits tout inclus : Croissance à 129 $/mois et Premium à 199 $/mois. Création du site, hébergement, sécurité, maintenance, SEO et modifications mensuelles inclus.",
+    desc: "Deux forfaits tout inclus : Croissance à 129 $/mois et Premium à 199 $/mois. Création du site, hébergement, sécurité, maintenance, SEO et modifications mensuelles inclus. 200 $ de frais de départ.",
     ogTitle: "Tarifs — Novio Studio",
     ogDesc: "Croissance 129 $/mois · Premium 199 $/mois. Un site professionnel hébergé, entretenu et optimisé, sans investissement initial important.",
   },
