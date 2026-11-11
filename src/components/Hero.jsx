@@ -53,6 +53,21 @@ const DeviceMockup = () => (
   </figure>
 );
 
+// Trait orange dessiné à la main : traverse le bas du hero et descend, avec une
+// flèche, vers la section suivante pour inviter à défiler. Décoratif (aria-hidden).
+// Se trace une seule fois au chargement ; statique si prefers-reduced-motion.
+const Scribble = () => (
+  <svg className="hero__scribble" viewBox="0 0 1440 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+    <path
+      className="scribble__line"
+      pathLength="1"
+      d="M -10 120 C 60 40, 110 200, 190 150 C 260 105, 250 40, 320 70 C 390 100, 360 190, 430 180 C 500 170, 520 90, 470 85 C 420 80, 430 160, 520 165 C 610 170, 640 60, 720 90 C 790 115, 790 196, 744 190 C 700 184, 702 122, 760 125 C 840 130, 860 200, 930 175 C 1000 150, 980 70, 1050 80 C 1120 90, 1100 180, 1170 170 C 1230 160, 1210 70, 1150 90 C 1100 110, 1180 200, 1260 160 C 1330 125, 1350 60, 1450 90"
+    />
+    <path className="scribble__drop" pathLength="1" d="M 744 190 C 762 218, 734 246, 752 284" />
+    <path className="scribble__head" pathLength="1" d="M 733 265 L 752 287 L 773 266" />
+  </svg>
+);
+
 const Hero = () => (
   <section className="hero" aria-labelledby="hero-title">
     <div className="container hero__grid">
@@ -73,6 +88,7 @@ const Hero = () => (
       </div>
       <DeviceMockup />
     </div>
+    <Scribble />
   </section>
 );
 
