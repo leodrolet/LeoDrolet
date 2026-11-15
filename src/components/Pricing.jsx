@@ -110,10 +110,10 @@ const Pricing = ({
           <caption className="sr-only">Comparaison des forfaits Croissance et Premium</caption>
           <thead>
             <tr>
-              <td className="pt-corner">
+              <th scope="col" className="pt-corner">
                 <span className="pt-corner__t">Prix mensuel fixe</span>
                 <span className="pt-corner__d">Plus {SETUP_FEE}&nbsp;$ de frais de départ, une seule fois, pour les deux forfaits.</span>
-              </td>
+              </th>
               {PLANS.map((p) => <PlanHead key={p.slug} p={p} />)}
             </tr>
           </thead>

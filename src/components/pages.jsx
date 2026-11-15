@@ -4,7 +4,7 @@
    Chargé après tous les composants de section (dépend d'eux).
    ============================================================ */
 
-const { BENEFIT_ICONS, ArrowIcon, SectionHead } = window;
+const { BENEFIT_ICONS, ArrowIcon, SectionHead, track } = window;
 
 const FORMSPREE = "https://formspree.io/f/mdaronva";
 const EMAIL = "leo_drolet@noviostudio.online";
@@ -75,18 +75,66 @@ const SiteFeatures = () => (
 );
 
 /* ── Contact ── */
-const NEXT_STEPS = [
-  { t: "Un appel de 15 minutes", d: "Gratuit et sans engagement. Vous me parlez de votre entreprise et de vos objectifs." },
-  { t: "Une proposition claire", d: "Le forfait adapté, ce qu'il comprend et un échéancier, en moins de 24 h." },
-  { t: "La conception démarre",  d: "Vous validez, je commence. Vous parlez toujours à la personne qui fait le travail." },
-];
+const NEXT_STEPS = {
+  fr: [
+    { t: "Un appel de 15 minutes", d: "Gratuit et sans engagement. Vous me parlez de votre entreprise et de vos objectifs." },
+    { t: "Une proposition claire", d: "Le forfait adapté, ce qu'il comprend et un échéancier, en moins de 24 h." },
+    { t: "La conception démarre",  d: "Vous validez, je commence. Vous parlez toujours à la personne qui fait le travail." },
+  ],
+  en: [
+    { t: "A 15-minute call",     d: "Free, no commitment. Tell me about your business and your goals." },
+    { t: "A clear proposal",     d: "The right plan, what it includes and a timeline, within 24 hours." },
+    { t: "Design begins",        d: "You approve, I start. You always talk to the person doing the work." },
+  ],
+};
 
 // Choix du forfait (radio). La valeur est envoyée dans le champ « interet ».
-const PLAN_OPTIONS = [
-  { slug: "croissance", label: "Croissance", hint: "129 $/mois" },
-  { slug: "premium",    label: "Premium",    hint: "199 $/mois" },
-  { slug: "indecis",    label: "Je ne sais pas encore", hint: "On en discute" },
-];
+const PLAN_OPTIONS = {
+  fr: [
+    { slug: "croissance", label: "Croissance", hint: "129 $/mois" },
+    { slug: "premium",    label: "Premium",    hint: "199 $/mois" },
+    { slug: "indecis",    label: "Je ne sais pas encore", hint: "On en discute" },
+  ],
+  en: [
+    { slug: "croissance", label: "Growth",  hint: "$129/month" },
+    { slug: "premium",    label: "Premium", hint: "$199/month" },
+    { slug: "indecis",    label: "Not sure yet", hint: "Let's discuss" },
+  ],
+};
+
+// Textes du formulaire (français / anglais)
+const FORM_TXT = {
+  fr: {
+    title: "Demander une soumission", plan: "Forfait souhaité", name: "Nom", phone: "Téléphone",
+    optional: "facultatif", email: "Courriel", msg: "Votre entreprise et votre projet",
+    placeholder: "Ex. : couvreur à Gatineau, je souhaite recevoir plus de demandes de soumission.",
+    consent: "J'accepte d'être contacté par Novio Studio au sujet de ma demande.",
+    sending: "Envoi en cours…", send: "Envoyer ma demande",
+    note: "Réponse en moins de 24 h. Les champs marqués d'un * sont obligatoires.",
+    okTitle: "Demande envoyée.", okLead: "Merci. Je vous réponds en moins de 24 h. D'ici là, vous pouvez m'écrire à",
+    back: "Retour à l'accueil", backHref: "/",
+    err: "Une erreur est survenue. Réessayez, ou écrivez-moi directement par courriel.",
+    net: "Connexion impossible. Réessayez, ou écrivez-moi à ",
+    subject: "Nouvelle demande, site Novio Studio", undecided: "Non précisé",
+    nextH: "Ce qui se passe ensuite", directH: "Ou directement", mailL: "Courriel", telL: "Téléphone",
+    section: "Formulaire de contact",
+  },
+  en: {
+    title: "Get a quote", plan: "Plan you're interested in", name: "Name", phone: "Phone",
+    optional: "optional", email: "Email", msg: "Your business and your project",
+    placeholder: "E.g. roofing company in Ottawa, I'd like to get more quote requests online.",
+    consent: "I agree to be contacted by Novio Studio about my request.",
+    sending: "Sending…", send: "Send my request",
+    note: "Reply within 24 hours. Fields marked with * are required.",
+    okTitle: "Request sent.", okLead: "Thank you. I'll get back to you within 24 hours. In the meantime, you can email me at",
+    back: "Back to home", backHref: "/en",
+    err: "Something went wrong. Please try again, or email me directly.",
+    net: "Connection failed. Please try again, or email me at ",
+    subject: "New request (EN), Novio Studio website", undecided: "Not specified",
+    nextH: "What happens next", directH: "Or reach me directly", mailL: "Email", telL: "Phone",
+    section: "Contact form",
+  },
+};
 const PLAN_VALUE = { croissance: "Forfait Croissance", premium: "Forfait Premium", indecis: "Pas sûr encore" };
 
 // Présélection depuis les boutons « Choisir … » : /contact?forfait=croissance|premium
@@ -98,9 +146,12 @@ const initialPlan = () => {
 };
 
 // ── Formulaire (AJAX → Formspree, états idle/submitting/success/error) ──
-const ProjectForm = () => {
+const ProjectForm = ({ lang = "fr" }) => {
+  const t = FORM_TXT[lang] || FORM_TXT.fr;
   const [status, setStatus] = React.useState("idle");
-  const [plan, setPlan] = React.useState(initialPlan);
+  // Présélection lue après le montage : le HTML pré-rendu (sans forfait) reste identique à l'hydratation
+  const [plan, setPlan] = React.useState("");
+  React.useEffect(() => { const p = initialPlan(); if (p) setPlan(p); }, []);
   const [error, setError] = React.useState("");
 
   const onSubmit = async (e) => {
@@ -109,10 +160,11 @@ const ProjectForm = () => {
     const form = e.currentTarget;
     const data = new FormData(form);
     data.delete("forfait");
-    data.set("interet", plan ? PLAN_VALUE[plan] : "Non précisé");
+    data.set("interet", plan ? PLAN_VALUE[plan] : t.undecided);
+    if (lang !== "fr") data.set("langue", lang);
     data.set("_subject", plan === "croissance" || plan === "premium"
-      ? `Nouvelle demande (${PLAN_VALUE[plan]}), site Novio Studio`
-      : "Nouvelle demande, site Novio Studio");
+      ? `${t.subject} (${PLAN_VALUE[plan]})`
+      : t.subject);
     setStatus("submitting");
     setError("");
     try {
@@ -124,15 +176,18 @@ const ProjectForm = () => {
       if (res.ok) {
         setStatus("success");
         form.reset();
+        // Conversion : aucun renseignement personnel, seulement le forfait et la langue
+        track("generate_lead", { form: "contact", plan: plan || "none", lang });
       } else {
         const j = await res.json().catch(() => null);
-        setError((j && j.errors && j.errors.map((x) => x.message).join(" ")) ||
-          "Une erreur est survenue. Réessayez, ou écrivez-moi directement par courriel.");
+        setError((j && j.errors && j.errors.map((x) => x.message).join(" ")) || t.err);
         setStatus("error");
+        track("form_error", { form: "contact", lang });
       }
     } catch (_) {
-      setError("Connexion impossible. Réessayez, ou écrivez-moi à " + EMAIL + ".");
+      setError(t.net + EMAIL + ".");
       setStatus("error");
+      track("form_error", { form: "contact", lang });
     }
   };
 
@@ -142,24 +197,24 @@ const ProjectForm = () => {
         <span className="form-success__check" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
         </span>
-        <h2 className="form-card__title">Demande envoyée.</h2>
+        <h2 className="form-card__title">{t.okTitle}</h2>
         <p className="form-success__lead">
-          Merci. Je vous réponds en moins de 24 h. D'ici là, vous pouvez m'écrire à{" "}
+          {t.okLead}{" "}
           <a className="link" href={`mailto:${EMAIL}`}>{EMAIL}</a>.
         </p>
-        <a href="/" className="btn btn--secondary">Retour à l'accueil</a>
+        <a href={t.backHref} className="btn btn--secondary">{t.back}</a>
       </div>
     );
   }
 
   return (
     <div className="form-card">
-      <h2 className="form-card__title">Demander une soumission</h2>
+      <h2 className="form-card__title">{t.title}</h2>
       <form onSubmit={onSubmit}>
         <fieldset className="field">
-          <legend className="field__label">Forfait souhaité</legend>
+          <legend className="field__label">{t.plan}</legend>
           <div className="plan-choice">
-            {PLAN_OPTIONS.map((o) => (
+            {(PLAN_OPTIONS[lang] || PLAN_OPTIONS.fr).map((o) => (
               <label key={o.slug} className="plan-choice__opt">
                 <input
                   type="radio"
@@ -179,60 +234,61 @@ const ProjectForm = () => {
 
         {/* anti-spam (honeypot Formspree) */}
         <input type="text" name="_gotcha" tabIndex="-1" autoComplete="off" aria-hidden="true" className="form-hp" />
-        <input type="hidden" name="_subject" value="Nouvelle demande, site Novio Studio" />
+        <input type="hidden" name="_subject" value={t.subject} />
 
         <div className="form-row">
           <div className="field">
-            <label className="field__label" htmlFor="cf-name">Nom <span className="field__req" aria-hidden="true">*</span></label>
+            <label className="field__label" htmlFor="cf-name">{t.name} <span className="field__req" aria-hidden="true">*</span></label>
             <input className="input" id="cf-name" type="text" name="name" autoComplete="name" required />
           </div>
           <div className="field">
-            <label className="field__label" htmlFor="cf-phone">Téléphone <span className="field__opt">facultatif</span></label>
+            <label className="field__label" htmlFor="cf-phone">{t.phone} <span className="field__opt">{t.optional}</span></label>
             <input className="input" id="cf-phone" type="tel" name="phone" autoComplete="tel" />
           </div>
         </div>
         <div className="field">
-          <label className="field__label" htmlFor="cf-email">Courriel <span className="field__req" aria-hidden="true">*</span></label>
+          <label className="field__label" htmlFor="cf-email">{t.email} <span className="field__req" aria-hidden="true">*</span></label>
           <input className="input" id="cf-email" type="email" name="email" autoComplete="email" required />
         </div>
         <div className="field">
-          <label className="field__label" htmlFor="cf-msg">Votre entreprise et votre projet</label>
-          <textarea className="input" id="cf-msg" name="message" rows="4" placeholder="Ex. : couvreur à Gatineau, je souhaite recevoir plus de demandes de soumission."></textarea>
+          <label className="field__label" htmlFor="cf-msg">{t.msg}</label>
+          <textarea className="input" id="cf-msg" name="message" rows="4" placeholder={t.placeholder}></textarea>
         </div>
         <label className="consent">
           <input type="checkbox" name="consent" required />
-          <span>J'accepte d'être contacté par Novio Studio au sujet de ma demande.</span>
+          <span>{t.consent}</span>
         </label>
 
         {status === "error" && <p className="form-error" role="alert">{error}</p>}
 
         <button type="submit" className="btn btn--primary btn--lg btn--block" disabled={status === "submitting"}>
           {status === "submitting"
-            ? (<><span className="spinner" aria-hidden="true"></span> Envoi en cours…</>)
-            : (<>Envoyer ma demande <ArrowIcon /></>)}
+            ? (<><span className="spinner" aria-hidden="true"></span> {t.sending}</>)
+            : (<>{t.send} <ArrowIcon /></>)}
         </button>
-        <p className="form-card__note">Réponse en moins de 24 h. Les champs marqués d'un * sont obligatoires.</p>
+        <p className="form-card__note">{t.note}</p>
       </form>
     </div>
   );
 };
 
-const ContactSection = () => {
+const ContactSection = ({ lang = "fr", id }) => {
+  const t = FORM_TXT[lang] || FORM_TXT.fr;
   React.useEffect(() => {
     if (window.location.hash !== "#formulaire") return;
     const el = document.getElementById("formulaire");
     if (el) requestAnimationFrame(() => el.scrollIntoView({ block: "start" }));
   }, []);
   return (
-    <section className="section section--tight" aria-label="Formulaire de contact">
+    <section className="section section--tight" id={id} aria-label={t.section}>
       <div className="container contact">
         <div className="contact__form" id="formulaire">
-          <ProjectForm />
+          <ProjectForm lang={lang} />
         </div>
         <aside className="contact__aside" aria-labelledby="ensuite-title">
-          <h2 className="contact__h" id="ensuite-title">Ce qui se passe ensuite</h2>
+          <h2 className="contact__h" id="ensuite-title">{t.nextH}</h2>
           <ol className="next">
-            {NEXT_STEPS.map((s, i) => (
+            {(NEXT_STEPS[lang] || NEXT_STEPS.fr).map((s, i) => (
               <li className="next__item" key={s.t}>
                 <span className="next__n" aria-hidden="true">{i + 1}</span>
                 <div>
@@ -242,18 +298,18 @@ const ContactSection = () => {
               </li>
             ))}
           </ol>
-          <h2 className="contact__h">Ou directement</h2>
+          <h2 className="contact__h">{t.directH}</h2>
           <ul className="channels">
             <li>
               <a className="channel" href={`mailto:${EMAIL}`}>
                 <span className="channel__ico" aria-hidden="true">{BENEFIT_ICONS.mail}</span>
-                <span className="channel__txt"><span className="channel__label">Courriel</span><span className="channel__val">{EMAIL}</span></span>
+                <span className="channel__txt"><span className="channel__label">{t.mailL}</span><span className="channel__val">{EMAIL}</span></span>
               </a>
             </li>
             <li>
               <a className="channel" href={`tel:${TEL}`}>
                 <span className="channel__ico" aria-hidden="true">{BENEFIT_ICONS.phone}</span>
-                <span className="channel__txt"><span className="channel__label">Téléphone</span><span className="channel__val">{TEL_DISPLAY}</span></span>
+                <span className="channel__txt"><span className="channel__label">{t.telL}</span><span className="channel__val">{TEL_DISPLAY}</span></span>
               </a>
             </li>
           </ul>
@@ -295,6 +351,18 @@ const Testimonials = () => {
   );
 };
 
+/* ── Page « statique » (blogue, articles, /en) ──
+   Le contenu principal est un fragment HTML généré au build (content/).
+   after = "cta" (appel à l'action final) | "contact" (formulaire, /en). */
+const StaticPage = ({ html, after = "cta", lang = "fr" }) => (
+  <React.Fragment>
+    <div className="static-body" data-static-body="" dangerouslySetInnerHTML={{ __html: html || "" }} />
+    {after === "contact"
+      ? <ContactSection lang={lang} id="contact" />
+      : <window.FinalCTA lang={lang} />}
+  </React.Fragment>
+);
+
 /* ── Composition des pages ── */
 const {
   Hero, Pricing, SubscriptionModel, Realisations, CompareAgency, About,
@@ -318,7 +386,7 @@ const HomePage = () => (
 const SiteWebPage = () => (
   <React.Fragment>
     <PageHeader
-      title="Des sites conçus pour attirer des clients."
+      title="Des sites Web d'entreprise conçus pour attirer des clients."
       sub="Clairs, rapides et pensés pour Google. Conçus, hébergés et entretenus par Novio Studio, pour les entreprises de l'Outaouais."
       actions={<>
         <a className="btn btn--primary btn--lg" href="/contact">Demander une soumission <ArrowIcon /></a>
@@ -337,7 +405,7 @@ const SiteWebPage = () => (
 const PricingPage = () => (
   <React.Fragment>
     <PageHeader
-      title="Des tarifs simples et transparents."
+      title="Prix d'un site Web : des tarifs simples et transparents."
       sub="Deux forfaits mensuels tout inclus, après des frais de départ uniques de 200 $. Vous savez exactement ce que vous payez, avant de commencer."
     />
     <Pricing showHead={false} />
@@ -359,6 +427,7 @@ const ContactPage = () => (
 );
 
 Object.assign(window, {
-  PageHeader, Process, SiteFeatures, ContactSection, Testimonials,
+  PageHeader, Process, SiteFeatures, ContactSection, Testimonials, StaticPage,
+  PROCESS, SITE_FEATURES,
   HomePage, SiteWebPage, PricingPage, ContactPage,
 });

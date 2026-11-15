@@ -1,23 +1,18 @@
 <!DOCTYPE html>
-<html lang="fr-CA">
+<html lang="{{HTML_LANG}}">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>{{TITLE}}</title>
 <meta name="description" content="{{DESC}}" />
+<meta name="robots" content="{{ROBOTS}}" />
 <meta name="author" content="Novio Studio" />
 <meta name="theme-color" content="#0B0B0D" />
 <meta name="color-scheme" content="dark" />
-
-<!-- SEO local (Gatineau · Outaouais) -->
-<meta name="geo.region" content="CA-QC" />
-<meta name="geo.placename" content="Gatineau" />
-
-<!-- Canonical -->
+{{GA_META}}
 <link rel="canonical" href="{{CANONICAL}}" />
-
-<!-- Open Graph -->
-<meta property="og:type"         content="website" />
+{{ALTERNATES}}
+<meta property="og:type"         content="{{OG_TYPE}}" />
 <meta property="og:site_name"    content="Novio Studio" />
 <meta property="og:url"          content="{{CANONICAL}}" />
 <meta property="og:title"        content="{{OG_TITLE}}" />
@@ -25,121 +20,33 @@
 <meta property="og:image"        content="https://noviostudio.online/og-image.jpg" />
 <meta property="og:image:width"  content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:image:alt"    content="Novio Studio — sites web par abonnement à Gatineau" />
-<meta property="og:locale"       content="fr_CA" />
-
-<!-- Twitter Card -->
+<meta property="og:image:alt"    content="{{OG_IMAGE_ALT}}" />
+<meta property="og:locale"       content="{{OG_LOCALE}}" />
 <meta name="twitter:card"        content="summary_large_image" />
 <meta name="twitter:title"       content="{{OG_TITLE}}" />
 <meta name="twitter:description" content="{{OG_DESC}}" />
 <meta name="twitter:image"       content="https://noviostudio.online/og-image.jpg" />
-<meta name="twitter:image:alt"   content="Novio Studio — sites web par abonnement à Gatineau" />
+<meta name="twitter:image:alt"   content="{{OG_IMAGE_ALT}}" />
 
-<!-- Favicons -->
 <link rel="icon"             href="/favicon.ico" sizes="any" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
-<!-- Schema.org JSON-LD -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "@id": "https://noviostudio.online/#business",
-  "name": "Novio Studio",
-  "description": "Studio web à Gatineau. Sites web professionnels par abonnement mensuel pour les PME locales : création, hébergement, maintenance et optimisation inclus.",
-  "url": "https://noviostudio.online",
-  "image": "https://noviostudio.online/og-image.jpg",
-  "logo": "https://noviostudio.online/apple-touch-icon.png",
-  "telephone": "+18736554684",
-  "email": "leo_drolet@noviostudio.online",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Gatineau",
-    "addressRegion": "QC",
-    "addressCountry": "CA"
-  },
-  "priceRange": "$$",
-  "areaServed": ["Gatineau", "Ottawa", "Outaouais"],
-  "serviceType": "Web Design & Development",
-  "openingHours": "Mo-Fr 09:00-18:00",
-  "makesOffer": [
-    {
-      "@type": "Offer",
-      "name": "Forfait Croissance",
-      "description": "Site Web de 5 à 10 pages, hébergement, gestion du nom de domaine, sécurité et sauvegardes, maintenance, 1 h de modifications par mois, SEO de base, formulaire de contact, statistiques et support technique. Frais de départ uniques de 200 $.",
-      "url": "https://noviostudio.online/tarifs",
-      "priceCurrency": "CAD",
-      "price": "129",
-      "priceSpecification": { "@type": "UnitPriceSpecification", "price": "129", "priceCurrency": "CAD", "unitCode": "MON", "billingDuration": "P1M" },
-      "itemOffered": { "@type": "Service", "name": "Site Web professionnel par abonnement — Croissance" }
-    },
-    {
-      "@type": "Offer",
-      "name": "Forfait Premium",
-      "description": "Site Web entièrement personnalisé, tout le forfait Croissance, jusqu'à 2 h de modifications par mois, SEO avancé, intégrations externes, automatisations personnalisées et support prioritaire. Frais de départ uniques de 200 $.",
-      "url": "https://noviostudio.online/tarifs",
-      "priceCurrency": "CAD",
-      "price": "199",
-      "priceSpecification": { "@type": "UnitPriceSpecification", "price": "199", "priceCurrency": "CAD", "unitCode": "MON", "billingDuration": "P1M" },
-      "itemOffered": { "@type": "Service", "name": "Site Web professionnel par abonnement — Premium" }
-    }
-  ]
-}
-</script>
+<script type="application/ld+json">{{JSONLD}}</script>
 
-<!-- Base critique : couleurs avant le chargement de la feuille de style (évite le flash blanc) -->
-<style>
-:root{--bg:#0B0B0D;--ink:#F5F5F5}
-html,body{margin:0;background:var(--bg);color:var(--ink)}
-</style>
-
-<!-- Police : Geist (une seule famille). Feuille de style du site chargée normalement
-     (petite, et compatible avec la CSP stricte : aucun gestionnaire inline). -->
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap" />
-<link rel="stylesheet" href="dist/styles.min.css?v={{V}}" />
+<!-- Police auto-hébergée (préchargée) + feuille de style intégrée : aucune ressource bloquante -->
+<link rel="preload" href="/vendor/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin />
+<style>{{CSS}}</style>
 </head>
 <body>
 
-<a class="skip-link" href="#contenu">Aller au contenu</a>
+<a class="skip-link" href="#contenu">{{SKIP}}</a>
 
-<!-- React mount — data-page sélectionne la page rendue par app.jsx -->
-<div id="root" data-page="{{DATA_PAGE}}">
-  <!-- Contenu de repli (no-JS / robots) : remplacé par React au chargement -->
-  <noscript>
-    <div style="max-width:760px;margin:0 auto;padding:48px 24px;font-family:system-ui,sans-serif;line-height:1.6">
-      <h1>Novio Studio, sites web par abonnement à Gatineau</h1>
-      <p>Studio web à Gatineau (Ottawa, Outaouais) pour couvreurs, plombiers, techniciens HVAC,
-        paysagistes, rénovateurs et entrepreneurs généraux. Un site Web professionnel sans
-        investissement initial important : conçu pour votre entreprise, hébergé, entretenu et
-        optimisé grâce à un abonnement mensuel simple et transparent.</p>
-      <h2>Nos forfaits</h2>
-      <ul>
-        <li><strong>Forfait Croissance, 129 $/mois</strong> : site Web de 5 à 10 pages, hébergement, gestion du nom de domaine, sécurité et sauvegardes, maintenance et mises à jour, 1 h de modifications par mois, SEO de base, formulaire de contact, statistiques de fréquentation et support technique.</li>
-        <li><strong>Forfait Premium, 199 $/mois</strong> : site Web entièrement personnalisé, tout le forfait Croissance, jusqu'à 2 h de modifications par mois, SEO avancé, intégrations avec des services externes, automatisations personnalisées et support prioritaire.</li>
-      </ul>
-      <p>Frais de départ uniques de 200 $ pour les deux forfaits.</p>
-      <h2>Pages</h2>
-      <ul>
-        <li><a href="/">Accueil</a></li>
-        <li><a href="/site-web">Sites Web</a></li>
-        <li><a href="/tarifs">Tarifs</a></li>
-        <li><a href="/contact">Contact</a></li>
-      </ul>
-      <h2>Contact</h2>
-      <p>
-        Demande d'estimation : <a href="/contact">formulaire de contact</a><br />
-        Courriel : <a href="mailto:leo_drolet@noviostudio.online">leo_drolet@noviostudio.online</a><br />
-        Téléphone : <a href="tel:+18736554684">873 655-4684</a>
-      </p>
-    </div>
-  </noscript>
-</div>
+<!-- HTML pré-rendu au build (build.js), hydraté par React au chargement -->
+<div id="root" {{ROOT_ATTRS}}>{{APP_HTML}}</div>
 
 <!-- React 18 (auto-hébergé) + bundle de l'application -->
-<script defer src="vendor/react.min.js"></script>
-<script defer src="vendor/react-dom.min.js"></script>
-<script defer src="dist/bundle.min.js?v={{V}}"></script>
+<script defer src="/vendor/react.min.js"></script>
+<script defer src="/vendor/react-dom.min.js"></script>
+<script defer src="/dist/bundle.min.js?v={{V}}"></script>
 </body>
 </html>

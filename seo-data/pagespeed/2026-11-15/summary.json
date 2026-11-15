@@ -1,0 +1,342 @@
+{
+  "date": "2026-11-15",
+  "base": "http://localhost:5055",
+  "source": "lighthouse-local",
+  "results": [
+    {
+      "path": "/",
+      "strategy": "mobile",
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "lcp_ms": 1535,
+      "fcp_ms": 604,
+      "cls": 0,
+      "tbt_ms": 12,
+      "si_ms": 1353,
+      "failing": [
+        "uses-long-cache-ttl",
+        "cache-insight"
+      ],
+      "field": null
+    },
+    {
+      "path": "/",
+      "strategy": "desktop",
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "lcp_ms": 372,
+      "fcp_ms": 292,
+      "cls": 0,
+      "tbt_ms": 0,
+      "si_ms": 498,
+      "failing": [
+        "label-content-name-mismatch",
+        "uses-long-cache-ttl",
+        "cache-insight"
+      ],
+      "field": null
+    },
+    {
+      "path": "/site-web",
+      "strategy": "mobile",
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "lcp_ms": 1504,
+      "fcp_ms": 602,
+      "cls": 0,
+      "tbt_ms": 0,
+      "si_ms": 602,
+      "failing": [
+        "uses-long-cache-ttl",
+        "cache-insight"
+      ],
+      "field": null
+    },
+    {
+      "path": "/site-web",
+      "strategy": "desktop",
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "lcp_ms": 363,
+      "fcp_ms": 166,
+      "cls": 0,
+      "tbt_ms": 0,
+      "si_ms": 166,
+      "failing": [
+        "label-content-name-mismatch",
+        "uses-long-cache-ttl",
+        "cache-insight"
+      ],
+      "field": null
+    },
+    {
+      "path": "/tarifs",
+      "strategy": "mobile",
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "lcp_ms": 1503,
+      "fcp_ms": 618,
+      "cls": 0,
+      "tbt_ms": 0,
+      "si_ms": 618,
+      "failing": [
+        "uses-long-cache-ttl",
+        "cache-insight"
+      ],
+      "field": null
+    },
+    {
+      "path": "/tarifs",
+      "strategy": "desktop",
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "lcp_ms": 363,
+      "fcp_ms": 166,
+      "cls": 0,
+      "tbt_ms": 0,
+      "si_ms": 166,
+      "failing": [
+        "label-content-name-mismatch",
+        "uses-long-cache-ttl",
+        "cache-insight"
+      ],
+      "field": null
+    },
+    {
+      "path": "/contact",
+      "strategy": "mobile",
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "lcp_ms": 1504,
+      "fcp_ms": 616,
+      "cls": 0,
+      "tbt_ms": 0,
+      "si_ms": 616,
+      "failing": [
+        "uses-long-cache-ttl",
+        "cache-insight"
+      ],
+      "field": null
+    },
+    {
+      "path": "/contact",
+      "strategy": "desktop",
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "lcp_ms": 364,
+      "fcp_ms": 166,
+      "cls": 0,
+      "tbt_ms": 0,
+      "si_ms": 166,
+      "failing": [
+        "label-content-name-mismatch",
+        "uses-long-cache-ttl",
+        "cache-insight"
+      ],
+      "field": null
+    },
+    {
+      "path": "/en",
+      "strategy": "mobile",
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "lcp_ms": 1654,
+      "fcp_ms": 752,
+      "cls": 0,
+      "tbt_ms": 7,
+      "si_ms": 752,
+      "failing": [
+        "uses-long-cache-ttl",
+        "cache-insight"
+      ],
+      "field": null
+    },
+    {
+      "path": "/en",
+      "strategy": "desktop",
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "lcp_ms": 423,
+      "fcp_ms": 207,
+      "cls": 0,
+      "tbt_ms": 0,
+      "si_ms": 207,
+      "failing": [
+        "label-content-name-mismatch",
+        "uses-long-cache-ttl",
+        "uses-responsive-images",
+        "cache-insight",
+        "image-delivery-insight"
+      ],
+      "field": null
+    },
+    {
+      "path": "/blogue",
+      "strategy": "mobile",
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "lcp_ms": 1503,
+      "fcp_ms": 601,
+      "cls": 0,
+      "tbt_ms": 0,
+      "si_ms": 601,
+      "failing": [
+        "uses-long-cache-ttl",
+        "cache-insight"
+      ],
+      "field": null
+    },
+    {
+      "path": "/blogue",
+      "strategy": "desktop",
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "lcp_ms": 364,
+      "fcp_ms": 165,
+      "cls": 0,
+      "tbt_ms": 0,
+      "si_ms": 165,
+      "failing": [
+        "label-content-name-mismatch",
+        "uses-long-cache-ttl",
+        "cache-insight"
+      ],
+      "field": null
+    },
+    {
+      "path": "/blogue/combien-coute-un-site-web-pme-quebec",
+      "strategy": "mobile",
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "lcp_ms": 1503,
+      "fcp_ms": 601,
+      "cls": 0,
+      "tbt_ms": 0,
+      "si_ms": 601,
+      "failing": [
+        "uses-long-cache-ttl",
+        "cache-insight"
+      ],
+      "field": null
+    },
+    {
+      "path": "/blogue/combien-coute-un-site-web-pme-quebec",
+      "strategy": "desktop",
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "lcp_ms": 363,
+      "fcp_ms": 166,
+      "cls": 0,
+      "tbt_ms": 0,
+      "si_ms": 166,
+      "failing": [
+        "label-content-name-mismatch",
+        "uses-long-cache-ttl",
+        "cache-insight"
+      ],
+      "field": null
+    },
+    {
+      "path": "/blogue/etre-trouve-sur-google-entreprise-locale",
+      "strategy": "mobile",
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "lcp_ms": 1504,
+      "fcp_ms": 603,
+      "cls": 0,
+      "tbt_ms": 0,
+      "si_ms": 603,
+      "failing": [
+        "uses-long-cache-ttl",
+        "cache-insight"
+      ],
+      "field": null
+    },
+    {
+      "path": "/blogue/etre-trouve-sur-google-entreprise-locale",
+      "strategy": "desktop",
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "lcp_ms": 363,
+      "fcp_ms": 165,
+      "cls": 0,
+      "tbt_ms": 0,
+      "si_ms": 165,
+      "failing": [
+        "label-content-name-mismatch",
+        "uses-long-cache-ttl",
+        "cache-insight"
+      ],
+      "field": null
+    },
+    {
+      "path": "/blogue/site-web-ou-reseaux-sociaux",
+      "strategy": "mobile",
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "lcp_ms": 1503,
+      "fcp_ms": 602,
+      "cls": 0,
+      "tbt_ms": 0,
+      "si_ms": 602,
+      "failing": [
+        "uses-long-cache-ttl",
+        "cache-insight"
+      ],
+      "field": null
+    },
+    {
+      "path": "/blogue/site-web-ou-reseaux-sociaux",
+      "strategy": "desktop",
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "lcp_ms": 368,
+      "fcp_ms": 288,
+      "cls": 0,
+      "tbt_ms": 0,
+      "si_ms": 288,
+      "failing": [
+        "label-content-name-mismatch",
+        "uses-long-cache-ttl",
+        "cache-insight"
+      ],
+      "field": null
+    }
+  ]
+}

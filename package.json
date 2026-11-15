@@ -3,13 +3,19 @@
   "version": "1.0.0",
   "scripts": {
     "build": "node build.js",
-    "watch": "babel src/components src/app.jsx --out-dir dist --watch"
+    "watch": "babel src/components src/app.jsx --out-dir dist --watch",
+    "seo:speed": "node scripts/seo/pagespeed.mjs",
+    "seo:auth": "node scripts/seo/google-auth.mjs",
+    "seo:gsc": "node scripts/seo/gsc.mjs",
+    "seo:ga": "node scripts/seo/ga4.mjs"
   },
   "devDependencies": {
     "@babel/cli": "^7.29.7",
     "@babel/core": "^7.29.7",
     "@babel/preset-react": "^7.29.7",
     "clean-css-cli": "^5.6.3",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
     "terser": "^5.48.0"
   }
 }

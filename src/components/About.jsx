@@ -9,8 +9,8 @@ const About = () => (
   <section className="section" id="studio" aria-labelledby="studio-title">
     <div className="container about">
       <picture className="about__portrait">
-        <source srcSet="assets/leo.webp" type="image/webp" />
-        <img src="assets/leo.jpg" alt="Léo Drolet, fondateur de Novio Studio" loading="lazy" decoding="async" width="600" height="750" />
+        <source srcSet="/assets/leo.webp" type="image/webp" />
+        <img src="/assets/leo.jpg" alt="Léo Drolet, fondateur de Novio Studio" loading="lazy" decoding="async" width="600" height="750" />
       </picture>
       <div className="about__body">
         <SectionHead id="studio-title" title="Un humain, pas une agence." />

@@ -1,0 +1,104 @@
+{
+  "date": "2026-11-15",
+  "base": "https://noviostudio.online",
+  "source": "lighthouse-local",
+  "note": "R\u00e9f\u00e9rence AVANT optimisation (production, commit 6e2d9f9)",
+  "results": [
+    {
+      "path": "/contact",
+      "strategy": "desktop",
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "lcp_ms": 497,
+      "fcp_ms": 497,
+      "cls": 0.0,
+      "tbt_ms": 0
+    },
+    {
+      "path": "/contact",
+      "strategy": "mobile",
+      "performance": 94,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "lcp_ms": 2517,
+      "fcp_ms": 2517,
+      "cls": 0.037,
+      "tbt_ms": 0
+    },
+    {
+      "path": "/",
+      "strategy": "desktop",
+      "performance": 99,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "lcp_ms": 758,
+      "fcp_ms": 758,
+      "cls": 0.005,
+      "tbt_ms": 0
+    },
+    {
+      "path": "/",
+      "strategy": "mobile",
+      "performance": 94,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "lcp_ms": 2526,
+      "fcp_ms": 2526,
+      "cls": 0.004,
+      "tbt_ms": 0
+    },
+    {
+      "path": "/site-web",
+      "strategy": "desktop",
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "lcp_ms": 493,
+      "fcp_ms": 493,
+      "cls": 0.0,
+      "tbt_ms": 0
+    },
+    {
+      "path": "/site-web",
+      "strategy": "mobile",
+      "performance": 99,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "lcp_ms": 1596,
+      "fcp_ms": 1596,
+      "cls": 0.033,
+      "tbt_ms": 0
+    },
+    {
+      "path": "/tarifs",
+      "strategy": "desktop",
+      "performance": 99,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "lcp_ms": 769,
+      "fcp_ms": 769,
+      "cls": 0.0,
+      "tbt_ms": 0
+    },
+    {
+      "path": "/tarifs",
+      "strategy": "mobile",
+      "performance": 94,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "lcp_ms": 2519,
+      "fcp_ms": 2519,
+      "cls": 0,
+      "tbt_ms": 0
+    }
+  ]
+}

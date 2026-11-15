@@ -10,23 +10,28 @@ const TEL = "+18736554684";
 const TEL_DISPLAY = "873 655-4684";
 
 // ── CTA final avant le pied de page (personnalisable par page) ──
-const FinalCTA = ({
-  title = "Parlons de votre site.",
-  sub = "Premier appel de 15 minutes, gratuit et sans engagement. Réponse en moins de 24 h.",
-} = {}) => (
+const CTA_TXT = {
+  fr: { title: "Parlons de votre site.", sub: "Premier appel de 15 minutes, gratuit et sans engagement. Réponse en moins de 24 h.", btn: "Demander une soumission", href: "/contact", call: "Appeler le" },
+  en: { title: "Let's talk about your website.", sub: "A free 15-minute first call, no commitment. Reply within 24 hours.", btn: "Get a quote", href: "/en#contact", call: "Call" },
+};
+
+const FinalCTA = ({ lang = "fr", title, sub } = {}) => {
+  const c = CTA_TXT[lang] || CTA_TXT.fr;
+  return (
   <section className="cta-final" aria-labelledby="cta-final-title">
     <div className="container cta-final__inner">
       <div>
-        <h2 className="cta-final__title" id="cta-final-title">{title}</h2>
-        <p className="cta-final__sub">{sub}</p>
+        <h2 className="cta-final__title" id="cta-final-title">{title || c.title}</h2>
+        <p className="cta-final__sub">{sub || c.sub}</p>
       </div>
       <div className="cta-final__actions">
-        <a className="btn btn--primary btn--lg" href="/contact">Demander une soumission <ArrowIcon /></a>
-        <a className="btn btn--secondary btn--lg" href={`tel:${TEL}`}>Appeler le {TEL_DISPLAY}</a>
+        <a className="btn btn--primary btn--lg" href={c.href}>{c.btn} <ArrowIcon /></a>
+        <a className="btn btn--secondary btn--lg" href={`tel:${TEL}`}>{c.call} {TEL_DISPLAY}</a>
       </div>
     </div>
   </section>
-);
+  );
+};
 
 // ── Fenêtre de dialogue (confidentialité / mentions) ──
 const LegalModal = ({ open, onClose, title, children }) => {
@@ -70,51 +75,73 @@ const ModalSection = ({ title, children }) => (
 );
 
 // ── Pied de page ──
-const Footer = () => {
+const FOOT_TXT = {
+  fr: {
+    pitch: "Création de sites Web professionnels par abonnement, à Gatineau et en Outaouais.",
+    navH: "Navigation", nav: [["/", "Accueil"], ["/site-web", "Sites Web"], ["/tarifs", "Tarifs"], ["/blogue", "Blogue"], ["/contact", "Contact"]],
+    alt: ["/en", "English", "en"],
+    contactH: "Contact", city: "Gatineau, Québec", legalH: "Légal",
+    privacy: "Politique de confidentialité", mentions: "Mentions légales", consent: "Mesure d'audience",
+    area: "Gatineau, Hull, Aylmer, Ottawa et l'Outaouais", footLabel: "Pied de page",
+  },
+  en: {
+    pitch: "Professional small business websites on a monthly plan, in Ottawa, Gatineau and the Outaouais.",
+    navH: "Navigation", nav: [["/en", "Home"], ["/en#pricing", "Pricing"], ["/en#contact", "Contact"]],
+    alt: ["/", "Français", "fr"],
+    contactH: "Contact", city: "Gatineau, Quebec", legalH: "Legal",
+    privacy: "Privacy policy (French)", mentions: "Legal notice (French)", consent: "Analytics preferences",
+    area: "Ottawa, Gatineau and the Outaouais", footLabel: "Footer",
+  },
+};
+
+const Footer = ({ lang = "fr" }) => {
+  const t = FOOT_TXT[lang] || FOOT_TXT.fr;
   const [modal, setModal] = React.useState(null); // "privacy" | "mentions" | null
   const close = React.useCallback(() => setModal(null), []);
+  // Le lien « Mesure d'audience » n'apparaît que si GA4 est configuré (après montage : pas d'écart d'hydratation)
+  const [hasGA, setHasGA] = React.useState(false);
+  React.useEffect(() => { setHasGA(!!(window.gaConfigured && window.gaConfigured())); }, []);
 
   return (
     <>
       <footer className="site-footer">
         <div className="container site-footer__grid">
           <div className="site-footer__brand">
-            <Brand />
-            <p>Sites Web professionnels par abonnement, à Gatineau et en Outaouais.</p>
+            <Brand lang={lang} />
+            <p>{t.pitch}</p>
           </div>
-          <nav aria-label="Pied de page">
-            <h2 className="site-footer__h">Navigation</h2>
+          <nav aria-label={t.footLabel}>
+            <h2 className="site-footer__h">{t.navH}</h2>
             <ul>
-              <li><a href="/">Accueil</a></li>
-              <li><a href="/site-web">Sites Web</a></li>
-              <li><a href="/tarifs">Tarifs</a></li>
-              <li><a href="/contact">Contact</a></li>
+              {t.nav.map(([href, label]) => <li key={href}><a href={href}>{label}</a></li>)}
+              <li><a href={t.alt[0]} hrefLang={t.alt[2]} lang={t.alt[2]}>{t.alt[1]}</a></li>
             </ul>
           </nav>
           <div>
-            <h2 className="site-footer__h">Contact</h2>
+            <h2 className="site-footer__h">{t.contactH}</h2>
             <ul>
               <li><a href={`mailto:${EMAIL}`}>{EMAIL}</a></li>
               <li><a href={`tel:${TEL}`}>{TEL_DISPLAY}</a></li>
-              <li>Gatineau, Québec</li>
+              <li>{t.city}</li>
             </ul>
           </div>
           <div>
-            <h2 className="site-footer__h">Légal</h2>
+            <h2 className="site-footer__h">{t.legalH}</h2>
             <ul>
-              <li><button type="button" className="site-footer__btn" onClick={() => setModal("privacy")}>Politique de confidentialité</button></li>
-              <li><button type="button" className="site-footer__btn" onClick={() => setModal("mentions")}>Mentions légales</button></li>
+              <li><button type="button" className="site-footer__btn" onClick={() => setModal("privacy")}>{t.privacy}</button></li>
+              <li><button type="button" className="site-footer__btn" onClick={() => setModal("mentions")}>{t.mentions}</button></li>
+              {hasGA && <li><button type="button" className="site-footer__btn" onClick={() => window.openConsent()}>{t.consent}</button></li>}
             </ul>
           </div>
         </div>
         <div className="container site-footer__bottom">
           <span>© 2026 Novio Studio</span>
-          <span>Gatineau, Hull, Aylmer, Ottawa et l'Outaouais</span>
+          <span>{t.area}</span>
         </div>
       </footer>
 
       <LegalModal open={modal === "privacy"} onClose={close} title="Politique de confidentialité">
-        <p className="legal__date">Dernière mise à jour : 8 juin 2026</p>
+        <p className="legal__date">Dernière mise à jour : 15 novembre 2026</p>
         <p>Novio Studio (« nous ») s'engage à protéger la vie privée des visiteurs de ce site.</p>
         <ModalSection title="1. Informations collectées">
           <p>Nous collectons uniquement les informations que vous nous fournissez volontairement via le formulaire de contact (ou par courriel) : nom, courriel, téléphone et message. Le formulaire est traité par Formspree.</p>
@@ -126,19 +153,18 @@ const Footer = () => {
         <ModalSection title="3. Hébergement">
           <p>Ce site est hébergé sur <strong>Vercel Inc.</strong> (340 Pine Street, San Francisco, CA 94104, USA). Les données transmises via le formulaire de contact transitent par les serveurs de Vercel.</p>
         </ModalSection>
-        <ModalSection title="4. Analyse d'audience, Cloudflare Web Analytics">
-          <p>Ce site utilise <strong>Cloudflare Web Analytics</strong> pour mesurer l'audience de façon agrégée (nombre de pages vues, visiteurs uniques, pays d'origine, type d'appareil, pages les plus consultées).</p>
-          <p>Cloudflare Web Analytics est conçu dans le respect de la vie privée :</p>
+        <ModalSection title="4. Mesure d'audience, Google Analytics (avec votre accord)">
+          <p>Si, et seulement si, vous l'acceptez dans le bandeau prévu à cet effet, ce site utilise <strong>Google Analytics 4</strong> (Google LLC) pour mesurer sa fréquentation : pages consultées, provenance des visites (moteur de recherche, lien, accès direct), type d'appareil, région approximative, et quelques actions sur le site (clic sur « Demander une soumission », sur le téléphone ou le courriel, envoi du formulaire).</p>
           <ul>
-            <li>Aucun cookie n'est déposé sur votre appareil.</li>
-            <li>Aucune empreinte numérique (fingerprinting) n'est utilisée.</li>
-            <li>Aucun suivi inter-sites n'est effectué.</li>
-            <li>Les données collectées sont anonymes et agrégées, aucune information personnelle n'est associée à votre visite.</li>
+            <li>Rien n'est chargé ni déposé sur votre appareil tant que vous n'avez pas accepté.</li>
+            <li>Aucun renseignement saisi dans le formulaire (nom, courriel, téléphone, message) n'est transmis à Google Analytics.</li>
+            <li>Les fonctions publicitaires et les signaux Google sont désactivés : aucune publicité ni profilage publicitaire.</li>
+            <li>Vous pouvez retirer votre consentement en tout temps avec le lien « Mesure d'audience » du pied de page ; les témoins de mesure sont alors effacés.</li>
           </ul>
-          <p>Pour en savoir plus : <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer" className="link">politique de confidentialité de Cloudflare</a>.</p>
+          <p>Les données peuvent être traitées à l'extérieur du Québec. Pour en savoir plus : <a href="https://policies.google.com/privacy?hl=fr" target="_blank" rel="noopener noreferrer" className="link">règles de confidentialité de Google</a>.</p>
         </ModalSection>
-        <ModalSection title="5. Cookies">
-          <p>Ce site n'utilise aucun cookie publicitaire ni cookie de traçage. Aucun bandeau de consentement aux cookies n'est requis.</p>
+        <ModalSection title="5. Témoins (cookies)">
+          <p>Ce site n'utilise aucun témoin publicitaire. Les seuls témoins possibles sont ceux de Google Analytics (_ga, _ga_*), déposés uniquement après votre accord. Votre choix est mémorisé dans le stockage local de votre navigateur.</p>
         </ModalSection>
         <ModalSection title="6. Vos droits (Loi 25, Québec)">
           <p>Conformément à la Loi sur la protection des renseignements personnels dans le secteur privé (Loi 25), vous avez le droit d'accéder à vos données, de les corriger ou d'en demander la suppression en nous contactant à :</p>
@@ -162,11 +188,9 @@ const Footer = () => {
           <p>340 Pine Street, Suite 701, San Francisco, CA 94104, USA</p>
           <p><a href="https://vercel.com" target="_blank" rel="noopener noreferrer" className="link">vercel.com</a></p>
         </ModalSection>
-        <ModalSection title="Analyse d'audience">
-          <p><strong>Cloudflare, Inc.</strong></p>
-          <p>101 Townsend St, San Francisco, CA 94107, USA</p>
-          <p>Service utilisé : Cloudflare Web Analytics (sans cookies, sans traçage)</p>
-          <p><a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer" className="link">cloudflare.com/privacypolicy</a></p>
+        <ModalSection title="Mesure d'audience">
+          <p><strong>Google LLC</strong>, 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA</p>
+          <p>Service utilisé : Google Analytics 4, uniquement avec le consentement du visiteur.</p>
         </ModalSection>
         <ModalSection title="Propriété intellectuelle">
           <p>L'ensemble du contenu de ce site (textes, images, graphismes, logo) est la propriété exclusive de Novio Studio. Toute reproduction sans autorisation écrite préalable est interdite.</p>
@@ -183,4 +207,5 @@ const Footer = () => {
 };
 
 window.FinalCTA = FinalCTA;
+window.CTA_TXT = CTA_TXT;
 window.Footer = Footer;

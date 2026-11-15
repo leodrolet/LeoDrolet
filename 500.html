@@ -8,10 +8,9 @@
 <meta name="theme-color" content="#0B0B0D" />
 <link rel="icon" href="/favicon.ico" sizes="any" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap" />
+<link rel="preload" href="/vendor/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin />
 <style>
+  @font-face { font-family: "Geist"; font-style: normal; font-weight: 400 600; font-display: swap; src: url("/vendor/fonts/geist-latin.woff2") format("woff2"); }
   :root { --bg: #0B0B0D; --ink: #F5F5F5; --ink-2: #A1A1AA; --ink-3: #8A8A93; --accent: #FF6A00; --accent-hover: #FF8126; }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { min-height: 100dvh; background: var(--bg); color: var(--ink); font-family: "Geist", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }

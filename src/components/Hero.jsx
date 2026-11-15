@@ -71,11 +71,11 @@ const Hero = () => (
     <div className="container hero__grid">
       <div className="hero__copy">
         <h1 className="hero__title" id="hero-title">
-          Un site Web professionnel, <span className="hero__title-accent">par abonnement.</span>
+          Création de sites Web à Gatineau, <span className="hero__title-accent">par abonnement.</span>
         </h1>
         <p className="hero__lead">
-          Novio Studio conçoit, héberge et entretient le site de votre entreprise, à Gatineau et en
-          Outaouais. Un prix mensuel fixe dès 129 $, modifications incluses.
+          Novio Studio conçoit, héberge et entretient le site Web professionnel de votre entreprise, à
+          Gatineau, à Ottawa et en Outaouais. Un prix mensuel fixe dès 129 $, modifications incluses.
         </p>
         <div className="hero__actions">
           <a className="btn btn--primary btn--lg" href="/contact">

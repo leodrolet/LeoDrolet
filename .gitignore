@@ -6,3 +6,11 @@ styles.min.css
 .idea/
 .claude/
 .notebook/
+
+# Secrets locaux (OAuth Google, clés API) — jamais dans Git
+.secrets/
+.env
+.env.*
+# Données brutes Search Console / GA4 (requêtes de recherche, peuvent être sensibles)
+seo-data/gsc/
+seo-data/ga4/
