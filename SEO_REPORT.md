@@ -1,6 +1,13 @@
 # Rapport SEO — Novio Studio
 
-Généré le 2026-11-15 par `npm run seo:report`. Les chiffres viennent directement des API Google ; aucune donnée n'est estimée.
+Généré le 2026-11-15 par `npm run seo:report`. Les chiffres proviennent des API Google (Search Console, GA4, PageSpeed) et de Lighthouse ; aucune donnée n'est estimée.
+
+## 0. Contexte de la période
+
+- **Rapport initial (15 nov. 2026).** Search Console et GA4 ne sont pas encore connectés : aucune donnée de trafic, de positions ni de conversions n'est disponible. Rien n'est extrapolé.
+- **Performance.** La comparaison ci-dessous oppose la production *avant* optimisation (Lighthouse local contre noviostudio.online) au build optimisé servi *en local* (`npx serve`, sans compression ni CDN). Les deux mesures ne sont donc pas faites dans les mêmes conditions : l'amélioration devra être confirmée par `npm run seo:speed` sur la production après déploiement.
+- **Modifications non encore déployées** : branche `seo-optimisation` (voir SEO_IMPLEMENTATION_LOG.md). Toute évolution des indicateurs avant le déploiement ne peut pas leur être attribuée.
+- **Prochain rapport** : environ 4 semaines après le déploiement et la soumission du sitemap, pour laisser à Google le temps d'explorer et d'indexer les nouvelles pages.
 
 ## 1. Google Search Console
 

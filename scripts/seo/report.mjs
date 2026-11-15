@@ -19,7 +19,11 @@ const n1 = (x) => (x == null ? "n/d" : Number(x).toFixed(1));
 const L = [];
 const today = new Date().toISOString().slice(0, 10);
 
-L.push(`# Rapport SEO — Novio Studio`, "", `Généré le ${today} par \`npm run seo:report\`. Les chiffres viennent directement des API Google ; aucune donnée n'est estimée.`, "");
+L.push(`# Rapport SEO — Novio Studio`, "", `Généré le ${today} par \`npm run seo:report\`. Les chiffres proviennent des API Google (Search Console, GA4, PageSpeed) et de Lighthouse ; aucune donnée n'est estimée.`, "");
+
+// ── Contexte rédigé à la main (facultatif) ──
+const notes = D("report-notes.md");
+if (fs.existsSync(notes)) L.push("## 0. Contexte de la période", "", fs.readFileSync(notes, "utf8").trim(), "");
 
 // ── Search Console ──
 const g = latest("gsc");
