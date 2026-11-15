@@ -25,3 +25,7 @@ date,base,source,path,strategy,performance,accessibility,best_practices,seo,lcp_
 2026-11-15,http://localhost:5055,lighthouse-local,/blogue/etre-trouve-sur-google-entreprise-locale,desktop,100,100,100,100,363,0,0,
 2026-11-15,http://localhost:5055,lighthouse-local,/blogue/site-web-ou-reseaux-sociaux,mobile,100,100,100,100,1503,0,0,
 2026-11-15,http://localhost:5055,lighthouse-local,/blogue/site-web-ou-reseaux-sociaux,desktop,100,100,100,100,368,0,0,
+2026-11-15,https://noviostudio.online,lighthouse-local,/,mobile,100,100,100,100,1544,0,0,
+2026-11-15,https://noviostudio.online,lighthouse-local,/,desktop,100,100,100,100,333,0,0,
+2026-11-15,https://noviostudio.online,lighthouse-local,/en,mobile,100,100,100,100,1660,0,0,
+2026-11-15,https://noviostudio.online,lighthouse-local,/en,desktop,100,100,100,100,327,0,0,
