@@ -79,7 +79,7 @@ Lighthouse 12.8.2, 15 nov. 2026 : 100 / 100 / 100 / 100 sur les 9 pages, mobile 
 | # | Modification | Fichiers | Vérification |
 |---|---|---|---|
 | 31 | Redirection 308 des URL avec barre oblique finale (`/site-web/` servait un doublon en 200) | `vercel.json` (`trailingSlash: false`) | À vérifier sur l'aperçu Vercel |
-| 32 | Redirection 301 `/content/blogue/<slug>(.html)` → `/blogue/<slug>` (fragments servis en 200 sans canonical) | `vercel.json` | Idem |
+| 32 | Redirection permanente (308) `/content/blogue/<slug>(.html)` → `/blogue/<slug>` (fragments servis en 200 sans canonical) | `vercel.json` | Idem |
 | 33 | `X-Robots-Tag: noindex, nofollow` sur `/src`, `/scripts`, `/content`, `/seo-data`, `build.js`, `babel.config.json`, `package*.json` | `vercel.json` | Idem |
 | 34 | Title de l'article réseaux sociaux : 71 → 56 caractères | `content/blog.js` | `seo:check` |
 | 35 | `npm run seo:check` : contrôle des 9 URL (title, description, canonical, H1, hreflang, JSON-LD, liens internes) | `scripts/seo/check-pages.mjs`, `package.json` | 0 erreur |

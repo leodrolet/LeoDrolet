@@ -7,7 +7,7 @@ Responsables : **L** = Léo (action dans vos comptes ou décision) ; **C** = Cla
 | # | Action | Priorité | Resp. | Effort | Délai | Dépend de | Indicateur de réussite |
 |---|---|---|---|---|---|---|---|
 | 1.1 | Corriger `www` : ajouter le domaine dans Vercel (308), CNAME DNS only dans Cloudflare (SEO_TECHNICAL_REPORT.md, 4.1) | Critique | L | 10 min | 17 nov. | — | `curl -sI https://www.noviostudio.online` → 308 vers `https://noviostudio.online/` |
-| 1.2 | Relire la branche `seo-30-jours`, pousser l'aperçu, puis fusionner dans `main` | Critique | L (C prépare) | 20 min | 18 nov. | — | `/site-web/` → 308 ; `/content/blogue/…` → 301 ; `npm run seo:check` : 0 erreur |
+| 1.2 | Relire la branche `seo-30-jours`, pousser l'aperçu, puis fusionner dans `main` | Critique | L (C prépare) | 20 min | 18 nov. | — | `/site-web/` → 308 ; `/content/blogue/…` → 308 ; `npm run seo:check` : 0 erreur |
 | 1.3 | Créer la propriété Search Console (type Domaine, TXT dans Cloudflare) et soumettre le sitemap | Critique | L | 20 min | 18 nov. | 1.2 | Sitemap « Opération effectuée », 9 URL découvertes |
 | 1.4 | Demander l'indexation des 9 URL (inspection d'URL) | Élevée | L | 15 min | 19 nov. | 1.3 | Inspection : « L'URL est sur Google » pour chaque page dans les 2 à 3 semaines |
 | 1.5 | Créer GA4, ajouter `GA_MEASUREMENT_ID` dans Vercel, redéployer | Critique | L | 20 min | 19 nov. | 1.2 | Temps réel GA4 : votre visite et `click_phone` visibles après « Accepter » |
