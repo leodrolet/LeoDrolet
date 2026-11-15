@@ -70,7 +70,12 @@ export const authorize = async () => {
   if (!t.refresh_token) fail("Google n'a pas renvoyé de jeton de rafraîchissement (" + (t.error || "inconnu") + ").");
   fs.mkdirSync(DIR, { recursive: true, mode: 0o700 });
   fs.writeFileSync(TOKEN, JSON.stringify({ refresh_token: t.refresh_token, scope: t.scope, created: new Date().toISOString() }), { mode: 0o600 });
-  console.log("Connexion enregistrée dans .secrets/google-oauth-token.json (portées : " + t.scope + ").");
+  // Même jeton, au format « Application Default Credentials », pour le serveur MCP officiel
+  // Google Analytics (analytics-mcp) : évite d'installer gcloud.
+  const adc = { type: "authorized_user", client_id: c.client_id, client_secret: c.client_secret, refresh_token: t.refresh_token };
+  if (process.env.GOOGLE_CLOUD_PROJECT) adc.quota_project_id = process.env.GOOGLE_CLOUD_PROJECT;
+  fs.writeFileSync(path.join(DIR, "google-adc.json"), JSON.stringify(adc), { mode: 0o600 });
+  console.log("Connexion enregistrée dans .secrets/ (google-oauth-token.json + google-adc.json). Portées : " + t.scope);
 };
 
 // Jeton d'accès à courte durée, obtenu à partir du jeton de rafraîchissement.

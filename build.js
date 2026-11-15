@@ -65,10 +65,13 @@ const runBundle = (pathname) => {
   vm.runInContext(bundle, sandbox, { filename: "bundle.js" });
   return sandbox;
 };
+// Typographie française : espace insécable avant « : ; ? ! » et après « « » (texte seulement, pas les balises)
+const frTypo = (html) => html.replace(/>([^<]+)</g, (m, t) => ">" + t.replace(/ ([:;?!»])/g, "\u00a0$1").replace(/« /g, "«\u00a0") + "<");
+
 const prerender = (p) => {
   const win = runBundle(p.path);
   return ReactDOMServer.renderToString(React.createElement(win.App, {
-    page: p.page, lang: p.lang, staticHtml: p.staticHtml || null, staticAfter: p.after || "cta",
+    page: p.page, lang: p.lang, staticHtml: p.staticHtml ? (p.lang === "fr" ? frTypo(p.staticHtml) : p.staticHtml) : null, staticAfter: p.after || "cta",
   }));
 };
 const WIN = runBundle("/"); // données partagées (FAQ) pour le JSON-LD

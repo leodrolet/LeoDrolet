@@ -405,7 +405,7 @@ const SiteWebPage = () => (
 const PricingPage = () => (
   <React.Fragment>
     <PageHeader
-      title="Prix d'un site Web : des tarifs simples et transparents."
+      title={"Prix d'un site Web\u00a0: des tarifs simples et transparents."}
       sub="Deux forfaits mensuels tout inclus, après des frais de départ uniques de 200 $. Vous savez exactement ce que vous payez, avant de commencer."
     />
     <Pricing showHead={false} />
