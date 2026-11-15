@@ -3,7 +3,7 @@
 Journal des modifications SEO. Une ligne par changement, avec sa vérification. Ne jamais attribuer une évolution du trafic à une ligne de ce journal sans preuve dans les données (voir SEO_REPORT.md).
 
 - **Point de restauration :** tag `pre-seo-2026-11-15` (= `main` au commit `6e2d9f9`).
-- **Branche de travail :** `seo-optimisation`. **Non fusionnée, non déployée** : la production n'a pas été modifiée.
+- **Branche de travail :** `seo-optimisation`. Fusionnée dans `main` et **déployée en production** le 15 nov. 2026 (commit `2cf6975`, vérifié par l'API Vercel).
 - Retour arrière complet : `git switch main` (rien n'a été modifié sur `main`).
 
 ## 15 novembre 2026
@@ -73,3 +73,18 @@ Lighthouse 12.8.2, 15 nov. 2026 : 100 / 100 / 100 / 100 sur les 9 pages, mobile 
 3. Search Console, GA4, clé PageSpeed (SEO_SETUP.md, étapes 1 à 7).
 4. Fiche Google Business Profile (LOCAL_SEO_STRATEGY.md).
 5. Confirmer : heures d'ouverture, conditions d'annulation et de dépassement, service en anglais.
+
+## 15 novembre 2026 (2e passe) — branche `seo-30-jours`, non déployée
+
+| # | Modification | Fichiers | Vérification |
+|---|---|---|---|
+| 31 | Redirection 308 des URL avec barre oblique finale (`/site-web/` servait un doublon en 200) | `vercel.json` (`trailingSlash: false`) | À vérifier sur l'aperçu Vercel |
+| 32 | Redirection 301 `/content/blogue/<slug>(.html)` → `/blogue/<slug>` (fragments servis en 200 sans canonical) | `vercel.json` | Idem |
+| 33 | `X-Robots-Tag: noindex, nofollow` sur `/src`, `/scripts`, `/content`, `/seo-data`, `build.js`, `babel.config.json`, `package*.json` | `vercel.json` | Idem |
+| 34 | Title de l'article réseaux sociaux : 71 → 56 caractères | `content/blog.js` | `seo:check` |
+| 35 | `npm run seo:check` : contrôle des 9 URL (title, description, canonical, H1, hreflang, JSON-LD, liens internes) | `scripts/seo/check-pages.mjs`, `package.json` | 0 erreur |
+| 36 | Brouillons d'articles (`draft: true`) exclus du build ; `PREVIEW_DRAFTS=1` pour prévisualiser | `build.js` | Build normal : 9 pages ; aperçu : 13 |
+| 37 | 4 articles en brouillon (couvreur, plombier, demandes de soumission, 129 $/mois) | `content/blogue/`, `content/blog.js` | Voir CONTENT_DRAFTS.md |
+| 38 | Structure Réalisations : pages générées seulement avec un projet réel publié ; accord et sources obligatoires | `content/realisations.js`, `build.js` | Test avec projet fictif (copie temporaire supprimée) |
+
+Documents : SEO_TECHNICAL_REPORT.md, LOCAL_SEO_EXECUTION.md, CONFIANCE_ET_PORTFOLIO.md, CONTENT_DRAFTS.md, BACKLINK_PROSPECTS.md, SEO_30_DAY_ACTION_PLAN.md, SEO_PROGRESS_REPORT.md.

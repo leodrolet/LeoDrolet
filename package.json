@@ -9,6 +9,7 @@
     "seo:gsc": "node scripts/seo/gsc.mjs",
     "seo:ga": "node scripts/seo/ga4.mjs",
     "seo:report": "node scripts/seo/report.mjs",
+    "seo:check": "node scripts/seo/check-pages.mjs",
     "seo:all": "npm run seo:gsc; npm run seo:ga; npm run seo:speed; npm run seo:report"
   },
   "devDependencies": {
