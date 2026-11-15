@@ -1,6 +1,7 @@
 {
   "buildCommand": "npm run build",
   "cleanUrls": true,
+  "trailingSlash": false,
   "outputDirectory": ".",
   "redirects": [
     {
@@ -21,6 +22,16 @@
     {
       "source": "/blog",
       "destination": "/blogue",
+      "permanent": true
+    },
+    {
+      "source": "/content/blogue/:slug([a-z0-9-]+).html",
+      "destination": "/blogue/:slug",
+      "permanent": true
+    },
+    {
+      "source": "/content/blogue/:slug([a-z0-9-]+)",
+      "destination": "/blogue/:slug",
       "permanent": true
     }
   ],
@@ -53,6 +64,24 @@
         {
           "key": "Cache-Control",
           "value": "public, max-age=86400, stale-while-revalidate=604800"
+        }
+      ]
+    },
+    {
+      "source": "/(src|scripts|content|seo-data)/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/(build.js|babel.config.json|package.json|package-lock.json)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
         }
       ]
     },

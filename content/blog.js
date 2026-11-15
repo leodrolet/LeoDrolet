@@ -27,10 +27,46 @@ module.exports = [
   {
     slug: "site-web-ou-reseaux-sociaux",
     title: "Site Web ou réseaux sociaux : que choisir pour une PME ?",
-    metaTitle: "Site Web ou réseaux sociaux : que choisir pour une PME ? | Novio Studio",
+    metaTitle: "Site Web ou réseaux sociaux : que choisir pour une PME ?",
     desc: "Page Facebook, Instagram ou site Web ? Ce que chaque outil fait bien, ses limites pour trouver de nouveaux clients, et la combinaison recommandée pour une PME.",
     dek: "Les deux outils ne font pas le même travail. Voici ce que chacun apporte, et comment les combiner pour attirer de nouveaux clients.",
     date: "2026-11-15", updated: "2026-11-15",
     related: ["etre-trouve-sur-google-entreprise-locale", "combien-coute-un-site-web-pme-quebec"],
+  },
+  {
+    slug: "prix-site-web-couvreur-quebec", draft: true, // BROUILLON : non publié tant que draft: true
+    title: "Combien coûte un site Web pour un couvreur au Québec ?",
+    metaTitle: "Prix d'un site Web pour couvreur au Québec : le guide complet",
+    desc: "Ce qu'un site de couvreur doit contenir (licence RBQ, services, zone, photos), ce qui fait varier son prix et les questions à poser avant de signer une offre.",
+    dek: "Ce dont un site de couvreur a vraiment besoin, ce qui fait varier son prix et comment comparer deux soumissions sans mauvaise surprise.",
+    date: "2026-11-24", updated: "2026-11-24", // date de publication prévue
+    related: ["combien-coute-un-site-web-pme-quebec", "plus-de-demandes-de-soumission-site-web"],
+  },
+  {
+    slug: "site-web-plombier", draft: true, // BROUILLON : non publié tant que draft: true
+    title: "Pourquoi votre entreprise de plomberie a besoin d'un site Web",
+    metaTitle: "Site Web pour plombier : pourquoi en avoir un et quoi y mettre",
+    desc: "Être trouvé au moment d'une urgence, prouver vos qualifications (RBQ, CMMTQ) et faciliter l'appel sur mobile : ce qu'un site de plombier doit contenir.",
+    dek: "Être trouvé au bon moment, prouver que vous êtes qualifié et rendre l'appel immédiat : ce qu'un site apporte à une entreprise de plomberie.",
+    date: "2026-12-01", updated: "2026-12-01", // date de publication prévue
+    related: ["etre-trouve-sur-google-entreprise-locale", "plus-de-demandes-de-soumission-site-web"],
+  },
+  {
+    slug: "plus-de-demandes-de-soumission-site-web", draft: true, // BROUILLON : non publié tant que draft: true
+    title: "Comment obtenir plus de demandes de soumission grâce à son site Web",
+    metaTitle: "Site Web d'entrepreneur : obtenir plus de demandes de soumission",
+    desc: "Message clair, formulaire court, téléphone cliquable, preuves vérifiables, vitesse et mesure : les points à corriger pour que votre site génère des soumissions.",
+    dek: "Neuf points à vérifier, dans l'ordre où ils comptent, pour que votre site d'entrepreneur transforme plus de visites en demandes de soumission.",
+    date: "2026-12-08", updated: "2026-12-08", // date de publication prévue
+    related: ["etre-trouve-sur-google-entreprise-locale", "site-web-plombier"],
+  },
+  {
+    slug: "site-web-129-par-mois-inclus", draft: true, // BROUILLON : non publié tant que draft: true
+    title: "Site Web à 129 $/mois : qu'est-ce qui est réellement inclus ?",
+    metaTitle: "Site Web par abonnement à 129 $/mois : ce qui est vraiment inclus",
+    desc: "Le détail du forfait Croissance de Novio Studio : création, hébergement, domaine, sécurité, maintenance, modifications et SEO, et ce qui n'est pas inclus.",
+    dek: "Le forfait Croissance de Novio Studio expliqué ligne par ligne : ce qui est inclus, ce qui ne l'est pas et les conditions à connaître avant de signer.",
+    date: "2026-12-15", updated: "2026-12-15", // date de publication prévue
+    related: ["combien-coute-un-site-web-pme-quebec", "site-web-ou-reseaux-sociaux"],
   },
 ];

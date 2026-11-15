@@ -78,7 +78,8 @@ const WIN = runBundle("/"); // données partagées (FAQ) pour le JSON-LD
 
 // ── Contenu statique (content/) ──
 const EN = require("./content/en.js");
-const ARTICLES = require("./content/blog.js");
+// Brouillons (draft: true) exclus : ni page, ni sitemap, ni liste du blogue. PREVIEW_DRAFTS=1 pour les inclure en local.
+const ARTICLES = require("./content/blog.js").filter((a) => !a.draft || process.env.PREVIEW_DRAFTS === "1");
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const frDate = (iso) => new Intl.DateTimeFormat("fr-CA", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(iso + "T12:00:00Z"));
 const readMinutes = (html) => Math.max(1, Math.round(html.replace(/<[^>]+>/g, " ").split(/\s+/).filter(Boolean).length / 200));
@@ -130,6 +131,62 @@ ARTICLES.forEach((a) => {
   a.body = fs.readFileSync(`content/blogue/${a.slug}.html`, "utf8").trim();
   a.minutes = readMinutes(a.body);
 });
+
+// ── Réalisations (content/realisations.js) ──
+// Pages générées UNIQUEMENT s'il existe au moins un projet réel publié.
+const PROJECTS = require("./content/realisations.js").filter((r) => r.published === true);
+PROJECTS.forEach((r) => {
+  const missing = ["slug", "date", "problem", "solution"].filter((k) => !r[k])
+    .concat(!r.client || !r.client.name ? ["client.name"] : []);
+  if (missing.length) throw new Error(`Réalisation « ${r.slug || "?"} » incomplète : ${missing.join(", ")}`);
+  if (!r.consent) throw new Error(`Réalisation « ${r.slug} » : accord écrit du client (consent) manquant`);
+  (r.results || []).forEach((x) => {
+    if (!x.source || !x.period) throw new Error(`Réalisation « ${r.slug} » : résultat sans source ni période (${x.label})`);
+  });
+});
+const projectTitle = (r) => `${r.client.name}, ${r.client.trade.toLowerCase()} à ${r.client.city}`;
+
+const realisationsIndexHtml = () => `
+<header class="page-head">
+  <div class="container">
+    ${crumbsHtml([["/", "Accueil"], ["/realisations", "Réalisations"]])}
+    <h1 class="page-head__title">Réalisations : des sites Web pour des entreprises d'ici.</h1>
+    <p class="page-head__sub">Des projets réels, présentés avec l'accord de chaque client : la situation de départ, le site conçu et ce qui a changé.</p>
+  </div>
+</header>
+<div class="container">
+  <ul class="posts">
+    ${PROJECTS.map((r) => `<li><a class="post-card" href="/realisations/${r.slug}">
+      <h2 class="post-card__t">${esc(projectTitle(r))}</h2>
+      <p class="post-card__d">${esc(r.client.description || r.solution)}</p>
+      <span class="post-card__m">Forfait ${esc(r.plan || "")} · mis en ligne le <time datetime="${r.date}">${frDate(r.date)}</time></span>
+    </a></li>`).join("\n    ")}
+  </ul>
+</div>`;
+
+const realisationHtml = (r) => `
+<article>
+  <header class="page-head">
+    <div class="container--narrow">
+      ${crumbsHtml([["/", "Accueil"], ["/realisations", "Réalisations"], [`/realisations/${r.slug}`, r.client.name]])}
+      <h1 class="page-head__title">${esc(projectTitle(r))}</h1>
+      <p class="page-head__sub">${esc(r.client.description || "")}</p>
+      <p class="article__meta">Forfait ${esc(r.plan || "")} · mis en ligne le <time datetime="${r.date}">${frDate(r.date)}</time>${r.client.url ? ` · <a class="link" href="${esc(r.client.url)}" rel="noopener">Voir le site</a>` : ""}</p>
+    </div>
+  </header>
+  <div class="container--narrow prose">
+    <h2>Le point de départ</h2>
+    <p>${esc(r.problem)}</p>
+    <h2>Ce qui a été conçu</h2>
+    <p>${esc(r.solution)}</p>
+    ${(r.features || []).length ? `<h3>Fonctionnalités</h3>\n    <ul>${r.features.map((f) => `<li>${esc(f)}</li>`).join("")}</ul>` : ""}
+    ${(r.screenshots || []).map((i) => `<figure><img src="${esc(i.src)}" width="${i.width}" height="${i.height}" alt="${esc(i.alt)}" loading="lazy" decoding="async" /></figure>`).join("\n    ")}
+    ${(r.results || []).length ? `<h2>Résultats mesurés</h2>
+    <table><thead><tr><th scope="col">Indicateur</th><th scope="col">Valeur</th><th scope="col">Période</th><th scope="col">Source</th></tr></thead><tbody>${r.results.map((x) => `<tr><td>${esc(x.label)}</td><td>${esc(x.value)}</td><td>${esc(x.period)}</td><td>${esc(x.source)}</td></tr>`).join("")}</tbody></table>` : ""}
+    ${r.testimonial && r.testimonial.quote ? `<blockquote class="callout"><p>« ${esc(r.testimonial.quote)} »</p><p>${esc(r.testimonial.name)}, ${esc(r.testimonial.role)}</p></blockquote>` : ""}
+    <p>Vous avez un projet semblable ? Consultez nos <a href="/tarifs">tarifs</a> ou <a href="/contact">demandez une soumission</a>.</p>
+  </div>
+</article>`;
 
 // ── Pages ──
 const FR_EN = { fr: "/", en: "/en" }; // seule paire traduite (hreflang)
@@ -194,6 +251,25 @@ const PAGES = [
     title: a.metaTitle, desc: a.desc, ogTitle: a.title, ogDesc: a.desc,
     priority: "0.6", changefreq: "yearly", lastmod: a.updated,
   })),
+  ...(PROJECTS.length ? [
+    {
+      file: "realisations.html", path: "/realisations", page: "static", lang: "fr", type: "CollectionPage",
+      staticHtml: realisationsIndexHtml(), crumbs: [["/", "Accueil"], ["/realisations", "Réalisations"]],
+      title: "Réalisations : sites Web d'entreprises de l'Outaouais | Novio Studio",
+      desc: "Projets réels de Novio Studio : sites Web conçus pour des entrepreneurs de Gatineau, d'Ottawa et de l'Outaouais, présentés avec l'accord de chaque client.",
+      ogTitle: "Réalisations | Novio Studio", ogDesc: "Des sites Web conçus pour des entreprises d'ici, présentés avec l'accord de chaque client.",
+      priority: "0.8", changefreq: "monthly", lastmod: PROJECTS.map((r) => r.date).sort().pop(),
+    },
+    ...PROJECTS.map((r) => ({
+      file: `realisations/${r.slug}.html`, path: `/realisations/${r.slug}`, page: "static", lang: "fr", type: "WebPage",
+      staticHtml: realisationHtml(r),
+      crumbs: [["/", "Accueil"], ["/realisations", "Réalisations"], [`/realisations/${r.slug}`, r.client.name]],
+      title: `Site Web de ${r.client.name} (${r.client.trade}, ${r.client.city}) | Novio Studio`.slice(0, 90),
+      desc: `${r.client.trade} à ${r.client.city} : ${r.solution}`.slice(0, 160),
+      ogTitle: projectTitle(r), ogDesc: (r.client.description || r.solution).slice(0, 160),
+      priority: "0.7", changefreq: "yearly", lastmod: r.date,
+    })),
+  ] : []),
 ];
 
 // ── Données structurées (schema.org, @graph par page) ──
